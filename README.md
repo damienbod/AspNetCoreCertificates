@@ -33,6 +33,10 @@ Validity period
 - Valid From
 - Valid To  
 
+Public Key
+
+Extensions
+
 ### Distinguished Name:
 
 example:
@@ -40,19 +44,31 @@ example:
 C=CH, O=damienbod, OU=testing, CN=localhost
 ```
 
-### SAN SubjectAlternativeName
+C= Country REQUIRED
+ST= State or province
+L= Locality
+O= organisation
+OU=Organisation Unit
+CN= Common name (DNS)  REQUIRED
+E=email
+
+### SAN 
+Subject Alternative Name
 
 ## Certificate Types
 
 ## Certificate Extentions, OID
 
 ### C#
+
 - X509BasicConstraintsExtension
 - X509KeyUsageExtension
 - X509EnhancedKeyUsageExtension => OID
 
 new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
 new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
+
+"2.5.29.35"
 
 ```
 //
@@ -106,7 +122,8 @@ public enum X509KeyUsageFlags
 }
 ```
 
-
+### ECDSA: 
+  Elliptic Curve Digital Signature Algorithm (ECDSA)
 
 ## How to create a self signed client server certificate for mtls
 
@@ -129,3 +146,5 @@ https://github.com/rwatjen/AzureIoTDPSCertificates
 https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-x509ca-overview
 
 https://github.com/Azure/azure-iot-sdk-c/blob/master/tools/CACertificates/CACertificateOverview.md
+
+http://oid-info.com/
