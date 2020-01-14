@@ -32,12 +32,19 @@ namespace CertificatesCreation
                 ValidTo = DateTime.UtcNow.AddYears(10)
             };
 
+            SubjectAlternativeName subjectAlternativeNameRoot = new SubjectAlternativeName
+            {
+                Email = "damienbod@damienbod.ch"
+            };
+            subjectAlternativeNameRoot.DnsName.Add("localhost");
+
             RootCertificate rcCreator = new RootCertificate();
 
             var rootCert = rcCreator.CreateRootCertificate(
                 distinguishedNameRoot, 
                 basicConstraintsRoot,
-                validityPeriodRoot);
+                validityPeriodRoot,
+                subjectAlternativeNameRoot);
             Console.WriteLine($"Created Root Certificate {rootCert.SubjectName}");
 
             DistinguishedName distinguishedNameIntermediate = new DistinguishedName
@@ -62,13 +69,23 @@ namespace CertificatesCreation
                 ValidFrom = DateTime.UtcNow,
                 ValidTo = DateTime.UtcNow.AddYears(9)
             };
+
+            SubjectAlternativeName subjectAlternativeNameIntermediate = new SubjectAlternativeName
+            {
+                Email = "damienbod@damienbod.ch"
+            };
+            subjectAlternativeNameRoot.DnsName.Add("localhost");
+
             var icCreator = new IntermediateCertificate();
 
             var intermediateCertificate = icCreator.CreateIntermediateCertificate(
                 distinguishedNameIntermediate,
                 basicConstraintsIntermediate,
                 validityPeriodIntermediate,
+                subjectAlternativeNameIntermediate,
                 rootCert);
+
+            
 
             Console.WriteLine($"Created Intermediate Certificate {intermediateCertificate.SubjectName}");
         }

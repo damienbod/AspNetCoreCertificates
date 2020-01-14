@@ -11,7 +11,8 @@ namespace CertificatesCreation
         public X509Certificate2 CreateRootCertificate(
             DistinguishedName distinguishedName,
             BasicConstraints basicConstraints,
-            ValidityPeriod validityPeriod)
+            ValidityPeriod validityPeriod,
+            SubjectAlternativeName subjectAlternativeName)
         {
             using (var ecdsa = ECDsa.Create("ECDsa"))
             {
@@ -27,10 +28,7 @@ namespace CertificatesCreation
                 // key usage: Digital Signature and Key Encipherment
                 request.CertificateExtensions.Add(new X509KeyUsageExtension(X509KeyUsageFlags.KeyCertSign, true));
 
-                var sanBuilder = new SubjectAlternativeNameBuilder();
-                sanBuilder.AddDnsName(distinguishedName.CommonName);
-                var sanExtension = sanBuilder.Build();
-                request.CertificateExtensions.Add(sanExtension);
+                Certificates.AddSubjectAlternativeName(request, subjectAlternativeName);
 
                 // Enhanced key usages
                 request.CertificateExtensions.Add(

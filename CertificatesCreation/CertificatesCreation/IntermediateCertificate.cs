@@ -13,6 +13,7 @@ namespace CertificatesCreation
             DistinguishedName distinguishedName,
             BasicConstraints basicConstraints,
             ValidityPeriod validityPeriod,
+            SubjectAlternativeName subjectAlternativeName,
             X509Certificate2 parentCertificateAuthority)
         {
             if(parentCertificateAuthority == null)
@@ -49,12 +50,8 @@ namespace CertificatesCreation
                 authorityKeyIdentifier[3] = 0x14;
                 segment.CopyTo(authorityKeyIdentifier, 4);
                 request.CertificateExtensions.Add(new X509Extension("2.5.29.35", authorityKeyIdentifier, false));
-               
-                // in addition to the subject name
-                var sanBuilder = new SubjectAlternativeNameBuilder();
-                sanBuilder.AddDnsName(distinguishedName.CommonName);
-                var sanExtension = sanBuilder.Build();
-                request.CertificateExtensions.Add(sanExtension);
+
+                Certificates.AddSubjectAlternativeName(request, subjectAlternativeName);
 
                 // Enhanced key usages
                 request.CertificateExtensions.Add(

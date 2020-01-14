@@ -31,6 +31,23 @@ namespace CertificatesCreation
                    basicConstraints.Critical));
         }
 
+        internal static void AddSubjectAlternativeName(CertificateRequest request, SubjectAlternativeName subjectAlternativeName)
+        {
+            var sanBuilder = new SubjectAlternativeNameBuilder();
+            foreach(var dnsName in subjectAlternativeName.DnsName)
+            {
+                sanBuilder.AddDnsName(dnsName);
+            }
+
+            if(!string.IsNullOrEmpty(subjectAlternativeName.Email))
+            {
+                sanBuilder.AddEmailAddress(subjectAlternativeName.Email);
+            }
+
+            var sanExtension = sanBuilder.Build();
+            request.CertificateExtensions.Add(sanExtension);
+        }
+        
         internal static string CreateIssuerOrSubject(DistinguishedName distinguishedName)
         {
             var sb = new StringBuilder($"CN={distinguishedName.CommonName}, C={distinguishedName.Country}");
