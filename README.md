@@ -178,4 +178,8 @@ https://openid.net/specs/openid-connect-core-1_0.html
 https://openid.net/specs/draft-jones-json-web-token-07.html 
 
 
+### Public Key Infrastructure - PKI
+
+https://gist.github.com/Soarez/9688998
+
 https://github.com/PKISharp/ACMESharpCore
