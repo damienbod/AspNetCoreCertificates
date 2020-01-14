@@ -25,6 +25,8 @@ namespace CertificatesCreation
                 RootCertConfig.ValidityPeriod,
                 RootCertConfig.SubjectAlternativeName);
 
+            rootCert.FriendlyName = "localhost root";
+
             Console.WriteLine($"Created Root Certificate {rootCert.SubjectName}");
 
 
@@ -36,6 +38,8 @@ namespace CertificatesCreation
                 IntermediateCertConfig.ValidityPeriod,
                 IntermediateCertConfig.SubjectAlternativeName,
                 rootCert);
+
+            intermediateCertificate.FriendlyName = "intermediate from root";
 
             Console.WriteLine($"Created Intermediate Certificate {intermediateCertificate.SubjectName}");
 
