@@ -155,3 +155,10 @@ https://github.com/Azure/azure-iot-sdk-c/blob/master/tools/CACertificates/CACert
 http://oid-info.com/
 
 https://www.alvestrand.no/objectid/
+
+
+https://github.com/damienbod/AspNetCoreCertificateAuth
+
+https://github.com/damienbod/Secure_gRpc
+
+https://docs.microsoft.com/en-us/aspnet/core/security/authentication/certauth
