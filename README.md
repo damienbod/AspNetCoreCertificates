@@ -65,10 +65,31 @@ E=email
 new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
 new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
 
-new Oid(""2.5.29.35")
+new Oid("2.5.29.35") // authorityKeyIdentifier
 
-new Oid(""2.5.29.19") // - Basic Constraints
+new Oid("2.5.29.19") // - Basic Constraints
 ```
+
+ref:
+https://access.redhat.com/documentation/en-US/Red_Hat_Certificate_System/8.0/html/Admin_Guide/Standard_X.509_v3_Certificate_Extensions.html
+
+#### 2.5.29.35 authorityKeyIdentifier
+The Authority Key Identifier extension identifies the public key corresponding to the private key used to sign a certificate. This extension is useful when an issuer has multiple signing keys, such as when a CA certificate is renewed.
+
+The extension consists of one or both of the following:
+- An explicit key identifier, set in the keyIdentifier field
+- An issuer, set in the authorityCertIssuer field, and serial number, set in the authorityCertSerialNumber field, identifying a certificate
+
+If the keyIdentifier field exists, it is used to select the certificate with a matching subjectKeyIdentifier extension. If the authorityCertIssuer and authorityCertSerialNumber fields are present, then they are used to identify the correct certificate by issuer and serialNumber.
+
+If this extension is not present, then the issuer name alone is used to identify the issuer certificate.
+PKIX Part 1 requires this extension for all certificates except self-signed root CA certificates. Where a key identifier has not been established, PKIX recommends that the authorityCertIssuer and authorityCertSerialNumber fields be specified. These fields permit construction of a complete certificate chain by matching the SubjectName and CertificateSerialNumber fields in the issuer's certificate against the authortiyCertIssuer and authorityCertSerialNumber in the Authority Key Identifier extension of the subject certificate.
+OID
+
+#### 2.5.29.19 basicConstraints
+This extension is used during the certificate chain verification process to identify CA certificates and to apply certificate chain path length constraints. The cA component should be set to true for all CA certificates. PKIX recommends that this extension should not appear in end-entity certificates.
+
+If the pathLenConstraint component is present, its value must be greater than the number of CA certificates that have been processed so far, starting with the end-entity certificate and moving up the chain. If pathLenConstraint is omitted, then all of the higher level CA certificates in the chain must not include this component when the extension is present.
 
 ```
 //
@@ -164,6 +185,10 @@ https://github.com/damienbod/AspNetCoreCertificateAuth
 https://github.com/damienbod/Secure_gRpc
 
 https://docs.microsoft.com/en-us/aspnet/core/security/authentication/certauth
+
+https://docs.microsoft.com/en-us/archive/blogs/kaushal/various-ssltls-certificate-file-typesextensions
+
+https://access.redhat.com/documentation/en-US/Red_Hat_Certificate_System/8.0/html/Admin_Guide/Standard_X.509_v3_Certificate_Extensions.html
 
 ### mtls
 
