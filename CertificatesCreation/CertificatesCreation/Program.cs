@@ -37,6 +37,7 @@ namespace CertificatesCreation
                 Email = "damienbod@damienbod.ch"
             };
             subjectAlternativeNameRoot.DnsName.Add("localhost");
+            subjectAlternativeNameRoot.DnsName.Add("test.damienbod.ch");
 
             RootCertificate rcCreator = new RootCertificate();
 
