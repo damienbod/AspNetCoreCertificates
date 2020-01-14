@@ -83,9 +83,10 @@ new Oid("2.5.29.19") // - Basic Constraints
 ```
 
 ref:
+
 https://access.redhat.com/documentation/en-US/Red_Hat_Certificate_System/8.0/html/Admin_Guide/Standard_X.509_v3_Certificate_Extensions.html
 
-#### 2.5.29.35 authorityKeyIdentifier
+#### OID 2.5.29.35 authorityKeyIdentifier
 The Authority Key Identifier extension identifies the public key corresponding to the private key used to sign a certificate. This extension is useful when an issuer has multiple signing keys, such as when a CA certificate is renewed.
 
 The extension consists of one or both of the following:
@@ -98,7 +99,7 @@ If this extension is not present, then the issuer name alone is used to identify
 PKIX Part 1 requires this extension for all certificates except self-signed root CA certificates. Where a key identifier has not been established, PKIX recommends that the authorityCertIssuer and authorityCertSerialNumber fields be specified. These fields permit construction of a complete certificate chain by matching the SubjectName and CertificateSerialNumber fields in the issuer's certificate against the authortiyCertIssuer and authorityCertSerialNumber in the Authority Key Identifier extension of the subject certificate.
 OID
 
-#### 2.5.29.19 basicConstraints
+#### OID 2.5.29.19 basicConstraints
 This extension is used during the certificate chain verification process to identify CA certificates and to apply certificate chain path length constraints. The cA component should be set to true for all CA certificates. PKIX recommends that this extension should not appear in end-entity certificates.
 
 If the pathLenConstraint component is present, its value must be greater than the number of CA certificates that have been processed so far, starting with the end-entity certificate and moving up the chain. If pathLenConstraint is omitted, then all of the higher level CA certificates in the chain must not include this component when the extension is present.
@@ -173,9 +174,17 @@ public enum X509KeyUsageFlags
 
 ## Configuring an Azure app for certificate authentication
 
-## PKI public key infrastructure
+## Public Key Infrastructure - PKI
 
-## Ways of creating certificates: powershell, openssl, C# code
+https://gist.github.com/Soarez/9688998
+
+https://github.com/PKISharp/ACMESharpCore
+
+## Ways of creating certificates
+
+- powershell
+- openssl
+- C# code
 
 # Links
 
@@ -215,8 +224,3 @@ https://openid.net/specs/openid-connect-core-1_0.html
 https://openid.net/specs/draft-jones-json-web-token-07.html 
 
 
-### Public Key Infrastructure - PKI
-
-https://gist.github.com/Soarez/9688998
-
-https://github.com/PKISharp/ACMESharpCore
