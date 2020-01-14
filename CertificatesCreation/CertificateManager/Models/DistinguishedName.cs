@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace CertificatesCreation.Models
+namespace CertificateManager.Models
 {
     /// <summary>
     /// Certificate Distinguished Name

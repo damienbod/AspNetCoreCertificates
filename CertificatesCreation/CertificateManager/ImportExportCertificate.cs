@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
-namespace CertificatesCreation
+namespace CertificateManager
 {
     /// <summary>
     /// https://github.com/rwatjen/AzureIoTDPSCertificates
     /// </summary>
-    internal static class ImportExportCertificate
+    public class ImportExportCertificate
     {
-        internal static void SaveCertificateToPfxFile(string filename, string password,
+        public void SaveCertificateToPfxFile(string filename, string password,
             X509Certificate2 certificate, X509Certificate2 signingCert,
             X509Certificate2Collection chain)
         {
@@ -30,14 +28,14 @@ namespace CertificatesCreation
             File.WriteAllBytes(filename, certBytes);
         }
 
-        internal static X509Certificate2 ExportCertificatePublicKey(X509Certificate2 certificate)
+        public X509Certificate2 ExportCertificatePublicKey(X509Certificate2 certificate)
         {
             var publicKeyBytes = certificate.Export(X509ContentType.Cert);
             var signingCertWithoutPrivateKey = new X509Certificate2(publicKeyBytes);
             return signingCertWithoutPrivateKey;
         }
 
-        internal static (X509Certificate2 certificate, X509Certificate2Collection collection)
+        public (X509Certificate2 certificate, X509Certificate2Collection collection)
             LoadCertificateAndCollectionFromPfx(string pfxFileName, string password)
         {
             if (string.IsNullOrEmpty(pfxFileName))

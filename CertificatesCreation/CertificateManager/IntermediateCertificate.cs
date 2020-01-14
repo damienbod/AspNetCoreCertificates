@@ -1,14 +1,19 @@
-﻿using CertificatesCreation.Models;
+﻿using CertificateManager.Models;
 using System;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
-namespace CertificatesCreation
+namespace CertificateManager
 {
     public class IntermediateCertificate
     {
+        private readonly Certificates _certificates;
+
+        public IntermediateCertificate(Certificates certificates)
+        {
+            _certificates = certificates;
+        }
+
         public X509Certificate2 CreateIntermediateCertificate(
             DistinguishedName distinguishedName,
             BasicConstraints basicConstraints,
@@ -25,12 +30,12 @@ namespace CertificatesCreation
             {
                 ecdsa.KeySize = 256;
                 var request = new CertificateRequest(
-                    Certificates.CreateIssuerOrSubject(distinguishedName), 
+                    _certificates.CreateIssuerOrSubject(distinguishedName), 
                     ecdsa, 
                     HashAlgorithmName.SHA256);
 
                 // set basic certificate contraints
-                Certificates.AddBasicConstraints(request, basicConstraints);
+                _certificates.AddBasicConstraints(request, basicConstraints);
 
                 // key usage: Digital Signature and Key Encipherment
                 request.CertificateExtensions.Add(
@@ -51,7 +56,7 @@ namespace CertificatesCreation
                 segment.CopyTo(authorityKeyIdentifier, 4);
                 request.CertificateExtensions.Add(new X509Extension("2.5.29.35", authorityKeyIdentifier, false));
 
-                Certificates.AddSubjectAlternativeName(request, subjectAlternativeName);
+                _certificates.AddSubjectAlternativeName(request, subjectAlternativeName);
 
                 // Enhanced key usages
                 request.CertificateExtensions.Add(

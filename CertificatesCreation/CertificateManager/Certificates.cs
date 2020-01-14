@@ -1,12 +1,10 @@
-﻿using CertificatesCreation.Models;
-using System;
-using System.Collections.Generic;
+﻿using CertificateManager.Models;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
-namespace CertificatesCreation
+namespace CertificateManager
 {
-    internal static class Certificates
+    public class Certificates
     {
         /// <summary>
         /// OID 2.5.29.19 basicConstraints
@@ -21,7 +19,7 @@ namespace CertificatesCreation
         /// and moving up the chain.If pathLenConstraint is omitted, then all of the higher level CA certificates
         /// in the chain must not include this component when the extension is present.
         /// </summary>
-        internal static void AddBasicConstraints(CertificateRequest request, BasicConstraints basicConstraints)
+        public void AddBasicConstraints(CertificateRequest request, BasicConstraints basicConstraints)
         {
             request.CertificateExtensions.Add(
                new X509BasicConstraintsExtension(
@@ -31,7 +29,7 @@ namespace CertificatesCreation
                    basicConstraints.Critical));
         }
 
-        internal static void AddSubjectAlternativeName(CertificateRequest request, SubjectAlternativeName subjectAlternativeName)
+        public void AddSubjectAlternativeName(CertificateRequest request, SubjectAlternativeName subjectAlternativeName)
         {
             var sanBuilder = new SubjectAlternativeNameBuilder();
             foreach(var dnsName in subjectAlternativeName.DnsName)
@@ -47,8 +45,8 @@ namespace CertificatesCreation
             var sanExtension = sanBuilder.Build();
             request.CertificateExtensions.Add(sanExtension);
         }
-        
-        internal static string CreateIssuerOrSubject(DistinguishedName distinguishedName)
+
+        public string CreateIssuerOrSubject(DistinguishedName distinguishedName)
         {
             var sb = new StringBuilder($"CN={distinguishedName.CommonName}, C={distinguishedName.Country}");
 

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CertificatesCreation.Models
+﻿namespace CertificateManager.Models
 {
     public class BasicConstraints
     {
-
         public bool CertificateAuthority { get; set; }
 
         public bool HasPathLengthConstraint { get; set; }

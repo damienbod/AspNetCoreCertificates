@@ -1,8 +1,10 @@
-﻿using CertificatesCreation.Models;
+﻿using CertificateManager.Models;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 
+using CertificateManager;
 namespace CertificatesCreation
 {
     class Program
@@ -11,92 +13,46 @@ namespace CertificatesCreation
         {
             Console.WriteLine("Create Root Certificate");
 
-            DistinguishedName distinguishedNameRoot = new DistinguishedName
-            {
-                CommonName = "localhost",
-                Country = "CH",
-                Locality = "CH",
-                Organisation = "damienbod",
-                OrganisationUnit = "developement"
-            };
-            BasicConstraints basicConstraintsRoot = new BasicConstraints
-            {
-                CertificateAuthority = true,
-                HasPathLengthConstraint = true,
-                PathLengthConstraint = 3,
-                Critical = true
-            };
-            ValidityPeriod validityPeriodRoot = new ValidityPeriod
-            {
-                ValidFrom = DateTime.UtcNow,
-                ValidTo = DateTime.UtcNow.AddYears(10)
-            };
-            SubjectAlternativeName subjectAlternativeNameRoot = new SubjectAlternativeName
-            {
-                Email = "damienbod@damienbod.ch"
-            };
-            subjectAlternativeNameRoot.DnsName.Add("localhost");
-            subjectAlternativeNameRoot.DnsName.Add("test.damienbod.ch");
+            var serviceProvider = new ServiceCollection()
+                .AddCertificateManager()
+                .BuildServiceProvider();
 
-            RootCertificate rcCreator = new RootCertificate();
+            var rcCreator = serviceProvider.GetService<RootCertificate>();
 
             var rootCert = rcCreator.CreateRootCertificate(
-                distinguishedNameRoot, 
-                basicConstraintsRoot,
-                validityPeriodRoot,
-                subjectAlternativeNameRoot);
+                RootCertConfig.DistinguishedName,
+                RootCertConfig.BasicConstraints,
+                RootCertConfig.ValidityPeriod,
+                RootCertConfig.SubjectAlternativeName);
+
             Console.WriteLine($"Created Root Certificate {rootCert.SubjectName}");
 
-            DistinguishedName distinguishedNameIntermediate = new DistinguishedName
-            {
-                CommonName = "localhost",
-                Country = "CH",
-                Locality = "CH",
-                Organisation = "damienbod",
-                OrganisationUnit = "region europe"
-            };
-            BasicConstraints basicConstraintsIntermediate = new BasicConstraints
-            {
-                CertificateAuthority = true,
-                HasPathLengthConstraint = true,
-                PathLengthConstraint = 2,
-                Critical = true
-            };
-            ValidityPeriod validityPeriodIntermediate = new ValidityPeriod
-            {
-                ValidFrom = DateTime.UtcNow,
-                ValidTo = DateTime.UtcNow.AddYears(9)
-            };
-            SubjectAlternativeName subjectAlternativeNameIntermediate = new SubjectAlternativeName
-            {
-                Email = "damienbod@damienbod.ch"
-            };
-            subjectAlternativeNameRoot.DnsName.Add("localhost");
 
-            var icCreator = new IntermediateCertificate();
+            var icCreator = serviceProvider.GetService<IntermediateCertificate>();
 
             var intermediateCertificate = icCreator.CreateIntermediateCertificate(
-                distinguishedNameIntermediate,
-                basicConstraintsIntermediate,
-                validityPeriodIntermediate,
-                subjectAlternativeNameIntermediate,
+                IntermediateCertConfig.DistinguishedName,
+                IntermediateCertConfig.BasicConstraints,
+                IntermediateCertConfig.ValidityPeriod,
+                IntermediateCertConfig.SubjectAlternativeName,
                 rootCert);
 
             Console.WriteLine($"Created Intermediate Certificate {intermediateCertificate.SubjectName}");
 
             string password = "1234";
             string rootCertName = "localhost_root";
-            string intermediateCertName = "localhost_ntermediate";
+            string intermediateCertName = "localhost_intermediate";
 
-            ImportExportCertificate.SaveCertificateToPfxFile($"{rootCertName}.pfx", password, rootCert, null, null);
-            var rootPublicKey = ImportExportCertificate.ExportCertificatePublicKey(rootCert);
+            var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
+
+            importExportCertificate.SaveCertificateToPfxFile($"{rootCertName}.pfx", password, rootCert, null, null);
+            var rootPublicKey = importExportCertificate.ExportCertificatePublicKey(rootCert);
             var rootPublicKeyBytes = rootPublicKey.Export(X509ContentType.Cert);
             File.WriteAllBytes($"{rootCertName}.cer", rootPublicKeyBytes);
 
             var chain = new X509Certificate2Collection();
-
-            var previousCaCertPublicKey = ImportExportCertificate.ExportCertificatePublicKey(rootCert);
-            ImportExportCertificate.SaveCertificateToPfxFile($"{intermediateCertName}.pfx", password, intermediateCertificate, previousCaCertPublicKey, chain);
+            var previousCaCertPublicKey = importExportCertificate.ExportCertificatePublicKey(rootCert);
+            importExportCertificate.SaveCertificateToPfxFile($"{intermediateCertName}.pfx", password, intermediateCertificate, previousCaCertPublicKey, chain);
             chain.Add(previousCaCertPublicKey);
 
             Console.WriteLine($"Exported Certificates");

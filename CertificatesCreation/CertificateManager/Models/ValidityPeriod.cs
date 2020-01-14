@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CertificatesCreation.Models
+namespace CertificateManager.Models
 {
     public class ValidityPeriod
     {
