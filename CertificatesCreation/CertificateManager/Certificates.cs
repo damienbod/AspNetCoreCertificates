@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CertificateManager
 {
-    public class Certificates
+    public class CertificateUtility
     {
         /// <summary>
         /// OID 2.5.29.19 basicConstraints

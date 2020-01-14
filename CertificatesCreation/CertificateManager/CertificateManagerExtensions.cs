@@ -7,7 +7,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddCertificateManager(this IServiceCollection services)
         {
-            services.AddTransient<Certificates>();
+            services.AddTransient<CertificateUtility>();
             services.AddTransient<ImportExportCertificate>();
             services.AddTransient<IntermediateCertificate>();
             services.AddTransient<RootCertificate>();

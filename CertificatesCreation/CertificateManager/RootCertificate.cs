@@ -6,11 +6,11 @@ namespace CertificateManager
 {
     public class RootCertificate
     {
-        private readonly Certificates _certificates;
+        private readonly CertificateUtility _certificateUtility;
 
-        public RootCertificate(Certificates certificates)
+        public RootCertificate(CertificateUtility certificateUtility)
         {
-            _certificates = certificates;
+            _certificateUtility = certificateUtility;
         }
 
         public X509Certificate2 CreateRootCertificate(
@@ -23,17 +23,17 @@ namespace CertificateManager
             {
                 ecdsa.KeySize = 256;
                 var request = new CertificateRequest(
-                    _certificates.CreateIssuerOrSubject(distinguishedName),
+                    _certificateUtility.CreateIssuerOrSubject(distinguishedName),
                     ecdsa,
                     HashAlgorithmName.SHA256);
 
                 // set basic certificate contraints
-                _certificates.AddBasicConstraints(request, basicConstraints);
+                _certificateUtility.AddBasicConstraints(request, basicConstraints);
 
                 // key usage: Digital Signature and Key Encipherment
                 request.CertificateExtensions.Add(new X509KeyUsageExtension(X509KeyUsageFlags.KeyCertSign, true));
 
-                _certificates.AddSubjectAlternativeName(request, subjectAlternativeName);
+                _certificateUtility.AddSubjectAlternativeName(request, subjectAlternativeName);
 
                 // Enhanced key usages
                 request.CertificateExtensions.Add(
