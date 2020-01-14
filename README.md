@@ -146,6 +146,8 @@ public enum X509KeyUsageFlags
 
 # Links
 
+https://www.ietf.org/rfc/rfc2459.txt
+
 https://github.com/rwatjen/AzureIoTDPSCertificates
 
 https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-x509ca-overview
@@ -174,3 +176,6 @@ https://tools.ietf.org/html/rfc7519
 https://openid.net/specs/openid-connect-core-1_0.html
 
 https://openid.net/specs/draft-jones-json-web-token-07.html 
+
+
+https://github.com/PKISharp/ACMESharpCore
