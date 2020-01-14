@@ -146,7 +146,7 @@ public enum X509KeyUsageFlags
 
 # Links
 
-https://www.ietf.org/rfc/rfc2459.txt
+https://tools.ietf.org/html/rfc5280
 
 https://github.com/rwatjen/AzureIoTDPSCertificates
 
