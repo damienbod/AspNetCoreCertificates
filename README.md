@@ -20,22 +20,22 @@ Also to the Firefox trusted certificates.
 
 Version: X.509v3
 
-Serial number: Unique identifier within a certification authority
+**Serial number**: Unique identifier within a certification authority
 
-Signature algorithm: SHA usually
+**Signature algorithm**: SHA usually
 
-Issuer: Distinguished Name
+**Issuer**: Distinguished Name
  
-Subject: Distinguished Name 
+**Subject**: Distinguished Name 
 
-Validity period
+**Validity period**
 
 - Valid From
 - Valid To  
 
-Public Key
+**Public Key**
 
-Extensions
+**Extensions**
 
 ### Distinguished Name:
 
@@ -51,11 +51,6 @@ O= organisation
 OU=Organisation Unit
 CN= Common name (DNS)  REQUIRED
 E=email
-
-### SAN 
-Subject Alternative Name
-
-## Certificate Types
 
 ## Certificate Extensions, OID
 
@@ -127,8 +122,13 @@ public enum X509KeyUsageFlags
 }
 ```
 
-### ECDSA: 
-  Elliptic Curve Digital Signature Algorithm (ECDSA)
+### other definitions 
+**SAN**: Subject Alternative Name
+
+**ECDSA**: Elliptic Curve Digital Signature Algorithm (ECDSA)
+
+## Certificate Types
+
 
 ## How to create a self signed client server certificate for mtls
 
