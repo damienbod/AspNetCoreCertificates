@@ -57,7 +57,7 @@ Subject Alternative Name
 
 ## Certificate Types
 
-## Certificate Extentions, OID
+## Certificate Extensions, OID
 
 ### C#
 
@@ -65,10 +65,15 @@ Subject Alternative Name
 - X509KeyUsageExtension
 - X509EnhancedKeyUsageExtension => OID
 
+
+```
 new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
 new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
 
-"2.5.29.35"
+new Oid(""2.5.29.35")
+```
+
+2.5.29.19 - Basic Constraints
 
 ```
 //
@@ -148,3 +153,5 @@ https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-x509ca-overview
 https://github.com/Azure/azure-iot-sdk-c/blob/master/tools/CACertificates/CACertificateOverview.md
 
 http://oid-info.com/
+
+https://www.alvestrand.no/objectid/
