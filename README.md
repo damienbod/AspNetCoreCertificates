@@ -4,7 +4,7 @@
 
 ## What is a self signed certificate
 
-A self signed certificate is any certificate which is not signed by a Certitficate authority.
+A self signed certificate is any certificate which is not signed by a certificate authority.
 
 All root certificates are self signed.
 
