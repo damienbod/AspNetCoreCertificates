@@ -71,9 +71,9 @@ new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
 new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
 
 new Oid(""2.5.29.35")
-```
 
-2.5.29.19 - Basic Constraints
+new Oid(""2.5.29.19") // - Basic Constraints
+```
 
 ```
 //
@@ -162,3 +162,15 @@ https://github.com/damienbod/AspNetCoreCertificateAuth
 https://github.com/damienbod/Secure_gRpc
 
 https://docs.microsoft.com/en-us/aspnet/core/security/authentication/certauth
+
+### mtls
+
+https://tools.ietf.org/html/draft-ietf-oauth-mtls-14
+
+https://identityserver4.readthedocs.io/en/latest/topics/mtls.html
+
+https://tools.ietf.org/html/rfc7519
+
+https://openid.net/specs/openid-connect-core-1_0.html
+
+https://openid.net/specs/draft-jones-json-web-token-07.html 
