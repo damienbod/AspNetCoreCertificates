@@ -26,9 +26,18 @@ namespace CertificatesCreation
                 Critical = true
             };
 
+            ValidityPeriod validityPeriod = new ValidityPeriod
+            {
+                ValidFrom = DateTime.UtcNow,
+                ValidTo = DateTime.UtcNow.AddYears(1)
+            };
+
             RootCertificate rcCreator = new RootCertificate();
 
-            var rootCert = rcCreator.CreateRootCertificate(distinguishedName, basicConstraints);
+            var rootCert = rcCreator.CreateRootCertificate(
+                distinguishedName, 
+                basicConstraints,
+                validityPeriod);
             Console.WriteLine($"Created Root Certificate {rootCert.SubjectName}");
         }
     }
