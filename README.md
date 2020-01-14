@@ -10,6 +10,12 @@
 
 ## What is a intermiedate certificate
 
+## Certificate Types
+
+## Certificate Extentions
+
+## OID
+
 ## How to create a self signed client server certificate for mtls
 
 ## How to create a chained client server certificate for mtls
@@ -20,6 +26,9 @@
 
 ## Configuring an Azure app for certificate authentication
 
+## PKI public key infrastructure
+
+## Ways of creating certificates: powershell, openssl, C# code
 
 # Links
 
