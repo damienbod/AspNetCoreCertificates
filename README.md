@@ -44,13 +44,19 @@ example:
 C=CH, O=damienbod, OU=testing, CN=localhost
 ```
 
-C= Country REQUIRED
+C= Country 
+
 ST= State or province
+
 L= Locality
+
 O= organisation
+
 OU=Organisation Unit
-CN= Common name (DNS)  REQUIRED
-E=email
+
+CN= Common name (DNS) 
+
+// C and CN are REQUIRED
 
 ## Certificate Extensions, OID
 
