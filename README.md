@@ -58,7 +58,9 @@ CN= Common name (DNS)
 
 // C and CN are REQUIRED
 
-## Certificate Extensions, OID
+## Certificate Extensions, OID Object Identifiers
+
+https://www.alvestrand.no/objectid/
 
 ### C#
 
