@@ -12,7 +12,7 @@ namespace CertificatesCreation
     {
         static void Main(string[] args)
         {
-            //LowLevelApis.Run();
+            //LowLevelApiExamples.Run();
 
             var serviceProvider = new ServiceCollection()
                 .AddCertificateManager()

@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace CertificatesCreation
 {
-    public static class LowLevelApis
+    public static class LowLevelApiExamples
     {
         public static void Run()
         {
@@ -84,8 +84,8 @@ namespace CertificatesCreation
             
             chain.Add(previousCaCertPublicKeyRoot);
             var previousCaCertPublicKeyIntermediate = importExportCertificate.ExportCertificatePublicKey(intermediateCertificate);
-            importExportCertificate.SaveCertificateToPfxFile("localhost_intermediate_l3.pfx", 
-                password, intermediateCertificateLevel3, previousCaCertPublicKeyIntermediate, chain);
+            importExportCertificate.SaveCertificateToPfxFile(
+                "localhost_intermediate_l3.pfx", password, intermediateCertificateLevel3, previousCaCertPublicKeyIntermediate, chain);
 
             importExportCertificate.SaveCertificateToPfxFile(
                 $"devicel4.pfx", password, deviceCertificate, intermediateCertificateLevel3, chain);
