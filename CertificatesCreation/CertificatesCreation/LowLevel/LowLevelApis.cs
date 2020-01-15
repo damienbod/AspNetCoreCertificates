@@ -33,9 +33,6 @@ namespace CertificatesCreation
 
             rootCert.FriendlyName = "localhost root l1";
 
-            Console.WriteLine($"Created Root Certificate {rootCert.SubjectName}");
-
-
             var icCreator = serviceProvider.GetService<IntermediateCertificate>();
 
             var intermediateCertificate = icCreator.CreateIntermediateCertificate(
@@ -47,8 +44,6 @@ namespace CertificatesCreation
                 enhancedKeyUsages);
 
             intermediateCertificate.FriendlyName = "intermediate from root l2";
-
-            Console.WriteLine($"Created Intermediate Certificate {intermediateCertificate.SubjectName}");
 
             var intermediateCertificateLevel3 = icCreator.CreateIntermediateCertificate(
                 IntermediateLevel3CertConfig.DistinguishedName,
@@ -74,7 +69,6 @@ namespace CertificatesCreation
             
 
             string password = "1234";
-      
             var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
 
             importExportCertificate.SaveCertificateToPfxFile(
@@ -92,9 +86,6 @@ namespace CertificatesCreation
             var previousCaCertPublicKeyIntermediate = importExportCertificate.ExportCertificatePublicKey(intermediateCertificate);
             importExportCertificate.SaveCertificateToPfxFile("localhost_intermediate_l3.pfx", 
                 password, intermediateCertificateLevel3, previousCaCertPublicKeyIntermediate, chain);
-
-            //var (certificate, collection) = 
-            //   importExportCertificate.LoadCertificateAndCollectionFromPfx(SigningCertPfxFile, password);
 
             importExportCertificate.SaveCertificateToPfxFile(
                 $"devicel4.pfx", password, deviceCertificate, intermediateCertificateLevel3, chain);
