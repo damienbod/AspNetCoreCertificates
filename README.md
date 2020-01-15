@@ -22,7 +22,7 @@ Also to the Firefox trusted certificates.
 
 ## Certificate Properties
 
-Version: X.509v3
+**Version**: X.509v3
 
 **Serial number**: Unique identifier within a certification authority
 
