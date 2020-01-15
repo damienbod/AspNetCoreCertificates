@@ -64,27 +64,30 @@ namespace CertificatesCreation
             
 
             string password = "1234";
-            string rootCertName = "localhost_root";
-            string intermediateCertName = "localhost_intermediate";
-            string intermediateCertNameL3 = "localhost_intermediate_lthree";
-
+      
             var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
 
-            importExportCertificate.SaveCertificateToPfxFile($"{rootCertName}.pfx", 
-                password, rootCert, null, null);
+            importExportCertificate.SaveCertificateToPfxFile(
+                "localhost_root_l1.pfx", password, rootCert, null, null);
             var rootPublicKey = importExportCertificate.ExportCertificatePublicKey(rootCert);
             var rootPublicKeyBytes = rootPublicKey.Export(X509ContentType.Cert);
-            File.WriteAllBytes($"{rootCertName}.cer", rootPublicKeyBytes);
+            File.WriteAllBytes($"localhost_root_l1.cer", rootPublicKeyBytes);
 
             var chain = new X509Certificate2Collection();
             var previousCaCertPublicKeyRoot =  importExportCertificate.ExportCertificatePublicKey(rootCert);
-            importExportCertificate.SaveCertificateToPfxFile($"{intermediateCertName}.pfx", 
-                password, intermediateCertificate, previousCaCertPublicKeyRoot, chain);
+            importExportCertificate.SaveCertificateToPfxFile(
+                "localhost_intermediate_l2.pfx", password, intermediateCertificate, previousCaCertPublicKeyRoot, chain);
             
             chain.Add(previousCaCertPublicKeyRoot);
             var previousCaCertPublicKeyIntermediate = importExportCertificate.ExportCertificatePublicKey(intermediateCertificate);
-            importExportCertificate.SaveCertificateToPfxFile($"{intermediateCertNameL3}.pfx", 
+            importExportCertificate.SaveCertificateToPfxFile("localhost_intermediate_l3.pfx", 
                 password, intermediateCertificateLevel3, previousCaCertPublicKeyIntermediate, chain);
+
+            //var (certificate, collection) = 
+            //   importExportCertificate.LoadCertificateAndCollectionFromPfx(SigningCertPfxFile, password);
+
+            importExportCertificate.SaveCertificateToPfxFile(
+                $"devicel4.pfx", password, deviceCertificate, intermediateCertificateLevel3, chain);
 
             Console.WriteLine($"Exported Certificates");
 
