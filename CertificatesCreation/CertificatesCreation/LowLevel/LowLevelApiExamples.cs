@@ -90,6 +90,23 @@ namespace CertificatesCreation
             importExportCertificate.SaveCertificateToPfxFile(
                 $"devicel4.pfx", password, deviceCertificate, intermediateCertificateLevel3, chain);
 
+            // Verification certificate
+            var (caCert, caCertCollection) = 
+                importExportCertificate.LoadCertificateAndCollectionFromPfx("localhost_root_l1.pfx", password);
+
+            var deviceVerificationCert = deviceCertCreator.CreateDeviceCertificate(
+               DeviceCertConfig.DistinguishedName,
+               DeviceCertConfig.BasicConstraints,
+               DeviceCertConfig.ValidityPeriod,
+               DeviceCertConfig.SubjectAlternativeName,
+               caCert,
+               enhancedKeyUsages);
+
+            deviceVerificationCert.FriendlyName = "device verification cert l4";
+
+            var publicKeyBytes = deviceVerificationCert.Export(X509ContentType.Cert);
+            File.WriteAllBytes("deviceVerificationCert.cer", publicKeyBytes);
+
             Console.WriteLine($"Exported Certificates");
 
         }
