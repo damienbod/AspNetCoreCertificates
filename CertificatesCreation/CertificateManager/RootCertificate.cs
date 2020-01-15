@@ -17,7 +17,8 @@ namespace CertificateManager
             DistinguishedName distinguishedName,
             BasicConstraints basicConstraints,
             ValidityPeriod validityPeriod,
-            SubjectAlternativeName subjectAlternativeName)
+            SubjectAlternativeName subjectAlternativeName,
+            OidCollection enhancedKeyUsages)
         {
             using (var ecdsa = ECDsa.Create("ECDsa"))
             {
@@ -37,12 +38,7 @@ namespace CertificateManager
 
                 // Enhanced key usages
                 request.CertificateExtensions.Add(
-                    new X509EnhancedKeyUsageExtension(
-                        new OidCollection {
-                            new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
-                            new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
-                        },
-                        false));
+                    new X509EnhancedKeyUsageExtension(enhancedKeyUsages, false));
 
                 // add this subject key identifier
                 request.CertificateExtensions.Add(

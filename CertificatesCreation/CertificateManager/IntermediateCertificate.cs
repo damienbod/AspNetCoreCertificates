@@ -19,7 +19,8 @@ namespace CertificateManager
             BasicConstraints basicConstraints,
             ValidityPeriod validityPeriod,
             SubjectAlternativeName subjectAlternativeName,
-            X509Certificate2 parentCertificateAuthority)
+            X509Certificate2 parentCertificateAuthority,
+            OidCollection enhancedKeyUsages)
         {
             if(parentCertificateAuthority == null)
             {
@@ -60,12 +61,7 @@ namespace CertificateManager
 
                 // Enhanced key usages
                 request.CertificateExtensions.Add(
-                    new X509EnhancedKeyUsageExtension(
-                        new OidCollection {
-                            new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
-                            new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
-                        },
-                        false));
+                    new X509EnhancedKeyUsageExtension(enhancedKeyUsages, false));
 
                 // add this subject key identifier
                 request.CertificateExtensions.Add(new X509SubjectKeyIdentifierExtension(request.PublicKey, false));

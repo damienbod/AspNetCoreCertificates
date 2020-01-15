@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using CertificateManager;
+using System.Security.Cryptography;
 
 namespace CertificatesCreation
 {
@@ -16,13 +17,19 @@ namespace CertificatesCreation
                 .AddCertificateManager()
                 .BuildServiceProvider();
 
+            var enhancedKeyUsages = new OidCollection {
+                new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
+                new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
+            };
+
             var rcCreator = serviceProvider.GetService<RootCertificate>();
 
             var rootCert = rcCreator.CreateRootCertificate(
                 RootCertConfig.DistinguishedName,
                 RootCertConfig.BasicConstraints,
                 RootCertConfig.ValidityPeriod,
-                RootCertConfig.SubjectAlternativeName);
+                RootCertConfig.SubjectAlternativeName,
+                enhancedKeyUsages);
 
             rootCert.FriendlyName = "localhost root l1";
 
@@ -36,7 +43,8 @@ namespace CertificatesCreation
                 IntermediateCertConfig.BasicConstraints,
                 IntermediateCertConfig.ValidityPeriod,
                 IntermediateCertConfig.SubjectAlternativeName,
-                rootCert);
+                rootCert,
+                enhancedKeyUsages);
 
             intermediateCertificate.FriendlyName = "intermediate from root l2";
 
@@ -47,7 +55,8 @@ namespace CertificatesCreation
                 IntermediateLevel3CertConfig.BasicConstraints,
                 IntermediateLevel3CertConfig.ValidityPeriod,
                 IntermediateLevel3CertConfig.SubjectAlternativeName,
-                intermediateCertificate);
+                intermediateCertificate,
+                enhancedKeyUsages);
 
             intermediateCertificateLevel3.FriendlyName = "intermediate l3 from intermediate";
 
@@ -58,7 +67,8 @@ namespace CertificatesCreation
                 DeviceCertConfig.BasicConstraints,
                 DeviceCertConfig.ValidityPeriod,
                 DeviceCertConfig.SubjectAlternativeName,
-                intermediateCertificateLevel3);
+                intermediateCertificateLevel3,
+                enhancedKeyUsages);
 
             deviceCertificate.FriendlyName = "device cert l4";
             
