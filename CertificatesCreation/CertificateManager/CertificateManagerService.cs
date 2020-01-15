@@ -24,7 +24,7 @@ namespace CertificateManager
         }
 
         /// <summary>
-        /// Create a root certificate for Client and Server TLS Auth
+        /// Create a root self signed certificate for Client and Server TLS Auth
         /// </summary>
         /// <param name="distinguishedName">Distinguished Name used for the subject and the issuer properties</param>
         /// <param name="validityPeriod">Valid from, Valid to certificate properties</param>
@@ -57,6 +57,7 @@ namespace CertificateManager
                     dnsName,
                 }
             };
+
             var rootCert = _rootCertificate.CreateRootCertificate(
                 distinguishedName,
                 basicConstraints,
@@ -65,6 +66,155 @@ namespace CertificateManager
                 enhancedKeyUsages);
 
             return rootCert;
+        }
+
+        /// <summary>
+        /// Create an intermediate chained certificate for Client and Server TLS Auth
+        /// </summary>
+        /// <param name="distinguishedName">Distinguished Name used for the subject and the issuer properties</param>
+        /// <param name="validityPeriod">Valid from, Valid to certificate properties</param>
+        /// <param name="pathLengthConstraint">path length for the amount of chained certificates</param>
+        /// <param name="dnsName">Dns name use the certificate validation</param>
+        /// <param name="parentCertificateAuthority"> Parent cert to create the chain from</param>
+        /// <returns>X509Certificate2 intermediate chained certificate</returns>
+        public X509Certificate2 CreateIntermediateCertificateForClientServerAuth(
+            DistinguishedName distinguishedName,
+            ValidityPeriod validityPeriod,
+            int pathLengthConstraint,
+            string dnsName,
+            X509Certificate2 parentCertificateAuthority)
+        {
+            var enhancedKeyUsages = new OidCollection {
+                new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
+                new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
+            };
+
+            var basicConstraints = new BasicConstraints
+            {
+                CertificateAuthority = true,
+                HasPathLengthConstraint = true,
+                PathLengthConstraint = pathLengthConstraint,
+                Critical = true
+            };
+
+            var subjectAlternativeName = new SubjectAlternativeName
+            {
+                DnsName = new List<string>
+                {
+                    dnsName,
+                }
+            };
+
+            var intermediateCert = _intermediateCertificate.CreateIntermediateCertificate(
+                distinguishedName,
+                basicConstraints,
+                validityPeriod,
+                subjectAlternativeName,
+                parentCertificateAuthority,
+                enhancedKeyUsages);
+
+            return intermediateCert;
+        }
+
+        /// <summary>
+        /// Create an device chained certificate for Client and Server TLS Auth
+        /// </summary>
+        /// <param name="distinguishedName">Distinguished Name used for the subject and the issuer properties</param>
+        /// <param name="validityPeriod">Valid from, Valid to certificate properties</param>
+        /// <param name="dnsName">Dns name use the certificate validation</param>
+        /// <param name="parentCertificateAuthority"> Parent cert to create the chain from</param>
+        /// <returns>X509Certificate2 device chained certificate</returns>
+        public X509Certificate2 CreateDeviceCertificateForClientServerAuth(
+           DistinguishedName distinguishedName,
+           ValidityPeriod validityPeriod,
+           string dnsName,
+           X509Certificate2 parentCertificateAuthority)
+        {
+            var enhancedKeyUsages = new OidCollection {
+                new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
+                new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
+            };
+
+            return CreateDeviceClientServerCertificate(distinguishedName,
+                validityPeriod, dnsName, enhancedKeyUsages, parentCertificateAuthority);
+        }
+
+        /// <summary>
+        /// Create an server chained certificate for Client and Server TLS Auth
+        /// </summary>
+        /// <param name="distinguishedName">Distinguished Name used for the subject and the issuer properties</param>
+        /// <param name="validityPeriod">Valid from, Valid to certificate properties</param>
+        /// <param name="dnsName">Dns name use the certificate validation</param>
+        /// <param name="parentCertificateAuthority"> Parent cert to create the chain from</param>
+        /// <returns>X509Certificate2 server chained certificate</returns>
+        public X509Certificate2 CreateClientCertificateForClientServerAuth(
+           DistinguishedName distinguishedName,
+           ValidityPeriod validityPeriod,
+           string dnsName,
+           X509Certificate2 parentCertificateAuthority)
+        {
+            var enhancedKeyUsages = new OidCollection {
+                new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
+            };
+
+            return CreateDeviceClientServerCertificate(distinguishedName,
+                validityPeriod, dnsName, enhancedKeyUsages, parentCertificateAuthority);
+        }
+
+        /// <summary>
+        /// Create an client chained certificate for Client and Server TLS Auth
+        /// </summary>
+        /// <param name="distinguishedName">Distinguished Name used for the subject and the issuer properties</param>
+        /// <param name="validityPeriod">Valid from, Valid to certificate properties</param>
+        /// <param name="dnsName">Dns name use the certificate validation</param>
+        /// <param name="parentCertificateAuthority"> Parent cert to create the chain from</param>
+        /// <returns>X509Certificate2 client chained certificate</returns>
+        public X509Certificate2 CreateServerCertificateForClientServerAuth(
+           DistinguishedName distinguishedName,
+           ValidityPeriod validityPeriod,
+           string dnsName,
+           X509Certificate2 parentCertificateAuthority)
+        {
+            var enhancedKeyUsages = new OidCollection {
+                new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
+            };
+
+            return CreateDeviceClientServerCertificate(distinguishedName,
+                validityPeriod, dnsName, enhancedKeyUsages, parentCertificateAuthority);
+        }
+
+        private X509Certificate2 CreateDeviceClientServerCertificate(
+           DistinguishedName distinguishedName,
+           ValidityPeriod validityPeriod,
+           string dnsName,
+           OidCollection enhancedKeyUsages, 
+           X509Certificate2 parentCertificateAuthority)
+        {
+            var basicConstraints = new BasicConstraints
+            {
+                CertificateAuthority = false,
+                HasPathLengthConstraint = false,
+                PathLengthConstraint = 0,
+                Critical = true
+            };
+
+            var subjectAlternativeName = new SubjectAlternativeName
+            {
+                DnsName = new List<string>
+                {
+                    dnsName,
+                }
+            };
+
+            var deviceCert = _deviceCertificate.CreateDeviceCertificate(
+                distinguishedName,
+                basicConstraints,
+                validityPeriod,
+                subjectAlternativeName,
+                parentCertificateAuthority,
+                enhancedKeyUsages);
+
+            return deviceCert;
         }
     }
 }
