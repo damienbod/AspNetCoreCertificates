@@ -5,10 +5,15 @@ using System.Security.Cryptography.X509Certificates;
 namespace CertificateManager
 {
     /// <summary>
-    /// https://github.com/rwatjen/AzureIoTDPSCertificates
+    /// API used to import and export certificates in bytes for the cer and pfc format
     /// </summary>
     public class ImportExportCertificate
     {
+        /// <summary>
+        /// Export the certificate public key which can then be saved as a cer file
+        /// </summary>
+        /// <param name="certificate">X509Certificate2 cert</param>
+        /// <returns></returns>
         public X509Certificate2 ExportCertificatePublicKey(X509Certificate2 certificate)
         {
             var publicKeyBytes = certificate.Export(X509ContentType.Cert);
@@ -16,11 +21,24 @@ namespace CertificateManager
             return signingCertWithoutPrivateKey;
         }
 
+        /// <summary>
+        /// Export a root certificate
+        /// </summary>
+        /// <param name="password">password used to create export</param>
+        /// <param name="certificate">certificate to export</param>
+        /// <returns>pfx or Pkcs12 byte[]</returns>
         public byte[] ExportRootPfx(string password, X509Certificate2 certificate)
         {
             return CertificateToPfx(password, certificate, null, null);
         }
 
+        /// <summary>
+        /// Export chained certificate in byte[] pfx , Pkcs12 format
+        /// </summary>
+        /// <param name="password">password used to create the export</param>
+        /// <param name="certificate">certificate to export</param>
+        /// <param name="signingCert">cert with the parent chain</param>
+        /// <returns>pfx or Pkcs12 byte[]</returns>
         public byte[] ExportCertificatePfx(string password, X509Certificate2 certificate, X509Certificate2 signingCert)
         {
             var caCertCollection = GetCertificateCollection(signingCert, password);
