@@ -12,7 +12,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<IntermediateCertificate>();
             services.AddTransient<RootCertificate>();
             services.AddTransient<DeviceCertificate>();
-            
+            services.AddTransient<CertificateManagerService>();
 
             return services;
         }
