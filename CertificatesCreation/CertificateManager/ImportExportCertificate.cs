@@ -29,7 +29,8 @@ namespace CertificateManager
         }
 
         private byte[] CertificateToPfx(string password,
-            X509Certificate2 certificate, X509Certificate2 signingCert,
+            X509Certificate2 certificate, 
+            X509Certificate2 signingCertificate,
             X509Certificate2Collection chain)
         {
             var certCollection = new X509Certificate2Collection(certificate);
@@ -37,14 +38,14 @@ namespace CertificateManager
             {
                 certCollection.AddRange(chain);
             }
-            if (signingCert != null)
-            {
-                var signingCertWithoutPrivateKey = ExportCertificatePublicKey(signingCert);
-                certCollection.Add(signingCertWithoutPrivateKey);
 
+            if (signingCertificate != null)
+            {
+                var signingCertWithoutPrivateKey = ExportCertificatePublicKey(signingCertificate);
+                certCollection.Add(signingCertWithoutPrivateKey);
             }
-            var certBytes = certCollection.Export(X509ContentType.Pkcs12, password);
-            return certBytes;
+
+            return certCollection.Export(X509ContentType.Pkcs12, password);
         }
 
         private X509Certificate2Collection GetCertificateCollection(X509Certificate2 inputCert, string password)
@@ -57,8 +58,6 @@ namespace CertificateManager
             var outcollection = new X509Certificate2Collection();
             foreach (X509Certificate2 element in certificateCollection)
             {
-                Console.WriteLine($"Found certificate: {element?.Thumbprint} " +
-                    $"{element?.Subject}; PrivateKey: {element?.HasPrivateKey}");
                 if (certificate == null && element.HasPrivateKey)
                 {
                     certificate = element;
