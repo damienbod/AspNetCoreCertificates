@@ -71,35 +71,28 @@ namespace CertificatesCreation
             string password = "1234";
             var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
 
-            importExportCertificate.SaveCertificateToPfxFile(
-                "localhost_root_l1.pfx", password, rootCert, null, null);
+            var rootCertInPfxBtyes = importExportCertificate.ExportRootPfx(password, rootCert);
+            File.WriteAllBytes("localhost_root_l1.pfx", rootCertInPfxBtyes);
+
             var rootPublicKey = importExportCertificate.ExportCertificatePublicKey(rootCert);
             var rootPublicKeyBytes = rootPublicKey.Export(X509ContentType.Cert);
             File.WriteAllBytes($"localhost_root_l1.cer", rootPublicKeyBytes);
 
-            var chain = new X509Certificate2Collection();
-            var previousCaCertPublicKeyRoot =  importExportCertificate.ExportCertificatePublicKey(rootCert);
-            importExportCertificate.SaveCertificateToPfxFile(
-                "localhost_intermediate_l2.pfx", password, intermediateCertificate, previousCaCertPublicKeyRoot, chain);
-            
-            chain.Add(previousCaCertPublicKeyRoot);
-            var previousCaCertPublicKeyIntermediate = importExportCertificate.ExportCertificatePublicKey(intermediateCertificate);
-            importExportCertificate.SaveCertificateToPfxFile(
-                "localhost_intermediate_l3.pfx", password, intermediateCertificateLevel3, previousCaCertPublicKeyIntermediate, chain);
+            var intermediateCertInPfxBtyes = importExportCertificate.ExportCertificatePfx(password, intermediateCertificate, rootCert);
+            File.WriteAllBytes("localhost_intermediate_l2.pfx", intermediateCertInPfxBtyes);
 
-            importExportCertificate.SaveCertificateToPfxFile(
-                $"devicel4.pfx", password, deviceCertificate, intermediateCertificateLevel3, chain);
+            var intermediateCertL3InPfxBtyes = importExportCertificate.ExportCertificatePfx(password, intermediateCertificateLevel3, intermediateCertificate);
+            File.WriteAllBytes("localhost_intermediate_l3.pfx", intermediateCertL3InPfxBtyes);
 
-            // Verification certificate
-            var (caCert, caCertCollection) = 
-                importExportCertificate.LoadCertificateAndCollectionFromPfx("localhost_root_l1.pfx", password);
+            var deviceCertL4InPfxBtyes = importExportCertificate.ExportCertificatePfx(password, deviceCertificate, intermediateCertificateLevel3);
+            File.WriteAllBytes("devicel4.pfx", deviceCertL4InPfxBtyes);
 
             var deviceVerificationCert = deviceCertCreator.CreateDeviceCertificate(
                DeviceCertConfig.DistinguishedName,
                DeviceCertConfig.BasicConstraints,
                DeviceCertConfig.ValidityPeriod,
                DeviceCertConfig.SubjectAlternativeName,
-               caCert,
+               rootCert,
                enhancedKeyUsages);
 
             deviceVerificationCert.FriendlyName = "device verification cert l4";

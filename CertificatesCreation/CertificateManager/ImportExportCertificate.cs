@@ -9,7 +9,26 @@ namespace CertificateManager
     /// </summary>
     public class ImportExportCertificate
     {
-        public void SaveCertificateToPfxFile(string filename, string password,
+        public X509Certificate2 ExportCertificatePublicKey(X509Certificate2 certificate)
+        {
+            var publicKeyBytes = certificate.Export(X509ContentType.Cert);
+            var signingCertWithoutPrivateKey = new X509Certificate2(publicKeyBytes);
+            return signingCertWithoutPrivateKey;
+        }
+
+        public byte[] ExportRootPfx(string password, X509Certificate2 certificate)
+        {
+            return CertificateToPfx(password, certificate, null, null);
+        }
+
+        public byte[] ExportCertificatePfx(string password, X509Certificate2 certificate, X509Certificate2 signingCert)
+        {
+            var caCertCollection = GetCertificateCollection(signingCert, password);
+            var publicKeySigningCert = ExportCertificatePublicKey(signingCert);
+            return CertificateToPfx(password, certificate, publicKeySigningCert, caCertCollection);
+        }
+
+        private byte[] CertificateToPfx(string password,
             X509Certificate2 certificate, X509Certificate2 signingCert,
             X509Certificate2Collection chain)
         {
@@ -25,31 +44,13 @@ namespace CertificateManager
 
             }
             var certBytes = certCollection.Export(X509ContentType.Pkcs12, password);
-            File.WriteAllBytes(filename, certBytes);
+            return certBytes;
         }
 
-        public X509Certificate2 ExportCertificatePublicKey(X509Certificate2 certificate)
+        private X509Certificate2Collection GetCertificateCollection(X509Certificate2 inputCert, string password)
         {
-            var publicKeyBytes = certificate.Export(X509ContentType.Cert);
-            var signingCertWithoutPrivateKey = new X509Certificate2(publicKeyBytes);
-            return signingCertWithoutPrivateKey;
-        }
-
-        public (X509Certificate2 certificate, X509Certificate2Collection collection)
-            LoadCertificateAndCollectionFromPfx(string pfxFileName, string password)
-        {
-            if (string.IsNullOrEmpty(pfxFileName))
-            {
-                throw new ArgumentException($"{nameof(pfxFileName)} must be a valid filename.", nameof(pfxFileName));
-            }
-            if (!File.Exists(pfxFileName))
-            {
-                throw new FileNotFoundException($"{pfxFileName} does not exist. Cannot load certificate from non-existing file.", pfxFileName);
-            }
             var certificateCollection = new X509Certificate2Collection();
-            certificateCollection.Import(
-                pfxFileName,
-                password,
+            certificateCollection.Import(inputCert.GetRawCertData(), password,
                 X509KeyStorageFlags.Exportable | X509KeyStorageFlags.UserKeySet);
 
             X509Certificate2 certificate = null;
@@ -70,17 +71,12 @@ namespace CertificateManager
 
             if (certificate == null)
             {
-                Console.WriteLine($"ERROR: {pfxFileName} did not " +
-                    $"contain any certificate with a private key.");
-                return (null, null);
+                return null;
             }
             else
             {
-                Console.WriteLine($"Using certificate {certificate.Thumbprint} " +
-                    $"{certificate.Subject}");
-                return (certificate, outcollection);
+                return outcollection;
             }
-
         }
     }
 }
