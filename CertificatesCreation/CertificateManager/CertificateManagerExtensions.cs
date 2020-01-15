@@ -11,6 +11,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ImportExportCertificate>();
             services.AddTransient<IntermediateCertificate>();
             services.AddTransient<RootCertificate>();
+            services.AddTransient<DeviceCertificate>();
+            
 
             return services;
         }

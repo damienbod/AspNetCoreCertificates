@@ -24,7 +24,7 @@ namespace CertificatesCreation
                 RootCertConfig.ValidityPeriod,
                 RootCertConfig.SubjectAlternativeName);
 
-            rootCert.FriendlyName = "localhost root";
+            rootCert.FriendlyName = "localhost root l1";
 
             Console.WriteLine($"Created Root Certificate {rootCert.SubjectName}");
 
@@ -38,7 +38,7 @@ namespace CertificatesCreation
                 IntermediateCertConfig.SubjectAlternativeName,
                 rootCert);
 
-            intermediateCertificate.FriendlyName = "intermediate from root";
+            intermediateCertificate.FriendlyName = "intermediate from root l2";
 
             Console.WriteLine($"Created Intermediate Certificate {intermediateCertificate.SubjectName}");
 
@@ -49,8 +49,19 @@ namespace CertificatesCreation
                 IntermediateLevel3CertConfig.SubjectAlternativeName,
                 intermediateCertificate);
 
-            intermediateCertificateLevel3.FriendlyName = "intermediate level 3 from intermediate";
+            intermediateCertificateLevel3.FriendlyName = "intermediate l3 from intermediate";
 
+            var deviceCertCreator = serviceProvider.GetService<DeviceCertificate>();
+
+            var deviceCertificate = deviceCertCreator.CreateDeviceCertificate(
+                DeviceCertConfig.DistinguishedName,
+                DeviceCertConfig.BasicConstraints,
+                DeviceCertConfig.ValidityPeriod,
+                DeviceCertConfig.SubjectAlternativeName,
+                intermediateCertificateLevel3);
+
+            deviceCertificate.FriendlyName = "device cert l4";
+            
 
             string password = "1234";
             string rootCertName = "localhost_root";
