@@ -30,19 +30,14 @@ namespace CertificatesCreation
             ValidTo = DateTime.UtcNow.AddYears(10)
         };
 
-        public static SubjectAlternativeName SubjectAlternativeName = GetSubjectAlternativeName();
-
-        private static SubjectAlternativeName GetSubjectAlternativeName()
+        public static SubjectAlternativeName SubjectAlternativeName = new SubjectAlternativeName
         {
-            var subjectAlternativeName = new SubjectAlternativeName
+            Email = "damienbod@damienbod.ch",
+            DnsName = new List<string>
             {
-                Email = "damienbod@damienbod.ch"
-            };
-
-            subjectAlternativeName.DnsName.Add("localhost");
-            subjectAlternativeName.DnsName.Add("test.damienbod.ch");
-
-            return subjectAlternativeName;
-        }
+                "localhost",
+                "test.damienbod.ch"
+            }
+        };
     }
 }
