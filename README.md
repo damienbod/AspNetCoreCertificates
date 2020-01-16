@@ -200,6 +200,8 @@ http://oid-info.com/
 
 https://www.alvestrand.no/objectid/
 
+https://azure.microsoft.com/sv-se/blog/installing-certificates-into-iot-devices/
+
 
 https://github.com/damienbod/AspNetCoreCertificateAuth
 
