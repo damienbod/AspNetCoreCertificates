@@ -32,7 +32,12 @@ namespace CertificateManager
                 _certificateUtility.AddBasicConstraints(request, basicConstraints);
 
                 // key usage: Digital Signature and Key Encipherment
-                request.CertificateExtensions.Add(new X509KeyUsageExtension(X509KeyUsageFlags.KeyCertSign, true));
+                request.CertificateExtensions.Add(
+                    new X509KeyUsageExtension(
+                      X509KeyUsageFlags.DigitalSignature
+                    | X509KeyUsageFlags.KeyEncipherment 
+                    | X509KeyUsageFlags.KeyCertSign, 
+                    true));
 
                 _certificateUtility.AddSubjectAlternativeName(request, subjectAlternativeName);
 

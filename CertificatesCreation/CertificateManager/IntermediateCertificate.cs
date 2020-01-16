@@ -40,7 +40,11 @@ namespace CertificateManager
 
                 // key usage: Digital Signature and Key Encipherment
                 request.CertificateExtensions.Add(
-                    new X509KeyUsageExtension( X509KeyUsageFlags.KeyCertSign, true));
+                  new X509KeyUsageExtension(
+                      X509KeyUsageFlags.DigitalSignature
+                    | X509KeyUsageFlags.KeyEncipherment
+                    | X509KeyUsageFlags.KeyCertSign,
+                    true));
 
                 // set the AuthorityKeyIdentifier. There is no built-in 
                 // support, so it needs to be copied from the Subject Key 

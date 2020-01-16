@@ -3,6 +3,7 @@ using CertificateManager.Models;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Xunit;
@@ -11,7 +12,7 @@ namespace CertificateManagerTests
 {
     public class ClientServerAuthTests
     {
-        private static readonly Oid ClientCertificateOid = new Oid("1.3.6.1.5.5.7.3.2");
+        
 
         private (X509Certificate2 root, X509Certificate2 intermediate, X509Certificate2 server, X509Certificate2 client) SetupCerts()
         {
@@ -60,6 +61,94 @@ namespace CertificateManagerTests
             Assert.False(client.IsSelfSigned());
         }
 
-      
+        [Fact]
+        public void ValidateSelfSignedValid()
+        {
+            var (root, intermediate, server, client) = SetupCerts();
+
+            var x509ChainPolicy = BuildChainUtil.BuildChainPolicySelfSigned(root, true, true);
+            var chain = new X509Chain
+            {
+                ChainPolicy = x509ChainPolicy
+            };
+
+            var certificateIsValid = chain.Build(root);
+            Assert.True(certificateIsValid);
+        }
+
+        [Fact]
+        public void ValidateChainedValid()
+        {
+            var (root, intermediate, server, client) = SetupCerts();
+
+            var x509ChainPolicy = BuildChainUtil.BuildChainPolicyChained(
+                root, intermediate, server, client,
+                X509RevocationFlag.ExcludeRoot,
+                X509RevocationMode.NoCheck,
+                true, true);
+
+            var chain = new X509Chain
+            {
+                ChainPolicy = x509ChainPolicy
+            };
+
+            var certificateIsValid = chain.Build(client);
+            Assert.True(certificateIsValid);
+        }
+
+        [Fact]
+        public void ValidateChainedInValidEU()
+        {
+            var (root, intermediate, server, client) = SetupCerts();
+
+            // we only accept client certs when the ValidateCertificateUse is true
+            var x509ChainPolicy = BuildChainUtil.BuildChainPolicyChained(
+                root, intermediate, server, client,
+                X509RevocationFlag.ExcludeRoot,
+                X509RevocationMode.NoCheck,
+                true, true);
+
+            var chain = new X509Chain
+            {
+                ChainPolicy = x509ChainPolicy
+            };
+
+            var certificateIsValid = chain.Build(server);
+            Assert.False(certificateIsValid);
+
+            if (!certificateIsValid)
+            {
+                var chainErrors = new List<X509ChainStatusFlags>();
+                foreach (var validationFailure in chain.ChainStatus)
+                {
+                    chainErrors.Add(validationFailure.Status);
+                }
+                Assert.True(chainErrors.Contains(X509ChainStatusFlags.NotValidForUsage), "expect NotValidForUsage");
+            }
+
+        }
+
+
+        [Fact]
+        public void ValidateChainedInValidIntermediate()
+        {
+            var (root, intermediate, server, client) = SetupCerts();
+
+            // we only accept client certs when the ValidateCertificateUse is true
+            var x509ChainPolicy = BuildChainUtil.BuildChainPolicyChained(
+                root, intermediate, server, client,
+                X509RevocationFlag.ExcludeRoot,
+                X509RevocationMode.NoCheck,
+                true, true);
+
+            var chain = new X509Chain
+            {
+                ChainPolicy = x509ChainPolicy
+            };
+
+            var certificateIsValid = chain.Build(intermediate);
+            Assert.True(certificateIsValid);
+        }
+
     }
 }
