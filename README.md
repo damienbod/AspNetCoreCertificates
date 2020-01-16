@@ -69,8 +69,8 @@ https://www.alvestrand.no/objectid/
 ### C#
 
 - X509BasicConstraintsExtension
-- X509KeyUsageExtension
-- X509EnhancedKeyUsageExtension => OID
+- X509KeyUsageExtension OID KU
+- X509EnhancedKeyUsageExtension => OID EKU
 
 
 ```
