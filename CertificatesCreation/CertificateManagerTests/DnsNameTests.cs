@@ -38,8 +38,9 @@ namespace CertificateManagerTests
 
             var certManagerService = serviceProvider.GetService<CertificateManagerService>();
 
-
-            certManagerService.CreateRootCertificateForClientServerAuth(
+            var exception = Assert.Throws<ArgumentException>(() =>
+            {
+                certManagerService.CreateRootCertificateForClientServerAuth(
                 new DistinguishedName
                 {
                     CommonName = "root dev",
@@ -50,10 +51,10 @@ namespace CertificateManagerTests
                 },
                 new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
                 3, "local  _ host");
+            });
+
+            
         }
-
-
-        
 
     }
 }
