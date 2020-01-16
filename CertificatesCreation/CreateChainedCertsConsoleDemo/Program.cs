@@ -5,7 +5,7 @@ using CertificateManager.Models;
 using System.Security.Cryptography.X509Certificates;
 using System.IO;
 
-namespace CertificatesCreation
+namespace CreateChainedCertsConsoleDemo
 {
     class Program
     {

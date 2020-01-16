@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using CertificateManager;
 using System.Security.Cryptography;
 
-namespace CertificatesCreation
+namespace CreateChainedCertsConsoleDemo
 {
     public static class LowLevelApiExamples
     {

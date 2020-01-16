@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CertificatesCreation
+namespace CreateChainedCertsConsoleDemo
 {
     public static class IntermediateLevel3CertConfig
     {

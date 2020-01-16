@@ -3,24 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CertificatesCreation
+namespace CreateChainedCertsConsoleDemo
 {
-    public static class RootCertConfig
+    public static class DeviceCertConfig
     {
         public static DistinguishedName DistinguishedName = new DistinguishedName
         {
             CommonName = "localhost",
             Country = "CH",
             Locality = "CH",
-            Organisation = "damienbod",
-            OrganisationUnit = "developement"
+            Organisation = "firma x",
+            OrganisationUnit = "skills"
         };
 
         public static BasicConstraints BasicConstraints = new BasicConstraints
         {
-            CertificateAuthority = true,
-            HasPathLengthConstraint = true,
-            PathLengthConstraint = 3,
+            CertificateAuthority = false,
+            HasPathLengthConstraint = false,
+            PathLengthConstraint = 0,
             Critical = true
         };
 
@@ -32,11 +32,9 @@ namespace CertificatesCreation
 
         public static SubjectAlternativeName SubjectAlternativeName = new SubjectAlternativeName
         {
-            Email = "damienbod@damienbod.ch",
             DnsName = new List<string>
             {
-                "localhost",
-                "test.damienbod.ch"
+                "localhost"
             }
         };
     }
