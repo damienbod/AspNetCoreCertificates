@@ -23,6 +23,7 @@ namespace CertificatesCreation
                 new DistinguishedName { CommonName = "root dev", Country = "IT" },
                 new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
                 3, "localhost");
+            rootCaL1.FriendlyName = "developement root L1 certificate";
 
             // Intermediate L2 chained from root L1
             var intermediateCaL2 = certManagerService.CreateIntermediateCertificateForClientServerAuth(
