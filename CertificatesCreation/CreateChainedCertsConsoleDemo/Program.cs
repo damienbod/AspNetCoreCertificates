@@ -65,6 +65,8 @@ namespace CreateChainedCertsConsoleDemo
 
             var clientCertL3InPfxBtyes = importExportCertificate.ExportCertificatePfx(password, clientL3, intermediateCaL2);
             File.WriteAllBytes("clientl3.pfx", clientCertL3InPfxBtyes);
+
+            Console.WriteLine("Certificates exported to pfx and cer files");
         }
     }
 }

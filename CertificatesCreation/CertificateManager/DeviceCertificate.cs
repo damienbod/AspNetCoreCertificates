@@ -30,11 +30,9 @@ namespace CertificateManager
             {
                 throw new Exception("Signing cert must have private key");
             }
-            //if (string.IsNullOrEmpty(distinguishedName.CommonName))
-            //{
-            //    throw new ArgumentException($"{nameof(distinguishedName.CommonName)} must be a valid DNS name", nameof(distinguishedName.CommonName));
-            //}
-            //if (UriHostNameType.Unknown == Uri.CheckHostName(distinguishedName.CommonName))
+
+            
+            //if (UriHostNameType.Unknown == Uri.CheckHostName(sa.CommonName))
             //{
             //    throw new ArgumentException("Must be a valid DNS name", nameof(distinguishedName.CommonName));
             //}
