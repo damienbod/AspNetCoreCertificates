@@ -62,6 +62,8 @@ namespace CertificateManagerTests
                 chainPolicy.ApplicationPolicy.Add(ClientCertificateOid);
             }
 
+            // This is NOT the default !!!
+            // Only set this to validate the other parts of the chained flow
             chainPolicy.VerificationFlags |= X509VerificationFlags.AllowUnknownCertificateAuthority;
 
             chainPolicy.ExtraStore.Add(root);

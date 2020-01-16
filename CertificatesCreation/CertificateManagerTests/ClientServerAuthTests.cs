@@ -128,7 +128,6 @@ namespace CertificateManagerTests
 
         }
 
-
         [Fact]
         public void ValidateChainedInValidIntermediate()
         {
