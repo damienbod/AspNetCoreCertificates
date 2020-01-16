@@ -61,10 +61,10 @@ namespace CertificatesCreation
             File.WriteAllBytes("localhost_intermediate_l2.pfx", intermediateCertInPfxBtyes);
 
             var serverCertL3InPfxBtyes = importExportCertificate.ExportCertificatePfx(password, serverL3, intermediateCaL2);
-            File.WriteAllBytes("serverl4.pfx", serverCertL3InPfxBtyes);
+            File.WriteAllBytes("serverl3.pfx", serverCertL3InPfxBtyes);
 
             var clientCertL3InPfxBtyes = importExportCertificate.ExportCertificatePfx(password, clientL3, intermediateCaL2);
-            File.WriteAllBytes("clientl4.pfx", clientCertL3InPfxBtyes);
+            File.WriteAllBytes("clientl3.pfx", clientCertL3InPfxBtyes);
         }
     }
 }
