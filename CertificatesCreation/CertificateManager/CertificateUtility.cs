@@ -32,6 +32,14 @@ namespace CertificateManager
 
         public void AddSubjectAlternativeName(CertificateRequest request, SubjectAlternativeName subjectAlternativeName)
         {
+            foreach (var dnsName in subjectAlternativeName.DnsName)
+            {
+                if (UriHostNameType.Unknown == Uri.CheckHostName(dnsName))
+                {
+                    throw new ArgumentException("Must be a valid DNS name", nameof(dnsName));
+                }
+            }
+
             var sanBuilder = new SubjectAlternativeNameBuilder();
             foreach(var dnsName in subjectAlternativeName.DnsName)
             {

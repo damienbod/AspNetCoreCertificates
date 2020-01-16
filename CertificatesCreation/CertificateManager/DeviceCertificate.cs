@@ -31,12 +31,6 @@ namespace CertificateManager
                 throw new Exception("Signing cert must have private key");
             }
 
-            
-            //if (UriHostNameType.Unknown == Uri.CheckHostName(sa.CommonName))
-            //{
-            //    throw new ArgumentException("Must be a valid DNS name", nameof(distinguishedName.CommonName));
-            //}
-
             using (var ecdsa = ECDsa.Create("ECDsa"))
             {
                 ecdsa.KeySize = 256;
