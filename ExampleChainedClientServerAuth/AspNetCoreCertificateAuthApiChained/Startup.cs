@@ -47,9 +47,7 @@ namespace AspNetCoreCertificateAuthApi
                 {
                     // https://docs.microsoft.com/en-us/aspnet/core/security/authentication/certauth
                     options.AllowedCertificateTypes = CertificateTypes.Chained;
-                    options.ValidateCertificateUse = true;
                     options.RevocationMode = X509RevocationMode.NoCheck;
-                    options.RevocationFlag = X509RevocationFlag.ExcludeRoot;
 
                     // Default values
                     //options.AllowedCertificateTypes = CertificateTypes.Chained;
