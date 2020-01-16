@@ -26,7 +26,6 @@ namespace AspNetCoreCertificateAuth.Pages
         public async Task OnGetAsync()
         {
             var chainedClient = await CallApiClientChainedClientCertLocalhost();
-
         }
 
         private async Task<JsonDocument> CallApiClientChainedClientCertLocalhost()
