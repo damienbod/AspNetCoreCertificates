@@ -30,7 +30,6 @@ namespace CreateChainedCertsConsoleDemo
 
             var rcCreator = serviceProvider.GetService<RootCertificate>();
 
-
             var rootCert = rcCreator.CreateRootCertificate(
                 RootCertConfig.DistinguishedName,
                 RootCertConfig.BasicConstraints,
@@ -66,8 +65,6 @@ namespace CreateChainedCertsConsoleDemo
             intermediateCertificateLevel3.FriendlyName = "intermediate l3 from intermediate";
 
             var deviceCertCreator = serviceProvider.GetService<DeviceCertificate>();
-
-           
 
             var deviceCertificate = deviceCertCreator.CreateDeviceCertificate(
                 DeviceCertConfig.DistinguishedName,
