@@ -27,6 +27,17 @@ namespace CertificateManager
         /// <param name="password">password used to create export</param>
         /// <param name="certificate">certificate to export</param>
         /// <returns>pfx or Pkcs12 byte[]</returns>
+        public byte[] ExportSelfSignedCertificatePfx(string password, X509Certificate2 certificate)
+        {
+            return CertificateToPfx(password, certificate, null, null);
+        }
+
+        /// <summary>
+        /// Export a root certificate
+        /// </summary>
+        /// <param name="password">password used to create export</param>
+        /// <param name="certificate">certificate to export</param>
+        /// <returns>pfx or Pkcs12 byte[]</returns>
         public byte[] ExportRootPfx(string password, X509Certificate2 certificate)
         {
             return CertificateToPfx(password, certificate, null, null);
@@ -39,7 +50,7 @@ namespace CertificateManager
         /// <param name="certificate">certificate to export</param>
         /// <param name="signingCert">cert with the parent chain</param>
         /// <returns>pfx or Pkcs12 byte[]</returns>
-        public byte[] ExportCertificatePfx(string password, X509Certificate2 certificate, X509Certificate2 signingCert)
+        public byte[] ExportChainedCertificatePfx(string password, X509Certificate2 certificate, X509Certificate2 signingCert)
         {
             var caCertCollection = GetCertificateCollection(signingCert, password);
             var publicKeySigningCert = ExportCertificatePublicKey(signingCert);

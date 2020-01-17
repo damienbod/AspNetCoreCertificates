@@ -57,13 +57,13 @@ namespace CreateChainedCertsConsoleDemo
             var rootPublicKeyBytes = rootPublicKey.Export(X509ContentType.Cert);
             File.WriteAllBytes($"localhost_root_l1.cer", rootPublicKeyBytes);
 
-            var intermediateCertInPfxBtyes = importExportCertificate.ExportCertificatePfx(password, intermediateCaL2, rootCaL1);
+            var intermediateCertInPfxBtyes = importExportCertificate.ExportChainedCertificatePfx(password, intermediateCaL2, rootCaL1);
             File.WriteAllBytes("localhost_intermediate_l2.pfx", intermediateCertInPfxBtyes);
 
-            var serverCertL3InPfxBtyes = importExportCertificate.ExportCertificatePfx(password, serverL3, intermediateCaL2);
+            var serverCertL3InPfxBtyes = importExportCertificate.ExportChainedCertificatePfx(password, serverL3, intermediateCaL2);
             File.WriteAllBytes("serverl3.pfx", serverCertL3InPfxBtyes);
 
-            var clientCertL3InPfxBtyes = importExportCertificate.ExportCertificatePfx(password, clientL3, intermediateCaL2);
+            var clientCertL3InPfxBtyes = importExportCertificate.ExportChainedCertificatePfx(password, clientL3, intermediateCaL2);
             File.WriteAllBytes("clientl3.pfx", clientCertL3InPfxBtyes);
 
             Console.WriteLine("Certificates exported to pfx and cer files");
