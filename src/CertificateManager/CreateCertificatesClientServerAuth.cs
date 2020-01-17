@@ -180,6 +180,83 @@ namespace CertificateManager
                 validityPeriod, dnsName, enhancedKeyUsages, parentCertificateAuthority);
         }
 
+        public X509Certificate2 NewServerSelfSignedCertificate(
+            DistinguishedName distinguishedName,
+            ValidityPeriod validityPeriod,
+            string dnsName)
+        {
+            var enhancedKeyUsages = new OidCollection {
+                new Oid("1.3.6.1.5.5.7.3.1"), // TLS Server auth
+            };
+
+            var basicConstraints = new BasicConstraints
+            {
+                CertificateAuthority = false,
+                HasPathLengthConstraint = false,
+                PathLengthConstraint = 0,
+                Critical = true
+            };
+
+            var subjectAlternativeName = new SubjectAlternativeName
+            {
+                DnsName = new List<string>
+                {
+                    dnsName,
+                }
+            };
+
+            var x509KeyUsageFlags =
+              X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment;
+
+            var clientCertSelfSigned = _createCertificates.NewSelfSignedCertificate(
+                distinguishedName,
+                basicConstraints,
+                validityPeriod,
+                subjectAlternativeName,
+                enhancedKeyUsages,
+                x509KeyUsageFlags);
+
+            return clientCertSelfSigned;
+        }
+        public X509Certificate2 NewClientSelfSignedCertificate(
+            DistinguishedName distinguishedName,
+            ValidityPeriod validityPeriod,
+            string dnsName)
+        {
+            var enhancedKeyUsages = new OidCollection {
+                new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
+            };
+
+            var basicConstraints = new BasicConstraints
+            {
+                CertificateAuthority = false,
+                HasPathLengthConstraint = false,
+                PathLengthConstraint = 0,
+                Critical = true
+            };
+
+            var subjectAlternativeName = new SubjectAlternativeName
+            {
+                DnsName = new List<string>
+                {
+                    dnsName,
+                }
+            };
+
+            var x509KeyUsageFlags =
+              X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment;
+
+            var clientCertSelfSigned = _createCertificates.NewSelfSignedCertificate(
+                distinguishedName,
+                basicConstraints,
+                validityPeriod,
+                subjectAlternativeName,
+                enhancedKeyUsages,
+                x509KeyUsageFlags);
+
+            return clientCertSelfSigned;
+        }
+
         private X509Certificate2 NewDeviceChainedCertificate(
            DistinguishedName distinguishedName,
            ValidityPeriod validityPeriod,
