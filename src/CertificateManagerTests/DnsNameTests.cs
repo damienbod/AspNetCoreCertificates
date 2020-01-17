@@ -18,10 +18,10 @@ namespace CertificateManagerTests
                 .AddCertificateManager()
                 .BuildServiceProvider();
 
-            var certManagerService = serviceProvider.GetService<CertificateManagerService>();
+            var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
 
 
-            var rootCaL1 = certManagerService.CreateRootCertificateForClientServerAuth(
+            var rootCaL1 = createClientServerAuthCerts.NewRootCertificate(
                 new DistinguishedName { CommonName = "root dev", Country = "IT" },
                 new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
                 3, "localhost");
@@ -36,11 +36,11 @@ namespace CertificateManagerTests
                 .AddCertificateManager()
                 .BuildServiceProvider();
 
-            var certManagerService = serviceProvider.GetService<CertificateManagerService>();
+            var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                certManagerService.CreateRootCertificateForClientServerAuth(
+                createClientServerAuthCerts.NewRootCertificate(
                 new DistinguishedName
                 {
                     CommonName = "root dev",

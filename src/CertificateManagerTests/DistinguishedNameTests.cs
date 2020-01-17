@@ -19,10 +19,10 @@ namespace CertificateManagerTests
                 .AddCertificateManager()
                 .BuildServiceProvider();
 
-            var certManagerService = serviceProvider.GetService<CertificateManagerService>();
+            var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
 
 
-            var rootCaL1 = certManagerService.CreateRootCertificateForClientServerAuth(
+            var rootCaL1 = createClientServerAuthCerts.NewRootCertificate(
                 new DistinguishedName { 
                     CommonName = "root dev", 
                     Country = "IT", 
@@ -45,10 +45,10 @@ namespace CertificateManagerTests
                 .AddCertificateManager()
                 .BuildServiceProvider();
 
-            var certManagerService = serviceProvider.GetService<CertificateManagerService>();
+            var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
 
 
-            var rootCaL1 = certManagerService.CreateRootCertificateForClientServerAuth(
+            var rootCaL1 = createClientServerAuthCerts.NewRootCertificate(
                 new DistinguishedName
                 {
                     CommonName = "root dev",
@@ -71,11 +71,11 @@ namespace CertificateManagerTests
                 .AddCertificateManager()
                 .BuildServiceProvider();
 
-            var certManagerService = serviceProvider.GetService<CertificateManagerService>();
+            var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                certManagerService.CreateRootCertificateForClientServerAuth(
+                createClientServerAuthCerts.NewRootCertificate(
                 new DistinguishedName
                 {
                     CommonName = "root dev",
@@ -96,11 +96,11 @@ namespace CertificateManagerTests
                 .AddCertificateManager()
                 .BuildServiceProvider();
 
-            var certManagerService = serviceProvider.GetService<CertificateManagerService>();
+            var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                certManagerService.CreateRootCertificateForClientServerAuth(
+                createClientServerAuthCerts.NewRootCertificate(
                 new DistinguishedName
                 {
                     Country = "IT",
@@ -121,11 +121,11 @@ namespace CertificateManagerTests
                 .AddCertificateManager()
                 .BuildServiceProvider();
 
-            var certManagerService = serviceProvider.GetService<CertificateManagerService>();
+            var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
 
             var exception = Assert.Throws<NullReferenceException>(() =>
             {
-                certManagerService.CreateRootCertificateForClientServerAuth(
+                createClientServerAuthCerts.NewRootCertificate(
                 null,
                 new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
                 3, "localhost");
