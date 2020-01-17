@@ -19,6 +19,17 @@ Also to the Firefox trusted certificates.
 
 ## What is a intermiedate certificate
 
+## Certificate Types
+
+## CRL Distribution Points
+
+https://www.alvestrand.no/objectid/2.5.29.31.html
+
+https://github.com/dotnet/runtime/blob/f1c7ed882a90104ab7171c95f4767fc15bb50cd6/src/libraries/System.Security.Cryptography.X509Certificates/tests/RevocationTests/CertificateAuthority.cs
+
+https://docs.microsoft.com/en-us/powershell/module/adcsadministration/add-cacrldistributionpoint?view=win10-ps
+
+
 ## Certificate Properties
 
 **Version**: X.509v3
