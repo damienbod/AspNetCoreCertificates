@@ -1,26 +1,17 @@
 ﻿using CertificateManager.Models;
 using System;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
 namespace CertificateManager
 {
     public class CreateCertificates
     {
-        private readonly IntermediateCertificate _intermediateCertificate;
-        private readonly RootCertificate _rootCertificate;
-        private readonly DeviceCertificate _deviceCertificate;
+        private readonly CertificateUtility _certificateUtility;
 
-        public CreateCertificates(
-            IntermediateCertificate intermediateCertificate,
-            RootCertificate rootCertificate,
-            DeviceCertificate deviceCertificate)
+        public CreateCertificates(CertificateUtility certificateUtility)
         {
-            _intermediateCertificate = intermediateCertificate;
-            _rootCertificate = rootCertificate;
-            _deviceCertificate = deviceCertificate;
+            _certificateUtility = certificateUtility;
         }
 
         /// <summary>
@@ -56,15 +47,29 @@ namespace CertificateManager
             OidCollection enhancedKeyUsages,
             X509KeyUsageFlags x509KeyUsageFlags)
         {
-            var rootCert = _rootCertificate.CreateRootCertificate(
-                distinguishedName,
-                basicConstraints,
-                validityPeriod,
-                subjectAlternativeName,
-                enhancedKeyUsages,
-                x509KeyUsageFlags);
+            using var ecdsa = ECDsa.Create("ECDsa");
 
-            return rootCert;
+            ecdsa.KeySize = 256;
+            var request = new CertificateRequest(
+                _certificateUtility.CreateIssuerOrSubject(distinguishedName),
+                ecdsa,
+                HashAlgorithmName.SHA256);
+
+            _certificateUtility.AddBasicConstraints(request, basicConstraints);
+            _certificateUtility.AddExtendedKeyUsages(request, x509KeyUsageFlags);
+            _certificateUtility.AddSubjectAlternativeName(request, subjectAlternativeName);
+
+            request.CertificateExtensions.Add(
+                new X509EnhancedKeyUsageExtension(enhancedKeyUsages, false));
+
+            request.CertificateExtensions.Add(
+                new X509SubjectKeyIdentifierExtension(request.PublicKey, false));
+
+            var notbefore = validityPeriod.ValidFrom.AddDays(-1);
+            var notafter = validityPeriod.ValidTo;
+            X509Certificate2 generatedCertificate = request.CreateSelfSigned(notbefore, notafter);
+
+            return generatedCertificate;
         }
 
         public X509Certificate2 NewChainedCertificate(
@@ -72,20 +77,81 @@ namespace CertificateManager
             BasicConstraints basicConstraints,
             ValidityPeriod validityPeriod,
             SubjectAlternativeName subjectAlternativeName,
-            X509Certificate2 parentCertificate,
+            X509Certificate2 signingCertificate,
             OidCollection enhancedKeyUsages,
             X509KeyUsageFlags x509KeyUsageFlags)
         {
-            var intermediateCert = _intermediateCertificate.CreateIntermediateCertificate(
-                distinguishedName,
-                basicConstraints,
-                validityPeriod,
-                subjectAlternativeName,
-                parentCertificate,
-                enhancedKeyUsages,
-                x509KeyUsageFlags);
+            if (signingCertificate == null)
+            {
+                throw new ArgumentNullException(nameof(signingCertificate));
+            }
+            if (!signingCertificate.HasPrivateKey)
+            {
+                throw new Exception("Signing cert must have private key");
+            }
 
-            return intermediateCert;
+            using var ecdsa = ECDsa.Create("ECDsa");
+            ecdsa.KeySize = 256;
+            var request = new CertificateRequest(
+                _certificateUtility.CreateIssuerOrSubject(distinguishedName),
+                ecdsa,
+                HashAlgorithmName.SHA256);
+
+            _certificateUtility.AddBasicConstraints(request, basicConstraints);
+            _certificateUtility.AddExtendedKeyUsages(request, x509KeyUsageFlags);
+
+            // set the AuthorityKeyIdentifier. There is no built-in 
+            // support, so it needs to be copied from the Subject Key 
+            // Identifier of the signing certificate and massaged slightly.
+            // AuthorityKeyIdentifier is "KeyID=<subject key identifier>"
+            var issuerSubjectKey = signingCertificate.Extensions["Subject Key Identifier"].RawData;
+            var segment = new ArraySegment<byte>(issuerSubjectKey, 2, issuerSubjectKey.Length - 2);
+            var authorityKeyIdentifier = new byte[segment.Count + 4];
+            // "KeyID" bytes
+            authorityKeyIdentifier[0] = 0x30;
+            authorityKeyIdentifier[1] = 0x16;
+            authorityKeyIdentifier[2] = 0x80;
+            authorityKeyIdentifier[3] = 0x14;
+            segment.CopyTo(authorityKeyIdentifier, 4);
+            request.CertificateExtensions.Add(new X509Extension("2.5.29.35", authorityKeyIdentifier, false));
+
+            _certificateUtility.AddSubjectAlternativeName(request, subjectAlternativeName);
+
+            // Enhanced key usages
+            request.CertificateExtensions.Add(
+                new X509EnhancedKeyUsageExtension(enhancedKeyUsages, false));
+
+            // add this subject key identifier
+            request.CertificateExtensions.Add(
+                new X509SubjectKeyIdentifierExtension(request.PublicKey, false));
+
+            // certificate expiry: Valid from Yesterday to Now+365 days
+            // Unless the signing cert's validity is less. It's not possible
+            // to create a cert with longer validity than the signing cert.
+            var notbefore = validityPeriod.ValidFrom.AddDays(-1);
+            if (notbefore < signingCertificate.NotBefore)
+            {
+                notbefore = new DateTimeOffset(signingCertificate.NotBefore);
+            }
+
+            var notafter = validityPeriod.ValidTo;
+            if (notafter > signingCertificate.NotAfter)
+            {
+                notafter = new DateTimeOffset(signingCertificate.NotAfter);
+            }
+
+            // cert serial is the epoch/unix timestamp
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            var unixTime = Convert.ToInt64((DateTime.UtcNow - epoch).TotalSeconds);
+            var serial = BitConverter.GetBytes(unixTime);
+
+            // create and return the generated and signed
+            using var cert = request.Create(
+                signingCertificate,
+                notbefore,
+                notafter,
+                serial);
+            return cert.CopyWithPrivateKey(ecdsa);
         }
     }
 }

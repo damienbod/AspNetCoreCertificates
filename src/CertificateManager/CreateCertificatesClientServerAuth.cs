@@ -1,26 +1,17 @@
 ﻿using CertificateManager.Models;
-using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
 namespace CertificateManager
 {
     public class CreateCertificatesClientServerAuth
     {
-        private readonly IntermediateCertificate _intermediateCertificate;
-        private readonly RootCertificate _rootCertificate;
-        private readonly DeviceCertificate _deviceCertificate;
+        private readonly CreateCertificates _createCertificates;
 
-        public CreateCertificatesClientServerAuth(
-            IntermediateCertificate intermediateCertificate,
-            RootCertificate rootCertificate,
-            DeviceCertificate deviceCertificate)
+        public CreateCertificatesClientServerAuth(CreateCertificates createCertificates)
         {
-            _intermediateCertificate = intermediateCertificate;
-            _rootCertificate = rootCertificate;
-            _deviceCertificate = deviceCertificate;
+            _createCertificates = createCertificates;
         }
 
         /// <summary>
@@ -60,7 +51,7 @@ namespace CertificateManager
 
             var x509KeyUsageFlags = X509KeyUsageFlags.KeyCertSign;
 
-            var rootCert = _rootCertificate.CreateRootCertificate(
+            var rootCert = _createCertificates.NewSelfSignedCertificate(
                 distinguishedName,
                 basicConstraints,
                 validityPeriod,
@@ -110,7 +101,7 @@ namespace CertificateManager
 
             var x509KeyUsageFlags = X509KeyUsageFlags.KeyCertSign;
 
-            var intermediateCert = _intermediateCertificate.CreateIntermediateCertificate(
+            var intermediateCert = _createCertificates.NewChainedCertificate(
                 distinguishedName,
                 basicConstraints,
                 validityPeriod,
@@ -215,7 +206,7 @@ namespace CertificateManager
             var x509KeyUsageFlags =
               X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment;
 
-            var deviceCert = _deviceCertificate.CreateDeviceCertificate(
+            var deviceCert = _createCertificates.NewChainedCertificate(
                 distinguishedName,
                 basicConstraints,
                 validityPeriod,

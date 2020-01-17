@@ -17,20 +17,21 @@ namespace CreateChainedCertsConsoleDemo
                 .AddCertificateManager()
                 .BuildServiceProvider();
 
-            //new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
-            //new Oid("1.3.6.1.5.5.7.3.2")  // TLS Client auth
-            //new Oid("1.3.6.1.5.5.7.3.3")  // Code signing 
-            //new Oid("1.3.6.1.5.5.7.3.4")  // Email
-            //new Oid("1.3.6.1.5.5.7.3.8")  // Timestamping  
+        //new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
+        //new Oid("1.3.6.1.5.5.7.3.2")  // TLS Client auth
+        //new Oid("1.3.6.1.5.5.7.3.3")  // Code signing 
+        //new Oid("1.3.6.1.5.5.7.3.4")  // Email
+        //new Oid("1.3.6.1.5.5.7.3.8")  // Timestamping  
 
-            var enhancedKeyUsages = new OidCollection {
+        var enhancedKeyUsages = new OidCollection {
                 new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
                 new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
             };
 
-            var rcCreator = serviceProvider.GetService<RootCertificate>();
+            var createCertificates = serviceProvider.GetService<CreateCertificates>();
 
-            var rootCert = rcCreator.CreateRootCertificate(
+            // Create the root self signed cert
+            var rootCert = createCertificates.NewSelfSignedCertificate(
                 RootCertConfig.DistinguishedName,
                 RootCertConfig.BasicConstraints,
                 RootCertConfig.ValidityPeriod,
@@ -40,9 +41,8 @@ namespace CreateChainedCertsConsoleDemo
 
             rootCert.FriendlyName = "localhost root l1";
 
-            var icCreator = serviceProvider.GetService<IntermediateCertificate>();
-
-            var intermediateCertificate = icCreator.CreateIntermediateCertificate(
+            // Create an intermediate chained cert
+            var intermediateCertificate = createCertificates.NewChainedCertificate(
                 IntermediateCertConfig.DistinguishedName,
                 IntermediateCertConfig.BasicConstraints,
                 IntermediateCertConfig.ValidityPeriod,
@@ -53,7 +53,8 @@ namespace CreateChainedCertsConsoleDemo
 
             intermediateCertificate.FriendlyName = "intermediate from root l2";
 
-            var intermediateCertificateLevel3 = icCreator.CreateIntermediateCertificate(
+            // Create a second intermediate chained cert
+            var intermediateCertificateLevel3 = createCertificates.NewChainedCertificate(
                 IntermediateLevel3CertConfig.DistinguishedName,
                 IntermediateLevel3CertConfig.BasicConstraints,
                 IntermediateLevel3CertConfig.ValidityPeriod,
@@ -64,9 +65,8 @@ namespace CreateChainedCertsConsoleDemo
 
             intermediateCertificateLevel3.FriendlyName = "intermediate l3 from intermediate";
 
-            var deviceCertCreator = serviceProvider.GetService<DeviceCertificate>();
-
-            var deviceCertificate = deviceCertCreator.CreateDeviceCertificate(
+            // Create a device chained cert
+            var deviceCertificate = createCertificates.NewChainedCertificate(
                 DeviceCertConfig.DistinguishedName,
                 DeviceCertConfig.BasicConstraints,
                 DeviceCertConfig.ValidityPeriod,
@@ -96,7 +96,8 @@ namespace CreateChainedCertsConsoleDemo
             var deviceCertL4InPfxBtyes = importExportCertificate.ExportCertificatePfx(password, deviceCertificate, intermediateCertificateLevel3);
             File.WriteAllBytes("devicel4.pfx", deviceCertL4InPfxBtyes);
 
-            var deviceVerificationCert = deviceCertCreator.CreateDeviceCertificate(
+            // Create a device validation cert
+            var deviceVerificationCert = createCertificates.NewChainedCertificate(
                DeviceCertConfig.DistinguishedName,
                DeviceCertConfig.BasicConstraints,
                DeviceCertConfig.ValidityPeriod,

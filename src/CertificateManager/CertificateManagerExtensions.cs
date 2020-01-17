@@ -9,9 +9,6 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // internal
             services.AddTransient<CertificateUtility>();
-            services.AddTransient<IntermediateCertificate>();
-            services.AddTransient<RootCertificate>();
-            services.AddTransient<DeviceCertificate>();
 
             // public
             services.AddTransient<ImportExportCertificate>();
