@@ -232,9 +232,14 @@ namespace CertificateManager
         /// </summary>
         /// <param name="distinguishedName">Distinguished Name used for the subject and the issuer properties</param>
         /// <param name="validityPeriod">Valid from, Valid to certificate properties</param>
-        /// <param name="validityPeriod"></param>
-        /// <param name="subjectAlternativeName">SAN but olnly DnsNames can be added as a list + Email property</param>
-        /// <param name="enhancedKeyUsages">Defines how the certificate key can be used. If this value is not defined, the key can be used for any purpose.</param>
+        /// <param name="subjectAlternativeName">SAN but only DnsNames can be added as a list + Email property</param>
+        /// <param name="enhancedKeyUsages">Defines how the certificate key can be used. If this value is not defined, the key can be used for any purpose.
+        ///  new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
+        ///  new Oid("1.3.6.1.5.5.7.3.2")  // TLS Client auth
+        ///  new Oid("1.3.6.1.5.5.7.3.3")  // Code signing 
+        ///  new Oid("1.3.6.1.5.5.7.3.4")  // Email
+        ///  new Oid("1.3.6.1.5.5.7.3.8")  // Timestamping  
+        ///  </param>
         /// <param name="x509KeyUsageFlags"></param>
         /// <returns>Self signed certificate</returns>
         public X509Certificate2 CreateSelfSignedCertificate(
