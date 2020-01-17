@@ -28,13 +28,8 @@ namespace CreateChainedCertsConsoleDemo
                 new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
             };
 
-            var x509KeyUsageFlags = X509KeyUsageFlags.DigitalSignature
-               | X509KeyUsageFlags.KeyEncipherment
-               | X509KeyUsageFlags.KeyCertSign;
-
             var rcCreator = serviceProvider.GetService<RootCertificate>();
 
-            
 
             var rootCert = rcCreator.CreateRootCertificate(
                 RootCertConfig.DistinguishedName,
@@ -42,7 +37,7 @@ namespace CreateChainedCertsConsoleDemo
                 RootCertConfig.ValidityPeriod,
                 RootCertConfig.SubjectAlternativeName,
                 enhancedKeyUsages,
-                x509KeyUsageFlags);
+                RootCertConfig.X509KeyUsageFlags);
 
             rootCert.FriendlyName = "localhost root l1";
 
@@ -55,7 +50,7 @@ namespace CreateChainedCertsConsoleDemo
                 IntermediateCertConfig.SubjectAlternativeName,
                 rootCert,
                 enhancedKeyUsages,
-                x509KeyUsageFlags);
+                IntermediateCertConfig.X509KeyUsageFlags);
 
             intermediateCertificate.FriendlyName = "intermediate from root l2";
 
@@ -66,14 +61,13 @@ namespace CreateChainedCertsConsoleDemo
                 IntermediateLevel3CertConfig.SubjectAlternativeName,
                 intermediateCertificate,
                 enhancedKeyUsages,
-                x509KeyUsageFlags);
+                IntermediateLevel3CertConfig.X509KeyUsageFlags);
 
             intermediateCertificateLevel3.FriendlyName = "intermediate l3 from intermediate";
 
             var deviceCertCreator = serviceProvider.GetService<DeviceCertificate>();
 
-            var x509KeyUsageFlagsDevice =
-              X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment;
+           
 
             var deviceCertificate = deviceCertCreator.CreateDeviceCertificate(
                 DeviceCertConfig.DistinguishedName,
@@ -82,10 +76,9 @@ namespace CreateChainedCertsConsoleDemo
                 DeviceCertConfig.SubjectAlternativeName,
                 intermediateCertificateLevel3,
                 enhancedKeyUsages,
-                x509KeyUsageFlagsDevice);
+                DeviceCertConfig.X509KeyUsageFlags);
 
             deviceCertificate.FriendlyName = "device cert l4";
-            
 
             string password = "1234";
             var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
@@ -113,7 +106,7 @@ namespace CreateChainedCertsConsoleDemo
                DeviceCertConfig.SubjectAlternativeName,
                rootCert,
                enhancedKeyUsages,
-               x509KeyUsageFlagsDevice);
+               DeviceCertConfig.X509KeyUsageFlags);
 
             deviceVerificationCert.FriendlyName = "device verification cert l4";
 

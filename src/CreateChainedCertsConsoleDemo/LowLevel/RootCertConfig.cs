@@ -1,6 +1,7 @@
 ﻿using CertificateManager.Models;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace CreateChainedCertsConsoleDemo
@@ -39,5 +40,10 @@ namespace CreateChainedCertsConsoleDemo
                 "test.damienbod.ch"
             }
         };
+
+        // Only X509KeyUsageFlags.KeyCertSign required for client server auth
+        public static X509KeyUsageFlags X509KeyUsageFlags = X509KeyUsageFlags.DigitalSignature
+               | X509KeyUsageFlags.KeyEncipherment
+               | X509KeyUsageFlags.KeyCertSign;
     }
 }
