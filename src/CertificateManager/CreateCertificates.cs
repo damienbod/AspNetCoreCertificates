@@ -66,5 +66,26 @@ namespace CertificateManager
 
             return rootCert;
         }
+
+        public X509Certificate2 NewChainedCertificate(
+            DistinguishedName distinguishedName,
+            BasicConstraints basicConstraints,
+            ValidityPeriod validityPeriod,
+            SubjectAlternativeName subjectAlternativeName,
+            X509Certificate2 parentCertificate,
+            OidCollection enhancedKeyUsages,
+            X509KeyUsageFlags x509KeyUsageFlags)
+        {
+            var intermediateCert = _intermediateCertificate.CreateIntermediateCertificate(
+                distinguishedName,
+                basicConstraints,
+                validityPeriod,
+                subjectAlternativeName,
+                parentCertificate,
+                enhancedKeyUsages,
+                x509KeyUsageFlags);
+
+            return intermediateCert;
+        }
     }
 }
