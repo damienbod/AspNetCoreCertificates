@@ -226,5 +226,34 @@ namespace CertificateManager
 
             return deviceCert;
         }
+
+        /// <summary>
+        /// Create a Self signed certificate with all options which can also be used as a root certificate
+        /// </summary>
+        /// <param name="distinguishedName">Distinguished Name used for the subject and the issuer properties</param>
+        /// <param name="validityPeriod">Valid from, Valid to certificate properties</param>
+        /// <param name="validityPeriod"></param>
+        /// <param name="subjectAlternativeName">SAN but olnly DnsNames can be added as a list + Email property</param>
+        /// <param name="enhancedKeyUsages">Defines how the certificate key can be used. If this value is not defined, the key can be used for any purpose.</param>
+        /// <param name="x509KeyUsageFlags"></param>
+        /// <returns>Self signed certificate</returns>
+        public X509Certificate2 CreateSelfSignedCertificate(
+            DistinguishedName distinguishedName,
+            BasicConstraints basicConstraints,
+            ValidityPeriod validityPeriod,
+            SubjectAlternativeName subjectAlternativeName,
+            OidCollection enhancedKeyUsages,
+            X509KeyUsageFlags x509KeyUsageFlags)
+        {
+            var rootCert = _rootCertificate.CreateRootCertificate(
+                distinguishedName,
+                basicConstraints,
+                validityPeriod,
+                subjectAlternativeName,
+                enhancedKeyUsages,
+                x509KeyUsageFlags);
+
+            return rootCert;
+        }
     }
 }
