@@ -10,7 +10,7 @@ using Xunit;
 
 namespace CertificateManagerTests
 {
-    public class ClientServerAuthTests
+    public class ValidityPeriodClientServerAuthTests
     {
         private (X509Certificate2 root, X509Certificate2 intermediate, X509Certificate2 server, X509Certificate2 client) SetupCerts()
         {
@@ -22,14 +22,14 @@ namespace CertificateManagerTests
 
             var rootCaL1 = certManagerService.CreateRootCertificateForClientServerAuth(
                 new DistinguishedName { CommonName = "root dev", Country = "IT" },
-                new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+                new ValidityPeriod { ValidFrom = DateTime.UtcNow.AddMonths(3), ValidTo = DateTime.UtcNow.AddMonths(6) },
                 3, "localhost");
             rootCaL1.FriendlyName = "developement root L1 certificate";
 
             // Intermediate L2 chained from root L1
             var intermediateCaL2 = certManagerService.CreateIntermediateCertificateForClientServerAuth(
                 new DistinguishedName { CommonName = "intermediate dev", Country = "FR" },
-                new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+                new ValidityPeriod { ValidFrom = DateTime.UtcNow.AddMonths(2), ValidTo = DateTime.UtcNow.AddYears(1) },
                 2, "localhost", rootCaL1);
             intermediateCaL2.FriendlyName = "developement Intermediate L2 certificate";
 
@@ -50,33 +50,27 @@ namespace CertificateManagerTests
         }
 
         [Fact]
-        public void ValidateSelfSigned()
+        public void ClientServerCertCorrectValidityPeriod()
         {
+            // ValidityPeriod definitions
+            // client/server t <= intermediate <= root <= intermediate <= client/server
             var (root, intermediate, server, client) = SetupCerts();
-            Assert.True(root.IsSelfSigned());
-            Assert.False(intermediate.IsSelfSigned());
-            Assert.False(server.IsSelfSigned());
-            Assert.False(client.IsSelfSigned());
+
+            Assert.Equal(root.NotBefore, intermediate.NotBefore);
+            Assert.Equal(root.NotAfter, intermediate.NotAfter);
+
+            Assert.Equal(intermediate.NotBefore, client.NotBefore);
+            Assert.Equal(intermediate.NotAfter, client.NotAfter);
+
+            Assert.Equal(intermediate.NotBefore, server.NotBefore);
+            Assert.Equal(intermediate.NotAfter, server.NotAfter);
+
         }
 
         [Fact]
-        public void ValidateSelfSignedValid()
+        public void ValidateChainedValidityPeriodNotActive()
         {
-            var (root, intermediate, server, client) = SetupCerts();
-
-            var x509ChainPolicy = BuildChainUtil.BuildChainPolicySelfSigned(root, true, true);
-            var chain = new X509Chain
-            {
-                ChainPolicy = x509ChainPolicy
-            };
-
-            var certificateIsValid = chain.Build(root);
-            Assert.True(certificateIsValid);
-        }
-
-        [Fact]
-        public void ValidateChainedValid()
-        {
+            // certs are not active till the future
             var (root, intermediate, server, client) = SetupCerts();
 
             var x509ChainPolicy = BuildChainUtil.BuildChainPolicyChained(
@@ -91,27 +85,6 @@ namespace CertificateManagerTests
             };
 
             var certificateIsValid = chain.Build(client);
-            Assert.True(certificateIsValid);
-        }
-
-        [Fact]
-        public void ValidateChainedInValidEU()
-        {
-            var (root, intermediate, server, client) = SetupCerts();
-
-            // we only accept client certs when the ValidateCertificateUse is true
-            var x509ChainPolicy = BuildChainUtil.BuildChainPolicyChained(
-                root, intermediate, server, client,
-                X509RevocationFlag.ExcludeRoot,
-                X509RevocationMode.NoCheck,
-                true, true);
-
-            var chain = new X509Chain
-            {
-                ChainPolicy = x509ChainPolicy
-            };
-
-            var certificateIsValid = chain.Build(server);
             Assert.False(certificateIsValid);
 
             if (!certificateIsValid)
@@ -121,31 +94,8 @@ namespace CertificateManagerTests
                 {
                     chainErrors.Add(validationFailure.Status);
                 }
-                Assert.True(chainErrors.Contains(X509ChainStatusFlags.NotValidForUsage), "expect NotValidForUsage");
+                Assert.True(chainErrors.Contains(X509ChainStatusFlags.NotTimeValid), "expect NotValidForUsage");
             }
-
         }
-
-        [Fact]
-        public void ValidateChainedInValidIntermediate()
-        {
-            var (root, intermediate, server, client) = SetupCerts();
-
-            // we only accept client certs when the ValidateCertificateUse is true
-            var x509ChainPolicy = BuildChainUtil.BuildChainPolicyChained(
-                root, intermediate, server, client,
-                X509RevocationFlag.ExcludeRoot,
-                X509RevocationMode.NoCheck,
-                true, true);
-
-            var chain = new X509Chain
-            {
-                ChainPolicy = x509ChainPolicy
-            };
-
-            var certificateIsValid = chain.Build(intermediate);
-            Assert.True(certificateIsValid);
-        }
-
     }
 }
