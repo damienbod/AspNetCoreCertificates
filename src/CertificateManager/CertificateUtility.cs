@@ -90,5 +90,19 @@ namespace CertificateManager
 
             return sb.ToString();
         }
+
+        public void AddExtendedKeyUsages(CertificateRequest request, X509KeyUsageFlags x509KeyUsageFlags)
+        {
+            // root
+            // x509KeyUsageFlags = X509KeyUsageFlags.DigitalSignature
+            //   | X509KeyUsageFlags.KeyEncipherment
+            //   | X509KeyUsageFlags.KeyCertSign;
+
+            // device
+            // x509KeyUsageFlags = 
+            // X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment;
+
+            request.CertificateExtensions.Add(new X509KeyUsageExtension(x509KeyUsageFlags, true));
+        }
     }
 }

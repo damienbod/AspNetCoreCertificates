@@ -18,44 +18,34 @@ namespace CertificateManager
             BasicConstraints basicConstraints,
             ValidityPeriod validityPeriod,
             SubjectAlternativeName subjectAlternativeName,
-            OidCollection enhancedKeyUsages)
+            OidCollection enhancedKeyUsages,
+            X509KeyUsageFlags x509KeyUsageFlags)
         {
-            using (var ecdsa = ECDsa.Create("ECDsa"))
-            {
-                ecdsa.KeySize = 256;
-                var request = new CertificateRequest(
-                    _certificateUtility.CreateIssuerOrSubject(distinguishedName),
-                    ecdsa,
-                    HashAlgorithmName.SHA256);
+            using var ecdsa = ECDsa.Create("ECDsa");
 
-                // set basic certificate contraints
-                _certificateUtility.AddBasicConstraints(request, basicConstraints);
+            ecdsa.KeySize = 256;
+            var request = new CertificateRequest(
+                _certificateUtility.CreateIssuerOrSubject(distinguishedName),
+                ecdsa,
+                HashAlgorithmName.SHA256);
 
-                // key usage: Digital Signature and Key Encipherment
-                request.CertificateExtensions.Add(
-                    new X509KeyUsageExtension(
-                      X509KeyUsageFlags.DigitalSignature
-                    | X509KeyUsageFlags.KeyEncipherment 
-                    | X509KeyUsageFlags.KeyCertSign, 
-                    true));
+            _certificateUtility.AddBasicConstraints(request, basicConstraints);
+            _certificateUtility.AddExtendedKeyUsages(request, x509KeyUsageFlags);
+            _certificateUtility.AddSubjectAlternativeName(request, subjectAlternativeName);
 
-                _certificateUtility.AddSubjectAlternativeName(request, subjectAlternativeName);
+            request.CertificateExtensions.Add(
+                new X509EnhancedKeyUsageExtension(enhancedKeyUsages, false));
 
-                // Enhanced key usages
-                request.CertificateExtensions.Add(
-                    new X509EnhancedKeyUsageExtension(enhancedKeyUsages, false));
+            request.CertificateExtensions.Add(
+                new X509SubjectKeyIdentifierExtension(request.PublicKey, false));
 
-                // add this subject key identifier
-                request.CertificateExtensions.Add(
-                    new X509SubjectKeyIdentifierExtension(request.PublicKey, false));
+            var notbefore = validityPeriod.ValidFrom.AddDays(-1);
+            var notafter = validityPeriod.ValidTo;
+            X509Certificate2 generatedCertificate = request.CreateSelfSigned(notbefore, notafter);
 
-                var notbefore = validityPeriod.ValidFrom.AddDays(-1);
-                var notafter = validityPeriod.ValidTo;
-                X509Certificate2 generatedCertificate = request.CreateSelfSigned(notbefore, notafter);
-
-                return generatedCertificate;
-            }
+            return generatedCertificate;
         }
 
+        
     }
 }
