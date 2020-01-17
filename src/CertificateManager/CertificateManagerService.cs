@@ -58,12 +58,15 @@ namespace CertificateManager
                 }
             };
 
+            var x509KeyUsageFlags = X509KeyUsageFlags.KeyCertSign;
+
             var rootCert = _rootCertificate.CreateRootCertificate(
                 distinguishedName,
                 basicConstraints,
                 validityPeriod,
                 subjectAlternativeName,
-                enhancedKeyUsages);
+                enhancedKeyUsages,
+                x509KeyUsageFlags);
 
             return rootCert;
         }
@@ -105,13 +108,16 @@ namespace CertificateManager
                 }
             };
 
+            var x509KeyUsageFlags = X509KeyUsageFlags.KeyCertSign;
+
             var intermediateCert = _intermediateCertificate.CreateIntermediateCertificate(
                 distinguishedName,
                 basicConstraints,
                 validityPeriod,
                 subjectAlternativeName,
                 parentCertificateAuthority,
-                enhancedKeyUsages);
+                enhancedKeyUsages,
+                x509KeyUsageFlags);
 
             return intermediateCert;
         }
@@ -206,13 +212,17 @@ namespace CertificateManager
                 }
             };
 
+            var x509KeyUsageFlags =
+              X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment;
+
             var deviceCert = _deviceCertificate.CreateDeviceCertificate(
                 distinguishedName,
                 basicConstraints,
                 validityPeriod,
                 subjectAlternativeName,
                 parentCertificateAuthority,
-                enhancedKeyUsages);
+                enhancedKeyUsages,
+                x509KeyUsageFlags);
 
             return deviceCert;
         }
