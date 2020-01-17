@@ -239,7 +239,7 @@ namespace CertificateManager
         ///  new Oid("1.3.6.1.5.5.7.3.3")  // Code signing 
         ///  new Oid("1.3.6.1.5.5.7.3.4")  // Email
         ///  new Oid("1.3.6.1.5.5.7.3.8")  // Timestamping  
-        ///  </param>
+        /// </param>
         /// <param name="x509KeyUsageFlags">Defines how the certificate key can be used. 
         ///  None             No key usage parameters.
         ///  EncipherOnly     The key can be used for encryption only.
