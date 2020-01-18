@@ -9,12 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CertificateManager", "Certi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8118B8BC-37A2-4440-9033-11C1EDC2F437}"
 	ProjectSection(SolutionItems) = preProject
+		..\appveyor.yml = ..\appveyor.yml
 		..\Certificates.md = ..\Certificates.md
 		..\Documentation.md = ..\Documentation.md
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertificateManagerTests", "CertificateManagerTests\CertificateManagerTests.csproj", "{E84C00DB-DC8F-4E4D-AEDB-B6BF82889D2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CertificateManagerTests", "CertificateManagerTests\CertificateManagerTests.csproj", "{E84C00DB-DC8F-4E4D-AEDB-B6BF82889D2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
