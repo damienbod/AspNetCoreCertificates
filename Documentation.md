@@ -2,7 +2,7 @@
 
 Certificate Manager is a package which makes it easy to create certifcates which can be used to in client server authentication and IoT Devices like Azure IoT Hub
 
-# Basic Usage ASP.NET Core
+# Basic usage ASP.NET Core, NET Core
 
 Add the NuGet package to the your project file
 
@@ -11,7 +11,8 @@ Add the NuGet package to the your project file
 ```
 
 The NuGet packages uses dependency injection to setup. In a console application initialize the package as follows:
-```
+
+```csharp
 var serviceProvider = new ServiceCollection()
     .AddCertificateManager()
     .BuildServiceProvider();
@@ -20,7 +21,7 @@ var serviceProvider = new ServiceCollection()
 
 Or in an ASP.NET Core application use the Startup ConfigureServices method to initialize the package.
 
-```
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     // ...
@@ -35,7 +36,7 @@ public void ConfigureServices(IServiceCollection services)
 
 The distinguished name will be saved to the Issuer and the Subject properties of the certificate.
 
-```
+```csharp
 var distinguishedName = new DistinguishedName
 {
     CommonName = "localhost",
@@ -67,7 +68,7 @@ definitions:
 
 The Validity Period defines when the certificate is valid from and how long.
 
-```
+```csharp
 var validityPeriod = new ValidityPeriod
 {
     ValidFrom = DateTime.UtcNow,
@@ -83,7 +84,7 @@ The ValidFrom and the ValidTo values can then be used to validate the certificat
 
 The CreateCertificatesClientServerAuth service is used to create these certificates.
 
-```
+```csharp
 var dnsName = "localhost";
 var serviceProvider = new ServiceCollection()
     .AddCertificateManager()
@@ -98,7 +99,7 @@ Oid("1.3.6.1.5.5.7.3.1"), // TLS Server auth
 
 This can then be validated.
 
-```
+```csharp
 // Server self signed certificate
 var server = createClientServerAuthCerts.NewServerSelfSignedCertificate(
     new DistinguishedName { CommonName = "server", Country = "CH" },
@@ -113,7 +114,7 @@ Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
 
 This can then be validated.
 
-```
+```csharp
 // Client self signed certificate
 var client = createClientServerAuthCerts.NewClientSelfSignedCertificate(
     new DistinguishedName { CommonName = "client", Country = "CH" },

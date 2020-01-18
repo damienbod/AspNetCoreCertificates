@@ -11,7 +11,7 @@
 
 [Quickstart](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateChainedCertsConsoleDemo) | [Documentation](https://github.com/damienbod/AspNetCoreCertificates/blob/master/Documentation.md) | [Changelog](https://github.com/damienbod/AspNetCoreCertificates/blob/master/CHANGELOG.md)
 
-# Basic Usage ASP.NET Core
+# Basic usage ASP.NET Core, .NET Core
 
 Add the NuGet package to the your project file
 
@@ -20,7 +20,8 @@ Add the NuGet package to the your project file
 ```
 
 The NuGet packages uses dependency injection to setup. In a console application initialize the package as follows:
-```
+
+```csharp
 var serviceProvider = new ServiceCollection()
     .AddCertificateManager()
     .BuildServiceProvider();
@@ -29,7 +30,7 @@ var serviceProvider = new ServiceCollection()
 
 Or in an ASP.NET Core application use the Startup ConfigureServices method to initialize the package.
 
-```
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     // ...
