@@ -92,7 +92,10 @@ var serviceProvider = new ServiceCollection()
 var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
 ```
 
-The NewServerSelfSignedCertificate method can be used to create a self signed certificate for a certificate which is to be used on the server. The dnsName must match your server deployment. Only the correct enhanced Key usages is set. Oid("1.3.6.1.5.5.7.3.1"), // TLS Server auth
+The NewServerSelfSignedCertificate method can be used to create a self signed certificate for a certificate which is to be used on the server. The dnsName must match your server deployment. Only the correct enhanced Key usages is set. 
+
+Oid("1.3.6.1.5.5.7.3.1"), // TLS Server auth
+
 This can then be validated.
 
 ```
@@ -104,7 +107,10 @@ var server = createClientServerAuthCerts.NewServerSelfSignedCertificate(
 server.FriendlyName = "azure server certificate";
 ```
 
-The NewClientSelfSignedCertificate method can be used to create a self signed certificate for a certificate which is to be used on the server. The dnsName must match your server deployment. Only the correct enhanced Key usages is set. Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
+The NewClientSelfSignedCertificate method can be used to create a self signed certificate for a certificate which is to be used on the server. The dnsName must match your server deployment. Only the correct enhanced Key usages is set. 
+
+Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
+
 This can then be validated.
 
 ```
