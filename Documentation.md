@@ -33,6 +33,8 @@ public void ConfigureServices(IServiceCollection services)
 
 ### Distinguished Name
 
+The distinguished name will be saved to the Issuer and the Subject properties of the certificate.
+
 ```
 var distinguishedName = new DistinguishedName
 {
@@ -40,14 +42,14 @@ var distinguishedName = new DistinguishedName
     Country = "CH",
     Locality = "CH",
     Organisation = "damienbod",
-    OrganisationUnit = "developement"
+    OrganisationUnit = "development"
 };
 ```
 The CommonName and the Country properties are required.
 
 example in certificate:
 ```
-C=CH, C=CH, O=damienbod, OU=developement, CN=localhost
+C=CH, C=CH, O=damienbod, OU=development, CN=localhost
 ```
 
 definitions:
