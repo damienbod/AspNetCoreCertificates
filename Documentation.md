@@ -229,7 +229,11 @@ var clientCertL3InPfxBtyes = importExportCertificate.ExportChainedCertificatePfx
 File.WriteAllBytes("clientl3.pfx", clientCertL3InPfxBtyes);
 ```
 
-## General Certificates
+## General Certificates, full APIs
+
+### Self signed certificate
+
+Creating a self signed certificate using **NewSelfSignedCertificate**
 
 ```csharp
 var serviceProvider = new ServiceCollection()
@@ -254,6 +258,8 @@ var rootCert = createCertificates.NewSelfSignedCertificate(
 
 rootCert.FriendlyName = "localhost root l1";
 ```
+
+Certificate configuration for a self signed root
 
 ```csharp
 public static class RootCertConfig
@@ -295,6 +301,73 @@ public static class RootCertConfig
     public static X509KeyUsageFlags X509KeyUsageFlags = X509KeyUsageFlags.DigitalSignature
             | X509KeyUsageFlags.KeyEncipherment
             | X509KeyUsageFlags.KeyCertSign;
+    }
+```
+
+### Chained certificate
+
+```csharp
+var serviceProvider = new ServiceCollection()
+    .AddCertificateManager()
+    .BuildServiceProvider();
+
+var enhancedKeyUsages = new OidCollection {
+    new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
+    new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
+};
+
+var createCertificates = serviceProvider.GetService<CreateCertificates>();
+
+var deviceCertificate = createCertificates.NewChainedCertificate(
+    DeviceCertConfig.DistinguishedName,
+    DeviceCertConfig.BasicConstraints,
+    DeviceCertConfig.ValidityPeriod,
+    DeviceCertConfig.SubjectAlternativeName,
+    intermediateCertificateLevel3,
+    enhancedKeyUsages,
+    DeviceCertConfig.X509KeyUsageFlags);
+
+deviceCertificate.FriendlyName = "device cert l4";
+```
+
+Device certificate chained
+
+```csharp
+public static class DeviceCertConfig
+    {
+        public static DistinguishedName DistinguishedName = new DistinguishedName
+        {
+            CommonName = "localhost",
+            Country = "CH",
+            Locality = "CH",
+            Organisation = "firma x",
+            OrganisationUnit = "skills"
+        };
+
+        public static BasicConstraints BasicConstraints = new BasicConstraints
+        {
+            CertificateAuthority = false,
+            HasPathLengthConstraint = false,
+            PathLengthConstraint = 0,
+            Critical = true
+        };
+
+        public static ValidityPeriod ValidityPeriod = new ValidityPeriod
+        {
+            ValidFrom = DateTime.UtcNow,
+            ValidTo = DateTime.UtcNow.AddYears(10)
+        };
+
+        public static SubjectAlternativeName SubjectAlternativeName = new SubjectAlternativeName
+        {
+            DnsName = new List<string>
+            {
+                "localhost"
+            }
+        };
+
+        public static X509KeyUsageFlags X509KeyUsageFlags = 
+             X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment;
     }
 ```
 
