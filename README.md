@@ -14,15 +14,14 @@
 Add the NuGet package to the your project file
 
 ```
-"dependencies": {
-        "CertificateManager": "1.0.0",
+<PackageReference Include="CertificateManager" Version="1.0.0" />
 ```
 
 The NuGet packages uses dependency injection to setup. In a console application initialize the package as follows:
 ```
 var serviceProvider = new ServiceCollection()
-                .AddCertificateManager()
-                .BuildServiceProvider();
+    .AddCertificateManager()
+    .BuildServiceProvider();
 
 ```
 
@@ -42,15 +41,12 @@ Now the package is ready to use. See the Documentation to create the specific ce
 # Examples Creating Certificates:
 
 <ul>
-    <li><a href="http://damienbod.com/2015/10/21/asp-net-5-mvc-6-localization/">ASP.NET Core MVC Localization</a></li>
-    <li><a href="http://damienbod.com/2015/10/24/using-dataannotations-and-localization-in-asp-net-5-mvc-6/">Using DataAnnotations and Localization in ASP.NET Core MVC </a></li>
-    <li><a href="http://damienbod.com/2016/01/29/asp-net-core-1-0-using-sql-localization/">ASP.NET Core using SQL Localization</a></li>
-</ul>
+    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateChainedCertsConsoleDemo">Create Chained Certs Console</a></li></ul>
 
 # Examples Using Certificates:
 
 <ul>
-    <li><a href="http://damienbod.com/2015/10/21/asp-net-5-mvc-6-localization/">ASP.NET Core MVC Localization</a></li>
-    <li><a href="http://damienbod.com/2015/10/24/using-dataannotations-and-localization-in-asp-net-5-mvc-6/">Using DataAnnotations and Localization in ASP.NET Core MVC </a></li>
-    <li><a href="http://damienbod.com/2016/01/29/asp-net-core-1-0-using-sql-localization/">ASP.NET Core using SQL Localization</a></li>
+    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/examplesUsingCertificateAuthentication/AspNetCoreChained">ASP.NET Core Chained</a></li>
+    <li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/authentication/certauth">Microsoft Docs: Configure certificate authentication in ASP.NET Core</a></li>
 </ul>
+
