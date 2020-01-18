@@ -45,7 +45,7 @@ Now the package is ready to use. See the [Documentation](https://github.com/dami
 # Examples Creating Certificates:
 
 <ul>
-    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateChainedCertsConsoleDemo">Create Chained Certs Console</a></li></ul>
+    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateChainedCertsConsoleDemo">Create Chained Certificates Console</a></li></ul>
 
 # Examples Using Certificates:
 
