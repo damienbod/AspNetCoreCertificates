@@ -43,8 +43,8 @@ Now the package is ready to use. See the [Documentation](https://github.com/dami
 # Examples Creating Certificates:
 
 <ul>
-    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateChainedCertsConsoleDemo">Create **chained** certificate authentication certificates console</a></li>
-    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateSelfSignedCertsConsoleDemo">Create **self signed** certificate authentication certificates console</a></li>
+    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateChainedCertsConsoleDemo">Create chained certificate authentication certificates console</a></li>
+    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateSelfSignedCertsConsoleDemo">Create self signed certificate authentication certificates console</a></li>
 </ul>
 
 # Examples Using Certificates:
