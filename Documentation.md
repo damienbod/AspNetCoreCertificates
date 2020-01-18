@@ -82,7 +82,7 @@ The ValidFrom and the ValidTo values can then be used to validate the certificat
 
 ## Creating Self Signed Certificates for Client Server Authentication
 
-The CreateCertificatesClientServerAuth service is used to create these certificates.
+The **CreateCertificatesClientServerAuth** service is used to create these certificates.
 
 ```csharp
 var dnsName = "localhost";
@@ -93,7 +93,7 @@ var serviceProvider = new ServiceCollection()
 var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
 ```
 
-The NewServerSelfSignedCertificate method can be used to create a self signed certificate for a certificate which is to be used on the server. The dnsName must match your server deployment. Only the correct enhanced Key usages is set. 
+The **NewServerSelfSignedCertificate** method can be used to create a self signed certificate for a certificate which is to be used on the server. The dnsName must match your server deployment. Only the correct enhanced Key usages is set. 
 
 Oid("1.3.6.1.5.5.7.3.1"), // TLS Server auth
 
@@ -108,7 +108,7 @@ var server = createClientServerAuthCerts.NewServerSelfSignedCertificate(
 server.FriendlyName = "azure server certificate";
 ```
 
-The NewClientSelfSignedCertificate method can be used to create a self signed certificate for a certificate which is to be used on the server. The dnsName must match your server deployment. Only the correct enhanced Key usages is set. 
+The **NewClientSelfSignedCertificate** method can be used to create a self signed certificate for a certificate which is to be used on the server. The dnsName must match your server deployment. Only the correct enhanced Key usages is set. 
 
 Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
 
@@ -126,7 +126,7 @@ client.FriendlyName = "azure client certificate";
 
 ## Creating Chained Certificates for Client Server Authentication
 
-The CreateCertificatesClientServerAuth service is used to create these certificates.
+The **CreateCertificatesClientServerAuth** service is used to create these certificates.
 
 ```csharp
 var serviceProvider = new ServiceCollection()
@@ -136,7 +136,7 @@ var serviceProvider = new ServiceCollection()
 var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
 ```
 
-The NewRootCertificate method creates a new root certificate which can be used for chained structures. If you use your own root certificate, it needs to be added to the trusted certificate store on deployment host.
+The **NewRootCertificate** method creates a new root certificate which can be used for chained structures. If you use your own root certificate, it needs to be added to the trusted certificate store on deployment host.
 
 This is not needed if creting certificates from a public CA certificate. The root certificatge is a self signed certificate.
 
@@ -148,7 +148,7 @@ var rootCaL1 = createClientServerAuthCerts.NewRootCertificate(
 rootCaL1.FriendlyName = "developement root L1 certificate";
 ```
 
-The NewIntermediateChainedCertificate creates an intermediate certificate from a parent root or another intermediate certificate. 
+The **NewIntermediateChainedCertificate** creates an intermediate certificate from a parent root or another intermediate certificate. 
 
 ```csharp
 // Intermediate L2 chained from root L1
@@ -159,7 +159,7 @@ var intermediateCaL2 = createClientServerAuthCerts.NewIntermediateChainedCertifi
 intermediateCaL2.FriendlyName = "developement Intermediate L2 certificate";
 ```
 
-The NewServerChainedCertificate method can be used to create a self signed certificate for a certificate which is to be used on the server. The dnsName must match your server deployment. Only the correct enhanced Key usages is set. 
+The **NewServerChainedCertificate** method can be used to create a self signed certificate for a certificate which is to be used on the server. The dnsName must match your server deployment. Only the correct enhanced Key usages is set. 
 
 Oid("1.3.6.1.5.5.7.3.1"), // TLS Server auth
 
@@ -174,11 +174,12 @@ var serverL3 = createClientServerAuthCerts.NewServerChainedCertificate(
 serverL3.FriendlyName = "developement server L3 certificate";
 ```
 
-The NewClientChainedCertificate method can be used to create a chained certificate for a certificate which is to be used on the server. The dnsName must match your server deployment. Only the correct enhanced Key usages is set. 
+The **NewClientChainedCertificate** method can be used to create a chained certificate for a certificate which is to be used on the server. The dnsName must match your server deployment. Only the correct enhanced Key usages is set. 
 
 Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
 
 This can then be validated.
+
 ```csharp
 var clientL3 = createClientServerAuthCerts.NewClientChainedCertificate(
     new DistinguishedName { CommonName = "client", Country = "IE" },
@@ -194,3 +195,36 @@ clientL3.FriendlyName = "developement client L3 certificate";
 
 ## Exporting Certificates
 
+### Exporting self signed certificates
+
+```csharp
+var serverCertInPfxBtyes = 
+    importExportCertificate.ExportSelfSignedCertificatePfx(password, server);
+File.WriteAllBytes("server.pfx", serverCertInPfxBtyes);
+
+var clientCertInPfxBtyes = 
+    importExportCertificate.ExportSelfSignedCertificatePfx(password, client);
+File.WriteAllBytes("client.pfx", clientCertInPfxBtyes);
+```
+### Exporting chained certificates
+
+```csharp
+string password = "1234";
+var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
+
+var rootCertInPfxBtyes = importExportCertificate.ExportRootPfx(password, rootCaL1);
+File.WriteAllBytes("localhost_root_l1.pfx", rootCertInPfxBtyes);
+
+var rootPublicKey = importExportCertificate.ExportCertificatePublicKey(rootCaL1);
+var rootPublicKeyBytes = rootPublicKey.Export(X509ContentType.Cert);
+File.WriteAllBytes($"localhost_root_l1.cer", rootPublicKeyBytes);
+
+var intermediateCertInPfxBtyes = importExportCertificate.ExportChainedCertificatePfx(password, intermediateCaL2, rootCaL1);
+File.WriteAllBytes("localhost_intermediate_l2.pfx", intermediateCertInPfxBtyes);
+
+var serverCertL3InPfxBtyes = importExportCertificate.ExportChainedCertificatePfx(password, serverL3, intermediateCaL2);
+File.WriteAllBytes("serverl3.pfx", serverCertL3InPfxBtyes);
+
+var clientCertL3InPfxBtyes = importExportCertificate.ExportChainedCertificatePfx(password, clientL3, intermediateCaL2);
+File.WriteAllBytes("clientl3.pfx", clientCertL3InPfxBtyes);
+```
