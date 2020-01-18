@@ -81,7 +81,41 @@ The ValidFrom and the ValidTo values can then be used to validate the certificat
 
 ## Creating Self Signed Certificates for Client Server Authentication
 
-## Creating Self Signed Certificates for Azure Client Server Authentication
+The CreateCertificatesClientServerAuth service is used to create these certificates.
+
+```
+var dnsName = "localhost";
+var serviceProvider = new ServiceCollection()
+    .AddCertificateManager()
+    .BuildServiceProvider();
+
+var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
+```
+
+The NewServerSelfSignedCertificate method can be used to create a self signed certificate for a certificate which is to be used on the server. The dnsName must match your server deployment. Only the correct enhanced Key usages is set. Oid("1.3.6.1.5.5.7.3.1"), // TLS Server auth
+This can then be validated.
+
+```
+// Server self signed certificate
+var server = createClientServerAuthCerts.NewServerSelfSignedCertificate(
+    new DistinguishedName { CommonName = "server", Country = "CH" },
+    new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+    dnsName);
+server.FriendlyName = "azure server certificate";
+```
+
+The NewClientSelfSignedCertificate method can be used to create a self signed certificate for a certificate which is to be used on the server. The dnsName must match your server deployment. Only the correct enhanced Key usages is set. Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
+This can then be validated.
+
+```
+// Client self signed certificate
+var client = createClientServerAuthCerts.NewClientSelfSignedCertificate(
+    new DistinguishedName { CommonName = "client", Country = "CH" },
+    new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+    dnsName);
+
+client.FriendlyName = "azure client certificate";
+```
 
 ## Creating Chained Certificates for Client Server Authentication
 
