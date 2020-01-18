@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureCertAuth", "AzureCertAuth\AzureCertAuth.csproj", "{285A21AD-533B-4D50-B690-0C27CC5FFFAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureCertAuthClientConsole", "AzureCertAuthClientConsole\AzureCertAuthClientConsole.csproj", "{26469919-882D-408C-BD24-C21E485B3A62}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{285A21AD-533B-4D50-B690-0C27CC5FFFAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{285A21AD-533B-4D50-B690-0C27CC5FFFAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{285A21AD-533B-4D50-B690-0C27CC5FFFAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{285A21AD-533B-4D50-B690-0C27CC5FFFAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26469919-882D-408C-BD24-C21E485B3A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26469919-882D-408C-BD24-C21E485B3A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26469919-882D-408C-BD24-C21E485B3A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26469919-882D-408C-BD24-C21E485B3A62}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BBAC6956-8A44-47A6-B1E4-6BD167BDF41B}
+	EndGlobalSection
+EndGlobal
