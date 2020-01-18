@@ -228,3 +228,74 @@ File.WriteAllBytes("serverl3.pfx", serverCertL3InPfxBtyes);
 var clientCertL3InPfxBtyes = importExportCertificate.ExportChainedCertificatePfx(password, clientL3, intermediateCaL2);
 File.WriteAllBytes("clientl3.pfx", clientCertL3InPfxBtyes);
 ```
+
+## General Certificates
+
+```csharp
+var serviceProvider = new ServiceCollection()
+    .AddCertificateManager()
+    .BuildServiceProvider();
+
+var enhancedKeyUsages = new OidCollection {
+    new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
+    new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
+};
+
+var createCertificates = serviceProvider.GetService<CreateCertificates>();
+
+// Create the root self signed cert
+var rootCert = createCertificates.NewSelfSignedCertificate(
+    RootCertConfig.DistinguishedName,
+    RootCertConfig.BasicConstraints,
+    RootCertConfig.ValidityPeriod,
+    RootCertConfig.SubjectAlternativeName,
+    enhancedKeyUsages,
+    RootCertConfig.X509KeyUsageFlags);
+
+rootCert.FriendlyName = "localhost root l1";
+```
+
+```csharp
+public static class RootCertConfig
+{
+    public static DistinguishedName DistinguishedName = new DistinguishedName
+    {
+        CommonName = "localhost",
+        Country = "CH",
+        Locality = "CH",
+        Organisation = "damienbod",
+        OrganisationUnit = "developement"
+    };
+
+    public static BasicConstraints BasicConstraints = new BasicConstraints
+    {
+        CertificateAuthority = true,
+        HasPathLengthConstraint = true,
+        PathLengthConstraint = 3,
+        Critical = true
+    };
+
+    public static ValidityPeriod ValidityPeriod = new ValidityPeriod
+    {
+        ValidFrom = DateTime.UtcNow,
+        ValidTo = DateTime.UtcNow.AddYears(10)
+    };
+
+    public static SubjectAlternativeName SubjectAlternativeName = new SubjectAlternativeName
+    {
+        Email = "damienbod@damienbod.ch",
+        DnsName = new List<string>
+        {
+            "localhost",
+            "test.damienbod.ch"
+        }
+    };
+
+    // Only X509KeyUsageFlags.KeyCertSign required for client server auth
+    public static X509KeyUsageFlags X509KeyUsageFlags = X509KeyUsageFlags.DigitalSignature
+            | X509KeyUsageFlags.KeyEncipherment
+            | X509KeyUsageFlags.KeyCertSign;
+    }
+```
+
+## Certificate Configuration

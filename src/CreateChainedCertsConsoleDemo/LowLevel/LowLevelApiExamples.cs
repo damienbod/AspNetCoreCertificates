@@ -17,13 +17,13 @@ namespace CreateChainedCertsConsoleDemo
                 .AddCertificateManager()
                 .BuildServiceProvider();
 
-        //new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
-        //new Oid("1.3.6.1.5.5.7.3.2")  // TLS Client auth
-        //new Oid("1.3.6.1.5.5.7.3.3")  // Code signing 
-        //new Oid("1.3.6.1.5.5.7.3.4")  // Email
-        //new Oid("1.3.6.1.5.5.7.3.8")  // Timestamping  
+            //new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
+            //new Oid("1.3.6.1.5.5.7.3.2")  // TLS Client auth
+            //new Oid("1.3.6.1.5.5.7.3.3")  // Code signing 
+            //new Oid("1.3.6.1.5.5.7.3.4")  // Email
+            //new Oid("1.3.6.1.5.5.7.3.8")  // Timestamping  
 
-        var enhancedKeyUsages = new OidCollection {
+            var enhancedKeyUsages = new OidCollection {
                 new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
                 new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
             };
