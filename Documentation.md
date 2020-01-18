@@ -77,7 +77,7 @@ var validityPeriod = new ValidityPeriod
 
 If creating a child certificate from a root or an intermediate certification, the values cannot be outside the range of the parent. If the certificate values are outside the range, the parent values will be used.
 
-The ValidFrom and the ValidTo values can then be used to validate the certificate. It is recommended the keep this period short, if possible, be this depends on how you use and deploy the certificates.
+The ValidFrom and the ValidTo values can then be used to validate the certificate. It is recommended the keep this period short. This depends on how you use and deploy the certificates.
 
 ## Creating Self Signed Certificates for Client Server Authentication
 
