@@ -19,9 +19,9 @@ namespace AzureCertAuthClientConsole
 
         private static async Task<JsonDocument> GetApiDataUsingHttpClientHandler()
         {
-            //var cert = new X509Certificate2("sts_dev_cert.pfx", "1234");
+            var cert = new X509Certificate2("client.pfx", "1234");
             var handler = new HttpClientHandler();
-            //handler.ClientCertificates.Add(cert);
+            handler.ClientCertificates.Add(cert);
             var client = new HttpClient(handler);
 
             var request = new HttpRequestMessage()

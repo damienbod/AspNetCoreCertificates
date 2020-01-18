@@ -6,9 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="client.pfx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CertificateManager\CertificateManager.csproj" />
   </ItemGroup>
 
 </Project>
