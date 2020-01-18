@@ -9,6 +9,8 @@
 
 ========================
 
+[Quickstart](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateChainedCertsConsoleDemo) | [Documentation](https://github.com/damienbod/AspNetCoreCertificates/blob/master/Documentation.md) | [Changelog](https://github.com/damienbod/AspNetCoreCertificates/blob/master/CHANGELOG.md)
+
 <strong>Basic Usage ASP.NET Core</strong>
 
 Add the NuGet package to the your project file
@@ -36,7 +38,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Now the package is ready to use. See the Documentation to create the specific certificates for your use case.
+Now the package is ready to use. See the [Documentation](https://github.com/damienbod/AspNetCoreCertificates/blob/master/Documentation.md)  to create the specific certificates for your use case.
+
+
 
 # Examples Creating Certificates:
 
