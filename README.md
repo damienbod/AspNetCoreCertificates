@@ -40,12 +40,12 @@ public void ConfigureServices(IServiceCollection services)
 
 Now the package is ready to use. See the [Documentation](https://github.com/damienbod/AspNetCoreCertificates/blob/master/Documentation.md)  to create the specific certificates for your use case.
 
-
-
 # Examples Creating Certificates:
 
 <ul>
-    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateChainedCertsConsoleDemo">Create Chained Certificates Console</a></li></ul>
+    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateChainedCertsConsoleDemo">Create Chained Cert Auth Certificates Console</a></li></ul>
+    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateSelfSignedCertsConsoleDemo">Create self signed Cert Auth Certificates Console</a></li>
+</ul>
 
 # Examples Using Certificates:
 
