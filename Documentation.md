@@ -377,11 +377,42 @@ public static class DeviceCertConfig
 
 ### Basic Constraints
 
+basic constraints for intermediate and root certificates. Set the path length to match the chain length.
+
+```csharp
+var basicConstraints = new BasicConstraints
+{
+    CertificateAuthority = true,
+    HasPathLengthConstraint = true,
+    PathLengthConstraint = pathLengthConstraint,
+    Critical = true
+};
+```
+
+Or the basic constaints for a device, client or server certificate.
+
+```csharp
+var basicConstraints = new BasicConstraints
+{
+    CertificateAuthority = false,
+    HasPathLengthConstraint = false,
+    PathLengthConstraint = 0,
+    Critical = true
+};
+```
+
 ### Subject Alternative Name
 
 ### Enhanced Key Usages
 
 Defines how the certificate key can be used. 
+
+```csharp
+var enhancedKeyUsages = new OidCollection {
+    new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
+    new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
+};
+```
 
 - new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
 - new Oid("1.3.6.1.5.5.7.3.2")  // TLS Client auth
@@ -392,6 +423,11 @@ Defines how the certificate key can be used.
 ### X509 Key Usage Flags
 
 Defines how the certificate key can be used. 
+
+```csharp
+var x509KeyUsageFlags = 
+             X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment;
+```
 
 - None             No key usage parameters.
 - EncipherOnly     The key can be used for encryption only.
