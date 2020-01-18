@@ -29,7 +29,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-## Certification Configuration
+## Certificate Configuration
 
 ### Distinguished Name
 
@@ -64,6 +64,20 @@ definitions:
 // C and CN are REQUIRED
 
 ### Validity Period
+
+The Validity Period defines when the certificate is valid from and how long.
+
+```
+var validityPeriod = new ValidityPeriod
+{
+    ValidFrom = DateTime.UtcNow,
+    ValidTo = DateTime.UtcNow.AddYears(10)
+};
+```
+
+If creating a child certificate from a root or an intermediate certification, the values cannot be outside the range of the parent. If the certificate values are outside the range, the parent values will be used.
+
+The ValidFrom and the ValidTo values can then be used to validate the certificate. It is recommended the keep this period short, if possible, be this depends on how you use and deploy the certificates.
 
 ## Creating Self Signed Certificates for Client Server Authentication
 
