@@ -403,6 +403,18 @@ var basicConstraints = new BasicConstraints
 
 ### Subject Alternative Name
 
+Add the required or supported DnsName or the Email here.
+
+```csharp
+var subjectAlternativeName = new SubjectAlternativeName
+{
+    DnsName = new List<string>
+    {
+        "localhost"
+    }
+};
+```
+
 ### Enhanced Key Usages
 
 Defines how the certificate key can be used. 
