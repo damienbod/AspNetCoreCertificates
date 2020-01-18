@@ -1,4 +1,4 @@
-# Certificate Manager Readme
+Certificate Manager is a package which makes it easy to create certifcates which can be used to in client server authentication and IoT Devices like Azure IoT Hub
 
 // TODO can setup once the repo is public 
 
@@ -11,7 +11,7 @@
 
 [Quickstart](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateChainedCertsConsoleDemo) | [Documentation](https://github.com/damienbod/AspNetCoreCertificates/blob/master/Documentation.md) | [Changelog](https://github.com/damienbod/AspNetCoreCertificates/blob/master/CHANGELOG.md)
 
-<strong>Basic Usage ASP.NET Core</strong>
+# Basic Usage ASP.NET Core
 
 Add the NuGet package to the your project file
 
