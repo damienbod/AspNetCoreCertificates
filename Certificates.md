@@ -173,16 +173,11 @@ public enum X509KeyUsageFlags
 
 ## Certificate Types
 
+## Certificate File types
 
-## How to create a self signed client server certificate for mtls
+### .pfx
 
-## How to create a chained client server certificate for mtls
-
-## Configuring a Kestrel app for certificate authentication
-
-## Configuring an IIS app for certificate authentication
-
-## Configuring an Azure app for certificate authentication
+### .cer
 
 ## Public Key Infrastructure - PKI
 
