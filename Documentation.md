@@ -126,6 +126,68 @@ client.FriendlyName = "azure client certificate";
 
 ## Creating Chained Certificates for Client Server Authentication
 
+The CreateCertificatesClientServerAuth service is used to create these certificates.
+
+```csharp
+var serviceProvider = new ServiceCollection()
+    .AddCertificateManager()
+    .BuildServiceProvider();
+
+var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
+```
+
+The NewRootCertificate method creates a new root certificate which can be used for chained structures. If you use your own root certificate, it needs to be added to the trusted certificate store on deployment host.
+
+This is not needed if creting certificates from a public CA certificate. The root certificatge is a self signed certificate.
+
+```csharp
+var rootCaL1 = createClientServerAuthCerts.NewRootCertificate(
+    new DistinguishedName { CommonName = "root dev", Country = "IT" },
+    new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+    3, "localhost");
+rootCaL1.FriendlyName = "developement root L1 certificate";
+```
+
+The NewIntermediateChainedCertificate creates an intermediate certificate from a parent root or another intermediate certificate. 
+
+```csharp
+// Intermediate L2 chained from root L1
+var intermediateCaL2 = createClientServerAuthCerts.NewIntermediateChainedCertificate(
+    new DistinguishedName { CommonName = "intermediate dev", Country = "FR" },
+    new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+    2,  "localhost", rootCaL1);
+intermediateCaL2.FriendlyName = "developement Intermediate L2 certificate";
+```
+
+The NewServerChainedCertificate method can be used to create a self signed certificate for a certificate which is to be used on the server. The dnsName must match your server deployment. Only the correct enhanced Key usages is set. 
+
+Oid("1.3.6.1.5.5.7.3.1"), // TLS Server auth
+
+This can then be validated.
+
+```csharp
+// Server, Client L3 chained from Intermediate L2
+var serverL3 = createClientServerAuthCerts.NewServerChainedCertificate(
+    new DistinguishedName { CommonName = "server", Country = "DE" },
+    new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+    "localhost", intermediateCaL2);
+serverL3.FriendlyName = "developement server L3 certificate";
+```
+
+The NewClientChainedCertificate method can be used to create a chained certificate for a certificate which is to be used on the server. The dnsName must match your server deployment. Only the correct enhanced Key usages is set. 
+
+Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
+
+This can then be validated.
+```csharp
+var clientL3 = createClientServerAuthCerts.NewClientChainedCertificate(
+    new DistinguishedName { CommonName = "client", Country = "IE" },
+    new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+    "localhost", intermediateCaL2);
+clientL3.FriendlyName = "developement client L3 certificate";
+            
+```
+
 ## Creating Chained Certificates for Azure IoT 
 
 ## Creating Chained Certificates from a trusted CA Certificate
