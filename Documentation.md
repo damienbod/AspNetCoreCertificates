@@ -35,11 +35,11 @@ public void ConfigureServices(IServiceCollection services)
 
 ### Validity Period
 
-## Creating Self Signed Certificates for Client Server Auth
+## Creating Self Signed Certificates for Client Server Authentication
 
-## Creating Self Signed Certificates for Azure Client Server Auth
+## Creating Self Signed Certificates for Azure Client Server Authentication
 
-## Creating Chained Certificates for Client Server Auth
+## Creating Chained Certificates for Client Server Authentication
 
 ## Creating Chained Certificates for Azure IoT 
 
