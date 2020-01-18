@@ -33,6 +33,34 @@ public void ConfigureServices(IServiceCollection services)
 
 ### Distinguished Name
 
+```
+var distinguishedName = new DistinguishedName
+{
+    CommonName = "localhost",
+    Country = "CH",
+    Locality = "CH",
+    Organisation = "damienbod",
+    OrganisationUnit = "developement"
+};
+```
+The CommonName and the Country properties are required.
+
+example in certificate:
+```
+C=CH, C=CH, O=damienbod, OU=developement, CN=localhost
+```
+
+definitions:
+
+- C= Country 
+- ST= State or province
+- L= Locality
+- O= organisation
+- OU=Organisation Unit
+- CN= Common name (DNS) 
+
+// C and CN are REQUIRED
+
 ### Validity Period
 
 ## Creating Self Signed Certificates for Client Server Authentication
