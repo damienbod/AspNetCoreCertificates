@@ -33,6 +33,7 @@ namespace AzureCertAuthClientConsole
             if (response.IsSuccessStatusCode)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(responseContent);
                 var data = JsonDocument.Parse(responseContent);
                 return data;
             }
