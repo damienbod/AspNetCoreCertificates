@@ -62,15 +62,43 @@ namespace CertificateManager
         /// </summary>
         /// <param name="cert">certificate to export</param>
         /// <returns>A pem certificate as a string</returns>
-        public string ExportToPem(X509Certificate cert)
+        public string ExportToPem(X509Certificate cert, string password = null)
         {
             StringBuilder builder = new StringBuilder();
 
             builder.AppendLine("-----BEGIN CERTIFICATE-----");
-            builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Cert), Base64FormattingOptions.InsertLineBreaks));
+            if(string.IsNullOrEmpty(password))
+            {
+                builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Cert), 
+                    Base64FormattingOptions.InsertLineBreaks));
+            }
+            else
+            {
+                builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Cert, password), 
+                    Base64FormattingOptions.InsertLineBreaks));
+            }
             builder.AppendLine("-----END CERTIFICATE-----");
 
             return builder.ToString();
+        }
+
+        public X509Certificate ImportPemCertificate(string pemCertificate, string password = null)
+        {
+            // TODO we might need to remove the start and end lines
+            // TODO add the tests
+            // TODO add the docs
+            var certBytes = Convert.FromBase64String(pemCertificate);
+
+            if (string.IsNullOrEmpty(password))
+            {
+                var certificate = new X509Certificate2(certBytes);
+                return certificate;
+            }
+            else
+            {
+                var certificate = new X509Certificate2(certBytes, password);
+                return certificate;
+            }
         }
 
         private byte[] CertificateToPfx(string password,
