@@ -55,24 +55,28 @@ namespace CertificateManager
         public static string BEGIN_PRIVATE_KEY = "-----BEGIN PRIVATE KEY-----";
         public static string END_PRIVATE_KEY = "-----END PRIVATE KEY-----";
 
-        //DSA KEY
+        /// <summary>
+        /// DSA KEY
+        /// </summary>
+        public static string BEGIN_DSA_PRIVATE_KEY = "-----BEGIN DSA PRIVATE KEY-----";
+        public static string END_DSA_PRIVATE_KEY = "-----END DSA PRIVATE KEY-----";
 
-        //-----BEGIN DSA PRIVATE KEY-----
-        //-----END DSA PRIVATE KEY-----
+        /// <summary>
+        /// Elliptic Curve
+        /// </summary>
+        public static string BEGIN_EC_PRIVATE_KEY = "-----BEGIN EC PRIVATE KEY-----";
+        public static string END_EC_PRIVATE_KEY = "-----END EC PRIVATE KEY-----";
 
-        //Elliptic Curve
+        /// <summary>
+        /// PGP Private Key
+        /// </summary>
+        public static string BEGIN_PGP_PRIVATE_KEY_BLOCK = "-----BEGIN PGP PRIVATE KEY BLOCK-----";
+        public static string END_PGP_PRIVATE_KEY_BLOCK = "-----END PGP PRIVATE KEY BLOCK-----";
 
-        //-----BEGIN EC PRIVATE KEY-----
-        //-----BEGIN EC PRIVATE KEY-----
-
-        //PGP Private Key
-
-        //-----BEGIN PGP PRIVATE KEY BLOCK-----
-        //-----END PGP PRIVATE KEY BLOCK-----
-
-        //PGP Public Key
-
-        //-----BEGIN PGP PUBLIC KEY BLOCK-----
-        //-----END PGP PUBLIC KEY BLOCK-----
+        /// <summary>
+        /// PGP Public Key
+        /// </summary>
+        public static string BEGIN_PGP_PUBLIC_KEY_BLOCK = "-----BEGIN PGP PUBLIC KEY BLOCK-----";
+        public static string END_PGP_PUBLIC_KEY_BLOCK = "-----END PGP PUBLIC KEY BLOCK-----";
     }
 }
