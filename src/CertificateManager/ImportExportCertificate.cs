@@ -1,6 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace CertificateManager
 {
@@ -10,7 +10,7 @@ namespace CertificateManager
     public class ImportExportCertificate
     {
         /// <summary>
-        /// Export the certificate public key which can then be saved as a cer file
+        /// Exports the certificate public key which can then be saved as a cer file
         /// </summary>
         /// <param name="certificate">X509Certificate2 cert</param>
         /// <returns></returns>
@@ -22,7 +22,7 @@ namespace CertificateManager
         }
 
         /// <summary>
-        /// Export a root certificate
+        /// Exports a root certificate
         /// </summary>
         /// <param name="password">password used to create export</param>
         /// <param name="certificate">certificate to export</param>
@@ -33,7 +33,7 @@ namespace CertificateManager
         }
 
         /// <summary>
-        /// Export a root certificate
+        /// Exports a root certificate
         /// </summary>
         /// <param name="password">password used to create export</param>
         /// <param name="certificate">certificate to export</param>
@@ -44,7 +44,7 @@ namespace CertificateManager
         }
 
         /// <summary>
-        /// Export chained certificate in byte[] pfx , Pkcs12 format
+        /// Exports a chained certificate in byte[] pfx , Pkcs12 format
         /// </summary>
         /// <param name="password">password used to create the export</param>
         /// <param name="certificate">certificate to export</param>
@@ -55,6 +55,22 @@ namespace CertificateManager
             var caCertCollection = GetCertificateCollection(signingCert, password);
             var publicKeySigningCert = ExportCertificatePublicKey(signingCert);
             return CertificateToPfx(password, certificate, publicKeySigningCert, caCertCollection);
+        }
+
+        /// <summary>
+        /// Exports a certificate as a base64 string in the pem format string
+        /// </summary>
+        /// <param name="cert">certificate to export</param>
+        /// <returns>A pem certificate as a string</returns>
+        public string ExportToPem(X509Certificate cert)
+        {
+            StringBuilder builder = new StringBuilder();
+
+            builder.AppendLine("-----BEGIN CERTIFICATE-----");
+            builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Cert), Base64FormattingOptions.InsertLineBreaks));
+            builder.AppendLine("-----END CERTIFICATE-----");
+
+            return builder.ToString();
         }
 
         private byte[] CertificateToPfx(string password,
