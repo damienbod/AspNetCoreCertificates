@@ -3,7 +3,6 @@ using CertificateManager.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
-using System.Security.Cryptography.X509Certificates;
 
 namespace CreateSelfSignedCertsConsoleDemo
 {
