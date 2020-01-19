@@ -47,7 +47,7 @@ namespace CertificateManagerTests
         }
 
         [Fact]
-        public void ImportExportPem()
+        public void ImportExportCrtPem()
         {
             var (root, intermediate, server, client) = SetupCerts();
             var serviceProvider = new ServiceCollection()
@@ -55,13 +55,53 @@ namespace CertificateManagerTests
                 .BuildServiceProvider();
             var importExport = serviceProvider.GetService<ImportExportCertificate>();
 
-            var pem = importExport.ExportToPem(root);
+            var crtPem = importExport.ExportToCrtPem(root);
+            var roundTripCertificate = importExport.ImportCrtPem(crtPem);
 
-            var roundTripCert = importExport.ImportPemCertificate(pem);
-
-            Assert.Equal(root.Subject, roundTripCert.Subject);
+            Assert.Equal(root.Subject, roundTripCertificate.Subject);
 
         }
 
+        [Fact]
+        public void ImportExportPasswordCrtPem()
+        {
+            var (root, intermediate, server, client) = SetupCerts();
+            var serviceProvider = new ServiceCollection()
+                .AddCertificateManager()
+                .BuildServiceProvider();
+            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+
+            var crtPem = importExport.ExportToCrtPem(intermediate, "23456");
+            var roundTripCertificate = importExport.ImportCrtPem(crtPem, "23456");
+
+            Assert.Equal(intermediate.Subject, roundTripCertificate.Subject);
+
+        }
+
+        [Fact]
+        public void ImportExportIncorrectPasswordCrtPem()
+        {
+            var (root, intermediate, server, client) = SetupCerts();
+            var serviceProvider = new ServiceCollection()
+                .AddCertificateManager()
+                .BuildServiceProvider();
+            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+
+            var exception = Assert.Throws<ArgumentException> (() =>
+            {
+                try
+                {
+                    var crtPem = importExport.ExportToCrtPem(intermediate, "23HHHH456");
+                    var roundTripCertificate = importExport.ImportCrtPem(crtPem, "23456");
+                }
+                catch(Exception ex)
+                {
+                    // internal Internal.Cryptography.CryptoThrowHelper+WindowsCryptographicException : The specified network password is not correct.
+                    Assert.Equal("The specified network password is not correct.", ex.Message);
+                    throw new ArgumentException();
+                }
+            });
+
+        }
     }
 }

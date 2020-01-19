@@ -9,6 +9,12 @@ namespace CertificateManager
     /// </summary>
     public class ImportExportCertificate
     {
+        private readonly PemParser _pemParser;
+
+        public ImportExportCertificate(PemParser pemParser)
+        {
+            _pemParser = pemParser;
+        }
         /// <summary>
         /// Exports the certificate public key which can then be saved as a cer file
         /// </summary>
@@ -62,31 +68,35 @@ namespace CertificateManager
         /// </summary>
         /// <param name="cert">certificate to export</param>
         /// <returns>A pem certificate as a string</returns>
-        public string ExportToPem(X509Certificate cert, string password = null)
+        public string ExportToCrtPem(X509Certificate cert, string password = null)
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.AppendLine("-----BEGIN CERTIFICATE-----");
+            builder.AppendLine(PemTypes.BEGIN_CERTIFICATE);
             if(string.IsNullOrEmpty(password))
             {
-                builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Cert), 
+                builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Pfx), 
                     Base64FormattingOptions.InsertLineBreaks));
             }
             else
             {
-                builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Cert, password), 
+                builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Pfx, password), 
                     Base64FormattingOptions.InsertLineBreaks));
             }
-            builder.AppendLine("-----END CERTIFICATE-----");
+            builder.AppendLine(PemTypes.END_CERTIFICATE);
 
             return builder.ToString();
         }
 
-        public X509Certificate ImportPemCertificate(string pemCertificate, string password = null)
+        /// <summary>
+        /// https://8gwifi.org/PemParserFunctions.jsp
+        /// </summary>
+        /// <param name="pemCertificate"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public X509Certificate ImportCrtPem(string pemCertificate, string password = null)
         {
-            var sb = new StringBuilder(pemCertificate);
-          // to do remove stuff
-            var certBytes = Convert.FromBase64String(pemCertificate);
+            var certBytes = Convert.FromBase64String(_pemParser.ProcessCrt(pemCertificate));
 
             if (string.IsNullOrEmpty(password))
             {
