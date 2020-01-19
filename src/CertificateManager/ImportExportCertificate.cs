@@ -84,9 +84,8 @@ namespace CertificateManager
 
         public X509Certificate ImportPemCertificate(string pemCertificate, string password = null)
         {
-            // TODO we might need to remove the start and end lines
-            // TODO add the tests
-            // TODO add the docs
+            var sb = new StringBuilder(pemCertificate);
+          // to do remove stuff
             var certBytes = Convert.FromBase64String(pemCertificate);
 
             if (string.IsNullOrEmpty(password))
