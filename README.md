@@ -53,6 +53,7 @@ Now the package is ready to use. See the [Documentation](https://github.com/dami
 <ul>
     <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/examplesUsingCertificateAuthentication/AspNetCoreChained">ASP.NET Core chained certificate authentication</a></li>
     <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/examplesUsingCertificateAuthentication/AzureCertAuth">Azure ASP.NET Core self signed certificate authentication</a></li>
+    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/examplesUsingCertificateAuthentication/GrpcCertAuthChainedCertificate">Grpc chained certificate authentication</a></li>
     <li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/authentication/certauth">Microsoft Docs: Configure certificate authentication in ASP.NET Core</a></li>
 </ul>
 
