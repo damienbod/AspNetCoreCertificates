@@ -28,18 +28,18 @@ namespace AzureCertAuth
             services.AddCertificateForwarding(options =>
             {
                 options.CertificateHeader = "X-ARR-ClientCert";
-                options.HeaderConverter = (headerValue) =>
-                {
+                //options.HeaderConverter = (headerValue) =>
+                //{
                     
-                    X509Certificate2 clientCertificate = null;
-                    if (!string.IsNullOrWhiteSpace(headerValue))
-                    {
-                        byte[] bytes = Convert.FromBase64String(headerValue); 
-                        clientCertificate = new X509Certificate2(bytes);
-                    }
+                //    X509Certificate2 clientCertificate = null;
+                //    if (!string.IsNullOrWhiteSpace(headerValue))
+                //    {
+                //        byte[] bytes = Convert.FromBase64String(headerValue); 
+                //        clientCertificate = new X509Certificate2(bytes);
+                //    }
 
-                    return clientCertificate;
-                };
+                //    return clientCertificate;
+                //};
             });
 
             services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme)
@@ -102,7 +102,6 @@ namespace AzureCertAuth
             app.UseCertificateForwarding();
             app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.UseEndpoints(endpoints =>
             {
