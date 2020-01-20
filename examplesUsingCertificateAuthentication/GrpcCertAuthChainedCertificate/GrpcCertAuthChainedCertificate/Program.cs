@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 
 namespace GrpcCertAuthChainedCertificate
@@ -21,7 +23,18 @@ namespace GrpcCertAuthChainedCertificate
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    var cert = new X509Certificate2(Path.Combine("serverl4.pfx"), "1234");
+                    webBuilder.UseStartup<Startup>()
+                    .ConfigureKestrel(options =>
+                    {
+                        options.Limits.MinRequestBodyDataRate = null;
+                        options.ListenLocalhost(5001, listenOptions =>
+                        {
+                            listenOptions.UseHttps(cert);
+                            listenOptions.Protocols = HttpProtocols.Http2;
+                            listenOptions.UseConnectionLogging();
+                        });
+                    });
                 });
     }
 }
