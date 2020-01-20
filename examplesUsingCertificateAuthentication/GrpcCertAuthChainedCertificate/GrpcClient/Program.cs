@@ -2,6 +2,7 @@
 using Grpc.Net.Client;
 using GrpcCertAuthChainedCertificate;
 using System;
+using System.IO;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
@@ -12,9 +13,13 @@ namespace GrpcClient
     {
         static async Task Main(string[] args)
         {
-            var channel = GrpcChannel.ForAddress("https://localhost:5001", new GrpcChannelOptions
+            var handler = new HttpClientHandler();
+            var certificate = new X509Certificate2("clientl4.pfx", "1234");
+            handler.ClientCertificates.Add(certificate);
+
+            var channel = GrpcChannel.ForAddress("https://localhost:44379", new GrpcChannelOptions
             {
-                HttpClient = CreateHttpClient()
+                HttpClient = new HttpClient(handler)
             });
 
             var client = new Greeter.GreeterClient(channel);
@@ -22,16 +27,6 @@ namespace GrpcClient
             Console.WriteLine("Greeting: " + reply.Message);
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
-        }
-
-        private static HttpClient CreateHttpClient()
-        {
-            var handler = new HttpClientHandler();
-            var cert = new X509Certificate2("clientl4.pfx", "1234");
-            handler.ClientCertificates.Add(cert);
-
-            // Create client
-            return new HttpClient(handler);
         }
     }
 }
