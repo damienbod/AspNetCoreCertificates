@@ -1,6 +1,6 @@
 # Certificate Manager Documentation
 
-Certificate Manager is a package which makes it easy to create certifcates which can be used to in client server authentication and IoT Devices like Azure IoT Hub
+Certificate Manager is a package which makes it easy to create certificates (chained and self signed) which can be used to in client server authentication and IoT Devices like Azure IoT Hub
 
 # Basic usage ASP.NET Core, NET Core
 
