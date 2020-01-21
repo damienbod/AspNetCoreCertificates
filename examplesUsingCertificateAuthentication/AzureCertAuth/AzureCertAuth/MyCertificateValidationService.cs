@@ -27,6 +27,8 @@ namespace AzureCertAuth
 
             if (listOfValidThumbprints.Contains(clientCertificate.Thumbprint))
             {
+                _logger.LogInformation($"auth success custom for certificate  {clientCertificate.FriendlyName} {clientCertificate.Thumbprint}");
+
                 return true;
             }
 
