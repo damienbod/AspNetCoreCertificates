@@ -46,7 +46,7 @@ var distinguishedName = new DistinguishedName
     OrganisationUnit = "development"
 };
 ```
-The CommonName and the Country properties are required.
+The CommonName property is required.
 
 example in certificate:
 ```
