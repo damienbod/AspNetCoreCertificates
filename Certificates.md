@@ -69,7 +69,7 @@ OU=Organisation Unit
 
 CN= Common name (DNS) 
 
-// C and CN are REQUIRED
+// CN is REQUIRED
 
 ## Certificate Extensions, OID Object Identifiers
 
