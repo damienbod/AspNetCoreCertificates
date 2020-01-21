@@ -1,4 +1,5 @@
 ﻿using CertificateManager.Models;
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -115,6 +116,8 @@ namespace CertificateManager
 
         /// <summary>
         /// Create an device chained certificate for Client and Server TLS Auth
+        /// 
+        /// The device certificate (also called a leaf certificate) must have the Subject Name set to the Device ID that was used when registering the IoT device in the Azure IoT Hub. This setting is required for authentication.
         /// </summary>
         /// <param name="distinguishedName">Distinguished Name used for the subject and the issuer properties</param>
         /// <param name="validityPeriod">Valid from, Valid to certificate properties</param>
@@ -136,6 +139,30 @@ namespace CertificateManager
                 validityPeriod, dnsName, enhancedKeyUsages, parentCertificateAuthority);
         }
 
+        public X509Certificate2 NewDeviceVerificationCertificate(
+           string deviceVerification,
+           X509Certificate2 parentCertificateAuthority)
+        {
+            var enhancedKeyUsages = new OidCollection {
+                new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
+                new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
+            };
+
+            var distinguishedName = new DistinguishedName
+            {
+                CommonName = deviceVerification,
+                Country = "CH" // not needed
+            };
+
+            var validityPeriod = new ValidityPeriod
+            {
+                ValidFrom = DateTimeOffset.UtcNow,
+                ValidTo = DateTimeOffset.UtcNow.AddDays(2)
+            };
+
+            return NewDeviceChainedCertificate(distinguishedName,
+                validityPeriod, "verify", enhancedKeyUsages, parentCertificateAuthority);
+        }
         /// <summary>
         /// Create an server chained certificate for Client and Server TLS Auth
         /// </summary>
