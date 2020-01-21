@@ -12,7 +12,6 @@ namespace CertificateManager.Models
         /// <summary>
         /// C= Country
         /// </summary>
-        [Required]
         public string Country { get; set; }
 
         /// <summary>

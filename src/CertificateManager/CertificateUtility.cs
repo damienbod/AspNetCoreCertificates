@@ -61,10 +61,10 @@ namespace CertificateManager
             {
                 throw new ArgumentException($"{nameof(distinguishedName.CommonName)} must be a valid name", nameof(distinguishedName.CommonName));
             }
-            if (string.IsNullOrEmpty(distinguishedName.Country))
-            {
-                throw new ArgumentException($"{nameof(distinguishedName.Country)} must be a valid country", nameof(distinguishedName.Country));
-            }
+            //if (string.IsNullOrEmpty(distinguishedName.Country))
+            //{
+            //    throw new ArgumentException($"{nameof(distinguishedName.Country)} must be a valid country", nameof(distinguishedName.Country));
+            //}
 
             var sb = new StringBuilder($"CN={distinguishedName.CommonName}, C={distinguishedName.Country}");
 

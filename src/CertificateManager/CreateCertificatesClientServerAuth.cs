@@ -150,8 +150,7 @@ namespace CertificateManager
 
             var distinguishedName = new DistinguishedName
             {
-                CommonName = deviceVerification,
-                Country = "CH" // not needed
+                CommonName = deviceVerification
             };
 
             var validityPeriod = new ValidityPeriod
