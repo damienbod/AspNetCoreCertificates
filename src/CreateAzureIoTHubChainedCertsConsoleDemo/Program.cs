@@ -35,7 +35,6 @@ namespace CreateAzureIoTHubChainedCertsConsoleDemo
                 new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
                 "localhost", intermediate);
             device.FriendlyName = "developement DeviceID certificate";
-           
 
             Console.WriteLine($"Created device, Certificate {device.FriendlyName}");
 

@@ -75,7 +75,25 @@ namespace CertificateManagerTests
             var roundTripCertificate = importExport.ImportCertificatePem(crtPem, "23456");
 
             Assert.Equal(intermediate.Subject, roundTripCertificate.Subject);
+            Assert.True(intermediate.HasPrivateKey);
+            Assert.True(roundTripCertificate.HasPrivateKey);
+        }
 
+        [Fact]
+        public void ImportExportExportPublicKeyCertificatePem()
+        {
+            var (root, intermediate, server, client) = SetupCerts();
+            var serviceProvider = new ServiceCollection()
+                .AddCertificateManager()
+                .BuildServiceProvider();
+            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+
+            var crtPem = importExport.ExportPublicKeyCertificatePem(intermediate);
+            var roundTripCertificate = importExport.ImportCertificatePem(crtPem);
+
+            Assert.Equal(intermediate.Subject, roundTripCertificate.Subject);
+            Assert.True(intermediate.HasPrivateKey);
+            Assert.False(roundTripCertificate.HasPrivateKey);
         }
 
         [Fact]
