@@ -7,6 +7,9 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace CreateAzureIoTHubChainedCertsConsoleDemo
 {
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-security-x509-get-started
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
