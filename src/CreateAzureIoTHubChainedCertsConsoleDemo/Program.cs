@@ -31,10 +31,10 @@ namespace CreateAzureIoTHubChainedCertsConsoleDemo
             intermediate.FriendlyName = "developement Intermediate certificate";
 
             var device = createClientServerAuthCerts.NewDeviceChainedCertificate(
-                new DistinguishedName { CommonName = "Device ID", Country = "IE" },
+                new DistinguishedName { CommonName = "DeviceID" },
                 new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
                 "localhost", intermediate);
-            device.FriendlyName = "developement server L3 certificate";
+            device.FriendlyName = "developement DeviceID certificate";
            
 
             Console.WriteLine($"Created device, Certificate {device.FriendlyName}");
@@ -56,7 +56,6 @@ namespace CreateAzureIoTHubChainedCertsConsoleDemo
 
             var deviceInPfxBytes = importExportCertificate.ExportChainedCertificatePfx(password, device, intermediate);
             File.WriteAllBytes("device.pfx", deviceInPfxBytes);
-
 
             var deviceVerify = createClientServerAuthCerts.NewDeviceVerificationCertificate(
             "verificationStringFromAzure", root);

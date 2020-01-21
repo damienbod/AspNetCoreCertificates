@@ -11,7 +11,7 @@ namespace CreateChainedCertsConsoleDemo
     {
         static void Main(string[] args)
         {
-            //LowLevelApiExamples.Run();
+            LowLevelApiExamples.Run();
 
             var serviceProvider = new ServiceCollection()
                 .AddCertificateManager()
