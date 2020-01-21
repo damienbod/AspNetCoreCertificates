@@ -64,7 +64,7 @@ namespace CertificateManager
 
             var sb = new StringBuilder($"CN={distinguishedName.CommonName}");
 
-            if (!string.IsNullOrEmpty(distinguishedName.Organisation))
+            if (!string.IsNullOrEmpty(distinguishedName.Country))
             {
                 sb.Append($", C={distinguishedName.Country}");
             }
