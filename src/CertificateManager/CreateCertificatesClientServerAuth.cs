@@ -144,8 +144,6 @@ namespace CertificateManager
            X509Certificate2 parentCertificateAuthority)
         {
             var enhancedKeyUsages = new OidCollection {
-                new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
-                new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
             };
 
             var distinguishedName = new DistinguishedName

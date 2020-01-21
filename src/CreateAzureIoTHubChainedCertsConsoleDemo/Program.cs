@@ -62,8 +62,9 @@ namespace CreateAzureIoTHubChainedCertsConsoleDemo
             "verificationStringFromAzure", root);
             deviceVerify.FriendlyName = "device verify";
 
-            var deviceVerifyPEM = importExportCertificate.ExportToCrtPem(deviceVerify);
-            
+            var deviceVerifyPEM = importExportCertificate.ExportPublicKeyCertificatePem(deviceVerify);
+            File.WriteAllText("deviceVerify.pem", deviceVerifyPEM);
+
             var deviceVerifyPublicKey = importExportCertificate.ExportCertificatePublicKey(deviceVerify);
             var deviceVerifyPublicKeyBytes = deviceVerifyPublicKey.Export(X509ContentType.Cert);
             File.WriteAllBytes($"deviceVerify.cer", deviceVerifyPublicKeyBytes);
