@@ -17,7 +17,7 @@ Certificate Manager is a package which makes it easy to create certificates (cha
 </ul>
 
 
-# Basic usage ASP.NET Core, NET Core
+# Basic usage ASP.NET Core, .NET Core
 
 Add the NuGet package to the your project file
 
@@ -75,9 +75,9 @@ definitions:
 - L= Locality
 - O= organisation
 - OU=Organisation Unit
-- CN= Common name (DNS) 
+- CN= Common name 
 
-// C and CN are REQUIRED
+// CN is REQUIRED
 
 ### Validity Period
 
@@ -498,7 +498,7 @@ public static class DeviceCertConfig
     }
 ```
 
-## Certificate Configuration full
+## Certificate Configuration full APIs
 
 ### Basic Constraints
 
