@@ -20,11 +20,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CertificateManagerTests", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreateSelfSignedCertsConsoleDemo", "CreateSelfSignedCertsConsoleDemo\CreateSelfSignedCertsConsoleDemo.csproj", "{A1074634-B736-4C6B-A610-916B24B35AF1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreateAzureIoTHubChainedCertsConsoleDemo", "CreateAzureIoTHubChainedCertsConsoleDemo\CreateAzureIoTHubChainedCertsConsoleDemo.csproj", "{3E0A5A28-EBC7-4A70-B70C-BF0938FEA489}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoTHubCreateChainedCerts", "IoTHubCreateChainedCerts\IoTHubCreateChainedCerts.csproj", "{3E0A5A28-EBC7-4A70-B70C-BF0938FEA489}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifyIoTHubCertificate", "VerifyIoTHubCertificate\VerifyIoTHubCertificate.csproj", "{CC51EFA1-769C-4EE9-85D9-E4A69130C6BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoTHubVerifyCertificate", "IoTHubVerifyCertificate\IoTHubVerifyCertificate.csproj", "{CC51EFA1-769C-4EE9-85D9-E4A69130C6BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateIoTHubDeviceCertificate", "CreateIoTHubDeviceCertificate\CreateIoTHubDeviceCertificate.csproj", "{1724BE4A-AB21-4CD6-B44A-B27F6E5FEB93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoTHubCreateDeviceCertificate", "IoTHubCreateDeviceCertificate\IoTHubCreateDeviceCertificate.csproj", "{1724BE4A-AB21-4CD6-B44A-B27F6E5FEB93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

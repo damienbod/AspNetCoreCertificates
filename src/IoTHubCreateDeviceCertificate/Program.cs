@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 
-namespace CreateIoTHubDeviceCertificate
+namespace IoTHubCreateDeviceCertificate
 {
     /// <summary>
     /// https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-security-x509-get-started

@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 
-namespace VerifyIoTHubCertificate
+namespace IoTHubVerifyCertificate
 {
 
     /// <summary>

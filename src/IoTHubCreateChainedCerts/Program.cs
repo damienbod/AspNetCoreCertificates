@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 
-namespace CreateAzureIoTHubChainedCertsConsoleDemo
+namespace IoTHubCreateChainedCerts
 {
     /// <summary>
     /// https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-security-x509-get-started
@@ -33,14 +33,6 @@ namespace CreateAzureIoTHubChainedCertsConsoleDemo
                 2, "localhost", root);
             intermediate.FriendlyName = "developement Intermediate certificate";
 
-            var device = createClientServerAuthCerts.NewDeviceChainedCertificate(
-                new DistinguishedName { CommonName = "DeviceID" },
-                new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
-                "localhost", intermediate);
-            device.FriendlyName = "developement DeviceID certificate";
-
-            Console.WriteLine($"Created device, Certificate {device.FriendlyName}");
-
             string password = "1234";
             var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
 
@@ -55,20 +47,6 @@ namespace CreateAzureIoTHubChainedCertsConsoleDemo
 
             var intermediateCertInPfxBtyes = importExportCertificate.ExportChainedCertificatePfx(password, intermediate, root);
             File.WriteAllBytes("intermediate.pfx", intermediateCertInPfxBtyes);
-
-            var deviceInPfxBytes = importExportCertificate.ExportChainedCertificatePfx(password, device, intermediate);
-            File.WriteAllBytes("device.pfx", deviceInPfxBytes);
-
-            var deviceVerify = createClientServerAuthCerts.NewDeviceVerificationCertificate(
-            "verificationStringFromAzure", root);
-            deviceVerify.FriendlyName = "device verify";
-
-            var deviceVerifyPEM = importExportCertificate.ExportPublicKeyCertificatePem(deviceVerify);
-            File.WriteAllText("deviceVerify.pem", deviceVerifyPEM);
-
-            var deviceVerifyPublicKey = importExportCertificate.ExportCertificatePublicKey(deviceVerify);
-            var deviceVerifyPublicKeyBytes = deviceVerifyPublicKey.Export(X509ContentType.Cert);
-            File.WriteAllBytes($"deviceVerify.cer", deviceVerifyPublicKeyBytes);
 
             Console.WriteLine("Certificates exported to pfx and cer files");
         }
