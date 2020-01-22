@@ -43,13 +43,12 @@ Now the package is ready to use. See the [Documentation](https://github.com/dami
 
 # Examples Creating Certificates:
 
-<ul>
-    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateChainedCertsConsoleDemo">Create chained certificate authentication certificates console</a></li>
-    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateSelfSignedCertsConsoleDemo">Create self signed certificate authentication certificates console</a></li>
-    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubCreateChainedCerts">Create chained certificates for Azure IoT Hub</a></li>
-    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubVerifyCertificate">Create verify certificate for Azure IoT Hub .pem or .cer</a></li>
-    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubCreateDeviceCertificate">Create  device (Leaf) certificate for Azure IoT Hub device</a></li>
-</ul>
+- [Create chained certificate authentication certificates console](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateChainedCertsConsoleDemo">
+- [Create self signed certificate authentication certificates console](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateSelfSignedCertsConsoleDemo)
+- [Create chained certificates for Azure IoT Hub](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubCreateChainedCerts)
+- [Create verify certificate for Azure IoT Hub .pem or .cer](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubVerifyCertificate)
+- [Create  device (Leaf) certificate for Azure IoT Hub device](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubCreateDeviceCertificate)
+
 
 # Examples Using Certificates:
 

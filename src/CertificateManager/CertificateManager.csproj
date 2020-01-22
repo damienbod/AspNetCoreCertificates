@@ -7,12 +7,14 @@
     <RepositoryUrl>https://github.com/damienbod/AspNetCoreCertificates</RepositoryUrl>
     <PackageIcon>icon.jpeg</PackageIcon>
     <PackageIconUrl />
+    <Title>Certificate Manager</Title>
     <Description>Certificate Manager is a package which makes it easy to create certificates (chained and self signed) which can be used to in client server authentication and IoT Devices like Azure IoT Hub
 </Description>
     <PackageTags>certificate authentication mtls pfx cer pem cert crt</PackageTags>
     <PackageReleaseNotes>first release, certificate creation, export certificates chained and self signed</PackageReleaseNotes>
     <Copyright>2020 damienbod</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>damienbod</Authors>
   </PropertyGroup>
 
   <ItemGroup>
