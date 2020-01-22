@@ -44,7 +44,7 @@ namespace CreateSelfSignedCertsConsoleDemo
                 importExportCertificate.ExportSelfSignedCertificatePfx(password, client);
             File.WriteAllBytes("client.pfx", clientCertInPfxBtyes);
 
-            var clientCertInPEMBtyes = importExportCertificate.ExportToCrtPem(client);
+            var clientCertInPEMBtyes = importExportCertificate.ExportFullCertificatePem(client);
             File.WriteAllText("client.pem", clientCertInPEMBtyes);
 
             //var rootPublicKey = importExportCertificate.ExportCertificatePublicKey(rootCaL1);

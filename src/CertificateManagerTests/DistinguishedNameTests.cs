@@ -70,9 +70,7 @@ namespace CertificateManagerTests
 
             var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
 
-            var exception = Assert.Throws<ArgumentException>(() =>
-            {
-                createClientServerAuthCerts.NewRootCertificate(
+            var root = createClientServerAuthCerts.NewRootCertificate(
                 new DistinguishedName
                 {
                     CommonName = "root dev",
@@ -83,7 +81,8 @@ namespace CertificateManagerTests
                 },
                 new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
                 3, "localhost");
-            });
+
+            Assert.NotNull(root);
         }
 
         [Fact]

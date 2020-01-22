@@ -68,7 +68,7 @@ namespace CertificateManager
         /// </summary>
         /// <param name="cert">certificate to export</param>
         /// <returns>A pem certificate as a string</returns>
-        public string ExportToCrtPem(X509Certificate cert, string password = null)
+        public string ExportFullCertificatePem(X509Certificate2 cert, string password = null)
         {
             StringBuilder builder = new StringBuilder();
 
@@ -88,13 +88,30 @@ namespace CertificateManager
             return builder.ToString();
         }
 
+        public string ExportPublicKeyCertificatePem(X509Certificate2 certificate)
+        {
+            var publicKeyCrt = ExportCertificatePublicKey(certificate);
+            var deviceVerifyPublicKeyBytes = publicKeyCrt.Export(X509ContentType.Cert);
+
+            StringBuilder builder = new StringBuilder();
+
+            builder.AppendLine(PemTypes.BEGIN_CERTIFICATE);
+            
+            builder.AppendLine(Convert.ToBase64String(deviceVerifyPublicKeyBytes,
+                    Base64FormattingOptions.InsertLineBreaks));
+            
+            builder.AppendLine(PemTypes.END_CERTIFICATE);
+
+            return builder.ToString();
+        }
+
         /// <summary>
         /// https://8gwifi.org/PemParserFunctions.jsp
         /// </summary>
         /// <param name="pemCertificate"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public X509Certificate ImportCrtPem(string pemCertificate, string password = null)
+        public X509Certificate2 ImportCertificatePem(string pemCertificate, string password = null)
         {
             var certBytes = Convert.FromBase64String(_pemParser.ProcessCrt(pemCertificate));
 

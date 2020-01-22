@@ -55,8 +55,8 @@ namespace CertificateManagerTests
                 .BuildServiceProvider();
             var importExport = serviceProvider.GetService<ImportExportCertificate>();
 
-            var crtPem = importExport.ExportToCrtPem(root);
-            var roundTripCertificate = importExport.ImportCrtPem(crtPem);
+            var crtPem = importExport.ExportFullCertificatePem(root);
+            var roundTripCertificate = importExport.ImportCertificatePem(crtPem);
 
             Assert.Equal(root.Subject, roundTripCertificate.Subject);
 
@@ -71,11 +71,29 @@ namespace CertificateManagerTests
                 .BuildServiceProvider();
             var importExport = serviceProvider.GetService<ImportExportCertificate>();
 
-            var crtPem = importExport.ExportToCrtPem(intermediate, "23456");
-            var roundTripCertificate = importExport.ImportCrtPem(crtPem, "23456");
+            var crtPem = importExport.ExportFullCertificatePem(intermediate, "23456");
+            var roundTripCertificate = importExport.ImportCertificatePem(crtPem, "23456");
 
             Assert.Equal(intermediate.Subject, roundTripCertificate.Subject);
+            Assert.True(intermediate.HasPrivateKey);
+            Assert.True(roundTripCertificate.HasPrivateKey);
+        }
 
+        [Fact]
+        public void ImportExportExportPublicKeyCertificatePem()
+        {
+            var (root, intermediate, server, client) = SetupCerts();
+            var serviceProvider = new ServiceCollection()
+                .AddCertificateManager()
+                .BuildServiceProvider();
+            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+
+            var crtPem = importExport.ExportPublicKeyCertificatePem(intermediate);
+            var roundTripCertificate = importExport.ImportCertificatePem(crtPem);
+
+            Assert.Equal(intermediate.Subject, roundTripCertificate.Subject);
+            Assert.True(intermediate.HasPrivateKey);
+            Assert.False(roundTripCertificate.HasPrivateKey);
         }
 
         [Fact]
@@ -91,8 +109,8 @@ namespace CertificateManagerTests
             {
                 try
                 {
-                    var crtPem = importExport.ExportToCrtPem(intermediate, "23HHHH456");
-                    var roundTripCertificate = importExport.ImportCrtPem(crtPem, "23456");
+                    var crtPem = importExport.ExportFullCertificatePem(intermediate, "23HHHH456");
+                    var roundTripCertificate = importExport.ImportCertificatePem(crtPem, "23456");
                 }
                 catch(Exception ex)
                 {
