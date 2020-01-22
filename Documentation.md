@@ -189,35 +189,27 @@ clientL3.FriendlyName = "developement client L3 certificate";
             
 ```
 
-## Creating Chained Certificates for Azure IoT 
+## Creating Chained Certificates for Azure IoT Hub
 
 ```csharp
 var serviceProvider = new ServiceCollection()
-    .AddCertificateManager()
-    .BuildServiceProvider();
+	.AddCertificateManager()
+	.BuildServiceProvider();
 
 var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
 
 var root = createClientServerAuthCerts.NewRootCertificate(
-    new DistinguishedName { CommonName = "root dev", Country = "IT" },
-    new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
-    3, "localhost");
+	new DistinguishedName { CommonName = "root dev", Country = "IT" },
+	new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+	3, "localhost");
 root.FriendlyName = "developement root certificate";
 
 // Intermediate L2 chained from root L1
 var intermediate = createClientServerAuthCerts.NewIntermediateChainedCertificate(
-    new DistinguishedName { CommonName = "intermediate dev", Country = "FR" },
-    new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
-    2, "localhost", root);
+	new DistinguishedName { CommonName = "intermediate dev", Country = "FR" },
+	new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+	2, "localhost", root);
 intermediate.FriendlyName = "developement Intermediate certificate";
-
-var device = createClientServerAuthCerts.NewDeviceChainedCertificate(
-    new DistinguishedName { CommonName = "DeviceID" },
-    new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
-    "localhost", intermediate);
-device.FriendlyName = "developement DeviceID certificate";
-
-Console.WriteLine($"Created device, Certificate {device.FriendlyName}");
 
 string password = "1234";
 var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
@@ -233,12 +225,23 @@ File.WriteAllBytes($"root.cer", rootPublicKeyBytes);
 
 var intermediateCertInPfxBtyes = importExportCertificate.ExportChainedCertificatePfx(password, intermediate, root);
 File.WriteAllBytes("intermediate.pfx", intermediateCertInPfxBtyes);
+```
 
-var deviceInPfxBytes = importExportCertificate.ExportChainedCertificatePfx(password, device, intermediate);
-File.WriteAllBytes("device.pfx", deviceInPfxBytes);
+## Creating Verify Certificate for Azure IoT Hub
+
+```csharp
+var serviceProvider = new ServiceCollection()
+	.AddCertificateManager()
+	.BuildServiceProvider();
+
+var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
+
+var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
+
+var root = new X509Certificate2("root.pfx", "1234");
 
 var deviceVerify = createClientServerAuthCerts.NewDeviceVerificationCertificate(
-"verificationStringFromAzure", root);
+"<veification code from Azure IoT Hub>", root);
 deviceVerify.FriendlyName = "device verify";
 
 var deviceVerifyPEM = importExportCertificate.ExportPublicKeyCertificatePem(deviceVerify);
@@ -247,6 +250,31 @@ File.WriteAllText("deviceVerify.pem", deviceVerifyPEM);
 var deviceVerifyPublicKey = importExportCertificate.ExportCertificatePublicKey(deviceVerify);
 var deviceVerifyPublicKeyBytes = deviceVerifyPublicKey.Export(X509ContentType.Cert);
 File.WriteAllBytes($"deviceVerify.cer", deviceVerifyPublicKeyBytes);
+
+```
+
+## Creating Device (Leaf) Certificates for Azure IoT Hub
+
+```csharp
+var serviceProvider = new ServiceCollection()
+	.AddCertificateManager()
+	.BuildServiceProvider();
+
+var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
+
+var intermediate = new X509Certificate2("intermediate.pfx", "1234");
+
+var testDevice01 = createClientServerAuthCerts.NewDeviceChainedCertificate(
+	new DistinguishedName { CommonName = "<Device ID>" },
+	new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+	"localhost", intermediate);
+testDevice01.FriendlyName = "IoT device testDevice01";
+
+string password = "1234";
+var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
+
+var deviceInPfxBytes = importExportCertificate.ExportChainedCertificatePfx(password, testDevice01, intermediate);
+File.WriteAllBytes("testDevice01.pfx", deviceInPfxBytes);
 ```
 
 ## Creating Chained Certificates from a trusted CA Certificate
