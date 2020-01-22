@@ -12,7 +12,7 @@ Certificate Manager is a package which makes it easy to create certificates (cha
     <li><a href="#creating-device-leaf-certificates-for-azure-iot-hub">Creating Device (Leaf) Certificates for Azure IoT Hub</a></li>
     <li><a href="#exporting-certificates">Exporting Certificates</a></li>
     <li><a href="#general-certificates-full-apis">General Certificates, full APIs</a></li>
-    <li><a href="#certificate-configuration-full-apis">Certificate Configuration full</a></li>
+    <li><a href="#certificate-configuration-full-apis">Certificate Configuration full APIs</a></li>
     
 </ul>
 
