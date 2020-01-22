@@ -2,16 +2,16 @@
 
 Certificate Manager is a package which makes it easy to create certificates (chained and self signed) which can be used to in client server authentication and IoT Devices like Azure IoT Hub
 
-[Basic usage ASP.NET Core, NET Core](#basic-usage-aspnet-core-net-core)
-[Certificate Configuration](#certificate-configuration )
-[Creating Self Signed Certificates for Client Server Authentication](#creating-self-signed-certificates-for-client-server-authentication)
-[Creating Chained Certificates for Client Server Authentication](#creating-chained-certificates-for-client-server-authentication)
-[Creating Chained Certificates for Azure IoT Hub](#creating-chained-certificates-for-azure-iot-hub)
-[Creating Verify Certificate for Azure IoT Hub](#creating-verify-certificate-for-azure-iot-hub)
-[Creating Device (Leaf) Certificates for Azure IoT Hub](#creating-device-leaf-certificates-for-azure-iot-hub)
-[Exporting Certificates](#exporting-certificates)
-[General Certificates, full APIs](#general-certificates-full-apis)
-[Certificate Configuration full APIs](#certificate-configuration-full-apis)
+- [Basic usage ASP.NET Core, NET Core](#basic-usage-aspnet-core-net-core)
+- [Certificate Configuration](#certificate-configuration )
+- [Creating Self Signed Certificates for Client Server Authentication](#creating-self-signed-certificates-for-client-server-authentication)
+- [Creating Chained Certificates for Client Server Authentication](#creating-chained-certificates-for-client-server-authentication)
+- [Creating Chained Certificates for Azure IoT Hub](#creating-chained-certificates-for-azure-iot-hub)
+- [Creating Verify Certificate for Azure IoT Hub](#creating-verify-certificate-for-azure-iot-hub)
+- [Creating Device (Leaf) Certificates for Azure IoT Hub](#creating-device-leaf-certificates-for-azure-iot-hub)
+- [Exporting Certificates](#exporting-certificates)
+- [General Certificates, full APIs](#general-certificates-full-apis)
+- [Certificate Configuration full APIs](#certificate-configuration-full-apis)
 
 # Basic usage ASP.NET Core, .NET Core
 
