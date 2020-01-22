@@ -1,11 +1,8 @@
 **Certificate Manager** is a package which makes it easy to create certifcates which can be used to in client server authentication and IoT Devices like Azure IoT Hub
 
-// TODO can setup once the repo is public 
-
 |                           | Build                                                                                                                                                       | Certificate Manager                                                                                                                                |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | .NET Core                 | [![Build status](https://ci.appveyor.com/api/projects/status/gyychgc7l5g4g5lb?svg=true)](https://ci.appveyor.com/project/damienbod/aspnet5localization)      | [![NuGet Status](http://img.shields.io/nuget/v/Localization.SqlLocalizer.svg?style=flat-square)](https://www.nuget.org/packages/CertificateManager/) |
-
 
 ========================
 
