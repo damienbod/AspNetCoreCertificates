@@ -11,7 +11,7 @@ namespace SimulateAzureIoTDevice
     {
         private static int MESSAGE_COUNT = 5;
         private const int TEMPERATURE_THRESHOLD = 30;
-        private static String deviceId = "<your-device-id>";
+        private static String deviceId = "TestDevice01";
         private static float temperature;
         private static float humidity;
         private static Random rnd = new Random();
@@ -20,9 +20,9 @@ namespace SimulateAzureIoTDevice
         {
             try
             {
-                var cert = new X509Certificate2(@"<absolute-path-to-your-device-pfx-file>", "1234");
-                var auth = new DeviceAuthenticationWithX509Certificate("<device-id>", cert);
-                var deviceClient = DeviceClient.Create("<your-iot-hub-name>.azure-devices.net", auth, TransportType.Amqp_Tcp_Only);
+                var cert = new X509Certificate2(@"testDevice01.pfx", "1234");
+                var auth = new DeviceAuthenticationWithX509Certificate("TestDevice01", cert);
+                var deviceClient = DeviceClient.Create("damienbod.azure-devices.net", auth, TransportType.Amqp_Tcp_Only);
 
                 if (deviceClient == null)
                 {

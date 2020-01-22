@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulateAzureIoTDevice", "SimulateAzureIoTDevice\SimulateAzureIoTDevice.csproj", "{7619D154-305D-40A1-8F4C-F7C17B096FA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifyIoT", "VerifyIoT\VerifyIoT.csproj", "{B351BD0A-BBF3-435A-AACC-0F47B997544C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{7619D154-305D-40A1-8F4C-F7C17B096FA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7619D154-305D-40A1-8F4C-F7C17B096FA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7619D154-305D-40A1-8F4C-F7C17B096FA5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B351BD0A-BBF3-435A-AACC-0F47B997544C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B351BD0A-BBF3-435A-AACC-0F47B997544C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B351BD0A-BBF3-435A-AACC-0F47B997544C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B351BD0A-BBF3-435A-AACC-0F47B997544C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

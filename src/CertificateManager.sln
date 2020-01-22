@@ -24,6 +24,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreateAzureIoTHubChainedCer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifyIoTHubCertificate", "VerifyIoTHubCertificate\VerifyIoTHubCertificate.csproj", "{CC51EFA1-769C-4EE9-85D9-E4A69130C6BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateIoTHubDeviceCertificate", "CreateIoTHubDeviceCertificate\CreateIoTHubDeviceCertificate.csproj", "{1724BE4A-AB21-4CD6-B44A-B27F6E5FEB93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{CC51EFA1-769C-4EE9-85D9-E4A69130C6BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC51EFA1-769C-4EE9-85D9-E4A69130C6BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC51EFA1-769C-4EE9-85D9-E4A69130C6BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1724BE4A-AB21-4CD6-B44A-B27F6E5FEB93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1724BE4A-AB21-4CD6-B44A-B27F6E5FEB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1724BE4A-AB21-4CD6-B44A-B27F6E5FEB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1724BE4A-AB21-4CD6-B44A-B27F6E5FEB93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,11 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.21.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="testDevice01.pfx">
+    <ProjectReference Include="..\CertificateManager\CertificateManager.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="intermediate.pfx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
