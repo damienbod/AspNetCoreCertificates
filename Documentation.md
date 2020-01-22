@@ -12,7 +12,7 @@ Certificate Manager is a package which makes it easy to create certificates (cha
     <li><a href="#creating-device-leaf-certificates-for-azure-iot-hub">Creating Device (Leaf) Certificates for Azure IoT Hub</a></li>
     <li><a href="#exporting-certificates">Exporting Certificates</a></li>
     <li><a href="#general-certificates-full-apis">General Certificates, full APIs</a></li>
-    <li><a href="#exporting-certificates">Certificate Configuration full</a></li>
+    <li><a href="#certificate-configuration-full">Certificate Configuration full</a></li>
     
 </ul>
 
@@ -330,6 +330,30 @@ var clientCertL3InPfxBtyes = importExportCertificate.ExportChainedCertificatePfx
 File.WriteAllBytes("clientl3.pfx", clientCertL3InPfxBtyes);
 ```
 
+### Exporting verify certificates
+
+```csharp
+var serviceProvider = new ServiceCollection()
+    .AddCertificateManager()
+    .BuildServiceProvider();
+
+var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
+
+var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
+
+var root = new X509Certificate2("root.pfx", "1234");
+
+var deviceVerify = createClientServerAuthCerts.NewDeviceVerificationCertificate(
+"4C8C754C6DA4280DBAB7FC7BB320E7FFFB7F411CBB7EAA7D", root);
+deviceVerify.FriendlyName = "device verify";
+
+var deviceVerifyPEM = importExportCertificate.ExportPublicKeyCertificatePem(deviceVerify);
+File.WriteAllText("deviceVerify.pem", deviceVerifyPEM);
+
+var deviceVerifyPublicKey = importExportCertificate.ExportCertificatePublicKey(deviceVerify);
+var deviceVerifyPublicKeyBytes = deviceVerifyPublicKey.Export(X509ContentType.Cert);
+File.WriteAllBytes($"deviceVerify.cer", deviceVerifyPublicKeyBytes);
+```
 ## General Certificates, full APIs
 
 ### Self signed certificate
