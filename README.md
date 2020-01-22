@@ -46,7 +46,9 @@ Now the package is ready to use. See the [Documentation](https://github.com/dami
 <ul>
     <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateChainedCertsConsoleDemo">Create chained certificate authentication certificates console</a></li>
     <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateSelfSignedCertsConsoleDemo">Create self signed certificate authentication certificates console</a></li>
-    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateAzureIoTHubChainedCertsConsoleDemo">Create chained certificates for Azure IoT Hub console</a></li>
+    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubCreateChainedCerts">Create chained certificates for Azure IoT Hub</a></li>
+    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubVerifyCertificate">Create verify certificate for Azure IoT Hub .pem or .cer</a></li>
+    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubCreateDeviceCertificate">Create  device (Leaf) certificate for Azure IoT Hub device</a></li>
 </ul>
 
 # Examples Using Certificates:
@@ -56,5 +58,6 @@ Now the package is ready to use. See the [Documentation](https://github.com/dami
     <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/examplesUsingCertificateAuthentication/AzureCertAuth">Azure ASP.NET Core self signed certificate authentication</a></li>
     <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/examplesUsingCertificateAuthentication/GrpcCertAuthChainedCertificate">Grpc chained certificate authentication</a></li>
     <li><a href="https://docs.microsoft.com/en-us/aspnet/core/security/authentication/certauth">Microsoft Docs: Configure certificate authentication in ASP.NET Core</a></li>
+    <li><a href="https://github.com/damienbod/AspNetCoreCertificates/tree/master/examplesUsingCertificateAuthentication/SimulateAzureIoTDevice">Simulate Azure IoT Hub Device with device certificate</a></li>
 </ul>
 
