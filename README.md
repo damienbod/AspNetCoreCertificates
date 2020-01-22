@@ -2,7 +2,7 @@
 
 |                           | Build                                                                                                                                                       | Certificate Manager                                                                                                                                |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| .NET Core                 | [![Build status](https://ci.appveyor.com/api/projects/status/gyychgc7l5g4g5lb?svg=true)](https://ci.appveyor.com/project/damienbod/aspnet5localization)      | [![NuGet Status](http://img.shields.io/nuget/v/Localization.SqlLocalizer.svg?style=flat-square)](https://www.nuget.org/packages/CertificateManager/) |
+| .NET Core                 | [![Build status](https://ci.appveyor.com/api/projects/status/gyychgc7l5g4g5lb?svg=true)](https://ci.appveyor.com/project/damienbod/aspnetcorecertificates)      | [![NuGet Status](http://img.shields.io/nuget/v/CertificateManager.svg?style=flat-square)](https://www.nuget.org/packages/CertificateManager/) |
 
 ========================
 
