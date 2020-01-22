@@ -8,13 +8,12 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - cmd: choco install dotnetcore-sdk --pre
   - dotnet --version
+  - cd src
   - dotnet restore
-  - choco install googlechrome
 build_script:
-- cd src
 - dotnet build
 before_build:
 - appveyor-retry dotnet restore -v Minimal
 test_script:
-- cd src/CertificateManagerTests
+- cd CertificateManagerTests
 - dotnet test
