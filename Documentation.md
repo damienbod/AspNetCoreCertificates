@@ -4,6 +4,15 @@ Certificate Manager is a package which makes it easy to create certificates (cha
 
 <ul>
     <li><a href="#basic-usage-aspnet-core-net-core">Basic usage ASP.NET Core, NET Core</a></li>
+    <li><a href="#certificate-configuration">Certificate Configuration</a></li>
+    <li><a href="#creating-self-signed-certificates-for-client-server-authentication">Creating Self Signed Certificates for Client Server Authentication</a></li>
+    <li><a href="#creating-chained-certificates-for-client-server-authentication">Creating Chained Certificates for Client Server Authentication</a></li>
+    <li><a href="#creating-chained-certificates-for-azure-iot-hub">Creating Chained Certificates for Azure IoT Hub</a></li>
+    <li><a href="#creating-verify-certificate-for-azure-iot-hub">Creating Verify Certificate for Azure IoT Hub</a></li>
+    <li><a href="#creating-device-leaf-certificates-for-azure-iot-hub">Creating Device (Leaf) Certificates for Azure IoT Hub</a></li>
+    <li><a href="#exporting-certificates">Exporting Certificates</a></li>
+    <li><a href="#general-certificates-full-apis">General Certificates, full APIs</a></li>
+    <li><a href="#exporting-certificates">Certificate Configuration full</a></li>
     
 </ul>
 
@@ -465,7 +474,7 @@ public static class DeviceCertConfig
     }
 ```
 
-## Certificate Configuration
+## Certificate Configuration full
 
 ### Basic Constraints
 
