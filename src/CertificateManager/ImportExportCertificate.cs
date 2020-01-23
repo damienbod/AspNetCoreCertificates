@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
@@ -84,6 +85,34 @@ namespace CertificateManager
                     Base64FormattingOptions.InsertLineBreaks));
             }
             builder.AppendLine(PemTypes.END_CERTIFICATE);
+
+            return builder.ToString();
+        }
+
+        public string ExportRsaPrivateKeyPem(X509Certificate2 cert)
+        {
+            StringBuilder builder = new StringBuilder();
+
+            var rsa = cert.GetRSAPrivateKey();
+            
+            builder.AppendLine(PemTypes.BEGIN_RSA_PRIVATE_KEY);
+            builder.AppendLine(Convert.ToBase64String(rsa.ExportRSAPrivateKey(),
+                    Base64FormattingOptions.InsertLineBreaks));
+            builder.AppendLine(PemTypes.END_RSA_PRIVATE_KEY);
+
+            return builder.ToString();
+        }
+
+        public string ExportRsaPublicKeyPem(X509Certificate2 cert)
+        {
+            StringBuilder builder = new StringBuilder();
+
+            var rsa = cert.GetRSAPublicKey();
+
+            builder.AppendLine(PemTypes.BEGIN_RSA_PUBLIC_KEY);
+            builder.AppendLine(Convert.ToBase64String(rsa.ExportRSAPublicKey(),
+                    Base64FormattingOptions.InsertLineBreaks));
+            builder.AppendLine(PemTypes.END_RSA_PUBLIC_KEY);
 
             return builder.ToString();
         }
