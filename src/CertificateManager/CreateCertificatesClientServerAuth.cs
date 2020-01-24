@@ -103,14 +103,15 @@ namespace CertificateManager
 
             var x509KeyUsageFlags = X509KeyUsageFlags.KeyCertSign;
 
-            var intermediateCert = _createCertificates.NewChainedCertificate(
+            var intermediateCert = _createCertificates.NewECDsaChainedCertificate(
                 distinguishedName,
                 basicConstraints,
                 validityPeriod,
                 subjectAlternativeName,
                 parentCertificateAuthority,
                 enhancedKeyUsages,
-                x509KeyUsageFlags);
+                x509KeyUsageFlags,
+                new ECDsaConfiguration());
 
             return intermediateCert;
         }
@@ -310,14 +311,15 @@ namespace CertificateManager
             var x509KeyUsageFlags =
               X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment;
 
-            var deviceCert = _createCertificates.NewChainedCertificate(
+            var deviceCert = _createCertificates.NewECDsaChainedCertificate(
                 distinguishedName,
                 basicConstraints,
                 validityPeriod,
                 subjectAlternativeName,
                 parentCertificateAuthority,
                 enhancedKeyUsages,
-                x509KeyUsageFlags);
+                x509KeyUsageFlags,
+                new ECDsaConfiguration());
 
             return deviceCert;
         }
