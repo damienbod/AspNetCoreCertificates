@@ -4,6 +4,7 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using CertificateManager;
 using System.Security.Cryptography;
+using CertificateManager.Models;
 
 namespace CreateChainedCertsConsoleDemo
 {
@@ -31,49 +32,53 @@ namespace CreateChainedCertsConsoleDemo
             var createCertificates = serviceProvider.GetService<CreateCertificates>();
 
             // Create the root self signed cert
-            var rootCert = createCertificates.NewSelfSignedCertificate(
+            var rootCert = createCertificates.NewECDsaSelfSignedCertificate(
                 RootCertConfig.DistinguishedName,
                 RootCertConfig.BasicConstraints,
                 RootCertConfig.ValidityPeriod,
                 RootCertConfig.SubjectAlternativeName,
                 enhancedKeyUsages,
-                RootCertConfig.X509KeyUsageFlags);
+                RootCertConfig.X509KeyUsageFlags,
+                new ECDsaConfiguration());
 
             rootCert.FriendlyName = "localhost root l1";
 
             // Create an intermediate chained cert
-            var intermediateCertificate = createCertificates.NewChainedCertificate(
+            var intermediateCertificate = createCertificates.NewECDsaChainedCertificate(
                 IntermediateCertConfig.DistinguishedName,
                 IntermediateCertConfig.BasicConstraints,
                 IntermediateCertConfig.ValidityPeriod,
                 IntermediateCertConfig.SubjectAlternativeName,
                 rootCert,
                 enhancedKeyUsages,
-                IntermediateCertConfig.X509KeyUsageFlags);
+                IntermediateCertConfig.X509KeyUsageFlags,
+                new ECDsaConfiguration());
 
             intermediateCertificate.FriendlyName = "intermediate from root l2";
 
             // Create a second intermediate chained cert
-            var intermediateCertificateLevel3 = createCertificates.NewChainedCertificate(
+            var intermediateCertificateLevel3 = createCertificates.NewECDsaChainedCertificate(
                 IntermediateLevel3CertConfig.DistinguishedName,
                 IntermediateLevel3CertConfig.BasicConstraints,
                 IntermediateLevel3CertConfig.ValidityPeriod,
                 IntermediateLevel3CertConfig.SubjectAlternativeName,
                 intermediateCertificate,
                 enhancedKeyUsages,
-                IntermediateLevel3CertConfig.X509KeyUsageFlags);
+                IntermediateLevel3CertConfig.X509KeyUsageFlags,
+                new ECDsaConfiguration());
 
             intermediateCertificateLevel3.FriendlyName = "intermediate l3 from intermediate";
 
             // Create a device chained cert
-            var deviceCertificate = createCertificates.NewChainedCertificate(
+            var deviceCertificate = createCertificates.NewECDsaChainedCertificate(
                 DeviceCertConfig.DistinguishedName,
                 DeviceCertConfig.BasicConstraints,
                 DeviceCertConfig.ValidityPeriod,
                 DeviceCertConfig.SubjectAlternativeName,
                 intermediateCertificateLevel3,
                 enhancedKeyUsages,
-                DeviceCertConfig.X509KeyUsageFlags);
+                DeviceCertConfig.X509KeyUsageFlags,
+                new ECDsaConfiguration());
 
             deviceCertificate.FriendlyName = "device cert l4";
 
@@ -97,14 +102,15 @@ namespace CreateChainedCertsConsoleDemo
             File.WriteAllBytes("devicel4.pfx", deviceCertL4InPfxBtyes);
 
             // Create a device validation cert
-            var deviceVerificationCert = createCertificates.NewChainedCertificate(
+            var deviceVerificationCert = createCertificates.NewECDsaChainedCertificate(
                DeviceCertConfig.DistinguishedName,
                DeviceCertConfig.BasicConstraints,
                DeviceCertConfig.ValidityPeriod,
                DeviceCertConfig.SubjectAlternativeName,
                rootCert,
                enhancedKeyUsages,
-               DeviceCertConfig.X509KeyUsageFlags);
+               DeviceCertConfig.X509KeyUsageFlags,
+               new ECDsaConfiguration());
 
             deviceVerificationCert.FriendlyName = "device verification cert l4";
 
