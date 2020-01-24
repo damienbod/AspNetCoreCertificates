@@ -14,6 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ImportExportCertificate>();
             services.AddTransient<CreateCertificates>();
             services.AddTransient<CreateCertificatesClientServerAuth>();
+            services.AddTransient<CreateCertificatesRsa>();
 
             return services;
         }

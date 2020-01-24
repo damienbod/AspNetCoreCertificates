@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
@@ -68,7 +69,7 @@ namespace CertificateManager
         /// </summary>
         /// <param name="cert">certificate to export</param>
         /// <returns>A pem certificate as a string</returns>
-        public string ExportFullCertificatePem(X509Certificate2 cert, string password = null)
+        public string PemExportPfxFullCertificate(X509Certificate2 cert, string password = null)
         {
             StringBuilder builder = new StringBuilder();
 
@@ -88,7 +89,52 @@ namespace CertificateManager
             return builder.ToString();
         }
 
-        public string ExportPublicKeyCertificatePem(X509Certificate2 certificate)
+        public string PemExportCertFullCertificate(X509Certificate2 cert)
+        {
+            StringBuilder builder = new StringBuilder();
+
+            builder.AppendLine(PemTypes.BEGIN_CERTIFICATE);
+            builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Cert),
+                    Base64FormattingOptions.InsertLineBreaks));
+            builder.AppendLine(PemTypes.END_CERTIFICATE);
+
+            return builder.ToString();
+        }
+
+        public string PemExportRsaPrivateKey(X509Certificate2 cert)
+        {
+            StringBuilder builder = new StringBuilder();
+
+            var rsa = cert.GetRSAPrivateKey();
+            
+            builder.AppendLine(PemTypes.BEGIN_RSA_PRIVATE_KEY);
+            builder.AppendLine(Convert.ToBase64String(rsa.ExportRSAPrivateKey(),
+                    Base64FormattingOptions.InsertLineBreaks));
+            builder.AppendLine(PemTypes.END_RSA_PRIVATE_KEY);
+
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// You must use a RSA based certificate for this export to work
+        /// </summary>
+        /// <param name="cert"></param>
+        /// <returns></returns>
+        public string PemExportRsaPublicKey(X509Certificate2 cert)
+        {
+            StringBuilder builder = new StringBuilder();
+
+            var rsa = cert.GetRSAPublicKey();
+
+            builder.AppendLine(PemTypes.BEGIN_RSA_PUBLIC_KEY);
+            builder.AppendLine(Convert.ToBase64String(rsa.ExportRSAPublicKey(),
+                    Base64FormattingOptions.InsertLineBreaks));
+            builder.AppendLine(PemTypes.END_RSA_PUBLIC_KEY);
+
+            return builder.ToString();
+        }
+
+        public string PemExportPublicKeyCertificate(X509Certificate2 certificate)
         {
             var publicKeyCrt = ExportCertificatePublicKey(certificate);
             var deviceVerifyPublicKeyBytes = publicKeyCrt.Export(X509ContentType.Cert);
@@ -111,7 +157,7 @@ namespace CertificateManager
         /// <param name="pemCertificate"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public X509Certificate2 ImportCertificatePem(string pemCertificate, string password = null)
+        public X509Certificate2 PemImportCertificate(string pemCertificate, string password = null)
         {
             var certBytes = Convert.FromBase64String(_pemParser.ProcessCrt(pemCertificate));
 

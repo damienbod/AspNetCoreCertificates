@@ -45,7 +45,7 @@ Now the package is ready to use. See the [Documentation](https://github.com/dami
 - [Create chained certificates for Azure IoT Hub](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubCreateChainedCerts)
 - [Create verify certificate for Azure IoT Hub .pem or .cer](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubVerifyCertificate)
 - [Create  device (Leaf) certificate for Azure IoT Hub device](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubCreateDeviceCertificate)
-
+- [Create  development certicates for SPAs HTTPS development, like Vue.js, Angular](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateAngularVueJsDevelopmentCertificates)
 
 # Examples Using Certificates:
 

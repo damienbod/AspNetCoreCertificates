@@ -4,6 +4,7 @@ using CertificateManager;
 using CertificateManager.Models;
 using System.Security.Cryptography.X509Certificates;
 using System.IO;
+using System.Collections.Generic;
 
 namespace CreateChainedCertsConsoleDemo
 {

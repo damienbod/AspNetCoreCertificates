@@ -288,6 +288,37 @@ var deviceInPfxBytes = importExportCertificate.ExportChainedCertificatePfx(passw
 File.WriteAllBytes("testDevice01.pfx", deviceInPfxBytes);
 ```
 
+## Creating certificates for application development Angular, VUE.js
+
+```csharp
+var serviceProvider = new ServiceCollection()
+    .AddCertificateManager()
+    .BuildServiceProvider();
+
+var _createCertificatesRsa = serviceProvider.GetService<CreateCertificatesRsa>();
+
+// Create development certificate for localhost
+var devCertificate = _createCertificatesRsa
+    .CreateDevelopmentCertificate("localhost", 10);
+
+devCertificate.FriendlyName = "localhost development";
+
+string password = "1234";
+var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
+
+// full pfx with password
+var rootCertInPfxBtyes = importExportCertificate.ExportRootPfx(password, devCertificate);
+File.WriteAllBytes("dev_localhost.pfx", rootCertInPfxBtyes);
+
+// private key
+var exportRsaPrivateKeyPem = importExportCertificate.PemExportRsaPrivateKey(devCertificate);
+File.WriteAllText($"dev_localhost.key", exportRsaPrivateKeyPem);
+
+// public key certificate as pem
+var exportPublicKeyCertificatePem = importExportCertificate.PemExportPublicKeyCertificate(devCertificate);
+File.WriteAllText($"dev_localhost.pem", exportPublicKeyCertificatePem);
+```
+
 ## Creating Chained Certificates from a trusted CA Certificate
 
 ## Exporting Certificates
@@ -354,7 +385,7 @@ File.WriteAllBytes($"deviceVerify.cer", deviceVerifyPublicKeyBytes);
 
 ### Self signed certificate
 
-Creating a self signed certificate using **NewSelfSignedCertificate**
+Creating a self signed certificate using **NewECDsaSelfSignedCertificate** with ECDsa
 
 ```csharp
 var serviceProvider = new ServiceCollection()
@@ -369,13 +400,14 @@ var enhancedKeyUsages = new OidCollection {
 var createCertificates = serviceProvider.GetService<CreateCertificates>();
 
 // Create the root self signed cert
-var rootCert = createCertificates.NewSelfSignedCertificate(
+var rootCert = createCertificates.NewECDsaSelfSignedCertificate(
     RootCertConfig.DistinguishedName,
     RootCertConfig.BasicConstraints,
     RootCertConfig.ValidityPeriod,
     RootCertConfig.SubjectAlternativeName,
     enhancedKeyUsages,
-    RootCertConfig.X509KeyUsageFlags);
+    RootCertConfig.X509KeyUsageFlags,
+    new ECDsaConfiguration());
 
 rootCert.FriendlyName = "localhost root l1";
 ```
@@ -427,7 +459,7 @@ public static class RootCertConfig
 
 ### Chained certificate
 
-Creating a certificate using **NewChainedCertificate**
+Creating a certificate using **NewECDsaChainedCertificate** using ECDsa
 
 ```csharp
 var serviceProvider = new ServiceCollection()
@@ -441,14 +473,15 @@ var enhancedKeyUsages = new OidCollection {
 
 var createCertificates = serviceProvider.GetService<CreateCertificates>();
 
-var deviceCertificate = createCertificates.NewChainedCertificate(
+var deviceCertificate = createCertificates.NewECDsaChainedCertificate(
     DeviceCertConfig.DistinguishedName,
     DeviceCertConfig.BasicConstraints,
     DeviceCertConfig.ValidityPeriod,
     DeviceCertConfig.SubjectAlternativeName,
     intermediateCertificateLevel3,
     enhancedKeyUsages,
-    DeviceCertConfig.X509KeyUsageFlags);
+    DeviceCertConfig.X509KeyUsageFlags,
+    new ECDsaConfiguration());
 
 deviceCertificate.FriendlyName = "device cert l4";
 ```
