@@ -29,7 +29,7 @@ namespace IoTHubVerifyCertificate
             "4C8C754C6DA4280DBAB7FC7BB320E7FFFB7F411CBB7EAA7D", root);
             deviceVerify.FriendlyName = "device verify";
 
-            var deviceVerifyPEM = importExportCertificate.ExportPublicKeyCertificatePem(deviceVerify);
+            var deviceVerifyPEM = importExportCertificate.PemExportPublicKeyCertificate(deviceVerify);
             File.WriteAllText("deviceVerify.pem", deviceVerifyPEM);
 
             var deviceVerifyPublicKey = importExportCertificate.ExportCertificatePublicKey(deviceVerify);

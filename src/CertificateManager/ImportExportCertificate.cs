@@ -69,7 +69,7 @@ namespace CertificateManager
         /// </summary>
         /// <param name="cert">certificate to export</param>
         /// <returns>A pem certificate as a string</returns>
-        public string ExportFullCertificatePem(X509Certificate2 cert, string password = null)
+        public string PemExportPfxFullCertificate(X509Certificate2 cert, string password = null)
         {
             StringBuilder builder = new StringBuilder();
 
@@ -89,7 +89,7 @@ namespace CertificateManager
             return builder.ToString();
         }
 
-        public string ExportRsaPrivateKeyPem(X509Certificate2 cert)
+        public string PemExportRsaPrivateKey(X509Certificate2 cert)
         {
             StringBuilder builder = new StringBuilder();
 
@@ -108,7 +108,7 @@ namespace CertificateManager
         /// </summary>
         /// <param name="cert"></param>
         /// <returns></returns>
-        public string ExportRsaPublicKeyPem(X509Certificate2 cert)
+        public string PemExportRsaPublicKey(X509Certificate2 cert)
         {
             StringBuilder builder = new StringBuilder();
 
@@ -122,7 +122,7 @@ namespace CertificateManager
             return builder.ToString();
         }
 
-        public string ExportPublicKeyCertificatePem(X509Certificate2 certificate)
+        public string PemExportPublicKeyCertificate(X509Certificate2 certificate)
         {
             var publicKeyCrt = ExportCertificatePublicKey(certificate);
             var deviceVerifyPublicKeyBytes = publicKeyCrt.Export(X509ContentType.Cert);
@@ -145,7 +145,7 @@ namespace CertificateManager
         /// <param name="pemCertificate"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public X509Certificate2 ImportCertificatePem(string pemCertificate, string password = null)
+        public X509Certificate2 PemImportCertificate(string pemCertificate, string password = null)
         {
             var certBytes = Convert.FromBase64String(_pemParser.ProcessCrt(pemCertificate));
 
