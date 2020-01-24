@@ -354,7 +354,7 @@ File.WriteAllBytes($"deviceVerify.cer", deviceVerifyPublicKeyBytes);
 
 ### Self signed certificate
 
-Creating a self signed certificate using **NewSelfSignedCertificate**
+Creating a self signed certificate using **NewECDsaSelfSignedCertificate** with ECDsa
 
 ```csharp
 var serviceProvider = new ServiceCollection()
@@ -369,13 +369,14 @@ var enhancedKeyUsages = new OidCollection {
 var createCertificates = serviceProvider.GetService<CreateCertificates>();
 
 // Create the root self signed cert
-var rootCert = createCertificates.NewSelfSignedCertificate(
+var rootCert = createCertificates.NewECDsaSelfSignedCertificate(
     RootCertConfig.DistinguishedName,
     RootCertConfig.BasicConstraints,
     RootCertConfig.ValidityPeriod,
     RootCertConfig.SubjectAlternativeName,
     enhancedKeyUsages,
-    RootCertConfig.X509KeyUsageFlags);
+    RootCertConfig.X509KeyUsageFlags,
+    new ECDsaConfiguration());
 
 rootCert.FriendlyName = "localhost root l1";
 ```
@@ -427,7 +428,7 @@ public static class RootCertConfig
 
 ### Chained certificate
 
-Creating a certificate using **NewChainedCertificate**
+Creating a certificate using **NewECDsaChainedCertificate** using ECDsa
 
 ```csharp
 var serviceProvider = new ServiceCollection()
@@ -441,14 +442,15 @@ var enhancedKeyUsages = new OidCollection {
 
 var createCertificates = serviceProvider.GetService<CreateCertificates>();
 
-var deviceCertificate = createCertificates.NewChainedCertificate(
+var deviceCertificate = createCertificates.NewECDsaChainedCertificate(
     DeviceCertConfig.DistinguishedName,
     DeviceCertConfig.BasicConstraints,
     DeviceCertConfig.ValidityPeriod,
     DeviceCertConfig.SubjectAlternativeName,
     intermediateCertificateLevel3,
     enhancedKeyUsages,
-    DeviceCertConfig.X509KeyUsageFlags);
+    DeviceCertConfig.X509KeyUsageFlags,
+    new ECDsaConfiguration());
 
 deviceCertificate.FriendlyName = "device cert l4";
 ```
