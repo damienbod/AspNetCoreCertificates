@@ -1,5 +1,10 @@
 # Certificate Manager change log
 
+<a name="2020-01-24"></a>
+## 2020-01-24 version 1.0.1
+* Support RSA certificates
+* Add example for creating development certificates which can be used in SPA development
+
 <a name="2020-01-22"></a>
 ## 2020-01-22 version 1.0.0
 * creates client server certificate authentication certificates
