@@ -15,6 +15,7 @@
     <Copyright>2020 damienbod</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>damienbod</Authors>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
