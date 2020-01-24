@@ -103,6 +103,11 @@ namespace CertificateManager
             return builder.ToString();
         }
 
+        /// <summary>
+        /// You must use a RSA based certificate for this export to work
+        /// </summary>
+        /// <param name="cert"></param>
+        /// <returns></returns>
         public string ExportRsaPublicKeyPem(X509Certificate2 cert)
         {
             StringBuilder builder = new StringBuilder();

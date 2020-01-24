@@ -52,13 +52,14 @@ namespace CertificateManager
 
             var x509KeyUsageFlags = X509KeyUsageFlags.KeyCertSign;
 
-            var rootCert = _createCertificates.NewSelfSignedCertificate(
+            var rootCert = _createCertificates.NewECDsaSelfSignedCertificate(
                 distinguishedName,
                 basicConstraints,
                 validityPeriod,
                 subjectAlternativeName,
                 enhancedKeyUsages,
-                x509KeyUsageFlags);
+                x509KeyUsageFlags,
+                new ECDsaConfiguration());
 
             return rootCert;
         }
@@ -232,13 +233,14 @@ namespace CertificateManager
             var x509KeyUsageFlags =
               X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment;
 
-            var clientCertSelfSigned = _createCertificates.NewSelfSignedCertificate(
+            var clientCertSelfSigned = _createCertificates.NewECDsaSelfSignedCertificate(
                 distinguishedName,
                 basicConstraints,
                 validityPeriod,
                 subjectAlternativeName,
                 enhancedKeyUsages,
-                x509KeyUsageFlags);
+                x509KeyUsageFlags,
+                new ECDsaConfiguration());
 
             return clientCertSelfSigned;
         }
@@ -270,13 +272,14 @@ namespace CertificateManager
             var x509KeyUsageFlags =
               X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment;
 
-            var clientCertSelfSigned = _createCertificates.NewSelfSignedCertificate(
+            var clientCertSelfSigned = _createCertificates.NewECDsaSelfSignedCertificate(
                 distinguishedName,
                 basicConstraints,
                 validityPeriod,
                 subjectAlternativeName,
                 enhancedKeyUsages,
-                x509KeyUsageFlags);
+                x509KeyUsageFlags,
+                new ECDsaConfiguration());
 
             return clientCertSelfSigned;
         }
