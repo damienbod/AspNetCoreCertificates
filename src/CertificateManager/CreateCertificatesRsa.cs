@@ -33,7 +33,13 @@ namespace CertificateManager
                 }
             };
 
-            var x509KeyUsageFlags = X509KeyUsageFlags.KeyCertSign;
+            var x509KeyUsageFlags = X509KeyUsageFlags.KeyCertSign
+                | X509KeyUsageFlags.DigitalSignature
+                | X509KeyUsageFlags.KeyEncipherment
+                | X509KeyUsageFlags.CrlSign
+                | X509KeyUsageFlags.DataEncipherment
+                | X509KeyUsageFlags.NonRepudiation
+                | X509KeyUsageFlags.KeyAgreement;
 
             var enhancedKeyUsages = new OidCollection {
                 new Oid("1.3.6.1.5.5.7.3.1"),  // TLS Server auth

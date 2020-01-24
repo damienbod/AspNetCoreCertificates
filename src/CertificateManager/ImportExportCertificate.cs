@@ -89,6 +89,18 @@ namespace CertificateManager
             return builder.ToString();
         }
 
+        public string PemExportCertFullCertificate(X509Certificate2 cert)
+        {
+            StringBuilder builder = new StringBuilder();
+
+            builder.AppendLine(PemTypes.BEGIN_CERTIFICATE);
+            builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Cert),
+                    Base64FormattingOptions.InsertLineBreaks));
+            builder.AppendLine(PemTypes.END_CERTIFICATE);
+
+            return builder.ToString();
+        }
+
         public string PemExportRsaPrivateKey(X509Certificate2 cert)
         {
             StringBuilder builder = new StringBuilder();

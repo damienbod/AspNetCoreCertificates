@@ -12,7 +12,7 @@ namespace CertificateManager.Models
         /// <summary>
         /// RSASignaturePadding.Pkcs1, RSASignaturePadding.Pss
         /// </summary>
-        public RSASignaturePadding RSASignaturePadding { get; set; } = RSASignaturePadding.Pss;
+        public RSASignaturePadding RSASignaturePadding { get; set; } = RSASignaturePadding.Pkcs1;
 
         public HashAlgorithmName HashAlgorithmName { get; set; } = HashAlgorithmName.SHA256;
         

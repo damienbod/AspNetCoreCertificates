@@ -39,12 +39,6 @@ namespace CreateAngularVueJsDevelopmentCertificates
             // public key certificate as pem
             var exportPublicKeyCertificatePem = importExportCertificate.PemExportPublicKeyCertificate(devCertificate);
             File.WriteAllText($"dev_localhost.pem", exportPublicKeyCertificatePem);
-
-            // public key certificate as cer
-            var exportCertificatePublicKey = importExportCertificate.ExportCertificatePublicKey(devCertificate);
-            var exportCertificatePublicKeyBytes = exportCertificatePublicKey.Export(X509ContentType.Cert);
-            File.WriteAllBytes($"dev_localhost.cer", exportCertificatePublicKeyBytes);
-
         }
     }
 }
