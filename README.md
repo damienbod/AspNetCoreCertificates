@@ -44,8 +44,10 @@ Now the package is ready to use. See the [Documentation](https://github.com/dami
 - [Create self signed certificate authentication certificates console](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateSelfSignedCertsConsoleDemo)
 - [Create chained certificates for Azure IoT Hub](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubCreateChainedCerts)
 - [Create verify certificate for Azure IoT Hub .pem or .cer](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubVerifyCertificate)
-- [Create  device (Leaf) certificate for Azure IoT Hub device](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubCreateDeviceCertificate)
-- [Create  development certificates for SPAs HTTPS development, like Vue.js, Angular](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateAngularVueJsDevelopmentCertificates)
+- [Create device (Leaf) certificate for Azure IoT Hub device](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubCreateDeviceCertificate)
+- [Create development certificates for SPAs HTTPS development, like Vue.js, Angular](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateAngularVueJsDevelopmentCertificates)
+- [Create certificates for IdentityServer4 RSA and ECDsa](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateIdentityServer4Certificates)
+
 
 # Examples Using Certificates:
 
