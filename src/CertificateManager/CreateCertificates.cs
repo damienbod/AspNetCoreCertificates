@@ -75,8 +75,8 @@ namespace CertificateManager
             X509KeyUsageFlags x509KeyUsageFlags,
             RsaConfiguration rsaConfiguration)
         {
-            using var rsa = RSA.Create("RSA");
-            rsa.KeySize = rsaConfiguration.KeySize; // 1024, 2048 or 4096
+            using var rsa = RSA.Create(rsaConfiguration.KeySize);
+            //rsa.KeySize = rsaConfiguration.KeySize; // 1024, 2048 or 4096
             var request = new CertificateRequest(
                 _certificateUtility.CreateIssuerOrSubject(distinguishedName),
                 rsa,
