@@ -15,7 +15,7 @@ namespace CertificateManager
             _createCertificates = createCertificates;
         }
 
-        public X509Certificate2 CreateDevelopmentCertificate(string dnsName, int validityPeriodInYears)
+        public X509Certificate2 CreateDevelopmentCertificate(string dnsName, int validityPeriodInYears, int keySize = 1024)
         {
             var basicConstraints = new BasicConstraints
             {
@@ -57,7 +57,10 @@ namespace CertificateManager
                 subjectAlternativeName,
                 enhancedKeyUsages,
                 x509KeyUsageFlags,
-                new RsaConfiguration());
+                new RsaConfiguration
+                {
+                    KeySize = keySize
+                });
 
             return certificate;
         }
