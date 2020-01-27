@@ -126,7 +126,7 @@ namespace CreateIdentityServer4Certificates
                 x509KeyUsageFlags,
                 new ECDsaConfiguration
                 {
-                    KeySize = 384
+                    //KeySize = 256
                 });
 
             return certificate;
