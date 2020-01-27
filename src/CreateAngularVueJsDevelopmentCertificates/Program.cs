@@ -1,11 +1,6 @@
 ﻿using CertificateManager;
-using CertificateManager.Models;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 
 namespace CreateAngularVueJsDevelopmentCertificates
 {
