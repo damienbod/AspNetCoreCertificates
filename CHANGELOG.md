@@ -2,7 +2,7 @@
 
 <a name="2020-01-27"></a>
 ## 2020-01-27 version 1.0.2
-* Small fixes for RSA certificates
+* Small fixes for RSA certificates KeySize
 * IdentityServer4 example certificates
 
 <a name="2020-01-24"></a>
