@@ -10,12 +10,6 @@ namespace CertificateManager
     /// </summary>
     public class ImportExportCertificate
     {
-        private readonly PemParser _pemParser;
-
-        public ImportExportCertificate(PemParser pemParser)
-        {
-            _pemParser = pemParser;
-        }
         /// <summary>
         /// Exports the certificate public key which can then be saved as a cer file
         /// </summary>
@@ -159,7 +153,7 @@ namespace CertificateManager
         /// <returns></returns>
         public X509Certificate2 PemImportCertificate(string pemCertificate, string password = null)
         {
-            var certBytes = Convert.FromBase64String(_pemParser.ProcessCrt(pemCertificate));
+            var certBytes = PemDecoder.DecodeSection(pemCertificate, PemTypes.CERTIFICATE);
 
             if (string.IsNullOrEmpty(password))
             {
