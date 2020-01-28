@@ -81,7 +81,7 @@ namespace CertificateManagerTests
         }
 
         [Fact]
-        public void ExportPublicKeyCertificatePem()
+        public void ExportEDAsaPublicKeyCertificatePem()
         {
             var (root, intermediate, server, client) = SetupCerts();
             var serviceProvider = new ServiceCollection()
@@ -124,7 +124,7 @@ namespace CertificateManagerTests
         }
 
         [Fact]
-        public void ImportExportExportTypesPem()
+        public void ImportExportExportFullPfxPem()
         {
             var (root, intermediate, server, client) = SetupCerts();
             var serviceProvider = new ServiceCollection()
@@ -142,7 +142,7 @@ namespace CertificateManagerTests
         }
 
         [Fact]
-        public void ImportExportExportRsaPublicKeyPem()
+        public void ImportExportRsaCertPublicKeyPem()
         {
             var serviceProvider = new ServiceCollection()
                 .AddCertificateManager()
@@ -159,17 +159,6 @@ namespace CertificateManagerTests
             Assert.Equal(rsaCert.Subject, roundTripPublicKeyPem.Subject);
             Assert.True(rsaCert.HasPrivateKey);
             Assert.False(roundTripPublicKeyPem.HasPrivateKey);
-
-            var rsaPublicPem = importExport.PemExportRsaPublicKey(rsaCert);
-            var roundTripRsaPublic = importExport.PemImportCertificate(rsaPublicPem);
-
-            Assert.Equal(rsaCert.Subject, roundTripRsaPublic.Subject);
-            Assert.True(rsaCert.HasPrivateKey);
-            Assert.False(roundTripRsaPublic.HasPrivateKey);
-
-           
-
-            Assert.Equal(roundTripRsaPublic, roundTripPublicKeyPem);
         }
     }
 }

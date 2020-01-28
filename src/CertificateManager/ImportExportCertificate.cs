@@ -99,17 +99,17 @@ namespace CertificateManager
         /// </summary>
         /// <param name="cert"></param>
         /// <returns></returns>
-        public string PemExportRsaPublicKey(X509Certificate2 cert)
-        {
-            var rsa = cert.GetRSAPublicKey();
+        //public string PemExportRsaPublicKey(X509Certificate2 cert)
+        //{
+        //    var rsa = cert.GetRSAPublicKey();
 
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine(PemDecoder.GetBegin(PemTypes.RSA_PUBLIC_KEY));
-            builder.AppendLine(Convert.ToBase64String(rsa.ExportRSAPublicKey(),
-                    Base64FormattingOptions.InsertLineBreaks));
-            builder.AppendLine(PemDecoder.GetEnd(PemTypes.RSA_PUBLIC_KEY));
-            return builder.ToString();
-        }
+        //    StringBuilder builder = new StringBuilder();
+        //    builder.AppendLine(PemDecoder.GetBegin(PemTypes.RSA_PUBLIC_KEY));
+        //    builder.AppendLine(Convert.ToBase64String(rsa.ExportRSAPublicKey(),
+        //            Base64FormattingOptions.InsertLineBreaks));
+        //    builder.AppendLine(PemDecoder.GetEnd(PemTypes.RSA_PUBLIC_KEY));
+        //    return builder.ToString();
+        //}
 
         public string PemExportPublicKeyCertificate(X509Certificate2 certificate)
         {
