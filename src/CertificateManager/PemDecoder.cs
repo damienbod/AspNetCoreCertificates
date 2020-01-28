@@ -4,6 +4,7 @@ using System.Text;
 namespace CertificateManager
 {
     /// <summary>
+    /// src:  Mathias Raacke
     /// https://github.com/oocx/ReadX509CertificateFromPem
     /// </summary>
     public static class PemDecoder

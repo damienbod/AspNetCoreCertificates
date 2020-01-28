@@ -82,9 +82,15 @@ namespace CertificateManager
             return builder.ToString();
         }
 
-        public string PemExportRsaPrivateKey(X509Certificate2 cert)
+        /// <summary>
+        /// Export a RSA private key as a pem
+        /// PKCS#1
+        /// </summary>
+        /// <param name="rsaCertificate">certificate which contains the private key</param>
+        /// <returns>a pem rsa private key export</returns>
+        public string PemExportRsaPrivateKey(X509Certificate2 rsaCertificate)
         {
-            var rsa = cert.GetRSAPrivateKey();
+            var rsa = rsaCertificate.GetRSAPrivateKey();
 
             StringBuilder builder = new StringBuilder();
             builder.AppendLine(PemDecoder.GetBegin(PemTypes.RSA_PRIVATE_KEY));
@@ -96,6 +102,7 @@ namespace CertificateManager
 
         /// <summary>
         /// You must use a RSA based certificate for this export to work
+        /// PKCS#1
         /// </summary>
         /// <param name="cert"></param>
         /// <returns></returns>
