@@ -121,5 +121,23 @@ namespace CertificateManagerTests
             });
 
         }
+
+        [Fact]
+        public void ImportExportExportTypesPem()
+        {
+            var (root, intermediate, server, client) = SetupCerts();
+            var serviceProvider = new ServiceCollection()
+                .AddCertificateManager()
+                .BuildServiceProvider();
+            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+
+            var pfxPem = importExport.PemExportPfxFullCertificate(intermediate);
+
+            var roundTripPfxPem = importExport.PemImportCertificate(pfxPem);
+
+            Assert.Equal(intermediate.Subject, roundTripPfxPem.Subject);
+            Assert.True(intermediate.HasPrivateKey);
+            Assert.True(roundTripPfxPem.HasPrivateKey);
+        }
     }
 }
