@@ -153,19 +153,23 @@ namespace CertificateManagerTests
 
             var rsaCert = ccRsa.CreateDevelopmentCertificate("localhost", 2, 2048);
 
-            var rsaPublicPem = importExport.PemExportPublicKeyCertificate(rsaCert);
-            var publicKeyPem = importExport.PemExportRsaPublicKey(rsaCert);
-
-            var roundTripRsaPublic = importExport.PemImportCertificate(rsaPublicPem);
+            var publicKeyPem = importExport.PemExportPublicKeyCertificate(rsaCert);
             var roundTripPublicKeyPem = importExport.PemImportCertificate(publicKeyPem);
+
+            Assert.Equal(rsaCert.Subject, roundTripPublicKeyPem.Subject);
+            Assert.True(rsaCert.HasPrivateKey);
+            Assert.False(roundTripPublicKeyPem.HasPrivateKey);
+
+            var rsaPublicPem = importExport.PemExportRsaPublicKey(rsaCert);
+            var roundTripRsaPublic = importExport.PemImportCertificate(rsaPublicPem);
 
             Assert.Equal(rsaCert.Subject, roundTripRsaPublic.Subject);
             Assert.True(rsaCert.HasPrivateKey);
             Assert.False(roundTripRsaPublic.HasPrivateKey);
 
-            Assert.Equal(rsaCert.Subject, roundTripPublicKeyPem.Subject);
-            Assert.True(rsaCert.HasPrivateKey);
-            Assert.False(roundTripPublicKeyPem.HasPrivateKey);
+           
+
+            Assert.Equal(roundTripRsaPublic, roundTripPublicKeyPem);
         }
     }
 }
