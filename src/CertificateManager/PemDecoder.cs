@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Text;
 
 namespace CertificateManager
@@ -9,13 +8,6 @@ namespace CertificateManager
     /// </summary>
     public static class PemDecoder
     {
-
-        public static byte[] DecodeSectionFromFile(string fileName, string type)
-        {
-            var encodedData = File.ReadAllText(fileName);
-            return DecodeSection(encodedData, type);
-        }
-
         public static byte[] DecodeSection(string data, string type)
         {
             var lines = data.Replace("\r", "").Split("\n");

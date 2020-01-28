@@ -130,7 +130,7 @@ namespace CertificateManager
             builder.AppendLine(PemDecoder.GetBegin(PemTypes.CERTIFICATE));
             builder.AppendLine(Convert.ToBase64String(deviceVerifyPublicKeyBytes,
                     Base64FormattingOptions.InsertLineBreaks));           
-            builder.AppendLine(PemDecoder.GetBegin(PemTypes.CERTIFICATE));
+            builder.AppendLine(PemDecoder.GetEnd(PemTypes.CERTIFICATE));
             return builder.ToString();
         }
 
