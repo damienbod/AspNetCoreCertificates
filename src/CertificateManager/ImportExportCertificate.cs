@@ -118,6 +118,11 @@ namespace CertificateManager
         //    return builder.ToString();
         //}
 
+        /// <summary>
+        /// public key certificate export in pem format
+        /// </summary>
+        /// <param name="certificate"></param>
+        /// <returns>CERTIFICATE pem export</returns>
         public string PemExportPublicKeyCertificate(X509Certificate2 certificate)
         {
             var publicKeyCrt = ExportCertificatePublicKey(certificate);
@@ -134,7 +139,7 @@ namespace CertificateManager
         /// <summary>
         /// https://8gwifi.org/PemParserFunctions.jsp
         /// </summary>
-        /// <param name="pemCertificate"></param>
+        /// <param name="pemCertificate">A pem string type CERTIFICATE with, without private key</param>
         /// <param name="password"></param>
         /// <returns></returns>
         public X509Certificate2 PemImportCertificate(string pemCertificate, string password = null)
