@@ -47,7 +47,7 @@ namespace CertificateManagerTests
         }
 
         [Fact]
-        public void ImportExportCrtPem()
+        public void ImportExportCrtSelfSignedPem()
         {
             var (root, intermediate, server, client) = SetupCerts();
             var serviceProvider = new ServiceCollection()
@@ -139,6 +139,33 @@ namespace CertificateManagerTests
             Assert.Equal(intermediate.Subject, roundTripPfxPem.Subject);
             Assert.True(intermediate.HasPrivateKey);
             Assert.True(roundTripPfxPem.HasPrivateKey);
+        }
+
+        [Fact]
+        public void ImportExportExportRsaPublicKeyPem()
+        {
+            var serviceProvider = new ServiceCollection()
+                .AddCertificateManager()
+                .BuildServiceProvider();
+
+            var ccRsa = serviceProvider.GetService<CreateCertificatesRsa>();
+            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+
+            var rsaCert = ccRsa.CreateDevelopmentCertificate("localhost", 2, 2048);
+
+            var rsaPublicPem = importExport.PemExportPublicKeyCertificate(rsaCert);
+            var publicKeyPem = importExport.PemExportRsaPublicKey(rsaCert);
+
+            var roundTripRsaPublic = importExport.PemImportCertificate(rsaPublicPem);
+            var roundTripPublicKeyPem = importExport.PemImportCertificate(publicKeyPem);
+
+            Assert.Equal(rsaCert.Subject, roundTripRsaPublic.Subject);
+            Assert.True(rsaCert.HasPrivateKey);
+            Assert.False(roundTripRsaPublic.HasPrivateKey);
+
+            Assert.Equal(rsaCert.Subject, roundTripPublicKeyPem.Subject);
+            Assert.True(rsaCert.HasPrivateKey);
+            Assert.False(roundTripPublicKeyPem.HasPrivateKey);
         }
     }
 }
