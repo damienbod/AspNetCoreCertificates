@@ -382,6 +382,69 @@ var deviceVerifyPublicKey = importExportCertificate.ExportCertificatePublicKey(d
 var deviceVerifyPublicKeyBytes = deviceVerifyPublicKey.Export(X509ContentType.Cert);
 File.WriteAllBytes($"deviceVerify.cer", deviceVerifyPublicKeyBytes);
 ```
+
+## Exporting Importing PEM
+
+RSA
+
+```csharp
+var sp = new ServiceCollection()
+    .AddCertificateManager()
+    .BuildServiceProvider();
+
+var ccRsa = sp.GetService<CreateCertificatesRsa>();
+var iec = sp.GetService<ImportExportCertificate>();
+
+var rsaCert = ccRsa.CreateDevelopmentCertificate("localhost", 2, 2048);
+
+// export
+var publicKeyPem = iec.PemExportPublicKeyCertificate(rsaCert);
+var rsaPrivateKeyPem = iec.PemExportRsaPrivateKey(rsaCert);
+
+// import
+var roundTripPublicKeyPem = iec.PemImportCertificate(publicKeyPem);
+var roundTripRsaPrivateKeyPem = iec.PemImportPrivateKey(rsaPrivateKeyPem);
+
+var roundTripFullCert = 
+    iec.CreateCertificateWithPrivateKey(
+        roundTripPublicKeyPem, 
+        roundTripRsaPrivateKeyPem, 
+        "1234");
+
+```
+
+ECDsa
+
+```csharp
+var sp = new ServiceCollection()
+    .AddCertificateManager()
+    .BuildServiceProvider();
+
+var cc = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
+
+var root = cc.NewRootCertificate(
+    new DistinguishedName { CommonName = "root dev", Country = "IT" },
+    new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+    3, "localhost");
+root.FriendlyName = "developement root L1 certificate";
+
+var iec = sp.GetService<ImportExportCertificate>();
+
+// export
+var publicKeyPem = iec.PemExportPublicKeyCertificate(root);
+var eCDsaPrivateKeyPem = iec.PemExportECPrivateKey(root);
+
+// import
+var roundTripPublicKeyPem = iec.PemImportCertificate(publicKeyPem);
+var roundTripECPrivateKeyPem = iec.PemImportPrivateKey(eCDsaPrivateKeyPem);
+
+var roundTripFullCert = 
+    iec.CreateCertificateWithPrivateKey(
+        roundTripPublicKeyPem, 
+        roundTripECPrivateKeyPem, 
+        "1234");
+
+```
 ## General Certificates, full APIs
 
 ### Self signed certificate
