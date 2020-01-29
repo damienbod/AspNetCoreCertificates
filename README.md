@@ -63,3 +63,7 @@ Now the package is ready to use. See the [Documentation](https://github.com/dami
 # Read certificates and private keys from PEM files
 
 https://github.com/oocx/ReadX509CertificateFromPem
+
+# Blogs
+
+- [Creating Certificates for X.509 security in Azure IoT Hub using .NET Core](https://damienbod.com/2020/01/29/creating-certificates-for-x-509-security-in-azure-iot-hub-using-net-core/)
