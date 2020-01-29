@@ -158,6 +158,24 @@ namespace CertificateManager
             }
         }
 
+        /// <summary>
+        /// Supported EC, RSA
+        /// </summary>
+        /// <param name="pemCertificate"></param>
+        /// <returns></returns>
+        public AsymmetricAlgorithm PemImportPrivateKey(string pemCertificate)
+        {
+            return PemDecoder.LoadPrivateKey(pemCertificate);
+        }
+
+        public X509Certificate2 CreateCertificateWithPrivateKey(
+            X509Certificate2 certificate, 
+            AsymmetricAlgorithm privateKey, 
+            string password = null)
+        {
+            return PemDecoder.CreateCertificateWithPrivateKey(certificate, privateKey, password);
+        }
+
         private byte[] CertificateToPfx(string password,
             X509Certificate2 certificate, 
             X509Certificate2 signingCertificate,
