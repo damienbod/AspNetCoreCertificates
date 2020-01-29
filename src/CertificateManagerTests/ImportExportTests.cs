@@ -160,5 +160,88 @@ namespace CertificateManagerTests
             Assert.True(rsaCert.HasPrivateKey);
             Assert.False(roundTripPublicKeyPem.HasPrivateKey);
         }
+
+        [Fact]
+        public void ImportExportRsaPrivateKeyPublicKeyPairPem()
+        {
+            var serviceProvider = new ServiceCollection()
+                .AddCertificateManager()
+                .BuildServiceProvider();
+
+            var ccRsa = serviceProvider.GetService<CreateCertificatesRsa>();
+            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+
+            var rsaCert = ccRsa.CreateDevelopmentCertificate("localhost", 2, 2048);
+
+            var publicKeyPem = importExport.PemExportPublicKeyCertificate(rsaCert);
+            var rsaPrivateKeyPem = importExport.PemExportRsaPrivateKey(rsaCert);
+
+            var roundTripPublicKeyPem = importExport.PemImportCertificate(publicKeyPem);
+            var roundTripRsaPrivateKeyPem = importExport.PemImportPrivateKey(rsaPrivateKeyPem);
+
+            var roundTripFullCert = 
+                importExport.CreateCertificateWithPrivateKey(roundTripPublicKeyPem, roundTripRsaPrivateKeyPem, "1234");
+
+            Assert.Equal(rsaCert.Subject, roundTripPublicKeyPem.Subject);
+            Assert.Equal(rsaCert.Thumbprint, roundTripFullCert.Thumbprint);
+            Assert.True(roundTripFullCert.HasPrivateKey);
+            Assert.Equal("sha256RSA", roundTripFullCert.SignatureAlgorithm.FriendlyName);
+        }
+
+        [Fact]
+        public void ImportExportECPrivateKeyPublicKeyPairPem()
+        {
+            var (root, intermediate, server, client) = SetupCerts();
+
+            var serviceProvider = new ServiceCollection()
+                .AddCertificateManager()
+                .BuildServiceProvider();
+
+            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+
+            var publicKeyPem = importExport.PemExportPublicKeyCertificate(root);
+            var ecPrivateKeyPem = importExport.PemExportECPrivateKey(root);
+
+            var roundTripPublicKeyPem = importExport.PemImportCertificate(publicKeyPem);
+            var roundTripRsaPrivateKeyPem = importExport.PemImportPrivateKey(ecPrivateKeyPem);
+
+            var roundTripFullCert =
+                importExport.CreateCertificateWithPrivateKey(
+                    roundTripPublicKeyPem, 
+                    roundTripRsaPrivateKeyPem, "1234");
+
+            Assert.Equal(root.Subject, roundTripPublicKeyPem.Subject);
+            Assert.Equal(root.Thumbprint, roundTripFullCert.Thumbprint);
+            Assert.True(roundTripFullCert.HasPrivateKey);
+            Assert.Equal("sha256ECDSA", roundTripFullCert.SignatureAlgorithm.FriendlyName);
+        }
+
+        [Fact]
+        public void ImportExportSingleChainedECPrivateKeyPublicKeyPairPem()
+        {
+            var (root, intermediate, server, client) = SetupCerts();
+
+            var serviceProvider = new ServiceCollection()
+                .AddCertificateManager()
+                .BuildServiceProvider();
+
+            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+
+            var publicKeyPem = importExport.PemExportPublicKeyCertificate(server);
+            var ecPrivateKeyPem = importExport.PemExportECPrivateKey(server);
+
+            var roundTripPublicKeyPem = importExport.PemImportCertificate(publicKeyPem);
+            var roundTripRsaPrivateKeyPem = importExport.PemImportPrivateKey(ecPrivateKeyPem);
+
+            var roundTripFullCert =
+                importExport.CreateCertificateWithPrivateKey(
+                    roundTripPublicKeyPem, 
+                    roundTripRsaPrivateKeyPem);
+
+            Assert.Equal(server.Subject, roundTripPublicKeyPem.Subject);
+            Assert.Equal(server.Thumbprint, roundTripFullCert.Thumbprint);
+            Assert.True(roundTripFullCert.HasPrivateKey);
+            Assert.Equal("sha256ECDSA", roundTripFullCert.SignatureAlgorithm.FriendlyName);
+        }
     }
 }

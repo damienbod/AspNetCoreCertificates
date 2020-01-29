@@ -13,6 +13,7 @@ namespace CertificateManager
 
         /// <summary>
         /// Encrypted Private Key / PEM
+        /// PKCS#1
         /// </summary>
         public const string RSA_PRIVATE_KEY = "RSA PRIVATE KEY";
 
@@ -44,6 +45,7 @@ namespace CertificateManager
 
         /// <summary>
         /// PRIVATE KEY
+        /// PKCS#8 RFC5208 RFC5958
         /// </summary>
         public const string PRIVATE_KEY = "PRIVATE KEY";
 
@@ -54,6 +56,7 @@ namespace CertificateManager
 
         /// <summary>
         /// Elliptic Curve
+        /// RFC5915
         /// </summary>
         public const string EC_PRIVATE_KEY = "EC PRIVATE KEY";
 
@@ -66,5 +69,14 @@ namespace CertificateManager
         /// PGP Public Key
         /// </summary>
         public const string PGP_PUBLIC_KEY_BLOCK = "PGP PUBLIC KEY BLOCK";
+
+        /// <summary>
+        /// ENCRYPTED_PRIVATE_KEY
+        /// PKCS#8 RFC5208
+        /// </summary>
+        public const string ENCRYPTED_PRIVATE_KEY = "ENCRYPTED PRIVATE KEY";
+
+        public static readonly string[] KnownTypes = new[] { RSA_PRIVATE_KEY, PRIVATE_KEY, ENCRYPTED_PRIVATE_KEY, EC_PRIVATE_KEY };
+    
     }
 }

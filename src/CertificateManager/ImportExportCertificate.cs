@@ -101,6 +101,23 @@ namespace CertificateManager
         }
 
         /// <summary>
+        /// Export the pem ec private key from a ECDsa certificate
+        /// </summary>
+        /// <param name="eCDsaCertificate">ECDsa certificate</param>
+        /// <returns>pem EC PRIVATE KEY</returns>
+        public string PemExportECPrivateKey(X509Certificate2 eCDsaCertificate)
+        {
+            var eCDsa = eCDsaCertificate.GetECDsaPrivateKey();
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine(PemDecoder.GetBegin(PemTypes.EC_PRIVATE_KEY));
+            builder.AppendLine(Convert.ToBase64String(eCDsa.ExportECPrivateKey(),
+                    Base64FormattingOptions.InsertLineBreaks));
+            builder.AppendLine(PemDecoder.GetEnd(PemTypes.EC_PRIVATE_KEY));
+            return builder.ToString();
+        }
+
+        /// <summary>
         /// You must use a RSA based certificate for this export to work
         /// PKCS#1
         /// </summary>
@@ -156,6 +173,24 @@ namespace CertificateManager
                 var certificate = new X509Certificate2(certBytes, password);
                 return certificate;
             }
+        }
+
+        /// <summary>
+        /// Supported EC, RSA
+        /// </summary>
+        /// <param name="pemCertificate"></param>
+        /// <returns></returns>
+        public AsymmetricAlgorithm PemImportPrivateKey(string pemCertificate)
+        {
+            return PemDecoder.LoadPrivateKey(pemCertificate);
+        }
+
+        public X509Certificate2 CreateCertificateWithPrivateKey(
+            X509Certificate2 certificate, 
+            AsymmetricAlgorithm privateKey, 
+            string password = null)
+        {
+            return PemDecoder.CreateCertificateWithPrivateKey(certificate, privateKey, password);
         }
 
         private byte[] CertificateToPfx(string password,
