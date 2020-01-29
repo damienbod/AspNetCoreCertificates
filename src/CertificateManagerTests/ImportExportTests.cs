@@ -206,7 +206,9 @@ namespace CertificateManagerTests
             var roundTripRsaPrivateKeyPem = importExport.PemImportPrivateKey(ecPrivateKeyPem);
 
             var roundTripFullCert =
-                importExport.CreateCertificateWithPrivateKey(roundTripPublicKeyPem, roundTripRsaPrivateKeyPem, "1234");
+                importExport.CreateCertificateWithPrivateKey(
+                    roundTripPublicKeyPem, 
+                    roundTripRsaPrivateKeyPem, "1234");
 
             Assert.Equal(root.Subject, roundTripPublicKeyPem.Subject);
             Assert.Equal(root.Thumbprint, roundTripFullCert.Thumbprint);
@@ -232,7 +234,9 @@ namespace CertificateManagerTests
             var roundTripRsaPrivateKeyPem = importExport.PemImportPrivateKey(ecPrivateKeyPem);
 
             var roundTripFullCert =
-                importExport.CreateCertificateWithPrivateKey(roundTripPublicKeyPem, roundTripRsaPrivateKeyPem, "1234");
+                importExport.CreateCertificateWithPrivateKey(
+                    roundTripPublicKeyPem, 
+                    roundTripRsaPrivateKeyPem);
 
             Assert.Equal(server.Subject, roundTripPublicKeyPem.Subject);
             Assert.Equal(server.Thumbprint, roundTripFullCert.Thumbprint);
