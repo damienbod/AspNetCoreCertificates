@@ -1,5 +1,10 @@
 # Certificate Manager change log
 
+<a name="2020-01-29"></a>
+## 2020-01-29 version 1.0.3
+* private key pem exports
+* private key import with certificate
+
 <a name="2020-01-27"></a>
 ## 2020-01-27 version 1.0.2
 * Small fixes for RSA certificates KeySize
