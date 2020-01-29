@@ -59,3 +59,7 @@ Now the package is ready to use. See the [Documentation](https://github.com/dami
 # Microsoft Certificate Authentication Docs:
 
 - [Microsoft Docs: Configure certificate authentication in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/certauth)
+
+# Read certificates and private keys from PEM files
+
+https://github.com/oocx/ReadX509CertificateFromPem

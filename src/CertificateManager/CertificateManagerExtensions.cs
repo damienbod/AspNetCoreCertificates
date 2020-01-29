@@ -8,7 +8,6 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // internal
             services.AddTransient<CertificateUtility>();
-            services.AddTransient<PemParser>();
 
             // public
             services.AddTransient<ImportExportCertificate>();

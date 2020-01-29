@@ -10,12 +10,6 @@ namespace CertificateManager
     /// </summary>
     public class ImportExportCertificate
     {
-        private readonly PemParser _pemParser;
-
-        public ImportExportCertificate(PemParser pemParser)
-        {
-            _pemParser = pemParser;
-        }
         /// <summary>
         /// Exports the certificate public key which can then be saved as a cer file
         /// </summary>
@@ -73,7 +67,7 @@ namespace CertificateManager
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.AppendLine(PemTypes.BEGIN_CERTIFICATE);
+            builder.AppendLine(PemDecoder.GetBegin(PemTypes.CERTIFICATE));
             if(string.IsNullOrEmpty(password))
             {
                 builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Pfx), 
@@ -84,82 +78,73 @@ namespace CertificateManager
                 builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Pfx, password), 
                     Base64FormattingOptions.InsertLineBreaks));
             }
-            builder.AppendLine(PemTypes.END_CERTIFICATE);
-
+            builder.AppendLine(PemDecoder.GetEnd(PemTypes.CERTIFICATE));
             return builder.ToString();
         }
 
-        public string PemExportCertFullCertificate(X509Certificate2 cert)
+        /// <summary>
+        /// Export a RSA private key as a pem
+        /// PKCS#1
+        /// </summary>
+        /// <param name="rsaCertificate">certificate which contains the private key</param>
+        /// <returns>a pem rsa private key export</returns>
+        public string PemExportRsaPrivateKey(X509Certificate2 rsaCertificate)
         {
+            var rsa = rsaCertificate.GetRSAPrivateKey();
+
             StringBuilder builder = new StringBuilder();
-
-            builder.AppendLine(PemTypes.BEGIN_CERTIFICATE);
-            builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Cert),
-                    Base64FormattingOptions.InsertLineBreaks));
-            builder.AppendLine(PemTypes.END_CERTIFICATE);
-
-            return builder.ToString();
-        }
-
-        public string PemExportRsaPrivateKey(X509Certificate2 cert)
-        {
-            StringBuilder builder = new StringBuilder();
-
-            var rsa = cert.GetRSAPrivateKey();
-            
-            builder.AppendLine(PemTypes.BEGIN_RSA_PRIVATE_KEY);
+            builder.AppendLine(PemDecoder.GetBegin(PemTypes.RSA_PRIVATE_KEY));
             builder.AppendLine(Convert.ToBase64String(rsa.ExportRSAPrivateKey(),
                     Base64FormattingOptions.InsertLineBreaks));
-            builder.AppendLine(PemTypes.END_RSA_PRIVATE_KEY);
-
+            builder.AppendLine(PemDecoder.GetEnd(PemTypes.RSA_PRIVATE_KEY));
             return builder.ToString();
         }
 
         /// <summary>
         /// You must use a RSA based certificate for this export to work
+        /// PKCS#1
         /// </summary>
         /// <param name="cert"></param>
         /// <returns></returns>
-        public string PemExportRsaPublicKey(X509Certificate2 cert)
-        {
-            StringBuilder builder = new StringBuilder();
+        //public string PemExportRsaPublicKey(X509Certificate2 cert)
+        //{
+        //    var rsa = cert.GetRSAPublicKey();
 
-            var rsa = cert.GetRSAPublicKey();
+        //    StringBuilder builder = new StringBuilder();
+        //    builder.AppendLine(PemDecoder.GetBegin(PemTypes.RSA_PUBLIC_KEY));
+        //    builder.AppendLine(Convert.ToBase64String(rsa.ExportRSAPublicKey(),
+        //            Base64FormattingOptions.InsertLineBreaks));
+        //    builder.AppendLine(PemDecoder.GetEnd(PemTypes.RSA_PUBLIC_KEY));
+        //    return builder.ToString();
+        //}
 
-            builder.AppendLine(PemTypes.BEGIN_RSA_PUBLIC_KEY);
-            builder.AppendLine(Convert.ToBase64String(rsa.ExportRSAPublicKey(),
-                    Base64FormattingOptions.InsertLineBreaks));
-            builder.AppendLine(PemTypes.END_RSA_PUBLIC_KEY);
-
-            return builder.ToString();
-        }
-
+        /// <summary>
+        /// public key certificate export in pem format
+        /// </summary>
+        /// <param name="certificate"></param>
+        /// <returns>CERTIFICATE pem export</returns>
         public string PemExportPublicKeyCertificate(X509Certificate2 certificate)
         {
             var publicKeyCrt = ExportCertificatePublicKey(certificate);
             var deviceVerifyPublicKeyBytes = publicKeyCrt.Export(X509ContentType.Cert);
 
             StringBuilder builder = new StringBuilder();
-
-            builder.AppendLine(PemTypes.BEGIN_CERTIFICATE);
-            
+            builder.AppendLine(PemDecoder.GetBegin(PemTypes.CERTIFICATE));
             builder.AppendLine(Convert.ToBase64String(deviceVerifyPublicKeyBytes,
-                    Base64FormattingOptions.InsertLineBreaks));
-            
-            builder.AppendLine(PemTypes.END_CERTIFICATE);
-
+                    Base64FormattingOptions.InsertLineBreaks));           
+            builder.AppendLine(PemDecoder.GetEnd(PemTypes.CERTIFICATE));
             return builder.ToString();
         }
 
         /// <summary>
         /// https://8gwifi.org/PemParserFunctions.jsp
         /// </summary>
-        /// <param name="pemCertificate"></param>
+        /// <param name="pemCertificate">A pem string type CERTIFICATE with, without private key</param>
         /// <param name="password"></param>
         /// <returns></returns>
         public X509Certificate2 PemImportCertificate(string pemCertificate, string password = null)
         {
-            var certBytes = Convert.FromBase64String(_pemParser.ProcessCrt(pemCertificate));
+            var certBytes = PemDecoder.DecodeSection(pemCertificate, PemTypes.CERTIFICATE);
 
             if (string.IsNullOrEmpty(password))
             {
