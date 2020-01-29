@@ -186,5 +186,30 @@ namespace CertificateManagerTests
             Assert.Equal(rsaCert.Thumbprint, roundTripFullCert.Thumbprint);
             Assert.True(roundTripFullCert.HasPrivateKey);
         }
+
+        [Fact]
+        public void ImportExportECPrivateKeyPublicKeyPairPem()
+        {
+            var (root, intermediate, server, client) = SetupCerts();
+
+            var serviceProvider = new ServiceCollection()
+                .AddCertificateManager()
+                .BuildServiceProvider();
+
+            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+
+            var publicKeyPem = importExport.PemExportPublicKeyCertificate(root);
+            var ecPrivateKeyPem = importExport.PemExportECPrivateKey(root);
+
+            var roundTripPublicKeyPem = importExport.PemImportCertificate(publicKeyPem);
+            var roundTripRsaPrivateKeyPem = importExport.PemImportPrivateKey(ecPrivateKeyPem);
+
+            var roundTripFullCert =
+                importExport.CreateCertificateWithPrivateKey(roundTripPublicKeyPem, roundTripRsaPrivateKeyPem, "1234");
+
+            Assert.Equal(root.Subject, roundTripPublicKeyPem.Subject);
+            Assert.Equal(root.Thumbprint, roundTripFullCert.Thumbprint);
+            Assert.True(roundTripFullCert.HasPrivateKey);
+        }
     }
 }
