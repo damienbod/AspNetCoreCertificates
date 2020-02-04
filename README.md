@@ -67,3 +67,4 @@ https://github.com/oocx/ReadX509CertificateFromPem
 # Blogs
 
 - [Creating Certificates for X.509 security in Azure IoT Hub using .NET Core](https://damienbod.com/2020/01/29/creating-certificates-for-x-509-security-in-azure-iot-hub-using-net-core/)
+- [Creating Certificates in .NET Core for Vue.js development using HTTPS](https://damienbod.com/2020/02/04/creating-certificates-in-net-core-for-vue-js-development-using-https/)
