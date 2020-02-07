@@ -22,10 +22,11 @@ namespace IoTHubCreateDeviceCertificate
 
             var intermediate = new X509Certificate2("intermediate.pfx", "1234");
 
+            // use lowercase for dps
             var testDevice01 = createClientServerAuthCerts.NewDeviceChainedCertificate(
-                new DistinguishedName { CommonName = "TestDevice01" },
+                new DistinguishedName { CommonName = "testdevice01" },
                 new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
-                "localhost", intermediate);
+                "testdevice01", intermediate);
             testDevice01.FriendlyName = "IoT device testDevice01";
       
             string password = "1234";
