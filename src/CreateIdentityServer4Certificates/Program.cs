@@ -20,8 +20,8 @@ namespace CreateIdentityServer4Certificates
 
             _cc = sp.GetService<CreateCertificates>();
 
-            var rsaCert = CreateRsaCertificate("locahost", 10);
-            var ecdsaCert = CreateECDsaCertificate("locahost", 10);
+            var rsaCert = CreateRsaCertificate("localhost", 10);
+            var ecdsaCert = CreateECDsaCertificate("localhost", 10);
 
             string password = "1234";
             var iec = sp.GetService<ImportExportCertificate>();
@@ -32,7 +32,7 @@ namespace CreateIdentityServer4Certificates
             var ecdsaCertPfxBytes = iec.ExportSelfSignedCertificatePfx(password, ecdsaCert);
             File.WriteAllBytes("ecdsaCert.pfx", ecdsaCertPfxBytes);
 
-            Console.WriteLine("");
+            Console.WriteLine("created");
         }
 
         public static X509Certificate2 CreateRsaCertificate(string dnsName, int validityPeriodInYears)
