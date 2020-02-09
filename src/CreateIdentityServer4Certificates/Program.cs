@@ -55,7 +55,7 @@ namespace CreateIdentityServer4Certificates
 
             var x509KeyUsageFlags = X509KeyUsageFlags.DigitalSignature;
 
-            // only if mtls is used
+            // only if certification authentication is used
             var enhancedKeyUsages = new OidCollection
             {
                 new Oid("1.3.6.1.5.5.7.3.1"),  // TLS Server auth
@@ -104,7 +104,7 @@ namespace CreateIdentityServer4Certificates
 
             var x509KeyUsageFlags = X509KeyUsageFlags.DigitalSignature;
 
-            // only if mtls is used
+            // only if certification authentication is used
             var enhancedKeyUsages = new OidCollection {
                 new Oid("1.3.6.1.5.5.7.3.1"),  // TLS Server auth
                 new Oid("1.3.6.1.5.5.7.3.2"),  // TLS Client auth
