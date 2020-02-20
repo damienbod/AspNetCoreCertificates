@@ -56,6 +56,10 @@ Now the package is ready to use. See the [Documentation](https://github.com/dami
 - [Grpc chained certificate authentication](https://github.com/damienbod/AspNetCoreCertificates/tree/master/examplesUsingCertificateAuthentication/GrpcCertAuthChainedCertificate)
 - [Simulate Azure IoT Hub Device with device certificate](https://github.com/damienbod/AspNetCoreCertificates/tree/master/examplesUsingCertificateAuthentication/SimulateAzureIoTDevice)
 
+- [Provisioning X.509 Devices for Azure IoT Hub using .NET Core](https://damienbod.com/2020/02/20/provisioning-x-509-devices-for-azure-iot-hub-using-net-core)
+
+
+
 # Microsoft Certificate Authentication Docs:
 
 - [Microsoft Docs: Configure certificate authentication in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/certauth)
