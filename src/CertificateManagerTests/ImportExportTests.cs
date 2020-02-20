@@ -243,5 +243,43 @@ namespace CertificateManagerTests
             Assert.True(roundTripFullCert.HasPrivateKey);
             Assert.Equal("sha256ECDSA", roundTripFullCert.SignatureAlgorithm.FriendlyName);
         }
+
+        [Fact]
+        public void ImportDerPem()
+        {
+
+            var serviceProvider = new ServiceCollection()
+                .AddCertificateManager()
+                .BuildServiceProvider();
+
+            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+
+            var certstring = @"-----BEGIN CERTIFICATE-----
+MIIEBzCCAu+gAwIBAgIQLlpk6CS8R0Z09GPVciC2qjANBgkqhkiG9w0BAQsFADAyMTAwLgYDVQQD
+EydEaWVnbyBJbnN0YW5jZSBJZGVudGl0eSBJbnRlcm1lZGlhdGUgQ0EwHhcNMjAwMjE5MTkzMjQy
+WhcNMjAwMjIwMTkzMjQyWjCByDGBnjA4BgNVBAsTMW9yZ2FuaXphdGlvbjpkN2FmZTVjYi0yZDQy
+LTQ4N2ItYTQxNS1mNDdjMDY2NWYxYmEwMQYDVQQLEypzcGFjZTpmMDNmMmFiMC1jZjMzLTQxNmIt
+OTk5Yy1mYjAxYzEyNDc3NTMwLwYDVQQLEyhhcHA6MTA4ZmU0ZDUtYTgzZS00OGI5LWE1NDktMDU0
+MmU3MWE0N2E2MSUwIwYDVQQDExw4OTE4MmE5Yi0wNjhmLTQ4NjgtNGYwZS01OWFhMIIBIjANBgkq
+hkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx+3DZQ6LvxB3wM7LWdfRQvj5X75aYMRip/bGlvJVBFvN
+cKQqSjijtqHO0d71cLJbZPrtNrmBDLSKGjpzuEq3+EbA2rbL7Tl/WWxdV9dRq2nZQuNF4sh47o6o
+ME4CA6S17E7dPBvXPXaRNIhvrGocoga6yhpYBT3iMXKSZnum5KI2qVLXNmCgQVN0G62QSzd3cjsv
++iEa/y3CntnZJ42elq+VfCECin0o35vOzA42GE5zqZokd/FEHg1Cl9flZknIHTxWgW5qQqYzPwZo
+w+a26B/kQNJOR4yx1mgQgdmq+6KHdGKQqDhQ9I1I7hTWUXTLx4X0a5pwmWvM2aQKgC/dFwIDAQAB
+o4GBMH8wDgYDVR0PAQH/BAQDAgOoMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAfBgNV
+HSMEGDAWgBTv0ki5J6EjEz9YdOBuRe+m74pvXDAtBgNVHREEJjAkghw4OTE4MmE5Yi0wNjhmLTQ4
+NjgtNGYwZS01OWFhhwQK/3mKMA0GCSqGSIb3DQEBCwUAA4IBAQB0Ao4jbowTGvF1jf5i+9oQBrsA
+YKepkZkirIzhKIKVfZEEgMRzm4CVNhB0MG5NiGn7x8XZlCIAO7jVSGOlT51nFx5Q16iyoBHv1r9b
+RJ8edDcaHcZ67VuCGppsAyPNobrsMCvNaW4OZsHqQ+H2Tq3btKYqxYw1foWHEJVTJ2ys0ltZ3/IM
+phubW4vcUC2Cyn0CMQxZjJs0nMBFy2zgtGAQX7zE6+nKVkzviWjDprHWv90xax08SmPg/OHqYS1s
+aBg2iHnjlg9taunpE2KGgPrbU0exPnaV+xYDqRxvoN0cC+mkGuehuVBy/DRtJ3WfevH6sdgqr4BP
+cQxzGDwe9ata
+-----END CERTIFICATE-----";
+
+
+            var pemCertImported = importExport.PemImportCertificate(certstring);
+
+            Assert.Equal("sha256RSA", pemCertImported.SignatureAlgorithm.FriendlyName);
+        }
     }
 }
