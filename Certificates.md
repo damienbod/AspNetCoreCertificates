@@ -239,6 +239,12 @@ https://github.com/PKISharp/ACMESharpCore
 
 https://tools.ietf.org/html/rfc5280
 
+https://crt.sh/
+
+https://cabforum.org/baseline-requirements-documents/
+
+https://letsencrypt.org/
+
 https://github.com/rwatjen/AzureIoTDPSCertificates
 
 https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-x509ca-overview
