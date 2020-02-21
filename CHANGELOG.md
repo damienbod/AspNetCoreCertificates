@@ -4,7 +4,6 @@
 ## 2020-02-21 version 1.0.4
 * bug fix Subject Key Identifier
 
-
 <a name="2020-01-29"></a>
 ## 2020-01-29 version 1.0.3
 * private key pem exports
