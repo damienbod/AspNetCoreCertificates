@@ -177,17 +177,25 @@ namespace CertificateManager
             // support, so it needs to be copied from the Subject Key 
             // Identifier of the signing certificate and massaged slightly.
             // AuthorityKeyIdentifier is "KeyID=<subject key identifier>"
-            var issuerSubjectKey = signingCertificate.Extensions["Subject Key Identifier"].RawData;
-            var segment = new ArraySegment<byte>(issuerSubjectKey, 2, issuerSubjectKey.Length - 2);
-            var authorityKeyIdentifier = new byte[segment.Count + 4];
-            // "KeyID" bytes
-            authorityKeyIdentifier[0] = 0x30;
-            authorityKeyIdentifier[1] = 0x16;
-            authorityKeyIdentifier[2] = 0x80;
-            authorityKeyIdentifier[3] = 0x14;
-            segment.CopyTo(authorityKeyIdentifier, 4);
-            request.CertificateExtensions.Add(new X509Extension("2.5.29.35", authorityKeyIdentifier, false));
-
+            foreach (var item in signingCertificate.Extensions)
+            {
+                if (item.Oid.Value == "2.5.29.14") //  "Subject Key Identifier"
+                {
+                    var issuerSubjectKey = item.RawData;
+                    //var issuerSubjectKey = signingCertificate.Extensions["Subject Key Identifier"].RawData;
+                    var segment = new ArraySegment<byte>(issuerSubjectKey, 2, issuerSubjectKey.Length - 2);
+                    var authorityKeyIdentifier = new byte[segment.Count + 4];
+                    // "KeyID" bytes
+                    authorityKeyIdentifier[0] = 0x30;
+                    authorityKeyIdentifier[1] = 0x16;
+                    authorityKeyIdentifier[2] = 0x80;
+                    authorityKeyIdentifier[3] = 0x14;
+                    segment.CopyTo(authorityKeyIdentifier, 4);
+                    request.CertificateExtensions.Add(new X509Extension("2.5.29.35", authorityKeyIdentifier, false));
+                    break;
+                }
+            }
+            
             _certificateUtility.AddSubjectAlternativeName(request, subjectAlternativeName);
 
             // Enhanced key usages
