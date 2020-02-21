@@ -1,7 +1,7 @@
 # Certificate Manager change log
 
-<a name="2020-02-21"></a>
-## 2020-02-21 version 1.0.4
+<a name="2020-02-22"></a>
+## 2020-02-22 version 1.0.4
 * bug fix Subject Key Identifier
 
 <a name="2020-01-29"></a>
