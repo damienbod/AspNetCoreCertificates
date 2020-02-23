@@ -36,6 +36,12 @@ https://tools.ietf.org/html/rfc6962
 
 https://www.certificate-transparency.org/
 
+## OCSP Stapling
+
+https://scotthelme.co.uk/ocsp-stapling-speeding-up-ssl/
+
+https://en.wikipedia.org/wiki/Online_Certificate_Status_Protocol
+
 ## Certificate Properties
 
 **Version**: X.509v3
