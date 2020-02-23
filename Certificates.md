@@ -28,6 +28,13 @@ https://github.com/dotnet/runtime/blob/f1c7ed882a90104ab7171c95f4767fc15bb50cd6/
 
 https://docs.microsoft.com/en-us/powershell/module/adcsadministration/add-cacrldistributionpoint?view=win10-ps
 
+## Certificate Transparency
+
+https://scotthelme.co.uk/certificate-transparency-an-introduction/
+
+https://tools.ietf.org/html/rfc6962
+
+https://www.certificate-transparency.org/
 
 ## Certificate Properties
 
