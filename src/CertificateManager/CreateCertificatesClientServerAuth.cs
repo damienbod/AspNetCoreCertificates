@@ -30,8 +30,8 @@ namespace CertificateManager
             string dnsName)
         {
             var enhancedKeyUsages = new OidCollection {
-                new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
-                new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
+                OidLookup.ClientAuthentication,
+                OidLookup.ServerAuthentication
             };
 
             var basicConstraints = new BasicConstraints
@@ -81,8 +81,8 @@ namespace CertificateManager
             X509Certificate2 parentCertificateAuthority)
         {
             var enhancedKeyUsages = new OidCollection {
-                new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
-                new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
+                OidLookup.ClientAuthentication,
+                OidLookup.ServerAuthentication
             };
 
             var basicConstraints = new BasicConstraints
@@ -133,8 +133,8 @@ namespace CertificateManager
            X509Certificate2 parentCertificateAuthority)
         {
             var enhancedKeyUsages = new OidCollection {
-                new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
-                new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
+                OidLookup.ClientAuthentication,
+                OidLookup.ServerAuthentication
             };
 
             return NewDeviceChainedCertificate(distinguishedName,
@@ -177,7 +177,7 @@ namespace CertificateManager
            X509Certificate2 parentCertificateAuthority)
         {
             var enhancedKeyUsages = new OidCollection {
-                new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
+                OidLookup.ClientAuthentication
             };
 
             return NewDeviceChainedCertificate(distinguishedName,
@@ -199,7 +199,7 @@ namespace CertificateManager
            X509Certificate2 parentCertificateAuthority)
         {
             var enhancedKeyUsages = new OidCollection {
-                new Oid("1.3.6.1.5.5.7.3.1")  // TLS Server auth
+                OidLookup.ServerAuthentication
             };
 
             return NewDeviceChainedCertificate(distinguishedName,
@@ -212,7 +212,7 @@ namespace CertificateManager
             string dnsName)
         {
             var enhancedKeyUsages = new OidCollection {
-                new Oid("1.3.6.1.5.5.7.3.1"), // TLS Server auth
+                OidLookup.ServerAuthentication
             };
 
             var basicConstraints = new BasicConstraints
@@ -250,8 +250,8 @@ namespace CertificateManager
             ValidityPeriod validityPeriod,
             string dnsName)
         {
-            var enhancedKeyUsages = new OidCollection {
-                new Oid("1.3.6.1.5.5.7.3.2"), // TLS Client auth
+            var enhancedKeyUsages = new OidCollection {       
+                OidLookup.ClientAuthentication
             };
 
             var basicConstraints = new BasicConstraints
