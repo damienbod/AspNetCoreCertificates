@@ -1,12 +1,13 @@
 ﻿using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using CertificateManager;
 
 namespace CertificateManagerTests
 {
     public static class BuildChainUtil
     {
-        private static readonly Oid ServerCertificateOid = new Oid("1.3.6.1.5.5.7.3.1");
-        private static readonly Oid ClientCertificateOid = new Oid("1.3.6.1.5.5.7.3.2");
+        private static readonly Oid ServerCertificateOid = OidLookup.ServerAuthentication;
+        private static readonly Oid ClientCertificateOid = OidLookup.ClientAuthentication;
 
         public static X509ChainPolicy BuildChainPolicySelfSigned(
             X509Certificate2 certificate,
