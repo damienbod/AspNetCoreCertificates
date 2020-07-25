@@ -1,5 +1,10 @@
 # Certificate Manager change log
 
+<a name="2020-07-26"></a>
+## 2020-07-26 version 1.0.5
+* OidLookup for common OIDs
+* The proj files have been updated to enable SourceLink 
+
 <a name="2020-02-22"></a>
 ## 2020-02-22 version 1.0.4
 * bug fix Subject Key Identifier
