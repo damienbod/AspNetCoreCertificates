@@ -5,7 +5,7 @@ namespace CertificateManager.Models
     public class ECDsaConfiguration
     {
         /// <summary>
-        /// RSA 1024, 2048 or 4096
+        /// EC 256, 384
         /// </summary>
         public int KeySize { get; set; } = 256;
 

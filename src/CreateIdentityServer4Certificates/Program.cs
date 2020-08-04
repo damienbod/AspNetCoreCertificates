@@ -27,10 +27,10 @@ namespace CreateIdentityServer4Certificates
             var iec = sp.GetService<ImportExportCertificate>();
 
             var rsaCertPfxBytes = iec.ExportSelfSignedCertificatePfx(password, rsaCert);
-            File.WriteAllBytes("rsaCert.pfx", rsaCertPfxBytes);
+            File.WriteAllBytes("cert_rsa512.pfx", rsaCertPfxBytes);
 
             var ecdsaCertPfxBytes = iec.ExportSelfSignedCertificatePfx(password, ecdsaCert);
-            File.WriteAllBytes("ecdsaCert.pfx", ecdsaCertPfxBytes);
+            File.WriteAllBytes("cert_ecdsa384.pfx", ecdsaCertPfxBytes);
 
             Console.WriteLine("created");
         }
@@ -78,7 +78,8 @@ namespace CreateIdentityServer4Certificates
                 x509KeyUsageFlags,
                 new RsaConfiguration
                 { 
-                    KeySize = 2048
+                    KeySize = 2048,
+                    HashAlgorithmName = HashAlgorithmName.SHA512
                 });
 
             return certificate;
@@ -126,7 +127,8 @@ namespace CreateIdentityServer4Certificates
                 x509KeyUsageFlags,
                 new ECDsaConfiguration
                 {
-                    //KeySize = 256
+                    KeySize = 384,
+                    HashAlgorithmName = HashAlgorithmName.SHA384
                 });
 
             return certificate;
