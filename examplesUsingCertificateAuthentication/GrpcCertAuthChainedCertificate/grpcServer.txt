@@ -1,212 +1,138 @@
-2020-01-20 22:11:12.444 +01:00 [DBG] Hosting starting
-2020-01-20 22:11:12.831 +01:00 [INF] User profile is available. Using 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
-2020-01-20 22:11:12.892 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-2913a921-b76b-484a-b7ab-71a724d631b4.xml'.
-2020-01-20 22:11:12.937 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-47c0a577-e593-43fe-9765-e8ab250e5d56.xml'.
-2020-01-20 22:11:12.943 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-8ab7fbd2-3801-4cfe-bad9-6664e52bf649.xml'.
-2020-01-20 22:11:12.958 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-923c8f5a-fb66-4975-9526-15839cdd9a83.xml'.
-2020-01-20 22:11:12.970 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-9aeaf8ce-d747-4811-b97f-ad31fcdc0eba.xml'.
-2020-01-20 22:11:12.981 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-c0bf2a7a-62cc-4f72-9649-9953830a5c8f.xml'.
-2020-01-20 22:11:12.992 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-dd834f26-948c-4923-aad9-7bf23d14c60a.xml'.
-2020-01-20 22:11:12.999 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-dfb27239-debb-4eaa-b1ee-b52b2ed7d79f.xml'.
-2020-01-20 22:11:13.011 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-e2d13bb4-8ade-4932-abf1-6abfc696747c.xml'.
-2020-01-20 22:11:13.020 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-e6deaa91-2211-4af7-bf27-d8343d71ffde.xml'.
-2020-01-20 22:11:13.057 +01:00 [DBG] Found key "2913a921-b76b-484a-b7ab-71a724d631b4".
-2020-01-20 22:11:13.097 +01:00 [DBG] Found key "47c0a577-e593-43fe-9765-e8ab250e5d56".
-2020-01-20 22:11:13.104 +01:00 [DBG] Found key "8ab7fbd2-3801-4cfe-bad9-6664e52bf649".
-2020-01-20 22:11:13.112 +01:00 [DBG] Found key "923c8f5a-fb66-4975-9526-15839cdd9a83".
-2020-01-20 22:11:13.119 +01:00 [DBG] Found key "9aeaf8ce-d747-4811-b97f-ad31fcdc0eba".
-2020-01-20 22:11:13.128 +01:00 [DBG] Found key "c0bf2a7a-62cc-4f72-9649-9953830a5c8f".
-2020-01-20 22:11:13.138 +01:00 [DBG] Found key "dd834f26-948c-4923-aad9-7bf23d14c60a".
-2020-01-20 22:11:13.148 +01:00 [DBG] Found key "dfb27239-debb-4eaa-b1ee-b52b2ed7d79f".
-2020-01-20 22:11:13.183 +01:00 [DBG] Found key "e2d13bb4-8ade-4932-abf1-6abfc696747c".
-2020-01-20 22:11:13.222 +01:00 [DBG] Found key "e6deaa91-2211-4af7-bf27-d8343d71ffde".
-2020-01-20 22:11:13.304 +01:00 [DBG] Considering key "dd834f26-948c-4923-aad9-7bf23d14c60a" with expiration date "2020-03-04T09:52:07.5395694+00:00" as default key.
-2020-01-20 22:11:13.390 +01:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
-2020-01-20 22:11:13.415 +01:00 [DBG] Decrypting secret element using Windows DPAPI.
-2020-01-20 22:11:13.422 +01:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
-2020-01-20 22:11:13.444 +01:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
-2020-01-20 22:11:13.453 +01:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
-2020-01-20 22:11:13.468 +01:00 [DBG] Using key "dd834f26-948c-4923-aad9-7bf23d14c60a" as the default key.
-2020-01-20 22:11:13.474 +01:00 [DBG] Key ring with default key "dd834f26-948c-4923-aad9-7bf23d14c60a" was loaded during application startup.
-2020-01-20 22:11:13.523 +01:00 [DBG] Discovering gRPC methods for GrpcCertAuthChainedCertificate.GreeterService.
-2020-01-20 22:11:13.592 +01:00 [DBG] Added gRPC method 'SayHello' to service 'greet.Greeter'. Method type: '"Unary"', route pattern: '/greet.Greeter/SayHello'.
-2020-01-20 22:11:13.681 +01:00 [DBG] Failed to locate the development https certificate at 'null'.
-2020-01-20 22:11:13.711 +01:00 [WRN] Overriding address(es) 'https://localhost:44379'. Binding to endpoints defined in UseKestrel() instead.
-2020-01-20 22:11:13.867 +01:00 [INF] Now listening on: https://localhost:44379
-2020-01-20 22:11:13.956 +01:00 [DBG] Loaded hosting startup assembly GrpcCertAuthChainedCertificate
-2020-01-20 22:11:13.979 +01:00 [INF] Application started. Press Ctrl+C to shut down.
-2020-01-20 22:11:13.993 +01:00 [INF] Hosting environment: Development
-2020-01-20 22:11:13.998 +01:00 [INF] Content root path: C:\git\damienbod\AspNetCoreCertificates\examplesUsingCertificateAuthentication\GrpcCertAuthChainedCertificate\GrpcCertAuthChainedCertificate
-2020-01-20 22:11:14.011 +01:00 [DBG] Hosting started
-2020-01-20 22:11:14.125 +01:00 [DBG] Connection id "0HLSTTL440IT4" accepted.
-2020-01-20 22:11:14.128 +01:00 [DBG] Connection id "0HLSTTL440IT4" started.
-2020-01-20 22:11:14.721 +01:00 [DBG] ReadAsync[58] 50 52 49 20 2A 20 48 54 54 50 2F 32 2E 30 0D 0A 0D 0A 53 4D 0D 0A 0D 0A 00 00 0C 04 00 00 00 00 00 00 02 00 00 00 00 00 01 00 00 00 00 00 00 04 08 00 00 00 00 00 03 FF 00 01 
+2020-08-04 23:28:57.442 +02:00 [DBG] Hosting starting
+2020-08-04 23:28:57.832 +02:00 [INF] User profile is available. Using 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2020-08-04 23:28:57.940 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-2913a921-b76b-484a-b7ab-71a724d631b4.xml'.
+2020-08-04 23:28:58.002 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-47c0a577-e593-43fe-9765-e8ab250e5d56.xml'.
+2020-08-04 23:28:58.007 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-7456b593-ae3c-462e-b786-4694bfc8221b.xml'.
+2020-08-04 23:28:58.016 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-8ab7fbd2-3801-4cfe-bad9-6664e52bf649.xml'.
+2020-08-04 23:28:58.020 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-923c8f5a-fb66-4975-9526-15839cdd9a83.xml'.
+2020-08-04 23:28:58.029 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-9aeaf8ce-d747-4811-b97f-ad31fcdc0eba.xml'.
+2020-08-04 23:28:58.034 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-a1002fa0-ba81-4337-82e9-7d4f7e4d0c0c.xml'.
+2020-08-04 23:28:58.043 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-c0bf2a7a-62cc-4f72-9649-9953830a5c8f.xml'.
+2020-08-04 23:28:58.051 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-dd834f26-948c-4923-aad9-7bf23d14c60a.xml'.
+2020-08-04 23:28:58.055 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-dfb27239-debb-4eaa-b1ee-b52b2ed7d79f.xml'.
+2020-08-04 23:28:58.064 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-e2d13bb4-8ade-4932-abf1-6abfc696747c.xml'.
+2020-08-04 23:28:58.069 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-e6deaa91-2211-4af7-bf27-d8343d71ffde.xml'.
+2020-08-04 23:28:58.095 +02:00 [DBG] Found key {2913a921-b76b-484a-b7ab-71a724d631b4}.
+2020-08-04 23:28:58.114 +02:00 [DBG] Found key {47c0a577-e593-43fe-9765-e8ab250e5d56}.
+2020-08-04 23:28:58.118 +02:00 [DBG] Found key {7456b593-ae3c-462e-b786-4694bfc8221b}.
+2020-08-04 23:28:58.122 +02:00 [DBG] Found key {8ab7fbd2-3801-4cfe-bad9-6664e52bf649}.
+2020-08-04 23:28:58.132 +02:00 [DBG] Found key {923c8f5a-fb66-4975-9526-15839cdd9a83}.
+2020-08-04 23:28:58.137 +02:00 [DBG] Found key {9aeaf8ce-d747-4811-b97f-ad31fcdc0eba}.
+2020-08-04 23:28:58.146 +02:00 [DBG] Found key {a1002fa0-ba81-4337-82e9-7d4f7e4d0c0c}.
+2020-08-04 23:28:58.157 +02:00 [DBG] Found key {c0bf2a7a-62cc-4f72-9649-9953830a5c8f}.
+2020-08-04 23:28:58.163 +02:00 [DBG] Found key {dd834f26-948c-4923-aad9-7bf23d14c60a}.
+2020-08-04 23:28:58.174 +02:00 [DBG] Found key {dfb27239-debb-4eaa-b1ee-b52b2ed7d79f}.
+2020-08-04 23:28:58.184 +02:00 [DBG] Found key {e2d13bb4-8ade-4932-abf1-6abfc696747c}.
+2020-08-04 23:28:58.190 +02:00 [DBG] Found key {e6deaa91-2211-4af7-bf27-d8343d71ffde}.
+2020-08-04 23:28:58.231 +02:00 [DBG] Considering key {7456b593-ae3c-462e-b786-4694bfc8221b} with expiration date 2020-08-27 14:37:06Z as default key.
+2020-08-04 23:28:58.274 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=3.1.4.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2020-08-04 23:28:58.300 +02:00 [DBG] Decrypting secret element using Windows DPAPI.
+2020-08-04 23:28:58.308 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=3.1.4.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2020-08-04 23:28:58.336 +02:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2020-08-04 23:28:58.355 +02:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2020-08-04 23:28:58.379 +02:00 [DBG] Using key {7456b593-ae3c-462e-b786-4694bfc8221b} as the default key.
+2020-08-04 23:28:58.387 +02:00 [DBG] Key ring with default key {7456b593-ae3c-462e-b786-4694bfc8221b} was loaded during application startup.
+2020-08-04 23:28:58.513 +02:00 [VRB] Discovering gRPC methods for GrpcCertAuthChainedCertificate.GreeterService.
+2020-08-04 23:30:04.429 +02:00 [DBG] Hosting starting
+2020-08-04 23:30:04.580 +02:00 [INF] User profile is available. Using 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2020-08-04 23:30:04.683 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-2913a921-b76b-484a-b7ab-71a724d631b4.xml'.
+2020-08-04 23:30:04.735 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-47c0a577-e593-43fe-9765-e8ab250e5d56.xml'.
+2020-08-04 23:30:04.738 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-7456b593-ae3c-462e-b786-4694bfc8221b.xml'.
+2020-08-04 23:30:04.740 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-8ab7fbd2-3801-4cfe-bad9-6664e52bf649.xml'.
+2020-08-04 23:30:04.742 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-923c8f5a-fb66-4975-9526-15839cdd9a83.xml'.
+2020-08-04 23:30:04.744 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-9aeaf8ce-d747-4811-b97f-ad31fcdc0eba.xml'.
+2020-08-04 23:30:04.750 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-a1002fa0-ba81-4337-82e9-7d4f7e4d0c0c.xml'.
+2020-08-04 23:30:04.752 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-c0bf2a7a-62cc-4f72-9649-9953830a5c8f.xml'.
+2020-08-04 23:30:04.754 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-dd834f26-948c-4923-aad9-7bf23d14c60a.xml'.
+2020-08-04 23:30:04.756 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-dfb27239-debb-4eaa-b1ee-b52b2ed7d79f.xml'.
+2020-08-04 23:30:04.760 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-e2d13bb4-8ade-4932-abf1-6abfc696747c.xml'.
+2020-08-04 23:30:04.762 +02:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-e6deaa91-2211-4af7-bf27-d8343d71ffde.xml'.
+2020-08-04 23:30:04.774 +02:00 [DBG] Found key {2913a921-b76b-484a-b7ab-71a724d631b4}.
+2020-08-04 23:30:04.784 +02:00 [DBG] Found key {47c0a577-e593-43fe-9765-e8ab250e5d56}.
+2020-08-04 23:30:04.787 +02:00 [DBG] Found key {7456b593-ae3c-462e-b786-4694bfc8221b}.
+2020-08-04 23:30:04.789 +02:00 [DBG] Found key {8ab7fbd2-3801-4cfe-bad9-6664e52bf649}.
+2020-08-04 23:30:04.791 +02:00 [DBG] Found key {923c8f5a-fb66-4975-9526-15839cdd9a83}.
+2020-08-04 23:30:04.793 +02:00 [DBG] Found key {9aeaf8ce-d747-4811-b97f-ad31fcdc0eba}.
+2020-08-04 23:30:04.795 +02:00 [DBG] Found key {a1002fa0-ba81-4337-82e9-7d4f7e4d0c0c}.
+2020-08-04 23:30:04.800 +02:00 [DBG] Found key {c0bf2a7a-62cc-4f72-9649-9953830a5c8f}.
+2020-08-04 23:30:04.802 +02:00 [DBG] Found key {dd834f26-948c-4923-aad9-7bf23d14c60a}.
+2020-08-04 23:30:04.804 +02:00 [DBG] Found key {dfb27239-debb-4eaa-b1ee-b52b2ed7d79f}.
+2020-08-04 23:30:04.806 +02:00 [DBG] Found key {e2d13bb4-8ade-4932-abf1-6abfc696747c}.
+2020-08-04 23:30:04.810 +02:00 [DBG] Found key {e6deaa91-2211-4af7-bf27-d8343d71ffde}.
+2020-08-04 23:30:04.825 +02:00 [DBG] Considering key {7456b593-ae3c-462e-b786-4694bfc8221b} with expiration date 2020-08-27 14:37:06Z as default key.
+2020-08-04 23:30:04.849 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=3.1.4.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2020-08-04 23:30:04.864 +02:00 [DBG] Decrypting secret element using Windows DPAPI.
+2020-08-04 23:30:04.903 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=3.1.4.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2020-08-04 23:30:04.930 +02:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2020-08-04 23:30:04.943 +02:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2020-08-04 23:30:04.959 +02:00 [DBG] Using key {7456b593-ae3c-462e-b786-4694bfc8221b} as the default key.
+2020-08-04 23:30:04.963 +02:00 [DBG] Key ring with default key {7456b593-ae3c-462e-b786-4694bfc8221b} was loaded during application startup.
+2020-08-04 23:30:05.050 +02:00 [VRB] Discovering gRPC methods for GrpcCertAuthChainedCertificate.GreeterService.
+2020-08-04 23:30:05.127 +02:00 [VRB] Added gRPC method 'SayHello' to service 'greet.Greeter'. Method type: '"Unary"', route pattern: '/greet.Greeter/SayHello'.
+2020-08-04 23:30:05.208 +02:00 [DBG] Failed to locate the development https certificate at 'null'.
+2020-08-04 23:30:05.237 +02:00 [WRN] Overriding address(es) 'https://localhost:44379'. Binding to endpoints defined in UseKestrel() instead.
+2020-08-04 23:30:05.337 +02:00 [INF] Now listening on: https://localhost:44379
+2020-08-04 23:30:05.341 +02:00 [DBG] Loaded hosting startup assembly GrpcCertAuthChainedCertificate
+2020-08-04 23:30:05.348 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-08-04 23:30:05.354 +02:00 [INF] Hosting environment: Development
+2020-08-04 23:30:05.357 +02:00 [INF] Content root path: C:\git\damienbod\AspNetCoreCertificates\examplesUsingCertificateAuthentication\GrpcCertAuthChainedCertificate\GrpcCertAuthChainedCertificate
+2020-08-04 23:30:05.364 +02:00 [DBG] Hosting started
+2020-08-04 23:30:26.713 +02:00 [DBG] Connection id "0HM1ONMD9V50A" accepted.
+2020-08-04 23:30:26.719 +02:00 [DBG] Connection id "0HM1ONMD9V50A" started.
+2020-08-04 23:30:27.198 +02:00 [DBG] ReadAsync[58] 50 52 49 20 2A 20 48 54 54 50 2F 32 2E 30 0D 0A 0D 0A 53 4D 0D 0A 0D 0A 00 00 0C 04 00 00 00 00 00 00 02 00 00 00 00 00 01 00 00 00 00 00 00 04 08 00 00 00 00 00 03 FF 00 01 
 PRI * HTTP/2.0\x0D\x0A\x0D\x0ASM\x0D\x0A\x0D\x0A\x00\x00\x0C\x04\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x04\x08\x00\x00\x00\x00\x00\x03ÿ\x00\x01
-2020-01-20 22:11:14.803 +01:00 [VRB] Connection id "0HLSTTL440IT4" sending "SETTINGS" frame for stream ID 0 with length 18 and flags "NONE"
-2020-01-20 22:11:14.823 +01:00 [DBG] WriteAsync[27] 00 00 12 04 00 00 00 00 00 00 03 00 00 00 64 00 04 00 01 80 00 00 06 00 00 80 00 
+2020-08-04 23:30:27.243 +02:00 [VRB] Connection id "0HM1ONMD9V50A" sending "SETTINGS" frame for stream ID 0 with length 18 and flags "NONE"
+2020-08-04 23:30:27.256 +02:00 [DBG] WriteAsync[27] 00 00 12 04 00 00 00 00 00 00 03 00 00 00 64 00 04 00 01 80 00 00 06 00 00 80 00 
 \x00\x00\x12\x04\x00\x00\x00\x00\x00\x00\x03\x00\x00\x00d\x00\x04\x00\x01\x80\x00\x00\x06\x00\x00\x80\x00
-2020-01-20 22:11:14.836 +01:00 [VRB] Connection id "0HLSTTL440IT4" sending "WINDOW_UPDATE" frame for stream ID 0 with length 4 and flags 0x0
-2020-01-20 22:11:14.841 +01:00 [DBG] WriteAsync[13] 00 00 04 08 00 00 00 00 00 00 01 00 01 
+2020-08-04 23:30:27.270 +02:00 [VRB] Connection id "0HM1ONMD9V50A" sending "WINDOW_UPDATE" frame for stream ID 0 with length 4 and flags 0x0
+2020-08-04 23:30:27.277 +02:00 [DBG] WriteAsync[13] 00 00 04 08 00 00 00 00 00 00 01 00 01 
 \x00\x00\x04\x08\x00\x00\x00\x00\x00\x00\x01\x00\x01
-2020-01-20 22:11:14.848 +01:00 [VRB] Connection id "0HLSTTL440IT4" received "SETTINGS" frame for stream ID 0 with length 12 and flags "NONE"
-2020-01-20 22:11:14.865 +01:00 [VRB] Connection id "0HLSTTL440IT4" sending "SETTINGS" frame for stream ID 0 with length 0 and flags "ACK"
-2020-01-20 22:11:14.874 +01:00 [DBG] WriteAsync[9] 00 00 00 04 01 00 00 00 00 
+2020-08-04 23:30:27.289 +02:00 [VRB] Connection id "0HM1ONMD9V50A" received "SETTINGS" frame for stream ID 0 with length 12 and flags "NONE"
+2020-08-04 23:30:27.302 +02:00 [VRB] Connection id "0HM1ONMD9V50A" sending "SETTINGS" frame for stream ID 0 with length 0 and flags "ACK"
+2020-08-04 23:30:27.313 +02:00 [DBG] WriteAsync[9] 00 00 00 04 01 00 00 00 00 
 \x00\x00\x00\x04\x01\x00\x00\x00\x00
-2020-01-20 22:11:14.883 +01:00 [VRB] Connection id "0HLSTTL440IT4" received "WINDOW_UPDATE" frame for stream ID 0 with length 4 and flags 0x0
-2020-01-20 22:11:14.890 +01:00 [DBG] ReadAsync[182] 00 00 87 01 04 00 00 00 01 83 87 01 0F 6C 6F 63 61 6C 68 6F 73 74 3A 34 34 33 37 39 04 17 2F 67 72 65 65 74 2E 47 72 65 65 74 65 72 2F 53 61 79 48 65 6C 6C 6F 0F 2B 14 67 72 70 63 2D 64 6F 74 6E 65 74 2F 32 2E 32 36 2E 30 2E 30 00 02 74 65 08 74 72 61 69 6C 65 72 73 00 14 67 72 70 63 2D 61 63 63 65 70 74 2D 65 6E 63 6F 64 69 6E 67 0D 69 64 65 6E 74 69 74 79 2C 67 7A 69 70 0F 10 10 61 70 70 6C 69 63 61 74 69 6F 6E 2F 67 72 70 63 00 00 05 00 00 00 00 00 01 00 00 00 00 0F 00 00 0F 00 00 00 00 00 01 0A 0D 47 72 65 65 74 65 72 43 6C 69 65 6E 74 
-\x00\x00\x87\x01\x04\x00\x00\x00\x01\x83\x87\x01\x0Flocalhost:44379\x04\x17/greet.Greeter/SayHello\x0F+\x14grpc-dotnet/2.26.0.0\x00\x02te\x08trailers\x00\x14grpc-accept-encoding\x0Didentity,gzip\x0F\x10\x10application/grpc\x00\x00\x05\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x0F\x00\x00\x0F\x00\x00\x00\x00\x00\x01\x0A\x0DGreeterClient
-2020-01-20 22:11:14.911 +01:00 [VRB] Connection id "0HLSTTL440IT4" received "HEADERS" frame for stream ID 1 with length 135 and flags "END_HEADERS"
-2020-01-20 22:11:14.967 +01:00 [VRB] Connection id "0HLSTTL440IT4" received "DATA" frame for stream ID 1 with length 5 and flags "NONE"
-2020-01-20 22:11:14.976 +01:00 [VRB] Connection id "0HLSTTL440IT4" received "DATA" frame for stream ID 1 with length 15 and flags "NONE"
-2020-01-20 22:11:14.989 +01:00 [DBG] ReadAsync[9] 00 00 00 00 01 00 00 00 01 
-\x00\x00\x00\x00\x01\x00\x00\x00\x01
-2020-01-20 22:11:15.009 +01:00 [VRB] Connection id "0HLSTTL440IT4" received "DATA" frame for stream ID 1 with length 0 and flags "END_STREAM"
-2020-01-20 22:11:15.018 +01:00 [DBG] ReadAsync[9] 00 00 00 04 01 00 00 00 00 
+2020-08-04 23:30:27.327 +02:00 [VRB] Connection id "0HM1ONMD9V50A" received "WINDOW_UPDATE" frame for stream ID 0 with length 4 and flags 0x0
+2020-08-04 23:30:27.332 +02:00 [DBG] ReadAsync[182] 00 00 87 01 04 00 00 00 01 83 87 01 0F 6C 6F 63 61 6C 68 6F 73 74 3A 34 34 33 37 39 04 17 2F 67 72 65 65 74 2E 47 72 65 65 74 65 72 2F 53 61 79 48 65 6C 6C 6F 0F 2B 14 67 72 70 63 2D 64 6F 74 6E 65 74 2F 32 2E 33 30 2E 30 2E 30 00 02 74 65 08 74 72 61 69 6C 65 72 73 00 14 67 72 70 63 2D 61 63 63 65 70 74 2D 65 6E 63 6F 64 69 6E 67 0D 69 64 65 6E 74 69 74 79 2C 67 7A 69 70 0F 10 10 61 70 70 6C 69 63 61 74 69 6F 6E 2F 67 72 70 63 00 00 14 00 00 00 00 00 01 00 00 00 00 0F 0A 0D 47 72 65 65 74 65 72 43 6C 69 65 6E 74 00 00 00 00 01 00 00 00 01 
+\x00\x00\x87\x01\x04\x00\x00\x00\x01\x83\x87\x01\x0Flocalhost:44379\x04\x17/greet.Greeter/SayHello\x0F+\x14grpc-dotnet/2.30.0.0\x00\x02te\x08trailers\x00\x14grpc-accept-encoding\x0Didentity,gzip\x0F\x10\x10application/grpc\x00\x00\x14\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x0F\x0A\x0DGreeterClient\x00\x00\x00\x00\x01\x00\x00\x00\x01
+2020-08-04 23:30:27.338 +02:00 [VRB] Connection id "0HM1ONMD9V50A" received "HEADERS" frame for stream ID 1 with length 135 and flags "END_HEADERS"
+2020-08-04 23:30:27.376 +02:00 [VRB] Connection id "0HM1ONMD9V50A" received "DATA" frame for stream ID 1 with length 20 and flags "NONE"
+2020-08-04 23:30:27.402 +02:00 [VRB] Connection id "0HM1ONMD9V50A" received "DATA" frame for stream ID 1 with length 0 and flags "END_STREAM"
+2020-08-04 23:30:27.427 +02:00 [DBG] ReadAsync[9] 00 00 00 04 01 00 00 00 00 
 \x00\x00\x00\x04\x01\x00\x00\x00\x00
-2020-01-20 22:11:15.022 +01:00 [VRB] Connection id "0HLSTTL440IT4" received "SETTINGS" frame for stream ID 0 with length 0 and flags "ACK"
-2020-01-20 22:11:15.028 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44379/greet.Greeter/SayHello application/grpc 
-2020-01-20 22:11:15.036 +01:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
-2020-01-20 22:11:15.042 +01:00 [VRB] All hosts are allowed.
-2020-01-20 22:11:15.122 +01:00 [DBG] 3 candidate(s) found for the request path '/greet.Greeter/SayHello'
-2020-01-20 22:11:15.159 +01:00 [DBG] Endpoint 'gRPC - /greet.Greeter/SayHello' with route pattern '/greet.Greeter/SayHello' is valid for the request path '/greet.Greeter/SayHello'
-2020-01-20 22:11:15.190 +01:00 [DBG] Endpoint 'gRPC - gRPC - Unimplemented method for greet.Greeter' with route pattern 'greet.Greeter/{unimplementedMethod}' is valid for the request path '/greet.Greeter/SayHello'
-2020-01-20 22:11:15.200 +01:00 [DBG] Endpoint 'gRPC - gRPC - Unimplemented service' with route pattern '{unimplementedService}/{unimplementedMethod}' is valid for the request path '/greet.Greeter/SayHello'
-2020-01-20 22:11:15.212 +01:00 [DBG] Request matched endpoint 'gRPC - /greet.Greeter/SayHello'
-2020-01-20 22:11:15.266 +01:00 [DBG] AuthenticationScheme: Certificate was successfully authenticated.
-2020-01-20 22:11:15.273 +01:00 [DBG] AuthenticationScheme: Certificate was successfully authenticated.
-2020-01-20 22:11:15.296 +01:00 [INF] Authorization was successful.
-2020-01-20 22:11:15.298 +01:00 [INF] Executing endpoint 'gRPC - /greet.Greeter/SayHello'
-2020-01-20 22:11:15.330 +01:00 [DBG] Reading message.
-2020-01-20 22:11:15.334 +01:00 [DBG] Connection id "0HLSTTL440IT4", Request id "0HLSTTL440IT4:00000001": started reading request body.
-2020-01-20 22:11:15.337 +01:00 [DBG] Connection id "0HLSTTL440IT4", Request id "0HLSTTL440IT4:00000001": done reading request body.
-2020-01-20 22:11:15.350 +01:00 [VRB] Deserializing 15 byte message to 'GrpcCertAuthChainedCertificate.HelloRequest'.
-2020-01-20 22:11:15.374 +01:00 [VRB] Received message.
-2020-01-20 22:11:15.457 +01:00 [VRB] Connection id "0HLSTTL440IT4" sending "HEADERS" frame for stream ID 1 with length 108 and flags "END_HEADERS"
-2020-01-20 22:11:15.463 +01:00 [DBG] Sending message.
-2020-01-20 22:11:15.491 +01:00 [VRB] Serialized 'GrpcCertAuthChainedCertificate.HelloReply' to 21 byte message.
-2020-01-20 22:11:15.497 +01:00 [VRB] Message sent.
-2020-01-20 22:11:15.512 +01:00 [INF] Executed endpoint 'gRPC - /greet.Greeter/SayHello'
-2020-01-20 22:11:15.518 +01:00 [VRB] Connection id "0HLSTTL440IT4" sending "DATA" frame for stream ID 1 with length 26 and flags "NONE"
-2020-01-20 22:11:15.527 +01:00 [DBG] WriteAsync[152] 00 00 6C 01 04 00 00 00 01 88 00 04 64 61 74 65 1D 4D 6F 6E 2C 20 32 30 20 4A 61 6E 20 32 30 32 30 20 32 31 3A 31 31 3A 31 34 20 47 4D 54 00 0C 63 6F 6E 74 65 6E 74 2D 74 79 70 65 10 61 70 70 6C 69 63 61 74 69 6F 6E 2F 67 72 70 63 00 06 73 65 72 76 65 72 07 4B 65 73 74 72 65 6C 00 0D 67 72 70 63 2D 65 6E 63 6F 64 69 6E 67 08 69 64 65 6E 74 69 74 79 00 00 1A 00 00 00 00 00 01 00 00 00 00 15 0A 13 48 65 6C 6C 6F 20 47 72 65 65 74 65 72 43 6C 69 65 6E 74 
-\x00\x00l\x01\x04\x00\x00\x00\x01\x88\x00\x04date\x1DMon, 20 Jan 2020 21:11:14 GMT\x00\x0Ccontent-type\x10application/grpc\x00\x06server\x07Kestrel\x00\x0Dgrpc-encoding\x08identity\x00\x00\x1A\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x15\x0A\x13Hello GreeterClient
-2020-01-20 22:11:15.542 +01:00 [VRB] Connection id "0HLSTTL440IT4" sending "HEADERS" frame for stream ID 1 with length 15 and flags "END_STREAM, END_HEADERS"
-2020-01-20 22:11:15.557 +01:00 [DBG] WriteAsync[24] 00 00 0F 01 05 00 00 00 01 00 0B 67 72 70 63 2D 73 74 61 74 75 73 01 30 
+2020-08-04 23:30:27.438 +02:00 [VRB] Connection id "0HM1ONMD9V50A" received "SETTINGS" frame for stream ID 0 with length 0 and flags "ACK"
+2020-08-04 23:30:27.449 +02:00 [INF] Request starting HTTP/2 POST https://localhost:44379/greet.Greeter/SayHello application/grpc 
+2020-08-04 23:30:27.464 +02:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2020-08-04 23:30:27.470 +02:00 [VRB] All hosts are allowed.
+2020-08-04 23:30:27.556 +02:00 [DBG] 3 candidate(s) found for the request path '/greet.Greeter/SayHello'
+2020-08-04 23:30:27.566 +02:00 [DBG] Endpoint 'gRPC - /greet.Greeter/SayHello' with route pattern '/greet.Greeter/SayHello' is valid for the request path '/greet.Greeter/SayHello'
+2020-08-04 23:30:27.576 +02:00 [DBG] Endpoint 'gRPC - Unimplemented method for greet.Greeter' with route pattern 'greet.Greeter/{unimplementedMethod}' is valid for the request path '/greet.Greeter/SayHello'
+2020-08-04 23:30:27.584 +02:00 [DBG] Endpoint 'gRPC - Unimplemented service' with route pattern '{unimplementedService}/{unimplementedMethod}' is valid for the request path '/greet.Greeter/SayHello'
+2020-08-04 23:30:27.596 +02:00 [DBG] Request matched endpoint 'gRPC - /greet.Greeter/SayHello'
+2020-08-04 23:30:27.654 +02:00 [DBG] AuthenticationScheme: Certificate was successfully authenticated.
+2020-08-04 23:30:27.665 +02:00 [DBG] AuthenticationScheme: Certificate was successfully authenticated.
+2020-08-04 23:30:27.699 +02:00 [INF] Authorization was successful.
+2020-08-04 23:30:27.703 +02:00 [INF] Executing endpoint 'gRPC - /greet.Greeter/SayHello'
+2020-08-04 23:30:27.741 +02:00 [DBG] Reading message.
+2020-08-04 23:30:27.745 +02:00 [DBG] Connection id "0HM1ONMD9V50A", Request id "0HM1ONMD9V50A:00000001": started reading request body.
+2020-08-04 23:30:27.748 +02:00 [DBG] Connection id "0HM1ONMD9V50A", Request id "0HM1ONMD9V50A:00000001": done reading request body.
+2020-08-04 23:30:27.757 +02:00 [VRB] Deserializing 15 byte message to 'GrpcCertAuthChainedCertificate.HelloRequest'.
+2020-08-04 23:30:27.769 +02:00 [VRB] Received message.
+2020-08-04 23:30:27.820 +02:00 [VRB] Connection id "0HM1ONMD9V50A" sending "HEADERS" frame for stream ID 1 with length 108 and flags "END_HEADERS"
+2020-08-04 23:30:27.824 +02:00 [DBG] Sending message.
+2020-08-04 23:30:27.841 +02:00 [VRB] Serialized 'GrpcCertAuthChainedCertificate.HelloReply' to 21 byte message.
+2020-08-04 23:30:27.846 +02:00 [VRB] Message sent.
+2020-08-04 23:30:27.854 +02:00 [INF] Executed endpoint 'gRPC - /greet.Greeter/SayHello'
+2020-08-04 23:30:27.857 +02:00 [VRB] Connection id "0HM1ONMD9V50A" sending "DATA" frame for stream ID 1 with length 26 and flags "NONE"
+2020-08-04 23:30:27.860 +02:00 [DBG] WriteAsync[152] 00 00 6C 01 04 00 00 00 01 88 00 04 64 61 74 65 1D 54 75 65 2C 20 30 34 20 41 75 67 20 32 30 32 30 20 32 31 3A 33 30 3A 32 37 20 47 4D 54 00 0C 63 6F 6E 74 65 6E 74 2D 74 79 70 65 10 61 70 70 6C 69 63 61 74 69 6F 6E 2F 67 72 70 63 00 06 73 65 72 76 65 72 07 4B 65 73 74 72 65 6C 00 0D 67 72 70 63 2D 65 6E 63 6F 64 69 6E 67 08 69 64 65 6E 74 69 74 79 00 00 1A 00 00 00 00 00 01 00 00 00 00 15 0A 13 48 65 6C 6C 6F 20 47 72 65 65 74 65 72 43 6C 69 65 6E 74 
+\x00\x00l\x01\x04\x00\x00\x00\x01\x88\x00\x04date\x1DTue, 04 Aug 2020 21:30:27 GMT\x00\x0Ccontent-type\x10application/grpc\x00\x06server\x07Kestrel\x00\x0Dgrpc-encoding\x08identity\x00\x00\x1A\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x15\x0A\x13Hello GreeterClient
+2020-08-04 23:30:27.872 +02:00 [VRB] Connection id "0HM1ONMD9V50A" sending "HEADERS" frame for stream ID 1 with length 15 and flags "END_STREAM, END_HEADERS"
+2020-08-04 23:30:27.875 +02:00 [DBG] WriteAsync[24] 00 00 0F 01 05 00 00 00 01 00 0B 67 72 70 63 2D 73 74 61 74 75 73 01 30 
 \x00\x00\x0F\x01\x05\x00\x00\x00\x01\x00\x0Bgrpc-status\x010
-2020-01-20 22:11:15.576 +01:00 [INF] Request finished in 555.0326ms 200 application/grpc
-2020-01-20 22:11:27.587 +01:00 [INF] Application is shutting down...
-2020-01-20 22:11:27.593 +01:00 [DBG] Hosting stopping
-2020-01-20 22:11:27.626 +01:00 [DBG] Connection id "0HLSTTL440IT4" is closing.
-2020-01-20 22:11:27.659 +01:00 [DBG] Connection id "0HLSTTL440IT4" is closed. The last processed stream ID was 1.
-2020-01-20 22:11:27.670 +01:00 [VRB] Connection id "0HLSTTL440IT4" sending "GOAWAY" frame for stream ID 0 with length 8 and flags 0x0
-2020-01-20 22:11:27.688 +01:00 [DBG] WriteAsync[17] 00 00 08 07 00 00 00 00 00 00 00 00 01 00 00 00 00 
-\x00\x00\x08\x07\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00
-2020-01-20 22:11:27.740 +01:00 [DBG] Connection id "0HLSTTL440IT4" received FIN.
-2020-01-20 22:11:27.755 +01:00 [DBG] Connection id "0HLSTTL440IT4" stopped.
-2020-01-20 22:11:27.768 +01:00 [DBG] Connection id "0HLSTTL440IT4" sending FIN because: "The Socket transport's send loop completed gracefully."
-2020-01-20 22:11:27.795 +01:00 [DBG] Hosting stopped
-2020-01-20 22:28:59.057 +01:00 [DBG] Hosting starting
-2020-01-20 22:28:59.354 +01:00 [INF] User profile is available. Using 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
-2020-01-20 22:28:59.470 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-2913a921-b76b-484a-b7ab-71a724d631b4.xml'.
-2020-01-20 22:28:59.525 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-47c0a577-e593-43fe-9765-e8ab250e5d56.xml'.
-2020-01-20 22:28:59.530 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-8ab7fbd2-3801-4cfe-bad9-6664e52bf649.xml'.
-2020-01-20 22:28:59.533 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-923c8f5a-fb66-4975-9526-15839cdd9a83.xml'.
-2020-01-20 22:28:59.540 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-9aeaf8ce-d747-4811-b97f-ad31fcdc0eba.xml'.
-2020-01-20 22:28:59.543 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-c0bf2a7a-62cc-4f72-9649-9953830a5c8f.xml'.
-2020-01-20 22:28:59.546 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-dd834f26-948c-4923-aad9-7bf23d14c60a.xml'.
-2020-01-20 22:28:59.553 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-dfb27239-debb-4eaa-b1ee-b52b2ed7d79f.xml'.
-2020-01-20 22:28:59.556 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-e2d13bb4-8ade-4932-abf1-6abfc696747c.xml'.
-2020-01-20 22:28:59.559 +01:00 [DBG] Reading data from file 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys\key-e6deaa91-2211-4af7-bf27-d8343d71ffde.xml'.
-2020-01-20 22:28:59.582 +01:00 [DBG] Found key "2913a921-b76b-484a-b7ab-71a724d631b4".
-2020-01-20 22:28:59.603 +01:00 [DBG] Found key "47c0a577-e593-43fe-9765-e8ab250e5d56".
-2020-01-20 22:28:59.606 +01:00 [DBG] Found key "8ab7fbd2-3801-4cfe-bad9-6664e52bf649".
-2020-01-20 22:28:59.609 +01:00 [DBG] Found key "923c8f5a-fb66-4975-9526-15839cdd9a83".
-2020-01-20 22:28:59.612 +01:00 [DBG] Found key "9aeaf8ce-d747-4811-b97f-ad31fcdc0eba".
-2020-01-20 22:28:59.618 +01:00 [DBG] Found key "c0bf2a7a-62cc-4f72-9649-9953830a5c8f".
-2020-01-20 22:28:59.621 +01:00 [DBG] Found key "dd834f26-948c-4923-aad9-7bf23d14c60a".
-2020-01-20 22:28:59.624 +01:00 [DBG] Found key "dfb27239-debb-4eaa-b1ee-b52b2ed7d79f".
-2020-01-20 22:28:59.633 +01:00 [DBG] Found key "e2d13bb4-8ade-4932-abf1-6abfc696747c".
-2020-01-20 22:28:59.637 +01:00 [DBG] Found key "e6deaa91-2211-4af7-bf27-d8343d71ffde".
-2020-01-20 22:28:59.670 +01:00 [DBG] Considering key "dd834f26-948c-4923-aad9-7bf23d14c60a" with expiration date "2020-03-04T09:52:07.5395694+00:00" as default key.
-2020-01-20 22:28:59.700 +01:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
-2020-01-20 22:28:59.715 +01:00 [DBG] Decrypting secret element using Windows DPAPI.
-2020-01-20 22:28:59.720 +01:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
-2020-01-20 22:28:59.744 +01:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
-2020-01-20 22:28:59.753 +01:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
-2020-01-20 22:28:59.767 +01:00 [DBG] Using key "dd834f26-948c-4923-aad9-7bf23d14c60a" as the default key.
-2020-01-20 22:28:59.773 +01:00 [DBG] Key ring with default key "dd834f26-948c-4923-aad9-7bf23d14c60a" was loaded during application startup.
-2020-01-20 22:28:59.850 +01:00 [DBG] Discovering gRPC methods for GrpcCertAuthChainedCertificate.GreeterService.
-2020-01-20 22:28:59.991 +01:00 [DBG] Added gRPC method 'SayHello' to service 'greet.Greeter'. Method type: '"Unary"', route pattern: '/greet.Greeter/SayHello'.
-2020-01-20 22:29:00.244 +01:00 [DBG] Failed to locate the development https certificate at 'null'.
-2020-01-20 22:29:00.275 +01:00 [WRN] Overriding address(es) 'https://localhost:44379'. Binding to endpoints defined in UseKestrel() instead.
-2020-01-20 22:29:00.487 +01:00 [INF] Now listening on: https://localhost:44379
-2020-01-20 22:29:00.531 +01:00 [DBG] Connection id "0HLSTTV1U1ECI" accepted.
-2020-01-20 22:29:00.595 +01:00 [DBG] Loaded hosting startup assembly GrpcCertAuthChainedCertificate
-2020-01-20 22:29:00.688 +01:00 [INF] Application started. Press Ctrl+C to shut down.
-2020-01-20 22:29:00.689 +01:00 [DBG] Connection id "0HLSTTV1U1ECI" started.
-2020-01-20 22:29:00.691 +01:00 [INF] Hosting environment: Development
-2020-01-20 22:29:00.863 +01:00 [INF] Content root path: C:\git\damienbod\AspNetCoreCertificates\examplesUsingCertificateAuthentication\GrpcCertAuthChainedCertificate\GrpcCertAuthChainedCertificate
-2020-01-20 22:29:00.887 +01:00 [DBG] Hosting started
-2020-01-20 22:29:01.338 +01:00 [DBG] ReadAsync[58] 50 52 49 20 2A 20 48 54 54 50 2F 32 2E 30 0D 0A 0D 0A 53 4D 0D 0A 0D 0A 00 00 0C 04 00 00 00 00 00 00 02 00 00 00 00 00 01 00 00 00 00 00 00 04 08 00 00 00 00 00 03 FF 00 01 
-PRI * HTTP/2.0\x0D\x0A\x0D\x0ASM\x0D\x0A\x0D\x0A\x00\x00\x0C\x04\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x04\x08\x00\x00\x00\x00\x00\x03ÿ\x00\x01
-2020-01-20 22:29:01.357 +01:00 [VRB] Connection id "0HLSTTV1U1ECI" sending "SETTINGS" frame for stream ID 0 with length 18 and flags "NONE"
-2020-01-20 22:29:01.364 +01:00 [DBG] WriteAsync[27] 00 00 12 04 00 00 00 00 00 00 03 00 00 00 64 00 04 00 01 80 00 00 06 00 00 80 00 
-\x00\x00\x12\x04\x00\x00\x00\x00\x00\x00\x03\x00\x00\x00d\x00\x04\x00\x01\x80\x00\x00\x06\x00\x00\x80\x00
-2020-01-20 22:29:01.372 +01:00 [VRB] Connection id "0HLSTTV1U1ECI" sending "WINDOW_UPDATE" frame for stream ID 0 with length 4 and flags 0x0
-2020-01-20 22:29:01.379 +01:00 [DBG] WriteAsync[13] 00 00 04 08 00 00 00 00 00 00 01 00 01 
-\x00\x00\x04\x08\x00\x00\x00\x00\x00\x00\x01\x00\x01
-2020-01-20 22:29:01.390 +01:00 [VRB] Connection id "0HLSTTV1U1ECI" received "SETTINGS" frame for stream ID 0 with length 12 and flags "NONE"
-2020-01-20 22:29:01.397 +01:00 [VRB] Connection id "0HLSTTV1U1ECI" sending "SETTINGS" frame for stream ID 0 with length 0 and flags "ACK"
-2020-01-20 22:29:01.407 +01:00 [DBG] WriteAsync[9] 00 00 00 04 01 00 00 00 00 
-\x00\x00\x00\x04\x01\x00\x00\x00\x00
-2020-01-20 22:29:01.420 +01:00 [VRB] Connection id "0HLSTTV1U1ECI" received "WINDOW_UPDATE" frame for stream ID 0 with length 4 and flags 0x0
-2020-01-20 22:29:01.431 +01:00 [DBG] ReadAsync[182] 00 00 87 01 04 00 00 00 01 83 87 01 0F 6C 6F 63 61 6C 68 6F 73 74 3A 34 34 33 37 39 04 17 2F 67 72 65 65 74 2E 47 72 65 65 74 65 72 2F 53 61 79 48 65 6C 6C 6F 0F 2B 14 67 72 70 63 2D 64 6F 74 6E 65 74 2F 32 2E 32 36 2E 30 2E 30 00 02 74 65 08 74 72 61 69 6C 65 72 73 00 14 67 72 70 63 2D 61 63 63 65 70 74 2D 65 6E 63 6F 64 69 6E 67 0D 69 64 65 6E 74 69 74 79 2C 67 7A 69 70 0F 10 10 61 70 70 6C 69 63 61 74 69 6F 6E 2F 67 72 70 63 00 00 05 00 00 00 00 00 01 00 00 00 00 0F 00 00 0F 00 00 00 00 00 01 0A 0D 47 72 65 65 74 65 72 43 6C 69 65 6E 74 
-\x00\x00\x87\x01\x04\x00\x00\x00\x01\x83\x87\x01\x0Flocalhost:44379\x04\x17/greet.Greeter/SayHello\x0F+\x14grpc-dotnet/2.26.0.0\x00\x02te\x08trailers\x00\x14grpc-accept-encoding\x0Didentity,gzip\x0F\x10\x10application/grpc\x00\x00\x05\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x0F\x00\x00\x0F\x00\x00\x00\x00\x00\x01\x0A\x0DGreeterClient
-2020-01-20 22:29:01.446 +01:00 [VRB] Connection id "0HLSTTV1U1ECI" received "HEADERS" frame for stream ID 1 with length 135 and flags "END_HEADERS"
-2020-01-20 22:29:01.557 +01:00 [VRB] Connection id "0HLSTTV1U1ECI" received "DATA" frame for stream ID 1 with length 5 and flags "NONE"
-2020-01-20 22:29:01.571 +01:00 [VRB] Connection id "0HLSTTV1U1ECI" received "DATA" frame for stream ID 1 with length 15 and flags "NONE"
-2020-01-20 22:29:01.618 +01:00 [DBG] ReadAsync[9] 00 00 00 00 01 00 00 00 01 
-\x00\x00\x00\x00\x01\x00\x00\x00\x01
-2020-01-20 22:29:01.633 +01:00 [VRB] Connection id "0HLSTTV1U1ECI" received "DATA" frame for stream ID 1 with length 0 and flags "END_STREAM"
-2020-01-20 22:29:01.657 +01:00 [DBG] ReadAsync[9] 00 00 00 04 01 00 00 00 00 
-\x00\x00\x00\x04\x01\x00\x00\x00\x00
-2020-01-20 22:29:01.655 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44379/greet.Greeter/SayHello application/grpc 
-2020-01-20 22:29:01.674 +01:00 [VRB] Connection id "0HLSTTV1U1ECI" received "SETTINGS" frame for stream ID 0 with length 0 and flags "ACK"
-2020-01-20 22:29:01.696 +01:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
-2020-01-20 22:29:01.727 +01:00 [VRB] All hosts are allowed.
-2020-01-20 22:29:01.881 +01:00 [DBG] 3 candidate(s) found for the request path '/greet.Greeter/SayHello'
-2020-01-20 22:29:01.904 +01:00 [DBG] Endpoint 'gRPC - /greet.Greeter/SayHello' with route pattern '/greet.Greeter/SayHello' is valid for the request path '/greet.Greeter/SayHello'
-2020-01-20 22:29:01.925 +01:00 [DBG] Endpoint 'gRPC - gRPC - Unimplemented method for greet.Greeter' with route pattern 'greet.Greeter/{unimplementedMethod}' is valid for the request path '/greet.Greeter/SayHello'
-2020-01-20 22:29:01.953 +01:00 [DBG] Endpoint 'gRPC - gRPC - Unimplemented service' with route pattern '{unimplementedService}/{unimplementedMethod}' is valid for the request path '/greet.Greeter/SayHello'
-2020-01-20 22:29:01.969 +01:00 [DBG] Request matched endpoint 'gRPC - /greet.Greeter/SayHello'
-2020-01-20 22:29:02.041 +01:00 [DBG] AuthenticationScheme: Certificate was successfully authenticated.
-2020-01-20 22:29:02.053 +01:00 [DBG] AuthenticationScheme: Certificate was successfully authenticated.
-2020-01-20 22:29:02.088 +01:00 [INF] Authorization was successful.
-2020-01-20 22:29:02.092 +01:00 [INF] Executing endpoint 'gRPC - /greet.Greeter/SayHello'
-2020-01-20 22:29:02.138 +01:00 [DBG] Reading message.
-2020-01-20 22:29:02.143 +01:00 [DBG] Connection id "0HLSTTV1U1ECI", Request id "0HLSTTV1U1ECI:00000001": started reading request body.
-2020-01-20 22:29:02.148 +01:00 [DBG] Connection id "0HLSTTV1U1ECI", Request id "0HLSTTV1U1ECI:00000001": done reading request body.
-2020-01-20 22:29:02.162 +01:00 [VRB] Deserializing 15 byte message to 'GrpcCertAuthChainedCertificate.HelloRequest'.
-2020-01-20 22:29:02.181 +01:00 [VRB] Received message.
-2020-01-20 22:29:02.257 +01:00 [VRB] Connection id "0HLSTTV1U1ECI" sending "HEADERS" frame for stream ID 1 with length 108 and flags "END_HEADERS"
-2020-01-20 22:29:02.263 +01:00 [DBG] Sending message.
-2020-01-20 22:29:02.293 +01:00 [VRB] Serialized 'GrpcCertAuthChainedCertificate.HelloReply' to 21 byte message.
-2020-01-20 22:29:02.301 +01:00 [VRB] Message sent.
-2020-01-20 22:29:02.329 +01:00 [INF] Executed endpoint 'gRPC - /greet.Greeter/SayHello'
-2020-01-20 22:29:02.345 +01:00 [VRB] Connection id "0HLSTTV1U1ECI" sending "DATA" frame for stream ID 1 with length 26 and flags "NONE"
-2020-01-20 22:29:02.362 +01:00 [DBG] WriteAsync[152] 00 00 6C 01 04 00 00 00 01 88 00 04 64 61 74 65 1D 4D 6F 6E 2C 20 32 30 20 4A 61 6E 20 32 30 32 30 20 32 31 3A 32 39 3A 30 31 20 47 4D 54 00 0C 63 6F 6E 74 65 6E 74 2D 74 79 70 65 10 61 70 70 6C 69 63 61 74 69 6F 6E 2F 67 72 70 63 00 06 73 65 72 76 65 72 07 4B 65 73 74 72 65 6C 00 0D 67 72 70 63 2D 65 6E 63 6F 64 69 6E 67 08 69 64 65 6E 74 69 74 79 00 00 1A 00 00 00 00 00 01 00 00 00 00 15 0A 13 48 65 6C 6C 6F 20 47 72 65 65 74 65 72 43 6C 69 65 6E 74 
-\x00\x00l\x01\x04\x00\x00\x00\x01\x88\x00\x04date\x1DMon, 20 Jan 2020 21:29:01 GMT\x00\x0Ccontent-type\x10application/grpc\x00\x06server\x07Kestrel\x00\x0Dgrpc-encoding\x08identity\x00\x00\x1A\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x15\x0A\x13Hello GreeterClient
-2020-01-20 22:29:02.390 +01:00 [VRB] Connection id "0HLSTTV1U1ECI" sending "HEADERS" frame for stream ID 1 with length 15 and flags "END_STREAM, END_HEADERS"
-2020-01-20 22:29:02.421 +01:00 [DBG] WriteAsync[24] 00 00 0F 01 05 00 00 00 01 00 0B 67 72 70 63 2D 73 74 61 74 75 73 01 30 
-\x00\x00\x0F\x01\x05\x00\x00\x00\x01\x00\x0Bgrpc-status\x010
-2020-01-20 22:29:02.438 +01:00 [INF] Request finished in 801.7187ms 200 application/grpc
-2020-01-20 22:29:15.707 +01:00 [INF] Application is shutting down...
-2020-01-20 22:29:15.711 +01:00 [DBG] Hosting stopping
-2020-01-20 22:29:15.777 +01:00 [DBG] Connection id "0HLSTTV1U1ECI" is closing.
-2020-01-20 22:29:15.785 +01:00 [DBG] Connection id "0HLSTTV1U1ECI" is closed. The last processed stream ID was 1.
-2020-01-20 22:29:15.796 +01:00 [VRB] Connection id "0HLSTTV1U1ECI" sending "GOAWAY" frame for stream ID 0 with length 8 and flags 0x0
-2020-01-20 22:29:15.813 +01:00 [DBG] WriteAsync[17] 00 00 08 07 00 00 00 00 00 00 00 00 01 00 00 00 00 
-\x00\x00\x08\x07\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00
-2020-01-20 22:29:15.864 +01:00 [DBG] Connection id "0HLSTTV1U1ECI" received FIN.
-2020-01-20 22:29:15.883 +01:00 [DBG] Connection id "0HLSTTV1U1ECI" stopped.
-2020-01-20 22:29:15.896 +01:00 [DBG] Connection id "0HLSTTV1U1ECI" sending FIN because: "The Socket transport's send loop completed gracefully."
-2020-01-20 22:29:15.933 +01:00 [DBG] Hosting stopped
+2020-08-04 23:30:27.885 +02:00 [INF] Request finished in 442.3614ms 200 application/grpc
+2020-08-04 23:30:32.071 +02:00 [DBG] Connection id "0HM1ONMD9V50A" reset.
+2020-08-04 23:30:32.107 +02:00 [DBG] Connection id "0HM1ONMD9V50A" is closed. The last processed stream ID was 1.
+2020-08-04 23:30:32.119 +02:00 [DBG] Connection id "0HM1ONMD9V50A" sending FIN because: "The client closed the connection."
+2020-08-04 23:30:32.159 +02:00 [DBG] Connection id "0HM1ONMD9V50A" stopped.
+2020-08-04 23:30:35.157 +02:00 [INF] Application is shutting down...
+2020-08-04 23:30:35.161 +02:00 [DBG] Hosting stopping
+2020-08-04 23:30:35.264 +02:00 [DBG] Hosting stopped
