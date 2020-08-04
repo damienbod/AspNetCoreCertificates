@@ -55,6 +55,23 @@ namespace CertificateManager
                 ecdsa,
                 eCDsaConfiguration.HashAlgorithmName);
 
+            return NewECDsaSelfSignedCertificate(basicConstraints,
+                                                 validityPeriod,
+                                                 subjectAlternativeName,
+                                                 enhancedKeyUsages,
+                                                 x509KeyUsageFlags,
+                                                 request);
+        }
+
+        public X509Certificate2 NewECDsaSelfSignedCertificate(
+            BasicConstraints basicConstraints,
+            ValidityPeriod validityPeriod,
+            SubjectAlternativeName subjectAlternativeName,
+            OidCollection enhancedKeyUsages,
+            X509KeyUsageFlags x509KeyUsageFlags,
+            CertificateRequest request) 
+        {
+
             X509Certificate2 generatedCertificate = SelfSignedConfiguration(
                 basicConstraints, 
                 validityPeriod, 
@@ -82,6 +99,23 @@ namespace CertificateManager
                 rsaConfiguration.HashAlgorithmName, 
                 rsaConfiguration.RSASignaturePadding);
 
+            return NewRsaSelfSignedCertificate(basicConstraints,
+                                               validityPeriod,
+                                               subjectAlternativeName,
+                                               enhancedKeyUsages,
+                                               x509KeyUsageFlags,
+                                               request);
+        }
+
+        public X509Certificate2 NewRsaSelfSignedCertificate(
+            BasicConstraints basicConstraints,
+            ValidityPeriod validityPeriod,
+            SubjectAlternativeName subjectAlternativeName,
+            OidCollection enhancedKeyUsages,
+            X509KeyUsageFlags x509KeyUsageFlags,
+            CertificateRequest request)
+        {
+
             X509Certificate2 generatedCertificate = SelfSignedConfiguration(
                 basicConstraints, 
                 validityPeriod, 
@@ -103,6 +137,33 @@ namespace CertificateManager
             X509KeyUsageFlags x509KeyUsageFlags,
             RsaConfiguration rsaConfiguration)
         {
+            using var rsa = RSA.Create(rsaConfiguration.KeySize);
+            var request = new CertificateRequest(
+                _certificateUtility.CreateIssuerOrSubject(distinguishedName),
+                rsa,
+                rsaConfiguration.HashAlgorithmName,
+                rsaConfiguration.RSASignaturePadding);
+
+            return NewRsaChainedCertificate(basicConstraints,
+                                            validityPeriod,
+                                            subjectAlternativeName,
+                                            signingCertificate,
+                                            enhancedKeyUsages,
+                                            x509KeyUsageFlags,
+                                            request,
+                                            rsa);
+        }
+
+        public X509Certificate2 NewRsaChainedCertificate(
+            BasicConstraints basicConstraints,
+            ValidityPeriod validityPeriod,
+            SubjectAlternativeName subjectAlternativeName,
+            X509Certificate2 signingCertificate,
+            OidCollection enhancedKeyUsages,
+            X509KeyUsageFlags x509KeyUsageFlags,
+            CertificateRequest request,
+            RSA rsa)
+        {
             if (signingCertificate == null)
             {
                 throw new ArgumentNullException(nameof(signingCertificate));
@@ -111,13 +172,6 @@ namespace CertificateManager
             {
                 throw new Exception("Signing cert must have private key");
             }
-
-            using var rsa = RSA.Create(rsaConfiguration.KeySize);
-            var request = new CertificateRequest(
-                _certificateUtility.CreateIssuerOrSubject(distinguishedName),
-                rsa,
-                rsaConfiguration.HashAlgorithmName,
-                rsaConfiguration.RSASignaturePadding);
 
             X509Certificate2 cert = ChainedConfiguration(
                 basicConstraints, 
@@ -128,7 +182,14 @@ namespace CertificateManager
                 x509KeyUsageFlags, 
                 request);
 
-            return cert.CopyWithPrivateKey(rsa);
+            if (rsa == null)
+            {
+                return cert;
+            }
+            else
+            {
+                return cert.CopyWithPrivateKey(rsa);
+            }
         }
 
         public X509Certificate2 NewECDsaChainedCertificate(
@@ -141,6 +202,33 @@ namespace CertificateManager
             X509KeyUsageFlags x509KeyUsageFlags,
             ECDsaConfiguration eCDsaConfiguration)
         {
+            using var ecdsa = ECDsa.Create("ECDsa");
+            ecdsa.KeySize = eCDsaConfiguration.KeySize;
+            var request = new CertificateRequest(
+                _certificateUtility.CreateIssuerOrSubject(distinguishedName),
+                ecdsa,
+                eCDsaConfiguration.HashAlgorithmName);
+
+            return NewECDsaChainedCertificate(basicConstraints,
+                                              validityPeriod,
+                                              subjectAlternativeName,
+                                              signingCertificate,
+                                              enhancedKeyUsages,
+                                              x509KeyUsageFlags,
+                                              request,
+                                              ecdsa);
+        }
+
+        public X509Certificate2 NewECDsaChainedCertificate(
+            BasicConstraints basicConstraints,
+            ValidityPeriod validityPeriod,
+            SubjectAlternativeName subjectAlternativeName,
+            X509Certificate2 signingCertificate,
+            OidCollection enhancedKeyUsages,
+            X509KeyUsageFlags x509KeyUsageFlags,
+            CertificateRequest request,
+            ECDsa ecdsa)
+        {
             if (signingCertificate == null)
             {
                 throw new ArgumentNullException(nameof(signingCertificate));
@@ -150,12 +238,6 @@ namespace CertificateManager
                 throw new Exception("Signing cert must have private key");
             }
 
-            using var ecdsa = ECDsa.Create("ECDsa");
-            ecdsa.KeySize = eCDsaConfiguration.KeySize;
-            var request = new CertificateRequest(
-                _certificateUtility.CreateIssuerOrSubject(distinguishedName),
-                ecdsa,
-                eCDsaConfiguration.HashAlgorithmName);
             X509Certificate2 cert = ChainedConfiguration(
                 basicConstraints, 
                 validityPeriod, 
@@ -164,8 +246,14 @@ namespace CertificateManager
                 enhancedKeyUsages, 
                 x509KeyUsageFlags, 
                 request);
-
-            return cert.CopyWithPrivateKey(ecdsa);
+            if (ecdsa == null)
+            {
+                return cert;
+            } 
+            else
+            {
+                return cert.CopyWithPrivateKey(ecdsa);
+            }
         }
 
         private X509Certificate2 ChainedConfiguration(BasicConstraints basicConstraints, ValidityPeriod validityPeriod, SubjectAlternativeName subjectAlternativeName, X509Certificate2 signingCertificate, OidCollection enhancedKeyUsages, X509KeyUsageFlags x509KeyUsageFlags, CertificateRequest request)
