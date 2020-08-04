@@ -5,6 +5,7 @@
 * OidLookup for common OIDs
 * The proj files have been updated to enable SourceLink 
 * Feature proposal to utilise certificate requests
+* Update Nuget pakages and examples
 
 <a name="2020-02-22"></a>
 ## 2020-02-22 version 1.0.4
