@@ -58,11 +58,11 @@ namespace CreateIdentityServer4Certificates
             // only if certification authentication is used
             var enhancedKeyUsages = new OidCollection
             {
-                new Oid("1.3.6.1.5.5.7.3.1"),  // TLS Server auth
-                new Oid("1.3.6.1.5.5.7.3.2"),  // TLS Client auth
-                //new Oid("1.3.6.1.5.5.7.3.3"),  // Code signing 
-                //new Oid("1.3.6.1.5.5.7.3.4"),  // Email
-                //new Oid("1.3.6.1.5.5.7.3.8")   // Timestamping  
+                OidLookup.ClientAuthentication,
+                OidLookup.ServerAuthentication 
+                // OidLookup.CodeSigning,
+                // OidLookup.SecureEmail,
+                // OidLookup.TimeStamping  
             };
 
             var certificate = _cc.NewRsaSelfSignedCertificate(
@@ -107,11 +107,11 @@ namespace CreateIdentityServer4Certificates
 
             // only if certification authentication is used
             var enhancedKeyUsages = new OidCollection {
-                new Oid("1.3.6.1.5.5.7.3.1"),  // TLS Server auth
-                new Oid("1.3.6.1.5.5.7.3.2"),  // TLS Client auth
-                //new Oid("1.3.6.1.5.5.7.3.3"),  // Code signing 
-                //new Oid("1.3.6.1.5.5.7.3.4"),  // Email
-                //new Oid("1.3.6.1.5.5.7.3.8")   // Timestamping  
+                OidLookup.ClientAuthentication,
+                OidLookup.ServerAuthentication 
+                // OidLookup.CodeSigning,
+                // OidLookup.SecureEmail,
+                // OidLookup.TimeStamping 
             };
 
             var certificate = _cc.NewECDsaSelfSignedCertificate(
