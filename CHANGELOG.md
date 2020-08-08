@@ -1,7 +1,7 @@
 # Certificate Manager change log
 
-<a name="2020-08-07"></a>
-## 2020-08-07 version 1.0.5
+<a name="2020-08-08"></a>
+## 2020-08-08 version 1.0.5
 * OidLookup for common OIDs
 * The proj files have been updated to enable SourceLink 
 * Feature proposal to utilise certificate requests
