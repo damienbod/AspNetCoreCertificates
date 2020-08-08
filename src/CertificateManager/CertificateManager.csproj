@@ -15,7 +15,7 @@
     <Copyright>2020 damienbod</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>damienbod</Authors>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
