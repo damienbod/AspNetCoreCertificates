@@ -26,7 +26,7 @@ namespace AzureCertAuthClientConsole
 
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri("https://azurecertauth20200118105901.azurewebsites.net/WeatherForecast"),
+                RequestUri = new Uri("https://azurecertauth20201108214641.azurewebsites.net/WeatherForecast"),
                 Method = HttpMethod.Get,
             };
             var response = await client.SendAsync(request);
