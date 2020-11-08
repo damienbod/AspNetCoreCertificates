@@ -1,7 +1,6 @@
 # Certificate Manager change log
 
-<a name="2020-11-08"></a>
-## 2020-11-08 version 1.0.6
+## 2020-11-08 
 * Updated packages
 
 <a name="2020-08-08"></a>
