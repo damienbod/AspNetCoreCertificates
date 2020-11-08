@@ -25,22 +25,22 @@ namespace AzureCertAuth
         {
             services.AddSingleton<MyCertificateValidationService>();
 
-            //services.AddCertificateForwarding(options =>
-            //{
-            //    options.CertificateHeader = "X-ARR-ClientCert";
-            //    //options.HeaderConverter = (headerValue) =>
-            //    //{
-                    
-            //    //    X509Certificate2 clientCertificate = null;
-            //    //    if (!string.IsNullOrWhiteSpace(headerValue))
-            //    //    {
-            //    //        byte[] bytes = Convert.FromBase64String(headerValue); 
-            //    //        clientCertificate = new X509Certificate2(bytes);
-            //    //    }
+            services.AddCertificateForwarding(options =>
+            {
+                options.CertificateHeader = "X-ARR-ClientCert";
+                options.HeaderConverter = (headerValue) =>
+                {
 
-            //    //    return clientCertificate;
-            //    //};
-            //});
+                    X509Certificate2 clientCertificate = null;
+                    if (!string.IsNullOrWhiteSpace(headerValue))
+                    {
+                        byte[] bytes = Convert.FromBase64String(headerValue);
+                        clientCertificate = new X509Certificate2(bytes);
+                    }
+
+                    return clientCertificate;
+                };
+            });
 
             services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme)
                 .AddCertificate(options => // code from ASP.NET Core sample
