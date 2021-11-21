@@ -81,7 +81,7 @@ namespace CertificateManagerTests
             throw new Exception("no SubjectAlternativeName found");
         }
 
-        public X509Certificate2 CreateSubjectAlternativeNameDetails(
+        public static X509Certificate2 CreateSubjectAlternativeNameDetails(
            SubjectAlternativeName subjectAlternativeName,
            CreateCertificates createCertificates)
         {
