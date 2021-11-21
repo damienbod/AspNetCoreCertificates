@@ -1,5 +1,9 @@
 # Certificate Manager change log
 
+<a name="2020-11-21"></a>
+## 2020-11-21 version 1.0.6
+* Add support for all SubjectAlternativeName properties
+
 ## 2020-11-21 
 * Updated packages, move to .NET 6
 
