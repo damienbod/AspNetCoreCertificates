@@ -2,7 +2,7 @@
 
 |                           | Build                                                                                                                                                       | Certificate Manager                                                                                                                                |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| .NET Core                 | [![Build status](https://ci.appveyor.com/api/projects/status/qj6epwf404qqa5n2?svg=true)](https://ci.appveyor.com/project/damienbod/aspnetcorecertificates)      | [![NuGet Status](http://img.shields.io/nuget/v/CertificateManager.svg?style=flat-square)](https://www.nuget.org/packages/CertificateManager/) |
+| .NET Core                 | [![.NET](https://github.com/damienbod/AspNetCoreCertificates/actions/workflows/dotnet.yml/badge.svg)](https://github.com/damienbod/AspNetCoreCertificates/actions/workflows/dotnet.yml)     | [![NuGet Status](http://img.shields.io/nuget/v/CertificateManager.svg?style=flat-square)](https://www.nuget.org/packages/CertificateManager/) |
 
 ========================
 
