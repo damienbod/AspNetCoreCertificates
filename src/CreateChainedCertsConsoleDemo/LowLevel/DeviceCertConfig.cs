@@ -38,7 +38,7 @@ namespace CreateChainedCertsConsoleDemo
             }
         };
 
-        public static X509KeyUsageFlags X509KeyUsageFlags = 
+        public static X509KeyUsageFlags X509KeyUsageFlags =
              X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment;
     }
 }

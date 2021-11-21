@@ -41,12 +41,12 @@ namespace CertificateManager
             }
 
             var sanBuilder = new SubjectAlternativeNameBuilder();
-            foreach(var dnsName in subjectAlternativeName.DnsName)
+            foreach (var dnsName in subjectAlternativeName.DnsName)
             {
                 sanBuilder.AddDnsName(dnsName);
             }
 
-            if(!string.IsNullOrEmpty(subjectAlternativeName.Email))
+            if (!string.IsNullOrEmpty(subjectAlternativeName.Email))
             {
                 sanBuilder.AddEmailAddress(subjectAlternativeName.Email);
             }

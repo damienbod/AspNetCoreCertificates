@@ -68,14 +68,14 @@ namespace CertificateManager
             StringBuilder builder = new StringBuilder();
 
             builder.AppendLine(PemDecoder.GetBegin(PemTypes.CERTIFICATE));
-            if(string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(password))
             {
-                builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Pfx), 
+                builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Pfx),
                     Base64FormattingOptions.InsertLineBreaks));
             }
             else
             {
-                builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Pfx, password), 
+                builder.AppendLine(Convert.ToBase64String(cert.Export(X509ContentType.Pfx, password),
                     Base64FormattingOptions.InsertLineBreaks));
             }
             builder.AppendLine(PemDecoder.GetEnd(PemTypes.CERTIFICATE));
@@ -148,7 +148,7 @@ namespace CertificateManager
             StringBuilder builder = new StringBuilder();
             builder.AppendLine(PemDecoder.GetBegin(PemTypes.CERTIFICATE));
             builder.AppendLine(Convert.ToBase64String(deviceVerifyPublicKeyBytes,
-                    Base64FormattingOptions.InsertLineBreaks));           
+                    Base64FormattingOptions.InsertLineBreaks));
             builder.AppendLine(PemDecoder.GetEnd(PemTypes.CERTIFICATE));
             return builder.ToString();
         }
@@ -186,15 +186,15 @@ namespace CertificateManager
         }
 
         public X509Certificate2 CreateCertificateWithPrivateKey(
-            X509Certificate2 certificate, 
-            AsymmetricAlgorithm privateKey, 
+            X509Certificate2 certificate,
+            AsymmetricAlgorithm privateKey,
             string password = null)
         {
             return PemDecoder.CreateCertificateWithPrivateKey(certificate, privateKey, password);
         }
 
         private byte[] CertificateToPfx(string password,
-            X509Certificate2 certificate, 
+            X509Certificate2 certificate,
             X509Certificate2 signingCertificate,
             X509Certificate2Collection chain)
         {

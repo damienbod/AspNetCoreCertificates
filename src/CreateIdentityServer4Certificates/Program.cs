@@ -77,7 +77,7 @@ namespace CreateIdentityServer4Certificates
                 enhancedKeyUsages,
                 x509KeyUsageFlags,
                 new RsaConfiguration
-                { 
+                {
                     KeySize = 2048,
                     HashAlgorithmName = HashAlgorithmName.SHA512
                 });

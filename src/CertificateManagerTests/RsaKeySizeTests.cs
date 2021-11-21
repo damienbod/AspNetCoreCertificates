@@ -56,7 +56,7 @@ namespace CertificateManagerTests
             var cert2048 = CreateRsaCertificate(cc, 2048);
             Assert.Equal(2048, cert2048.GetRSAPrivateKey().KeySize);
 
-            var cert4096= CreateRsaCertificate(cc, 4096);
+            var cert4096 = CreateRsaCertificate(cc, 4096);
             Assert.Equal(4096, cert4096.GetRSAPrivateKey().KeySize);
         }
 

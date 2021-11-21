@@ -25,7 +25,7 @@ namespace CertificateManager.Models
         /// <summary>
         /// optional
         /// </summary>
-        public string UserPrincipalName { get;  set; }
+        public string UserPrincipalName { get; set; }
         public Uri Uri { get; set; } = null;
     }
 }

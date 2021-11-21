@@ -69,15 +69,15 @@ namespace CertificateManager
             SubjectAlternativeName subjectAlternativeName,
             OidCollection enhancedKeyUsages,
             X509KeyUsageFlags x509KeyUsageFlags,
-            CertificateRequest request) 
+            CertificateRequest request)
         {
 
             X509Certificate2 generatedCertificate = SelfSignedConfiguration(
-                basicConstraints, 
-                validityPeriod, 
-                subjectAlternativeName, 
-                enhancedKeyUsages, 
-                x509KeyUsageFlags, 
+                basicConstraints,
+                validityPeriod,
+                subjectAlternativeName,
+                enhancedKeyUsages,
+                x509KeyUsageFlags,
                 request);
 
             return generatedCertificate;
@@ -96,7 +96,7 @@ namespace CertificateManager
             var request = new CertificateRequest(
                 _certificateUtility.CreateIssuerOrSubject(distinguishedName),
                 rsa,
-                rsaConfiguration.HashAlgorithmName, 
+                rsaConfiguration.HashAlgorithmName,
                 rsaConfiguration.RSASignaturePadding);
 
             return NewRsaSelfSignedCertificate(basicConstraints,
@@ -117,11 +117,11 @@ namespace CertificateManager
         {
 
             X509Certificate2 generatedCertificate = SelfSignedConfiguration(
-                basicConstraints, 
-                validityPeriod, 
-                subjectAlternativeName, 
-                enhancedKeyUsages, 
-                x509KeyUsageFlags, 
+                basicConstraints,
+                validityPeriod,
+                subjectAlternativeName,
+                enhancedKeyUsages,
+                x509KeyUsageFlags,
                 request);
 
             return generatedCertificate;
@@ -174,12 +174,12 @@ namespace CertificateManager
             }
 
             X509Certificate2 cert = ChainedConfiguration(
-                basicConstraints, 
-                validityPeriod, 
-                subjectAlternativeName, 
-                signingCertificate, 
-                enhancedKeyUsages, 
-                x509KeyUsageFlags, 
+                basicConstraints,
+                validityPeriod,
+                subjectAlternativeName,
+                signingCertificate,
+                enhancedKeyUsages,
+                x509KeyUsageFlags,
                 request);
 
             if (rsa == null)
@@ -239,17 +239,17 @@ namespace CertificateManager
             }
 
             X509Certificate2 cert = ChainedConfiguration(
-                basicConstraints, 
-                validityPeriod, 
-                subjectAlternativeName, 
-                signingCertificate, 
-                enhancedKeyUsages, 
-                x509KeyUsageFlags, 
+                basicConstraints,
+                validityPeriod,
+                subjectAlternativeName,
+                signingCertificate,
+                enhancedKeyUsages,
+                x509KeyUsageFlags,
                 request);
             if (ecdsa == null)
             {
                 return cert;
-            } 
+            }
             else
             {
                 return cert.CopyWithPrivateKey(ecdsa);
@@ -283,7 +283,7 @@ namespace CertificateManager
                     break;
                 }
             }
-            
+
             _certificateUtility.AddSubjectAlternativeName(request, subjectAlternativeName);
 
             // Enhanced key usages

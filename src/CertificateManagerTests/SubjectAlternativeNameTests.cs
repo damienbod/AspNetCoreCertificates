@@ -24,21 +24,21 @@ namespace CertificateManagerTests
             var testCertificate = CreateSubjectAlternativeNameDetails(
                 new SubjectAlternativeName
                 {
-                    DnsName = new List<string> { "testones" , "testtwos" },
+                    DnsName = new List<string> { "testones", "testtwos" },
                     IpAddress = new IPAddress(2414),
                     Uri = new Uri("https://damienbod.com"),
                     UserPrincipalName = "myNameIsBob",
                     Email = "mick@jones.be"
-                }, 
+                },
                 createCertificates);
 
             foreach (X509Extension extension in testCertificate.Extensions)
             {
-                if(extension.Oid.FriendlyName == "Subject Alternative Name")
+                if (extension.Oid.FriendlyName == "Subject Alternative Name")
                 {
                     var asndata = new AsnEncodedData(extension.Oid, extension.RawData);
                     var data = asndata.Format(false);
-                    var expected = "DNS Name=testones, DNS Name=testtwos, RFC822 Name=mick@jones.be, IP Address=110.9.0.0, Other Name:Principal Name=myNameIsBob, URL=https://damienbod.com/"; 
+                    var expected = "DNS Name=testones, DNS Name=testtwos, RFC822 Name=mick@jones.be, IP Address=110.9.0.0, Other Name:Principal Name=myNameIsBob, URL=https://damienbod.com/";
 
                     Assert.Equal(expected, data);
                     return;
@@ -60,7 +60,7 @@ namespace CertificateManagerTests
             var testCertificate = CreateSubjectAlternativeNameDetails(
                 new SubjectAlternativeName
                 {
-                    DnsName = new List<string> { "testones"},
+                    DnsName = new List<string> { "testones" },
                     IpAddress = new IPAddress(2414)
                 },
                 createCertificates);

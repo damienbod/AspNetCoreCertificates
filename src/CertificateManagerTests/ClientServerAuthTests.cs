@@ -11,7 +11,7 @@ namespace CertificateManagerTests
 {
     public class ClientServerAuthTests
     {
-        private (X509Certificate2 root, X509Certificate2 intermediate, X509Certificate2 server, X509Certificate2 client) SetupCerts()
+        private static (X509Certificate2 root, X509Certificate2 intermediate, X509Certificate2 server, X509Certificate2 client) SetupCerts()
         {
             var serviceProvider = new ServiceCollection()
                 .AddCertificateManager()

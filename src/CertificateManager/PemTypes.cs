@@ -77,6 +77,6 @@ namespace CertificateManager
         public const string ENCRYPTED_PRIVATE_KEY = "ENCRYPTED PRIVATE KEY";
 
         public static readonly string[] KnownTypes = new[] { RSA_PRIVATE_KEY, PRIVATE_KEY, ENCRYPTED_PRIVATE_KEY, EC_PRIVATE_KEY };
-    
+
     }
 }

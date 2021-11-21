@@ -20,13 +20,14 @@ namespace CertificateManagerTests
 
 
             var rootCaL1 = createClientServerAuthCerts.NewRootCertificate(
-                new DistinguishedName { 
-                    CommonName = "root dev", 
-                    Country = "IT", 
-                    Locality = "DD", 
-                    Organisation="SS", 
-                    OrganisationUnit="unit",
-                    StateProvince= "yes"
+                new DistinguishedName
+                {
+                    CommonName = "root dev",
+                    Country = "IT",
+                    Locality = "DD",
+                    Organisation = "SS",
+                    OrganisationUnit = "unit",
+                    StateProvince = "yes"
                 },
                 new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
                 3, "localhost");
