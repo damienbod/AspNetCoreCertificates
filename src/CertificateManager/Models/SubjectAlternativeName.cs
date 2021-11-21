@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 
 namespace CertificateManager.Models
 {
@@ -14,5 +15,15 @@ namespace CertificateManager.Models
         /// optional
         /// </summary>
         public string Email { get; set; }
+
+        /// <summary>
+        /// optional
+        /// </summary>
+        public IPAddress IpAddress { get; set; } = null;
+
+        /// <summary>
+        /// optional
+        /// </summary>
+        public string UserPrincipalName { get;  set; }
     }
 }

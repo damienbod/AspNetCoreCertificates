@@ -51,6 +51,16 @@ namespace CertificateManager
                 sanBuilder.AddEmailAddress(subjectAlternativeName.Email);
             }
 
+            if (subjectAlternativeName.IpAddress != null)
+            {
+                sanBuilder.AddIpAddress(subjectAlternativeName.IpAddress);
+            }
+
+            if (!string.IsNullOrEmpty(subjectAlternativeName.UserPrincipalName))
+            {
+                sanBuilder.AddUserPrincipalName(subjectAlternativeName.UserPrincipalName);
+            }
+
             var sanExtension = sanBuilder.Build();
             request.CertificateExtensions.Add(sanExtension);
         }
