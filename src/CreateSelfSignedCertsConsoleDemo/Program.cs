@@ -36,11 +36,11 @@ namespace CreateSelfSignedCertsConsoleDemo
             string password = "1234";
             var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
 
-            var serverCertInPfxBtyes = 
+            var serverCertInPfxBtyes =
                 importExportCertificate.ExportSelfSignedCertificatePfx(password, server);
             File.WriteAllBytes("server.pfx", serverCertInPfxBtyes);
 
-            var clientCertInPfxBtyes = 
+            var clientCertInPfxBtyes =
                 importExportCertificate.ExportSelfSignedCertificatePfx(password, client);
             File.WriteAllBytes("client.pfx", clientCertInPfxBtyes);
 

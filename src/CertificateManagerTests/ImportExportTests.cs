@@ -106,20 +106,20 @@ namespace CertificateManagerTests
                 .BuildServiceProvider();
             var importExport = serviceProvider.GetService<ImportExportCertificate>();
 
-            var exception = Assert.Throws<ArgumentException> (() =>
-            {
-                try
-                {
-                    var crtPem = importExport.PemExportPfxFullCertificate(intermediate, "23HHHH456");
-                    var roundTripCertificate = importExport.PemImportCertificate(crtPem, "23456");
-                }
-                catch(Exception ex)
-                {
-                    // internal Internal.Cryptography.CryptoThrowHelper+WindowsCryptographicException : The specified network password is not correct.
-                    Assert.Equal("The specified network password is not correct.", ex.Message);
-                    throw new ArgumentException();
-                }
-            });
+            var exception = Assert.Throws<ArgumentException>(() =>
+           {
+               try
+               {
+                   var crtPem = importExport.PemExportPfxFullCertificate(intermediate, "23HHHH456");
+                   var roundTripCertificate = importExport.PemImportCertificate(crtPem, "23456");
+               }
+               catch (Exception ex)
+               {
+                   // internal Internal.Cryptography.CryptoThrowHelper+WindowsCryptographicException : The specified network password is not correct.
+                   Assert.Equal("The specified network password is not correct.", ex.Message);
+                   throw new ArgumentException();
+               }
+           });
 
         }
 
@@ -179,7 +179,7 @@ namespace CertificateManagerTests
             var roundTripPublicKeyPem = importExport.PemImportCertificate(publicKeyPem);
             var roundTripRsaPrivateKeyPem = importExport.PemImportPrivateKey(rsaPrivateKeyPem);
 
-            var roundTripFullCert = 
+            var roundTripFullCert =
                 importExport.CreateCertificateWithPrivateKey(roundTripPublicKeyPem, roundTripRsaPrivateKeyPem, "1234");
 
             Assert.Equal(rsaCert.Subject, roundTripPublicKeyPem.Subject);
@@ -207,7 +207,7 @@ namespace CertificateManagerTests
 
             var roundTripFullCert =
                 importExport.CreateCertificateWithPrivateKey(
-                    roundTripPublicKeyPem, 
+                    roundTripPublicKeyPem,
                     roundTripRsaPrivateKeyPem, "1234");
 
             Assert.Equal(root.Subject, roundTripPublicKeyPem.Subject);
@@ -235,7 +235,7 @@ namespace CertificateManagerTests
 
             var roundTripFullCert =
                 importExport.CreateCertificateWithPrivateKey(
-                    roundTripPublicKeyPem, 
+                    roundTripPublicKeyPem,
                     roundTripRsaPrivateKeyPem);
 
             Assert.Equal(server.Subject, roundTripPublicKeyPem.Subject);

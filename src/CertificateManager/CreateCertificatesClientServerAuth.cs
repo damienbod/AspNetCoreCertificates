@@ -145,7 +145,8 @@ namespace CertificateManager
            string deviceVerification,
            X509Certificate2 parentCertificateAuthority)
         {
-            var enhancedKeyUsages = new OidCollection {
+            var enhancedKeyUsages = new OidCollection
+            {
             };
 
             var distinguishedName = new DistinguishedName
@@ -250,7 +251,7 @@ namespace CertificateManager
             ValidityPeriod validityPeriod,
             string dnsName)
         {
-            var enhancedKeyUsages = new OidCollection {       
+            var enhancedKeyUsages = new OidCollection {
                 OidLookup.ClientAuthentication
             };
 
@@ -289,7 +290,7 @@ namespace CertificateManager
            DistinguishedName distinguishedName,
            ValidityPeriod validityPeriod,
            string dnsName,
-           OidCollection enhancedKeyUsages, 
+           OidCollection enhancedKeyUsages,
            X509Certificate2 parentCertificateAuthority)
         {
             var basicConstraints = new BasicConstraints

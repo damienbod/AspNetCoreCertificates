@@ -15,6 +15,6 @@ namespace CertificateManager.Models
         public RSASignaturePadding RSASignaturePadding { get; set; } = RSASignaturePadding.Pkcs1;
 
         public HashAlgorithmName HashAlgorithmName { get; set; } = HashAlgorithmName.SHA256;
-        
+
     }
 }

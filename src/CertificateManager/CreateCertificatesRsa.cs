@@ -59,8 +59,11 @@ namespace CertificateManager
             var certificate = _createCertificates.NewRsaSelfSignedCertificate(
                 new DistinguishedName { CommonName = dnsName },
                 basicConstraints,
-                new ValidityPeriod { ValidFrom = DateTimeOffset.UtcNow, 
-                    ValidTo = DateTimeOffset.UtcNow.AddYears(validityPeriodInYears) },
+                new ValidityPeriod
+                {
+                    ValidFrom = DateTimeOffset.UtcNow,
+                    ValidTo = DateTimeOffset.UtcNow.AddYears(validityPeriodInYears)
+                },
                 subjectAlternativeName,
                 enhancedKeyUsages,
                 x509KeyUsageFlags,

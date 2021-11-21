@@ -11,7 +11,7 @@ namespace CertificateManagerTests
 {
     public class ClientServerAuthTests
     {
-        private (X509Certificate2 root, X509Certificate2 intermediate, X509Certificate2 server, X509Certificate2 client) SetupCerts()
+        private static (X509Certificate2 root, X509Certificate2 intermediate, X509Certificate2 server, X509Certificate2 client) SetupCerts()
         {
             var serviceProvider = new ServiceCollection()
                 .AddCertificateManager()
@@ -61,7 +61,7 @@ namespace CertificateManagerTests
         [Fact]
         public void ValidateSelfSignedValid()
         {
-            var (root, intermediate, server, client) = SetupCerts();
+            var (root, _, _, _) = SetupCerts();
 
             var x509ChainPolicy = BuildChainUtil.BuildChainPolicySelfSigned(root, true, true);
             var chain = new X509Chain

@@ -10,6 +10,6 @@ namespace CertificateManager.Models
         public int KeySize { get; set; } = 256;
 
         public HashAlgorithmName HashAlgorithmName { get; set; } = HashAlgorithmName.SHA256;
-        
+
     }
 }

@@ -28,7 +28,7 @@ namespace IoTHubCreateDeviceCertificate
                 new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
                 "testdevice01", intermediate);
             testDevice01.FriendlyName = "IoT device testDevice01";
-      
+
             string password = "1234";
             var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
 

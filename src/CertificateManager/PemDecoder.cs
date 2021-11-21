@@ -127,8 +127,8 @@ namespace CertificateManager
         }
 
         public static X509Certificate2 CreateCertificateWithPrivateKey(
-            X509Certificate2 certificate, 
-            AsymmetricAlgorithm privateKey, 
+            X509Certificate2 certificate,
+            AsymmetricAlgorithm privateKey,
             string password = null)
         {
             var builder = new Pkcs12Builder();

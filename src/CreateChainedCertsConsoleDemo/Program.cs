@@ -30,7 +30,7 @@ namespace CreateChainedCertsConsoleDemo
             var intermediateCaL2 = createClientServerAuthCerts.NewIntermediateChainedCertificate(
                 new DistinguishedName { CommonName = "intermediate dev", Country = "FR" },
                 new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
-                2,  "localhost", rootCaL1);
+                2, "localhost", rootCaL1);
             intermediateCaL2.FriendlyName = "developement Intermediate L2 certificate";
 
             // Server, Client L3 chained from Intermediate L2
@@ -45,7 +45,7 @@ namespace CreateChainedCertsConsoleDemo
                 "localhost", intermediateCaL2);
             serverL3.FriendlyName = "developement server L3 certificate";
             clientL3.FriendlyName = "developement client L3 certificate";
-            
+
             Console.WriteLine($"Created Client, Server L3 Certificates {clientL3.FriendlyName}");
 
             string password = "1234";
