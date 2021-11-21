@@ -61,7 +61,7 @@ namespace CertificateManagerTests
         [Fact]
         public void ValidateSelfSignedValid()
         {
-            var (root, intermediate, server, client) = SetupCerts();
+            var (root, _, _, _) = SetupCerts();
 
             var x509ChainPolicy = BuildChainUtil.BuildChainPolicySelfSigned(root, true, true);
             var chain = new X509Chain
