@@ -27,7 +27,7 @@ jobs:
     - name: Build GrpcCertAuthChainedCertificate
       run: dotnet build ./examplesUsingCertificateAuthentication/GrpcCertAuthChainedCertificate/GrpcCertAuthChainedCertificate.sln
     - name: Build SigningCertificate
-      run: dotnet build ./examplesUsingCertificateAuthentication/SigningCertificate/SigningCertificate.sln
+      run: dotnet build ./examplesUsingCertificateAuthentication/SigningCertificate/SigningCertificate.csproj
     - name: Build SimulateAzureIoTDevice
       run: dotnet build ./examplesUsingCertificateAuthentication/SimulateAzureIoTDevice/SimulateAzureIoTDevice.sln
 
