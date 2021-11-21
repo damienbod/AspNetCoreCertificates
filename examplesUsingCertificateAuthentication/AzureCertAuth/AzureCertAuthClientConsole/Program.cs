@@ -8,11 +8,11 @@ namespace AzureCertAuthClientConsole
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Console.WriteLine("Get data!");
 
-            var json = GetApiDataUsingHttpClientHandler().GetAwaiter().GetResult();
+            var json = await GetApiDataUsingHttpClientHandler();
 
             Console.WriteLine("Success!");
         }
