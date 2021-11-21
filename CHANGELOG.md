@@ -1,5 +1,8 @@
 # Certificate Manager change log
 
+## 2020-11-21 
+* Updated packages, move to .NET 6
+
 ## 2020-11-08 
 * Updated packages
 
