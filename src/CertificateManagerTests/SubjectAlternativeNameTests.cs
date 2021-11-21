@@ -13,7 +13,7 @@ namespace CertificateManagerTests
     public class SubjectAlternativeNameTests
     {
         [Fact]
-        public void SubjectAlternativeNameValid()
+        public void SubjectAlternativeNameValidAll()
         {
             var serviceProvider = new ServiceCollection()
                 .AddCertificateManager()
@@ -39,6 +39,39 @@ namespace CertificateManagerTests
                     var asndata = new AsnEncodedData(extension.Oid, extension.RawData);
                     var data = asndata.Format(false);
                     var expected = "DNS Name=testones, DNS Name=testtwos, RFC822 Name=mick@jones.be, IP Address=110.9.0.0, Other Name:Principal Name=myNameIsBob, URL=https://damienbod.com/"; 
+
+                    Assert.Equal(expected, data);
+                    return;
+                }
+            }
+
+            throw new Exception("no SubjectAlternativeName found");
+        }
+
+        [Fact]
+        public void SubjectAlternativeNameValidSomeValues()
+        {
+            var serviceProvider = new ServiceCollection()
+                .AddCertificateManager()
+                .BuildServiceProvider();
+
+            var createCertificates = serviceProvider.GetService<CreateCertificates>();
+
+            var testCertificate = CreateSubjectAlternativeNameDetails(
+                new SubjectAlternativeName
+                {
+                    DnsName = new List<string> { "testones"},
+                    IpAddress = new IPAddress(2414)
+                },
+                createCertificates);
+
+            foreach (X509Extension extension in testCertificate.Extensions)
+            {
+                if (extension.Oid.FriendlyName == "Subject Alternative Name")
+                {
+                    var asndata = new AsnEncodedData(extension.Oid, extension.RawData);
+                    var data = asndata.Format(false);
+                    var expected = "DNS Name=testones, IP Address=110.9.0.0";
 
                     Assert.Equal(expected, data);
                     return;
