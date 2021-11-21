@@ -25,8 +25,8 @@ namespace CertificateManagerTests
 
             var chained1024 = CreateRsaCertificateChained(cc, 1024, cert2048);
             var chained4096 = CreateRsaCertificateChained(cc, 4096, cert2048);
-            Assert.Equal(1024, chained1024.PrivateKey.KeySize);
-            Assert.Equal(4096, chained4096.PrivateKey.KeySize);
+            Assert.Equal(1024, chained1024.GetRSAPrivateKey().KeySize);
+            Assert.Equal(4096, chained4096.GetRSAPrivateKey().KeySize);
         }
 
         [Fact]
@@ -38,10 +38,10 @@ namespace CertificateManagerTests
 
             var ccRsa = serviceProvider.GetService<CreateCertificatesRsa>();
             var cert2048 = ccRsa.CreateDevelopmentCertificate("localhost", 2, 2048);
-            Assert.Equal(2048, cert2048.PrivateKey.KeySize);
+            Assert.Equal(2048, cert2048.GetRSAPrivateKey().KeySize);
 
             var cert1024 = ccRsa.CreateDevelopmentCertificate("localhost", 2);
-            Assert.Equal(1024, cert1024.PrivateKey.KeySize);
+            Assert.Equal(1024, cert1024.GetRSAPrivateKey().KeySize);
         }
 
         [Fact]
@@ -54,10 +54,10 @@ namespace CertificateManagerTests
             var cc = serviceProvider.GetService<CreateCertificates>();
 
             var cert2048 = CreateRsaCertificate(cc, 2048);
-            Assert.Equal(2048, cert2048.PrivateKey.KeySize);
+            Assert.Equal(2048, cert2048.GetRSAPrivateKey().KeySize);
 
             var cert4096= CreateRsaCertificate(cc, 4096);
-            Assert.Equal(4096, cert4096.PrivateKey.KeySize);
+            Assert.Equal(4096, cert4096.GetRSAPrivateKey().KeySize);
         }
 
         public static X509Certificate2 CreateRsaCertificate(CreateCertificates createCertificates, int keySize)
