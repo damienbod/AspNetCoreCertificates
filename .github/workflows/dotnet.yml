@@ -1,0 +1,33 @@
+name: .NET
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0'
+        include-prerelease: True
+    - name: Build CertificateManager
+      run: dotnet build ./src/CertificateManager.sln
+    - name: Build AspNetCoreCertificateAuth
+      run: dotnet build ./examplesUsingCertificateAuthentication/AspNetCoreChained/AspNetCoreCertificateAuth.sln
+    - name: Build AzureCertAuth
+      run: dotnet build ./examplesUsingCertificateAuthentication/AzureCertAuth/AzureCertAuth.sln
+    - name: Build GrpcCertAuthChainedCertificate
+      run: dotnet build ./examplesUsingCertificateAuthentication/GrpcCertAuthChainedCertificate/GrpcCertAuthChainedCertificate.sln
+    - name: Build SigningCertificate
+      run: dotnet build ./examplesUsingCertificateAuthentication/SigningCertificate/SigningCertificate.sln
+    - name: Build SimulateAzureIoTDevice
+      run: dotnet build ./examplesUsingCertificateAuthentication/SimulateAzureIoTDevice/SimulateAzureIoTDevice.sln
+
