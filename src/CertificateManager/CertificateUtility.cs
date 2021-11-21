@@ -61,6 +61,11 @@ namespace CertificateManager
                 sanBuilder.AddUserPrincipalName(subjectAlternativeName.UserPrincipalName);
             }
 
+            if (subjectAlternativeName.Uri != null)
+            {
+                sanBuilder.AddUri(subjectAlternativeName.Uri);
+            }
+
             var sanExtension = sanBuilder.Build();
             request.CertificateExtensions.Add(sanExtension);
         }

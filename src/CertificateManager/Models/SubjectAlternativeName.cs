@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 
 namespace CertificateManager.Models
@@ -25,5 +26,6 @@ namespace CertificateManager.Models
         /// optional
         /// </summary>
         public string UserPrincipalName { get;  set; }
+        public Uri Uri { get; set; } = null;
     }
 }
