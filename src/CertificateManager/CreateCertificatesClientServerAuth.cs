@@ -141,6 +141,33 @@ namespace CertificateManager
                 validityPeriod, dnsName, enhancedKeyUsages, parentCertificateAuthority);
         }
 
+        /// <summary>
+        /// Create an device chained certificate for Client and Server TLS Auth using RSA algorithm
+        /// 
+        /// The device certificate (also called a leaf certificate) must have the Subject Name set to the Device ID that was used when registering the IoT device in the Azure IoT Hub. This setting is required for authentication.
+        /// </summary>
+        /// <param name="distinguishedName">Distinguished Name used for the subject and the issuer properties</param>
+        /// <param name="validityPeriod">Valid from, Valid to certificate properties</param>
+        /// <param name="dnsName">Dns name use the certificate validation</param>
+        /// <param name="parentCertificateAuthority"> Parent cert to create the chain from</param>
+        /// <returns>X509Certificate2 device chained certificate</returns>
+        public X509Certificate2 NewRsaDeviceChainedCertificate(
+           DistinguishedName distinguishedName,
+           ValidityPeriod validityPeriod,
+           string dnsName,
+           X509Certificate2 parentCertificateAuthority,
+           RsaConfiguration rsaConfiguration = null)
+        {
+            var enhancedKeyUsages = new OidCollection {
+                OidLookup.ClientAuthentication,
+                OidLookup.ServerAuthentication
+            };
+
+            return NewRsaDeviceChainedCertificate(distinguishedName,
+                validityPeriod, dnsName, enhancedKeyUsages, parentCertificateAuthority,
+                rsaConfiguration);
+        }
+
         public X509Certificate2 NewDeviceVerificationCertificate(
            string deviceVerification,
            X509Certificate2 parentCertificateAuthority)
@@ -321,6 +348,46 @@ namespace CertificateManager
                 enhancedKeyUsages,
                 x509KeyUsageFlags,
                 new ECDsaConfiguration());
+
+            return deviceCert;
+        }
+
+        private X509Certificate2 NewRsaDeviceChainedCertificate(
+           DistinguishedName distinguishedName,
+           ValidityPeriod validityPeriod,
+           string dnsName,
+           OidCollection enhancedKeyUsages,
+           X509Certificate2 parentCertificateAuthority,
+           RsaConfiguration rsaConfiguration = null)
+        {
+            var basicConstraints = new BasicConstraints
+            {
+                CertificateAuthority = false,
+                HasPathLengthConstraint = false,
+                PathLengthConstraint = 0,
+                Critical = true
+            };
+
+            var subjectAlternativeName = new SubjectAlternativeName
+            {
+                DnsName = new List<string>
+                {
+                    dnsName,
+                }
+            };
+
+            var x509KeyUsageFlags =
+              X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment;
+
+            var deviceCert = _createCertificates.NewRsaChainedCertificate(
+                distinguishedName,
+                basicConstraints,
+                validityPeriod,
+                subjectAlternativeName,
+                parentCertificateAuthority,
+                enhancedKeyUsages,
+                x509KeyUsageFlags,
+                rsaConfiguration ?? new RsaConfiguration());
 
             return deviceCert;
         }
