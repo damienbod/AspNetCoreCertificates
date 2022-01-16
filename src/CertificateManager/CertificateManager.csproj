@@ -11,25 +11,25 @@
     <Description>Certificate Manager is a package which makes it easy to create certificates (chained and self signed) which can be used to in client server authentication and IoT Devices like Azure IoT Hub
 </Description>
     <PackageTags>certificate authentication mtls pfx cer pem cert crt</PackageTags>
-    <PackageReleaseNotes>bug fix Subject Key Identifier</PackageReleaseNotes>
-    <Copyright>2021 damienbod</Copyright>
+    <PackageReleaseNotes>Added new methods to support creating RSA Device Chained Certificates</PackageReleaseNotes>
+    <Copyright>2022 damienbod</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>damienbod</Authors>
-    <Version>1.0.6</Version>
+    <Version>1.0.7</Version>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.9" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
-    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

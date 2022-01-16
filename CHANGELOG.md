@@ -1,5 +1,11 @@
 # Certificate Manager change log
 
+<a name="2022-01-16"></a>
+## 2022-01-16 version 1.0.7
+* Improved support for chained certificates
+* Added new methods to support creating RSA Device Chained Certificates
+* Updated packages
+
 <a name="2020-11-21"></a>
 ## 2020-11-21 version 1.0.6
 * Add support for all SubjectAlternativeName properties
