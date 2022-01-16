@@ -309,18 +309,18 @@ namespace CertificateManager
                 notafter = new DateTimeOffset(signingCertificate.NotAfter);
             }
 
-            // cert serial is the epoch/unix timestamp
+            // cert serialNumber is the epoch/unix timestamp
             var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             var unixTime = Convert.ToInt64((DateTime.UtcNow - epoch).TotalSeconds);
 
             var serialUnknownEndian = BitConverter.GetBytes(unixTime);
-            byte[] serial = ForceBigEndian(serialUnknownEndian);
+            byte[] serialNumber = ForceBigEndian(serialUnknownEndian);
 
             var cert = request.Create(
                 signingCertificate,
                 notbefore,
                 notafter,
-                serial);
+                serialNumber);
 
             return cert;
         }
