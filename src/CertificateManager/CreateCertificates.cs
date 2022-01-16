@@ -313,28 +313,38 @@ namespace CertificateManager
             var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             var unixTime = Convert.ToInt64((DateTime.UtcNow - epoch).TotalSeconds);
 
-            var serialUnknown = BitConverter.GetBytes(unixTime);
+            var serialUnknownEndian = BitConverter.GetBytes(unixTime);
+            byte[] serial = ForceBigEndian(serialUnknownEndian);
 
-            bool isLittleEndian = false;
-            byte[] serial = new byte[serialUnknown.Length * 8];
+            var cert = request.Create(
+                signingCertificate,
+                notbefore,
+                notafter,
+                serial);
+
+            return cert;
+        }
+
+        private static byte[] ForceBigEndian(byte[] serialUnknownEndian)
+        {
+            if (!BitConverter.IsLittleEndian)
+            {
+                return serialUnknownEndian;
+            }
+
+            // convert
+            byte[] serial = new byte[serialUnknownEndian.Length * 8];
             int offset = 0;
-            foreach (long value in serialUnknown)
+            foreach (long value in serialUnknownEndian)
             {
                 byte[] buffer = BitConverter.GetBytes(value);
-                if (BitConverter.IsLittleEndian != isLittleEndian)
-                {
-                    Array.Reverse(buffer);
-                }
+                Array.Reverse(buffer);
+
                 buffer.CopyTo(serial, offset);
                 offset += 8;
             }
 
-            var cert = request.Create(
-                            signingCertificate,
-                            notbefore,
-                            notafter,
-                            serial);
-            return cert;
+            return serial;
         }
 
         private X509Certificate2 SelfSignedConfiguration(BasicConstraints basicConstraints, ValidityPeriod validityPeriod, SubjectAlternativeName subjectAlternativeName, OidCollection enhancedKeyUsages, X509KeyUsageFlags x509KeyUsageFlags, CertificateRequest request)
