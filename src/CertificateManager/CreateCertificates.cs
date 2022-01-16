@@ -312,7 +312,23 @@ namespace CertificateManager
             // cert serial is the epoch/unix timestamp
             var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             var unixTime = Convert.ToInt64((DateTime.UtcNow - epoch).TotalSeconds);
-            var serial = BitConverter.GetBytes(unixTime);
+
+            var serialUnknown = BitConverter.GetBytes(unixTime);
+
+            bool isLittleEndian = false;
+            byte[] serial = new byte[serialUnknown.Length * 8];
+            int offset = 0;
+            foreach (long value in serialUnknown)
+            {
+                byte[] buffer = BitConverter.GetBytes(value);
+                if (BitConverter.IsLittleEndian != isLittleEndian)
+                {
+                    Array.Reverse(buffer);
+                }
+                buffer.CopyTo(serial, offset);
+                offset += 8;
+            }
+
             var cert = request.Create(
                             signingCertificate,
                             notbefore,
