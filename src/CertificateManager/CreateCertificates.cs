@@ -1,5 +1,6 @@
 ﻿using CertificateManager.Models;
 using System;
+using System.Buffers.Binary;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
@@ -310,11 +311,10 @@ namespace CertificateManager
             }
 
             // cert serialNumber is the epoch/unix timestamp
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            var unixTime = Convert.ToInt64((DateTime.UtcNow - epoch).TotalSeconds);
-
-            var serialUnknownEndian = BitConverter.GetBytes(unixTime);
-            byte[] serialNumber = ForceBigEndian(serialUnknownEndian);
+            var unixTime = Convert.ToUInt64((DateTime.UtcNow - DateTime.UnixEpoch).TotalSeconds);
+            var serialByteSpan = new Span<byte>(new byte[sizeof(ulong)]);
+            BinaryPrimitives.WriteUInt64BigEndian(serialByteSpan, unixTime);
+            var serialNumber = serialByteSpan.ToArray();
 
             var cert = request.Create(
                 signingCertificate,
@@ -323,28 +323,6 @@ namespace CertificateManager
                 serialNumber);
 
             return cert;
-        }
-
-        private static byte[] ForceBigEndian(byte[] serialUnknownEndian)
-        {
-            if (!BitConverter.IsLittleEndian)
-            {
-                return serialUnknownEndian;
-            }
-
-            // convert
-            byte[] serial = new byte[serialUnknownEndian.Length * 8];
-            int offset = 0;
-            foreach (long value in serialUnknownEndian)
-            {
-                byte[] buffer = BitConverter.GetBytes(value);
-                Array.Reverse(buffer);
-
-                buffer.CopyTo(serial, offset);
-                offset += 8;
-            }
-
-            return serial;
         }
 
         private X509Certificate2 SelfSignedConfiguration(BasicConstraints basicConstraints, ValidityPeriod validityPeriod, SubjectAlternativeName subjectAlternativeName, OidCollection enhancedKeyUsages, X509KeyUsageFlags x509KeyUsageFlags, CertificateRequest request)
