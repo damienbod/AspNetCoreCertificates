@@ -19,7 +19,7 @@ Certificate Manager is a package which makes it easy to create certificates (cha
 Add the NuGet package to the your project file
 
 ```
-<PackageReference Include="CertificateManager" Version="1.0.7" />
+<PackageReference Include="CertificateManager" Version="1.0.8" />
 ```
 
 The NuGet packages uses dependency injection to setup. In a console application initialize the package as follows:

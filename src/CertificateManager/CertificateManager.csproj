@@ -11,11 +11,11 @@
     <Description>Certificate Manager is a package which makes it easy to create certificates (chained and self signed) which can be used to in client server authentication and IoT Devices like Azure IoT Hub
 </Description>
     <PackageTags>certificate authentication mtls pfx cer pem cert crt</PackageTags>
-    <PackageReleaseNotes>Added new methods to support creating RSA Device Chained Certificates</PackageReleaseNotes>
+    <PackageReleaseNotes>Update serial conversion to use big endian only </PackageReleaseNotes>
     <Copyright>2022 damienbod</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>damienbod</Authors>
-    <Version>1.0.7</Version>
+    <Version>1.0.8</Version>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
