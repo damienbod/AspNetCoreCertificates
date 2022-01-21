@@ -1,5 +1,9 @@
 # Certificate Manager change log
 
+<a name="2022-01-21"></a>
+## 2022-01-21 version 1.0.8
+Update serial conversion to use big endian only 
+
 <a name="2022-01-16"></a>
 ## 2022-01-16 version 1.0.7
 * Improved support for chained certificates
