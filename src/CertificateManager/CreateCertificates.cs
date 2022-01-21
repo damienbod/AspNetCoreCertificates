@@ -1,5 +1,6 @@
 ﻿using CertificateManager.Models;
 using System;
+using System.Buffers.Binary;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
@@ -309,15 +310,18 @@ namespace CertificateManager
                 notafter = new DateTimeOffset(signingCertificate.NotAfter);
             }
 
-            // cert serial is the epoch/unix timestamp
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            var unixTime = Convert.ToInt64((DateTime.UtcNow - epoch).TotalSeconds);
-            var serial = BitConverter.GetBytes(unixTime);
+            // cert serialNumber is the epoch/unix timestamp
+            var unixTime = Convert.ToUInt64((DateTime.UtcNow - DateTime.UnixEpoch).TotalSeconds);
+            var serialByteSpan = new Span<byte>(new byte[sizeof(ulong)]);
+            BinaryPrimitives.WriteUInt64BigEndian(serialByteSpan, unixTime);
+            var serialNumber = serialByteSpan.ToArray();
+
             var cert = request.Create(
-                            signingCertificate,
-                            notbefore,
-                            notafter,
-                            serial);
+                signingCertificate,
+                notbefore,
+                notafter,
+                serialNumber);
+
             return cert;
         }
 
