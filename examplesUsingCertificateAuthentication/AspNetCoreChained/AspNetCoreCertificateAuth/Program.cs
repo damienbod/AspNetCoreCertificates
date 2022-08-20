@@ -34,16 +34,16 @@ public class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
+            .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
+                       .ReadFrom.Configuration(hostingContext.Configuration)
+                       .MinimumLevel.Override("Microsoft", LogEventLevel.Verbose)
+                       .MinimumLevel.Verbose()
+                       .Enrich.FromLogContext()
+                       .WriteTo.File("../_chainedServerLogs.txt")
+                       .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+            )
             .ConfigureWebHostDefaults(webBuilder =>
             {
-                webBuilder.UseStartup<Startup>()
-                .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
-                   .ReadFrom.Configuration(hostingContext.Configuration)
-                   .MinimumLevel.Override("Microsoft", LogEventLevel.Verbose)
-                   .MinimumLevel.Verbose()
-                   .Enrich.FromLogContext()
-                   .WriteTo.File("../_clientLogs.txt")
-                   .WriteTo.Console(theme: AnsiConsoleTheme.Code)
-               );
+                webBuilder.UseStartup<Startup>();
             });
 }
