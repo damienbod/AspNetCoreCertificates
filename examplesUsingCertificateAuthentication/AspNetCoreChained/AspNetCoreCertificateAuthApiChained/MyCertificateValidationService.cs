@@ -9,7 +9,7 @@ public class MyCertificateValidationService
         return CheckIfThumbprintIsValid(clientCertificate);
     }
 
-    private bool CheckIfThumbprintIsValid(X509Certificate2 clientCertificate)
+    private static bool CheckIfThumbprintIsValid(X509Certificate2 clientCertificate)
     {
         var listOfValidThumbprints = new List<string>
         {
