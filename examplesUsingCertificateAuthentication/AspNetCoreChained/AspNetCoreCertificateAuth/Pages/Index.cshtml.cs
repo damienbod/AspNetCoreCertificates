@@ -1,8 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
+﻿using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AspNetCoreCertificateAuth.Pages;
@@ -10,12 +6,10 @@ namespace AspNetCoreCertificateAuth.Pages;
 public class IndexModel : PageModel
 {
     private readonly IHttpClientFactory _clientFactory;
-    private readonly IWebHostEnvironment _environment;
 
-    public IndexModel(IHttpClientFactory clientFactory, IWebHostEnvironment environment)
+    public IndexModel(IHttpClientFactory clientFactory)
     {
         _clientFactory = clientFactory;
-        _environment = environment;
     }
 
     public async Task OnGetAsync()

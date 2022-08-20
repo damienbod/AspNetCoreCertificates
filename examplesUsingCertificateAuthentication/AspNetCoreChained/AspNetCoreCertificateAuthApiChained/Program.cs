@@ -1,12 +1,8 @@
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 using System.Security.Cryptography.X509Certificates;
-using System.IO;
 using Serilog;
 using Serilog.Events;
-using System;
 using Serilog.Sinks.SystemConsole.Themes;
 
 namespace AspNetCoreCertificateAuthApi;

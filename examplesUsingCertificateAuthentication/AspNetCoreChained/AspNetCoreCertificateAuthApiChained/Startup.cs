@@ -1,13 +1,6 @@
-using System;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Certificate;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace AspNetCoreCertificateAuthApi;
 
@@ -62,7 +55,7 @@ public class Startup
                         var validationService =
                             context.HttpContext.RequestServices.GetService<MyCertificateValidationService>();
 
-                        if (validationService.ValidateCertificate(context.ClientCertificate))
+                        if (validationService!.ValidateCertificate(context.ClientCertificate))
                         {
                             var claims = new[]
                             {
