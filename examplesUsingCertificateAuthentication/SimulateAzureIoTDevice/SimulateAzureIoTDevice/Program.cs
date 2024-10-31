@@ -1,6 +1,5 @@
-﻿using System;
-using Microsoft.Azure.Devices.Client;
-using Microsoft.Azure.Devices.Shared;
+﻿using Microsoft.Azure.Devices.Client;
+using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
