@@ -1,54 +1,34 @@
+using AzureCertAuth;
 using Serilog;
-using Serilog.Events;
-using Serilog.Sinks.SystemConsole.Themes;
 
-namespace AzureCertAuth;
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
 
-public class Program
+Log.Information("Starting up OpeniddictServer");
+
+try
 {
-    public static int Main(string[] args)
-    {
-        Log.Logger = new LoggerConfiguration()
-       .MinimumLevel.Debug()
-       .MinimumLevel.Override("Microsoft", LogEventLevel.Debug)
-       .Enrich.FromLogContext()
-       .CreateLogger();
+    var builder = WebApplication.CreateBuilder(args);
 
-        try
-        {
-            Log.Information("Starting web host");
-            CreateHostBuilder(args).Build().Run();
-            return 0;
-        }
-        catch (Exception ex)
-        {
-            Log.Fatal(ex, "Host terminated unexpectedly");
-            return 1;
-        }
-        finally
-        {
-            Log.CloseAndFlush();
-        }
-    }
+    builder.Host.UseSerilog((context, loggerConfiguration) => loggerConfiguration
+        .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
+        .WriteTo.File("../_logs-DownstreamApiCertAuth.txt")
+        .Enrich.FromLogContext()
+        .ReadFrom.Configuration(context.Configuration));
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-             .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
-                .ReadFrom.Configuration(hostingContext.Configuration)
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Verbose)
-                .MinimumLevel.Verbose()
-                .Enrich.FromLogContext()
-                .WriteTo.File(
-                    //$@"../certauth.txt",
-                    $@"D:\home\LogFiles\Application\{Environment.UserDomainName}.txt",
-                    fileSizeLimitBytes: 1_000_000,
-                    rollOnFileSizeLimit: true,
-                    shared: true,
-                    flushToDiskInterval: TimeSpan.FromSeconds(1))
-                .WriteTo.Console(theme: AnsiConsoleTheme.Code)
-            )
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Startup>();
-            });
+    var app = builder
+        .ConfigureServices()
+        .ConfigurePipeline();
+
+    app.Run();
+}
+catch (Exception ex) when (ex.GetType().Name is not "StopTheHostException" && ex.GetType().Name is not "HostAbortedException")
+{
+    Log.Fatal(ex, "Unhandled exception");
+}
+finally
+{
+    Log.Information("Shut down complete");
+    Log.CloseAndFlush();
 }

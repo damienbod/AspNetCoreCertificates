@@ -22,7 +22,7 @@ class Program
         handler.ClientCertificates.Add(cert);
         var client = new HttpClient(handler);
 
-        var url = "https://localhost:44361/WeatherForecast";
+        var url = "https://localhost:5009/WeatherForecast";
         //var url = "https://azurecertauth20201108214641.azurewebsites.net/WeatherForecast";
         var request = new HttpRequestMessage()
         {     

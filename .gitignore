@@ -8,3 +8,4 @@
 /examplesUsingCertificateAuthentication/AspNetCoreChained/_chainedServerLogs.txt
 /examplesUsingCertificateAuthentication/AspNetCoreChained/_clientLogs.txt
 /examplesUsingCertificateAuthentication/AzureCertAuth/certauth.txt
+**/_logs-*
