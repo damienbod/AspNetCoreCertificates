@@ -4,54 +4,53 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
 
-namespace CreateSelfSignedCertsConsoleDemo
+namespace CreateSelfSignedCertsConsoleDemo;
+
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            var dnsName = "localhost";
-            var serviceProvider = new ServiceCollection()
-                .AddCertificateManager()
-                .BuildServiceProvider();
+        var dnsName = "localhost";
+        var serviceProvider = new ServiceCollection()
+            .AddCertificateManager()
+            .BuildServiceProvider();
 
-            var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
+        var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
 
-            // Server self signed certificate
-            var server = createClientServerAuthCerts.NewServerSelfSignedCertificate(
-                new DistinguishedName { CommonName = "server", Country = "CH" },
-                new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
-                dnsName);
+        // Server self signed certificate
+        var server = createClientServerAuthCerts.NewServerSelfSignedCertificate(
+            new DistinguishedName { CommonName = "server", Country = "CH" },
+            new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+            dnsName);
 
-            // Client self signed certificate
-            var client = createClientServerAuthCerts.NewClientSelfSignedCertificate(
-                new DistinguishedName { CommonName = "client", Country = "CH" },
-                new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
-                dnsName);
-            server.FriendlyName = "azure server certificate";
-            client.FriendlyName = "azure client certificate";
+        // Client self signed certificate
+        var client = createClientServerAuthCerts.NewClientSelfSignedCertificate(
+            new DistinguishedName { CommonName = "client", Country = "CH" },
+            new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+            dnsName);
+        server.FriendlyName = "azure server certificate";
+        client.FriendlyName = "azure client certificate";
 
-            Console.WriteLine($"Created server certificate {server.FriendlyName}");
+        Console.WriteLine($"Created server certificate {server.FriendlyName}");
 
-            string password = "1234";
-            var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
+        string password = "1234";
+        var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
 
-            var serverCertInPfxBtyes =
-                importExportCertificate.ExportSelfSignedCertificatePfx(password, server);
-            File.WriteAllBytes("server.pfx", serverCertInPfxBtyes);
+        var serverCertInPfxBtyes =
+            importExportCertificate.ExportSelfSignedCertificatePfx(password, server);
+        File.WriteAllBytes("server.pfx", serverCertInPfxBtyes);
 
-            var clientCertInPfxBtyes =
-                importExportCertificate.ExportSelfSignedCertificatePfx(password, client);
-            File.WriteAllBytes("client.pfx", clientCertInPfxBtyes);
+        var clientCertInPfxBtyes =
+            importExportCertificate.ExportSelfSignedCertificatePfx(password, client);
+        File.WriteAllBytes("client.pfx", clientCertInPfxBtyes);
 
-            var clientCertInPEMBtyes = importExportCertificate.PemExportPfxFullCertificate(client);
-            File.WriteAllText("client.pem", clientCertInPEMBtyes);
+        var clientCertInPEMBtyes = importExportCertificate.PemExportPfxFullCertificate(client);
+        File.WriteAllText("client.pem", clientCertInPEMBtyes);
 
-            //var rootPublicKey = importExportCertificate.ExportCertificatePublicKey(rootCaL1);
-            //var rootPublicKeyBytes = rootPublicKey.Export(X509ContentType.Cert);
-            //File.WriteAllBytes($"localhost_root_l1.cer", rootPublicKeyBytes);
+        //var rootPublicKey = importExportCertificate.ExportCertificatePublicKey(rootCaL1);
+        //var rootPublicKeyBytes = rootPublicKey.Export(X509ContentType.Cert);
+        //File.WriteAllBytes($"localhost_root_l1.cer", rootPublicKeyBytes);
 
-            Console.WriteLine("Certificates exported to pfx and cer files");
-        }
+        Console.WriteLine("Certificates exported to pfx and cer files");
     }
 }

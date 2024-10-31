@@ -35,7 +35,7 @@ Update serial conversion to use big endian only
 
 ## 2020-01-27 version 1.0.2
 * Small fixes for RSA certificates KeySize
-* IdentityServer4 example certificates
+* IdentityServer example certificates
 
 ## 2020-01-24 version 1.0.1
 * Support RSA certificates

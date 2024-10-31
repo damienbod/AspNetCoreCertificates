@@ -28,7 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoTHubCreateDeviceCertifica
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreateAngularVueJsDevelopmentCertificates", "CreateAngularVueJsDevelopmentCertificates\CreateAngularVueJsDevelopmentCertificates.csproj", "{4761AF09-95B5-4632-92D6-872652C354C7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreateIdentityServer4Certificates", "CreateIdentityServer4Certificates\CreateIdentityServer4Certificates.csproj", "{C22EB3CB-0F6F-4F64-847B-63E0A75AA999}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreateIdentityServerCertificates", "CreateIdentityServer4Certificates\CreateIdentityServerCertificates.csproj", "{C22EB3CB-0F6F-4F64-847B-63E0A75AA999}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

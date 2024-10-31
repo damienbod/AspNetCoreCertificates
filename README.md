@@ -46,7 +46,7 @@ Now the package is ready to use. See the [Documentation](https://github.com/dami
 - [Create verify certificate for Azure IoT Hub .pem or .cer](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubVerifyCertificate)
 - [Create device (Leaf) certificate for Azure IoT Hub device](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/IoTHubCreateDeviceCertificate)
 - [Create development certificates for SPAs HTTPS development, like Vue.js, Angular](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateAngularVueJsDevelopmentCertificates)
-- [Create certificates for IdentityServer4 RSA and ECDsa](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateIdentityServer4Certificates)
+- [Create certificates for IdentityServer RSA and ECDsa](https://github.com/damienbod/AspNetCoreCertificates/tree/master/src/CreateIdentityServer4Certificates)
 
 
 # Examples Using Certificates:
@@ -70,6 +70,6 @@ https://github.com/oocx/ReadX509CertificateFromPem
 
 - [Creating Certificates for X.509 security in Azure IoT Hub using .NET Core](https://damienbod.com/2020/01/29/creating-certificates-for-x-509-security-in-azure-iot-hub-using-net-core/)
 - [Creating Certificates in .NET Core for Vue.js development using HTTPS](https://damienbod.com/2020/02/04/creating-certificates-in-net-core-for-vue-js-development-using-https/)
-- [Create Certificates for IdentityServer4 signing using .NET Core](https://damienbod.com/2020/02/10/create-certificates-for-identityserver4-signing-using-net-core/)
+- [Create Certificates for IdentityServer signing using .NET Core](https://damienbod.com/2020/02/10/create-certificates-for-identityserver4-signing-using-net-core/)
 - [Provisioning X.509 Devices for Azure IoT Hub using .NET Core](https://damienbod.com/2020/02/20/provisioning-x-509-devices-for-azure-iot-hub-using-net-core)
 

@@ -5,256 +5,256 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 using Xunit;
 
-namespace CertificateManagerTests
+namespace CertificateManagerTests;
+
+public class ImportExportTests
 {
-    public class ImportExportTests
+    private (X509Certificate2 root, X509Certificate2 intermediate, X509Certificate2 server, X509Certificate2 client) SetupCerts()
     {
-        private (X509Certificate2 root, X509Certificate2 intermediate, X509Certificate2 server, X509Certificate2 client) SetupCerts()
-        {
-            var serviceProvider = new ServiceCollection()
-                .AddCertificateManager()
-                .BuildServiceProvider();
+        var serviceProvider = new ServiceCollection()
+            .AddCertificateManager()
+            .BuildServiceProvider();
 
-            var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
+        var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
 
-            var rootCaL1 = createClientServerAuthCerts.NewRootCertificate(
-                new DistinguishedName { CommonName = "root dev", Country = "IT" },
-                new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
-                3, "localhost");
-            rootCaL1.FriendlyName = "developement root L1 certificate";
+        var rootCaL1 = createClientServerAuthCerts.NewRootCertificate(
+            new DistinguishedName { CommonName = "root dev", Country = "IT" },
+            new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+            3, "localhost");
+        rootCaL1.FriendlyName = "developement root L1 certificate";
 
-            // Intermediate L2 chained from root L1
-            var intermediateCaL2 = createClientServerAuthCerts.NewIntermediateChainedCertificate(
-                new DistinguishedName { CommonName = "intermediate dev", Country = "FR" },
-                new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
-                2, "localhost", rootCaL1);
-            intermediateCaL2.FriendlyName = "developement Intermediate L2 certificate";
+        // Intermediate L2 chained from root L1
+        var intermediateCaL2 = createClientServerAuthCerts.NewIntermediateChainedCertificate(
+            new DistinguishedName { CommonName = "intermediate dev", Country = "FR" },
+            new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+            2, "localhost", rootCaL1);
+        intermediateCaL2.FriendlyName = "developement Intermediate L2 certificate";
 
-            // Server, Client L3 chained from Intermediate L2
-            var serverL3 = createClientServerAuthCerts.NewServerChainedCertificate(
-                new DistinguishedName { CommonName = "server", Country = "DE" },
-                new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
-                "localhost", intermediateCaL2);
+        // Server, Client L3 chained from Intermediate L2
+        var serverL3 = createClientServerAuthCerts.NewServerChainedCertificate(
+            new DistinguishedName { CommonName = "server", Country = "DE" },
+            new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+            "localhost", intermediateCaL2);
 
-            var clientL3 = createClientServerAuthCerts.NewClientChainedCertificate(
-                new DistinguishedName { CommonName = "client", Country = "IE" },
-                new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
-                "localhost", intermediateCaL2);
-            serverL3.FriendlyName = "developement server L3 certificate";
-            clientL3.FriendlyName = "developement client L3 certificate";
+        var clientL3 = createClientServerAuthCerts.NewClientChainedCertificate(
+            new DistinguishedName { CommonName = "client", Country = "IE" },
+            new ValidityPeriod { ValidFrom = DateTime.UtcNow, ValidTo = DateTime.UtcNow.AddYears(10) },
+            "localhost", intermediateCaL2);
+        serverL3.FriendlyName = "developement server L3 certificate";
+        clientL3.FriendlyName = "developement client L3 certificate";
 
-            return (rootCaL1, intermediateCaL2, serverL3, clientL3);
-        }
+        return (rootCaL1, intermediateCaL2, serverL3, clientL3);
+    }
 
-        [Fact]
-        public void ImportExportCrtSelfSignedPem()
-        {
-            var (root, intermediate, server, client) = SetupCerts();
-            var serviceProvider = new ServiceCollection()
-                .AddCertificateManager()
-                .BuildServiceProvider();
-            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+    [Fact]
+    public void ImportExportCrtSelfSignedPem()
+    {
+        var (root, intermediate, server, client) = SetupCerts();
+        var serviceProvider = new ServiceCollection()
+            .AddCertificateManager()
+            .BuildServiceProvider();
+        var importExport = serviceProvider.GetService<ImportExportCertificate>();
 
-            var crtPem = importExport.PemExportPfxFullCertificate(root);
-            var roundTripCertificate = importExport.PemImportCertificate(crtPem);
+        var crtPem = importExport.PemExportPfxFullCertificate(root);
+        var roundTripCertificate = importExport.PemImportCertificate(crtPem);
 
-            Assert.Equal(root.Subject, roundTripCertificate.Subject);
-            Assert.True(roundTripCertificate.HasPrivateKey);
+        Assert.Equal(root.Subject, roundTripCertificate.Subject);
+        Assert.True(roundTripCertificate.HasPrivateKey);
 
-        }
+    }
 
-        [Fact]
-        public void ImportExportPasswordCrtPem()
-        {
-            var (root, intermediate, server, client) = SetupCerts();
-            var serviceProvider = new ServiceCollection()
-                .AddCertificateManager()
-                .BuildServiceProvider();
-            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+    [Fact]
+    public void ImportExportPasswordCrtPem()
+    {
+        var (root, intermediate, server, client) = SetupCerts();
+        var serviceProvider = new ServiceCollection()
+            .AddCertificateManager()
+            .BuildServiceProvider();
+        var importExport = serviceProvider.GetService<ImportExportCertificate>();
 
-            var crtPem = importExport.PemExportPfxFullCertificate(intermediate, "23456");
-            var roundTripCertificate = importExport.PemImportCertificate(crtPem, "23456");
+        var crtPem = importExport.PemExportPfxFullCertificate(intermediate, "23456");
+        var roundTripCertificate = importExport.PemImportCertificate(crtPem, "23456");
 
-            Assert.Equal(intermediate.Subject, roundTripCertificate.Subject);
-            Assert.True(intermediate.HasPrivateKey);
-            Assert.True(roundTripCertificate.HasPrivateKey);
-        }
+        Assert.Equal(intermediate.Subject, roundTripCertificate.Subject);
+        Assert.True(intermediate.HasPrivateKey);
+        Assert.True(roundTripCertificate.HasPrivateKey);
+    }
 
-        [Fact]
-        public void ExportEDAsaPublicKeyCertificatePem()
-        {
-            var (root, intermediate, server, client) = SetupCerts();
-            var serviceProvider = new ServiceCollection()
-                .AddCertificateManager()
-                .BuildServiceProvider();
-            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+    [Fact]
+    public void ExportEDAsaPublicKeyCertificatePem()
+    {
+        var (root, intermediate, server, client) = SetupCerts();
+        var serviceProvider = new ServiceCollection()
+            .AddCertificateManager()
+            .BuildServiceProvider();
+        var importExport = serviceProvider.GetService<ImportExportCertificate>();
 
-            var crtPem = importExport.PemExportPublicKeyCertificate(intermediate);
-            var roundTripCertificate = importExport.PemImportCertificate(crtPem);
+        var crtPem = importExport.PemExportPublicKeyCertificate(intermediate);
+        var roundTripCertificate = importExport.PemImportCertificate(crtPem);
 
-            Assert.Equal(intermediate.Subject, roundTripCertificate.Subject);
-            Assert.True(intermediate.HasPrivateKey);
-            Assert.False(roundTripCertificate.HasPrivateKey);
-        }
+        Assert.Equal(intermediate.Subject, roundTripCertificate.Subject);
+        Assert.True(intermediate.HasPrivateKey);
+        Assert.False(roundTripCertificate.HasPrivateKey);
+    }
 
-        [Fact]
-        public void ImportExportIncorrectPasswordCrtPem()
-        {
-            var (root, intermediate, server, client) = SetupCerts();
-            var serviceProvider = new ServiceCollection()
-                .AddCertificateManager()
-                .BuildServiceProvider();
-            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+    [Fact]
+    public void ImportExportIncorrectPasswordCrtPem()
+    {
+        var (root, intermediate, server, client) = SetupCerts();
+        var serviceProvider = new ServiceCollection()
+            .AddCertificateManager()
+            .BuildServiceProvider();
+        var importExport = serviceProvider.GetService<ImportExportCertificate>();
 
-            var exception = Assert.Throws<ArgumentException>(() =>
+        var exception = Assert.Throws<ArgumentException>(() =>
+       {
+           try
            {
-               try
-               {
-                   var crtPem = importExport.PemExportPfxFullCertificate(intermediate, "23HHHH456");
-                   var roundTripCertificate = importExport.PemImportCertificate(crtPem, "23456");
-               }
-               catch (Exception ex)
-               {
-                   // internal Internal.Cryptography.CryptoThrowHelper+WindowsCryptographicException : The specified network password is not correct.
-                   Assert.Equal("The specified network password is not correct.", ex.Message);
-                   throw new ArgumentException();
-               }
-           });
+               var crtPem = importExport.PemExportPfxFullCertificate(intermediate, "23HHHH456");
+               var roundTripCertificate = importExport.PemImportCertificate(crtPem, "23456");
+           }
+           catch (Exception ex)
+           {
+               // internal Internal.Cryptography.CryptoThrowHelper+WindowsCryptographicException : The specified network password is not correct.
+               Assert.Equal("The specified network password is not correct.", ex.Message);
+               throw new ArgumentException();
+           }
+       });
 
-        }
+    }
 
-        [Fact]
-        public void ImportExportExportFullPfxPem()
-        {
-            var (root, intermediate, server, client) = SetupCerts();
-            var serviceProvider = new ServiceCollection()
-                .AddCertificateManager()
-                .BuildServiceProvider();
-            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+    [Fact]
+    public void ImportExportExportFullPfxPem()
+    {
+        var (root, intermediate, server, client) = SetupCerts();
+        var serviceProvider = new ServiceCollection()
+            .AddCertificateManager()
+            .BuildServiceProvider();
+        var importExport = serviceProvider.GetService<ImportExportCertificate>();
 
-            var pfxPem = importExport.PemExportPfxFullCertificate(intermediate);
+        var pfxPem = importExport.PemExportPfxFullCertificate(intermediate);
 
-            var roundTripPfxPem = importExport.PemImportCertificate(pfxPem);
+        var roundTripPfxPem = importExport.PemImportCertificate(pfxPem);
 
-            Assert.Equal(intermediate.Subject, roundTripPfxPem.Subject);
-            Assert.True(intermediate.HasPrivateKey);
-            Assert.True(roundTripPfxPem.HasPrivateKey);
-        }
+        Assert.Equal(intermediate.Subject, roundTripPfxPem.Subject);
+        Assert.True(intermediate.HasPrivateKey);
+        Assert.True(roundTripPfxPem.HasPrivateKey);
+    }
 
-        [Fact]
-        public void ImportExportRsaCertPublicKeyPem()
-        {
-            var serviceProvider = new ServiceCollection()
-                .AddCertificateManager()
-                .BuildServiceProvider();
+    [Fact]
+    public void ImportExportRsaCertPublicKeyPem()
+    {
+        var serviceProvider = new ServiceCollection()
+            .AddCertificateManager()
+            .BuildServiceProvider();
 
-            var ccRsa = serviceProvider.GetService<CreateCertificatesRsa>();
-            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+        var ccRsa = serviceProvider.GetService<CreateCertificatesRsa>();
+        var importExport = serviceProvider.GetService<ImportExportCertificate>();
 
-            var rsaCert = ccRsa.CreateDevelopmentCertificate("localhost", 2, 2048);
+        var rsaCert = ccRsa.CreateDevelopmentCertificate("localhost", 2, 2048);
 
-            var publicKeyPem = importExport.PemExportPublicKeyCertificate(rsaCert);
-            var roundTripPublicKeyPem = importExport.PemImportCertificate(publicKeyPem);
+        var publicKeyPem = importExport.PemExportPublicKeyCertificate(rsaCert);
+        var roundTripPublicKeyPem = importExport.PemImportCertificate(publicKeyPem);
 
-            Assert.Equal(rsaCert.Subject, roundTripPublicKeyPem.Subject);
-            Assert.True(rsaCert.HasPrivateKey);
-            Assert.False(roundTripPublicKeyPem.HasPrivateKey);
-        }
+        Assert.Equal(rsaCert.Subject, roundTripPublicKeyPem.Subject);
+        Assert.True(rsaCert.HasPrivateKey);
+        Assert.False(roundTripPublicKeyPem.HasPrivateKey);
+    }
 
-        [Fact]
-        public void ImportExportRsaPrivateKeyPublicKeyPairPem()
-        {
-            var serviceProvider = new ServiceCollection()
-                .AddCertificateManager()
-                .BuildServiceProvider();
+    [Fact]
+    public void ImportExportRsaPrivateKeyPublicKeyPairPem()
+    {
+        var serviceProvider = new ServiceCollection()
+            .AddCertificateManager()
+            .BuildServiceProvider();
 
-            var ccRsa = serviceProvider.GetService<CreateCertificatesRsa>();
-            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+        var ccRsa = serviceProvider.GetService<CreateCertificatesRsa>();
+        var importExport = serviceProvider.GetService<ImportExportCertificate>();
 
-            var rsaCert = ccRsa.CreateDevelopmentCertificate("localhost", 2, 2048);
+        var rsaCert = ccRsa.CreateDevelopmentCertificate("localhost", 2, 2048);
 
-            var publicKeyPem = importExport.PemExportPublicKeyCertificate(rsaCert);
-            var rsaPrivateKeyPem = importExport.PemExportRsaPrivateKey(rsaCert);
+        var publicKeyPem = importExport.PemExportPublicKeyCertificate(rsaCert);
+        var rsaPrivateKeyPem = importExport.PemExportRsaPrivateKey(rsaCert);
 
-            var roundTripPublicKeyPem = importExport.PemImportCertificate(publicKeyPem);
-            var roundTripRsaPrivateKeyPem = importExport.PemImportPrivateKey(rsaPrivateKeyPem);
+        var roundTripPublicKeyPem = importExport.PemImportCertificate(publicKeyPem);
+        var roundTripRsaPrivateKeyPem = importExport.PemImportPrivateKey(rsaPrivateKeyPem);
 
-            var roundTripFullCert =
-                importExport.CreateCertificateWithPrivateKey(roundTripPublicKeyPem, roundTripRsaPrivateKeyPem, "1234");
+        var roundTripFullCert =
+            importExport.CreateCertificateWithPrivateKey(roundTripPublicKeyPem, roundTripRsaPrivateKeyPem, "1234");
 
-            Assert.Equal(rsaCert.Subject, roundTripPublicKeyPem.Subject);
-            Assert.Equal(rsaCert.Thumbprint, roundTripFullCert.Thumbprint);
-            Assert.True(roundTripFullCert.HasPrivateKey);
-            Assert.Equal("sha256RSA", roundTripFullCert.SignatureAlgorithm.FriendlyName);
-        }
+        Assert.Equal(rsaCert.Subject, roundTripPublicKeyPem.Subject);
+        Assert.Equal(rsaCert.Thumbprint, roundTripFullCert.Thumbprint);
+        Assert.True(roundTripFullCert.HasPrivateKey);
+        Assert.Equal("sha256RSA", roundTripFullCert.SignatureAlgorithm.FriendlyName);
+    }
 
-        [Fact]
-        public void ImportExportECPrivateKeyPublicKeyPairPem()
-        {
-            var (root, intermediate, server, client) = SetupCerts();
+    [Fact]
+    public void ImportExportECPrivateKeyPublicKeyPairPem()
+    {
+        var (root, intermediate, server, client) = SetupCerts();
 
-            var serviceProvider = new ServiceCollection()
-                .AddCertificateManager()
-                .BuildServiceProvider();
+        var serviceProvider = new ServiceCollection()
+            .AddCertificateManager()
+            .BuildServiceProvider();
 
-            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+        var importExport = serviceProvider.GetService<ImportExportCertificate>();
 
-            var publicKeyPem = importExport.PemExportPublicKeyCertificate(root);
-            var ecPrivateKeyPem = importExport.PemExportECPrivateKey(root);
+        var publicKeyPem = importExport.PemExportPublicKeyCertificate(root);
+        var ecPrivateKeyPem = importExport.PemExportECPrivateKey(root);
 
-            var roundTripPublicKeyPem = importExport.PemImportCertificate(publicKeyPem);
-            var roundTripRsaPrivateKeyPem = importExport.PemImportPrivateKey(ecPrivateKeyPem);
+        var roundTripPublicKeyPem = importExport.PemImportCertificate(publicKeyPem);
+        var roundTripRsaPrivateKeyPem = importExport.PemImportPrivateKey(ecPrivateKeyPem);
 
-            var roundTripFullCert =
-                importExport.CreateCertificateWithPrivateKey(
-                    roundTripPublicKeyPem,
-                    roundTripRsaPrivateKeyPem, "1234");
+        var roundTripFullCert =
+            importExport.CreateCertificateWithPrivateKey(
+                roundTripPublicKeyPem,
+                roundTripRsaPrivateKeyPem, "1234");
 
-            Assert.Equal(root.Subject, roundTripPublicKeyPem.Subject);
-            Assert.Equal(root.Thumbprint, roundTripFullCert.Thumbprint);
-            Assert.True(roundTripFullCert.HasPrivateKey);
-            Assert.Equal("sha256ECDSA", roundTripFullCert.SignatureAlgorithm.FriendlyName);
-        }
+        Assert.Equal(root.Subject, roundTripPublicKeyPem.Subject);
+        Assert.Equal(root.Thumbprint, roundTripFullCert.Thumbprint);
+        Assert.True(roundTripFullCert.HasPrivateKey);
+        Assert.Equal("sha256ECDSA", roundTripFullCert.SignatureAlgorithm.FriendlyName);
+    }
 
-        [Fact]
-        public void ImportExportSingleChainedECPrivateKeyPublicKeyPairPem()
-        {
-            var (root, intermediate, server, client) = SetupCerts();
+    [Fact]
+    public void ImportExportSingleChainedECPrivateKeyPublicKeyPairPem()
+    {
+        var (root, intermediate, server, client) = SetupCerts();
 
-            var serviceProvider = new ServiceCollection()
-                .AddCertificateManager()
-                .BuildServiceProvider();
+        var serviceProvider = new ServiceCollection()
+            .AddCertificateManager()
+            .BuildServiceProvider();
 
-            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+        var importExport = serviceProvider.GetService<ImportExportCertificate>();
 
-            var publicKeyPem = importExport.PemExportPublicKeyCertificate(server);
-            var ecPrivateKeyPem = importExport.PemExportECPrivateKey(server);
+        var publicKeyPem = importExport.PemExportPublicKeyCertificate(server);
+        var ecPrivateKeyPem = importExport.PemExportECPrivateKey(server);
 
-            var roundTripPublicKeyPem = importExport.PemImportCertificate(publicKeyPem);
-            var roundTripRsaPrivateKeyPem = importExport.PemImportPrivateKey(ecPrivateKeyPem);
+        var roundTripPublicKeyPem = importExport.PemImportCertificate(publicKeyPem);
+        var roundTripRsaPrivateKeyPem = importExport.PemImportPrivateKey(ecPrivateKeyPem);
 
-            var roundTripFullCert =
-                importExport.CreateCertificateWithPrivateKey(
-                    roundTripPublicKeyPem,
-                    roundTripRsaPrivateKeyPem);
+        var roundTripFullCert =
+            importExport.CreateCertificateWithPrivateKey(
+                roundTripPublicKeyPem,
+                roundTripRsaPrivateKeyPem);
 
-            Assert.Equal(server.Subject, roundTripPublicKeyPem.Subject);
-            Assert.Equal(server.Thumbprint, roundTripFullCert.Thumbprint);
-            Assert.True(roundTripFullCert.HasPrivateKey);
-            Assert.Equal("sha256ECDSA", roundTripFullCert.SignatureAlgorithm.FriendlyName);
-        }
+        Assert.Equal(server.Subject, roundTripPublicKeyPem.Subject);
+        Assert.Equal(server.Thumbprint, roundTripFullCert.Thumbprint);
+        Assert.True(roundTripFullCert.HasPrivateKey);
+        Assert.Equal("sha256ECDSA", roundTripFullCert.SignatureAlgorithm.FriendlyName);
+    }
 
-        [Fact]
-        public void ImportDerPem()
-        {
+    [Fact]
+    public void ImportDerPem()
+    {
 
-            var serviceProvider = new ServiceCollection()
-                .AddCertificateManager()
-                .BuildServiceProvider();
+        var serviceProvider = new ServiceCollection()
+            .AddCertificateManager()
+            .BuildServiceProvider();
 
-            var importExport = serviceProvider.GetService<ImportExportCertificate>();
+        var importExport = serviceProvider.GetService<ImportExportCertificate>();
 
-            var certstring = @"-----BEGIN CERTIFICATE-----
+        var certstring = @"-----BEGIN CERTIFICATE-----
 MIIEBzCCAu+gAwIBAgIQLlpk6CS8R0Z09GPVciC2qjANBgkqhkiG9w0BAQsFADAyMTAwLgYDVQQD
 EydEaWVnbyBJbnN0YW5jZSBJZGVudGl0eSBJbnRlcm1lZGlhdGUgQ0EwHhcNMjAwMjE5MTkzMjQy
 WhcNMjAwMjIwMTkzMjQyWjCByDGBnjA4BgNVBAsTMW9yZ2FuaXphdGlvbjpkN2FmZTVjYi0yZDQy
@@ -277,9 +277,8 @@ cQxzGDwe9ata
 -----END CERTIFICATE-----";
 
 
-            var pemCertImported = importExport.PemImportCertificate(certstring);
+        var pemCertImported = importExport.PemImportCertificate(certstring);
 
-            Assert.Equal("sha256RSA", pemCertImported.SignatureAlgorithm.FriendlyName);
-        }
+        Assert.Equal("sha256RSA", pemCertImported.SignatureAlgorithm.FriendlyName);
     }
 }
