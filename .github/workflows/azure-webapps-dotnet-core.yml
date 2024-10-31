@@ -28,16 +28,8 @@ jobs:
       - name: Build AzureCertAuth
         run: dotnet build ./examplesUsingCertificateAuthentication/AzureCertAuth/AzureCertAuth.sln
 
-      - name: Set up dependency caching for faster builds
-        uses: actions/cache@v4
-        with:
-          path: ~/.nuget/packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-nuget-
-
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ./examplesUsingCertificateAuthentication/AzureCertAuth/AzureCertAuth.sln
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
