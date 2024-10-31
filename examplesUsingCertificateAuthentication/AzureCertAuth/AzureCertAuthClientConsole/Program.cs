@@ -22,9 +22,11 @@ class Program
         handler.ClientCertificates.Add(cert);
         var client = new HttpClient(handler);
 
+        var url = "https://localhost:44361/WeatherForecast";
+        //var url = "https://azurecertauth20201108214641.azurewebsites.net/WeatherForecast";
         var request = new HttpRequestMessage()
-        {
-            RequestUri = new Uri("https://azurecertauth20201108214641.azurewebsites.net/WeatherForecast"),
+        {     
+            RequestUri = new Uri(url),
             Method = HttpMethod.Get,
         };
         var response = await client.SendAsync(request);
