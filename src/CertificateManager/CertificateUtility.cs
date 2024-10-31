@@ -86,22 +86,22 @@ namespace CertificateManager
 
             if (!string.IsNullOrEmpty(distinguishedName.Organisation))
             {
-                sb.Append($", O={ distinguishedName.Organisation}");
+                sb.Append($", O={distinguishedName.Organisation}");
             }
 
             if (!string.IsNullOrEmpty(distinguishedName.OrganisationUnit))
             {
-                sb.Append($", OU={ distinguishedName.OrganisationUnit}");
+                sb.Append($", OU={distinguishedName.OrganisationUnit}");
             }
 
             if (!string.IsNullOrEmpty(distinguishedName.Locality))
             {
-                sb.Append($", L={ distinguishedName.Locality}");
+                sb.Append($", L={distinguishedName.Locality}");
             }
 
             if (!string.IsNullOrEmpty(distinguishedName.StateProvince))
             {
-                sb.Append($", ST={ distinguishedName.StateProvince}");
+                sb.Append($", ST={distinguishedName.StateProvince}");
             }
 
             return sb.ToString();

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CertificateManager
+﻿namespace CertificateManager
 {
     public static class PemTypes
     {

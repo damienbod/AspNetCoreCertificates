@@ -1,5 +1,4 @@
 ﻿using CertificateManager;
-using CertificateManager.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;

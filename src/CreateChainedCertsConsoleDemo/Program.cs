@@ -1,10 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using CertificateManager;
+﻿using CertificateManager;
 using CertificateManager.Models;
-using System.Security.Cryptography.X509Certificates;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.IO;
-using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace CreateChainedCertsConsoleDemo
 {
