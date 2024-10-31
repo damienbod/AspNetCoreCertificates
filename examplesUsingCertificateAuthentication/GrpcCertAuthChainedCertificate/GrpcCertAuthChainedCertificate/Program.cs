@@ -1,72 +1,34 @@
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.AspNetCore.Server.Kestrel.Https;
+using DownstreamApiCertAuth;
 using Serilog;
-using Serilog.Events;
 
-namespace GrpcCertAuthChainedCertificate;
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
 
-public class Program
+Log.Information("Starting up OpeniddictServer");
+
+try
 {
-    public static int Main(string[] args)
-    {
-        Log.Logger = new LoggerConfiguration()
-      .MinimumLevel.Debug()
-      .MinimumLevel.Override("Microsoft", LogEventLevel.Debug)
-      .Enrich.FromLogContext()
-      .CreateLogger();
+    var builder = WebApplication.CreateBuilder(args);
 
-        try
-        {
-            Log.Information("Starting web host");
-            CreateHostBuilder(args).Build().Run();
-            return 0;
-        }
-        catch (Exception ex)
-        {
-            Log.Fatal(ex, "Host terminated unexpectedly");
-            return 1;
-        }
-        finally
-        {
-            Log.CloseAndFlush();
-        }
-    }
+    builder.Host.UseSerilog((context, loggerConfiguration) => loggerConfiguration
+        .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
+        .WriteTo.File("../_logs-grpcServer.txt")
+        .Enrich.FromLogContext()
+        .ReadFrom.Configuration(context.Configuration));
 
-    // Additional configuration is required to successfully run gRPC on macOS.
-    // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
-                .ReadFrom.Configuration(hostingContext.Configuration)
-                .Enrich.FromLogContext()
-                .MinimumLevel.Verbose()
-                .WriteTo.Console()
-                .WriteTo.File(
-                    @"../grpcServer.txt",
-                    fileSizeLimitBytes: 1_000_000,
-                    rollOnFileSizeLimit: true,
-                    shared: true,
-                    flushToDiskInterval: TimeSpan.FromSeconds(1))
-            )
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                var cert = new X509Certificate2(Path.Combine("../Certs/serverl4.pfx"), "1234");
-                webBuilder.UseStartup<Startup>()
-                .ConfigureKestrel(options =>
-                {
-                    options.Limits.MinRequestBodyDataRate = null;
-                    options.ConfigureHttpsDefaults(o =>
-                    {
-                        o.ServerCertificate = cert;
-                        o.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-                    });
-                    options.ListenLocalhost(44379, listenOptions =>
-                    {
-                        listenOptions.UseHttps(cert);
-                        listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-                        listenOptions.UseConnectionLogging();
-                    });
-                });
-            });
+    var app = builder
+        .ConfigureServices()
+        .ConfigurePipeline();
+
+    app.Run();
+}
+catch (Exception ex) when (ex.GetType().Name is not "StopTheHostException" && ex.GetType().Name is not "HostAbortedException")
+{
+    Log.Fatal(ex, "Unhandled exception");
+}
+finally
+{
+    Log.Information("Shut down complete");
+    Log.CloseAndFlush();
 }
