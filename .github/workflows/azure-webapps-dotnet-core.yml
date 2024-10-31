@@ -25,14 +25,12 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
-      - name: Build AzureCertAuth
-        run: dotnet build ./examplesUsingCertificateAuthentication/AzureCertAuth/AzureCertAuth.sln
 
       - name: Restore dependencies
         run: dotnet restore ./examplesUsingCertificateAuthentication/AzureCertAuth/AzureCertAuth.sln
 
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
+      - name: Build AzureCertAuth
+        run: dotnet build ./examplesUsingCertificateAuthentication/AzureCertAuth/AzureCertAuth.sln --configuration Release
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
