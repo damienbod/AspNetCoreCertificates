@@ -2,12 +2,9 @@ using GrpcCertAuthChainedCertificate;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Logging;
 using Serilog;
-using System.Reflection.PortableExecutable;
-using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 
 namespace DownstreamApiCertAuth;
@@ -39,7 +36,7 @@ internal static class StartupExtensions
                     listenOptions.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
                     listenOptions.AllowAnyClientCertificate();
 
-                    
+
                 });
             });
         }
@@ -80,7 +77,7 @@ internal static class StartupExtensions
         {
             await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
         });
-       
+
 
         return app;
     }
