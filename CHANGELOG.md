@@ -1,5 +1,8 @@
 # Certificate Manager change log
 
+## 2022-10-31 version 1.0.9
+Updated packages and dependencies
+
 ## 2022-01-21 version 1.0.8
 Update serial conversion to use big endian only 
 

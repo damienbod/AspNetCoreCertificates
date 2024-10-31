@@ -12,10 +12,10 @@
 </Description>
     <PackageTags>certificate authentication mtls pfx cer pem cert crt</PackageTags>
     <PackageReleaseNotes>Update serial conversion to use big endian only </PackageReleaseNotes>
-    <Copyright>2022 damienbod</Copyright>
+    <Copyright>2024 damienbod</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>damienbod</Authors>
-    <Version>1.0.8</Version>
+    <Version>1.0.9</Version>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
