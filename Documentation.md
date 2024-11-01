@@ -34,12 +34,7 @@ var serviceProvider = new ServiceCollection()
 Or in an ASP.NET Core application use the Startup ConfigureServices method to initialize the package.
 
 ```csharp
-public void ConfigureServices(IServiceCollection services)
-{
-    // ...
-
-    services.AddCertificateManager();
-}
+builder.Services.AddCertificateManager();
 ```
 
 ## Certificate Configuration
