@@ -1,4 +1,3 @@
-using GrpcCertAuthChainedCertificate;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
@@ -7,7 +6,7 @@ using Microsoft.IdentityModel.Logging;
 using Serilog;
 using System.Security.Cryptography.X509Certificates;
 
-namespace DownstreamApiCertAuth;
+namespace GrpcCertAuthChainedCertificate;
 
 internal static class StartupExtensions
 {
