@@ -1,9 +1,7 @@
-using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Logging;
 using Serilog;
-using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 
 namespace AspNetCoreCertificateAuth;
@@ -15,7 +13,7 @@ internal static class StartupExtensions
         var services = builder.Services;
         var configuration = builder.Configuration;
 
-        if(builder.Environment.IsDevelopment())
+        if (builder.Environment.IsDevelopment())
         {
             builder.WebHost.ConfigureKestrel((context, serverOptions) =>
             {
