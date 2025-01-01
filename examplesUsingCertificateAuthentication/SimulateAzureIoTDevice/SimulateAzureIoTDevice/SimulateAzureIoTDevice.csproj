@@ -7,10 +7,18 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.42.3" />
+    <PackageReference Include="CertificateManager" Version="1.0.9" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="testDevice01.pfx">
+    <None Update="final-measurement-private.pem">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="final-measurement-public.pem">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="final-measurement.pfx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
