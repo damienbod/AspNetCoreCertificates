@@ -41,7 +41,7 @@ internal static class StartupExtensions
                 if (!string.IsNullOrWhiteSpace(headerValue))
                 {
                     byte[] bytes = Convert.FromBase64String(headerValue);
-                    clientCertificate = new X509Certificate2(bytes);
+                    clientCertificate = X509CertificateLoader.LoadCertificate(bytes);
                 }
 
                 return clientCertificate!;

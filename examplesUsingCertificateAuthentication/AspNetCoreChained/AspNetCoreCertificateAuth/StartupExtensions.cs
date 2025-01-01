@@ -34,7 +34,7 @@ internal static class StartupExtensions
             options.CheckConsentNeeded = context => true;
         });
 
-        var chainedClient = new X509Certificate2("../Certs/clientl4.pfx", "1234");
+        var chainedClient = X509CertificateLoader.LoadPkcs12FromFile("../Certs/clientl4.pfx", "1234");
         var handlerChainedClient = new HttpClientHandler();
         handlerChainedClient.ClientCertificates.Add(chainedClient);
 
