@@ -51,7 +51,7 @@ class Program
             temperature = rnd.Next(20, 35);
             humidity = rnd.Next(60, 80);
             dataBuffer = string.Format("{{\"deviceId\":\"{0}\",\"messageId\":{1},\"temperature\":{2},\"humidity\":{3}}}", deviceId, count, temperature, humidity);
-            Message eventMessage = new Message(Encoding.UTF8.GetBytes(dataBuffer));
+            var eventMessage = new Message(Encoding.UTF8.GetBytes(dataBuffer));
             eventMessage.Properties.Add("temperatureAlert", (temperature > TEMPERATURE_THRESHOLD) ? "true" : "false");
             Console.WriteLine("\t{0}> Sending message: {1}, Data: [{2}]", DateTime.Now.ToLocalTime(), count, dataBuffer);
 
