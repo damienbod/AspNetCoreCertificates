@@ -20,7 +20,7 @@ class Program
 
         var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
 
-        var intermediate = new X509Certificate2("intermediate.pfx", "1234");
+        var intermediate = X509CertificateLoader.LoadPkcs12FromFile("intermediate.pfx", "1234");
 
         // use lowercase for dps
         var testDevice01 = createClientServerAuthCerts.NewDeviceChainedCertificate(
