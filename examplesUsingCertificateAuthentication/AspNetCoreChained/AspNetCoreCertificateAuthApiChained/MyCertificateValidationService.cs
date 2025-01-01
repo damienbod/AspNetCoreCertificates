@@ -2,7 +2,7 @@
 
 namespace AspNetCoreCertificateAuthApi;
 
-public class MyCertificateValidationService 
+public class MyCertificateValidationService
 {
     public bool ValidateCertificate(X509Certificate2 clientCertificate)
     {
@@ -13,7 +13,7 @@ public class MyCertificateValidationService
     {
         var listOfValidThumbprints = new List<string>
         {
-            "2F002F39CCC224DF70FE4EE54195B2E6FE6FB5D2" 
+            "2F002F39CCC224DF70FE4EE54195B2E6FE6FB5D2"
         };
 
         if (listOfValidThumbprints.Contains(clientCertificate.Thumbprint))

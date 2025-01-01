@@ -1,4 +1,4 @@
-using DownstreamApiCertAuth;
+using GrpcCertAuthChainedCertificate;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()

@@ -1,9 +1,7 @@
-using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Logging;
 using Serilog;
-using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 
 namespace AspNetCoreCertificateAuth;
@@ -15,7 +13,7 @@ internal static class StartupExtensions
         var services = builder.Services;
         var configuration = builder.Configuration;
 
-        if(builder.Environment.IsDevelopment())
+        if (builder.Environment.IsDevelopment())
         {
             builder.WebHost.ConfigureKestrel((context, serverOptions) =>
             {
@@ -34,7 +32,7 @@ internal static class StartupExtensions
             options.CheckConsentNeeded = context => true;
         });
 
-        var chainedClient = new X509Certificate2("../Certs/clientl4.pfx", "1234");
+        var chainedClient = X509CertificateLoader.LoadPkcs12FromFile("../Certs/clientl4.pfx", "1234");
         var handlerChainedClient = new HttpClientHandler();
         handlerChainedClient.ClientCertificates.Add(chainedClient);
 

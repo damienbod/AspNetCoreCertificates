@@ -1,5 +1,5 @@
-﻿using System.Text.Json;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.Json;
 
 namespace AspNetCoreCertificateAuth.Pages;
 
@@ -26,7 +26,7 @@ public class IndexModel : PageModel
 
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri("https://localhost:44378/api/values"),
+                RequestUri = new Uri("https://localhost:5001/api/values"),
                 Method = HttpMethod.Get,
             };
 

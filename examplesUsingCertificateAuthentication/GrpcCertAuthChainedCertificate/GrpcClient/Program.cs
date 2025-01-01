@@ -9,7 +9,7 @@ class Program
     static async Task Main(string[] args)
     {
         var handler = new HttpClientHandler();
-        var certificate = new X509Certificate2("clientl4.pfx", "1234");
+        var certificate = X509CertificateLoader.LoadPkcs12FromFile("clientl4.pfx", "1234");
         handler.ClientCertificates.Add(certificate);
 
         var channel = GrpcChannel.ForAddress("https://localhost:44379", new GrpcChannelOptions

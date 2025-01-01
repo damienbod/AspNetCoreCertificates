@@ -245,7 +245,7 @@ var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesC
 
 var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
 
-var root = new X509Certificate2("root.pfx", "1234");
+var root = X509CertificateLoader.LoadPkcs12FromFile("root.pfx", "1234");
 
 var deviceVerify = createClientServerAuthCerts.NewDeviceVerificationCertificate(
 "<veification code from Azure IoT Hub>", root);
@@ -269,7 +269,7 @@ var serviceProvider = new ServiceCollection()
 
 var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesClientServerAuth>();
 
-var intermediate = new X509Certificate2("intermediate.pfx", "1234");
+var intermediate = X509CertificateLoader.LoadPkcs12FromFile("intermediate.pfx", "1234");
 
 var testDevice01 = createClientServerAuthCerts.NewDeviceChainedCertificate(
 	new DistinguishedName { CommonName = "<Device ID>" },
@@ -364,7 +364,7 @@ var createClientServerAuthCerts = serviceProvider.GetService<CreateCertificatesC
 
 var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
 
-var root = new X509Certificate2("root.pfx", "1234");
+var root = X509CertificateLoader.LoadPkcs12FromFile("root.pfx", "1234");
 
 var deviceVerify = createClientServerAuthCerts.NewDeviceVerificationCertificate(
 "4C8C754C6DA4280DBAB7FC7BB320E7FFFB7F411CBB7EAA7D", root);

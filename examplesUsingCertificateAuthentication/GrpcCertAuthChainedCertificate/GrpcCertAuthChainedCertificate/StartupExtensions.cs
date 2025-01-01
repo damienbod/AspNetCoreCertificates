@@ -1,4 +1,3 @@
-using GrpcCertAuthChainedCertificate;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
@@ -7,7 +6,7 @@ using Microsoft.IdentityModel.Logging;
 using Serilog;
 using System.Security.Cryptography.X509Certificates;
 
-namespace DownstreamApiCertAuth;
+namespace GrpcCertAuthChainedCertificate;
 
 internal static class StartupExtensions
 {
@@ -16,7 +15,7 @@ internal static class StartupExtensions
         var services = builder.Services;
         var configuration = builder.Configuration;
 
-        var cert = new X509Certificate2(Path.Combine("../Certs/serverl4.pfx"), "1234");
+        var cert = X509CertificateLoader.LoadPkcs12FromFile(Path.Combine("../Certs/serverl4.pfx"), "1234");
 
         if (builder.Environment.IsDevelopment())
         {

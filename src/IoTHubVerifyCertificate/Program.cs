@@ -21,7 +21,7 @@ class Program
 
         var importExportCertificate = serviceProvider.GetService<ImportExportCertificate>();
 
-        var root = new X509Certificate2("root.pfx", "1234");
+        var root = X509CertificateLoader.LoadPkcs12FromFile("root.pfx", "1234");
 
         var deviceVerify = createClientServerAuthCerts.NewDeviceVerificationCertificate(
         "4C8C754C6DA4280DBAB7FC7BB320E7FFFB7F411CBB7EAA7D", root);
