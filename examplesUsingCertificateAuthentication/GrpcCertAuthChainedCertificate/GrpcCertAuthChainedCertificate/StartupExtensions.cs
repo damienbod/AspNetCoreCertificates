@@ -16,7 +16,7 @@ internal static class StartupExtensions
         var services = builder.Services;
         var configuration = builder.Configuration;
 
-        var cert = new X509Certificate2(Path.Combine("../Certs/serverl4.pfx"), "1234");
+        var cert = X509CertificateLoader.LoadPkcs12FromFile(Path.Combine("../Certs/serverl4.pfx"), "1234");
 
         if (builder.Environment.IsDevelopment())
         {
