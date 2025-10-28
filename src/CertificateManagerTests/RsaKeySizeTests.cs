@@ -22,9 +22,9 @@ public class RsaKeySizeTests
         var cert2048 = CreateRsaCertificate(cc, 2048);
         var cert4096 = CreateRsaCertificate(cc, 4096);
 
-        var chained1024 = CreateRsaCertificateChained(cc, 1024, cert2048);
+        var chained1024 = CreateRsaCertificateChained(cc, 2048, cert2048);
         var chained4096 = CreateRsaCertificateChained(cc, 4096, cert2048);
-        Assert.Equal(1024, chained1024.GetRSAPrivateKey().KeySize);
+        Assert.Equal(2048, chained1024.GetRSAPrivateKey().KeySize);
         Assert.Equal(4096, chained4096.GetRSAPrivateKey().KeySize);
     }
 
@@ -39,8 +39,8 @@ public class RsaKeySizeTests
         var cert2048 = ccRsa.CreateDevelopmentCertificate("localhost", 2, 2048);
         Assert.Equal(2048, cert2048.GetRSAPrivateKey().KeySize);
 
-        var cert1024 = ccRsa.CreateDevelopmentCertificate("localhost", 2);
-        Assert.Equal(1024, cert1024.GetRSAPrivateKey().KeySize);
+        var cert2048Two = ccRsa.CreateDevelopmentCertificate("localhost", 2);
+        Assert.Equal(2048, cert2048Two.GetRSAPrivateKey().KeySize);
     }
 
     [Fact]
