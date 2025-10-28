@@ -22,7 +22,7 @@ namespace CertificateManager
         /// <param name="validityPeriodInYears">valid time in years</param>
         /// <param name="keySize">1024 2048 4096</param>
         /// <returns></returns>
-        public X509Certificate2 CreateDevelopmentCertificate(string dnsName, int validityPeriodInYears, int keySize = 1024)
+        public X509Certificate2 CreateDevelopmentCertificate(string dnsName, int validityPeriodInYears, int keySize = 2048)
         {
             var basicConstraints = new BasicConstraints
             {
