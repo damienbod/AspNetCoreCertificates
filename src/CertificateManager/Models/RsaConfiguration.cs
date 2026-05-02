@@ -7,7 +7,7 @@ namespace CertificateManager.Models
         /// <summary>
         /// RSA 1024, 2048 or 4096
         /// </summary>
-        public int KeySize { get; set; } = 1024;
+        public int KeySize { get; set; } = 2048;
 
         /// <summary>
         /// RSASignaturePadding.Pkcs1, RSASignaturePadding.Pss
