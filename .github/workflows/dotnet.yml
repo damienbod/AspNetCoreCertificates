@@ -19,15 +19,15 @@ jobs:
         dotnet-version: '10.0'
         include-prerelease: True
     - name: Build CertificateManager
-      run: dotnet build ./src/CertificateManager.sln
+      run: dotnet build ./src/CertificateManager.slnx
     - name: Build AspNetCoreCertificateAuth
       run: dotnet build ./examplesUsingCertificateAuthentication/AspNetCoreChained/AspNetCoreCertificateAuth.sln
     - name: Build AzureCertAuth
       run: dotnet build ./examplesUsingCertificateAuthentication/AzureCertAuth/AzureCertAuth.sln
     - name: Build GrpcCertAuthChainedCertificate
-      run: dotnet build ./examplesUsingCertificateAuthentication/GrpcCertAuthChainedCertificate/GrpcCertAuthChainedCertificate.sln
+      run: dotnet build ./examplesUsingCertificateAuthentication/GrpcCertAuthChainedCertificate/GrpcCertAuthChainedCertificate.slnx
     - name: Build SigningCertificate
       run: dotnet build ./examplesUsingCertificateAuthentication/SigningCertificate/SigningCertificate.csproj
     - name: Build SimulateAzureIoTDevice
-      run: dotnet build ./examplesUsingCertificateAuthentication/SimulateAzureIoTDevice/SimulateAzureIoTDevice.sln
+      run: dotnet build ./examplesUsingCertificateAuthentication/SimulateAzureIoTDevice/SimulateAzureIoTDevice.slnx
 
