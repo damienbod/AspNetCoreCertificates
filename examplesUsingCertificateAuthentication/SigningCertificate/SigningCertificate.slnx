@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../../src/CertificateManager/CertificateManager.csproj" />
+  <Project Path="SigningCertificate.csproj" />
+</Solution>

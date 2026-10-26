@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../../.github/workflows/azure-webapps-dotnet-core.yml" />
+  </Folder>
+  <Project Path="AzureCertAuth/AzureCertAuth.csproj" />
+  <Project Path="AzureCertAuthClientConsole/AzureCertAuthClientConsole.csproj" />
+</Solution>
