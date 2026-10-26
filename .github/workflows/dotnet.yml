@@ -21,7 +21,7 @@ jobs:
     - name: Build CertificateManager
       run: dotnet build ./src/CertificateManager.slnx
     - name: Build AspNetCoreCertificateAuth
-      run: dotnet build ./examplesUsingCertificateAuthentication/AspNetCoreChained/AspNetCoreCertificateAuth.sln
+      run: dotnet build ./examplesUsingCertificateAuthentication/AspNetCoreChained/AspNetCoreCertificateAuth.slnx
     - name: Build AzureCertAuth
       run: dotnet build ./examplesUsingCertificateAuthentication/AzureCertAuth/AzureCertAuth.slnx
     - name: Build GrpcCertAuthChainedCertificate

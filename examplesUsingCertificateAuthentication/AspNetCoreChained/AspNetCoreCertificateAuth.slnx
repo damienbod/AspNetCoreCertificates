@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="AspNetCoreCertificateAuth/AspNetCoreCertificateAuth.csproj" />
+  <Project Path="AspNetCoreCertificateAuthApiChained/AspNetCoreCertificateAuthApiChained.csproj" />
+</Solution>
