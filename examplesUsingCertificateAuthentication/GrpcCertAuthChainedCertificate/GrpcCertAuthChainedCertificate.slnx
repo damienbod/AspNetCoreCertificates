@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="GrpcCertAuthChainedCertificate/GrpcCertAuthChainedCertificate.csproj" />
+  <Project Path="GrpcClient/GrpcClient.csproj" />
+</Solution>
