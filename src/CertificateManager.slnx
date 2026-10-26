@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../.github/workflows/dotnet.yml" />
+    <File Path="../Certificates.md" />
+    <File Path="../CHANGELOG.md" />
+    <File Path="../Documentation.md" />
+    <File Path="../README.md" />
+  </Folder>
+  <Project Path="CertificateManager/CertificateManager.csproj" />
+  <Project Path="CertificateManagerTests/CertificateManagerTests.csproj" />
+  <Project Path="CreateAngularVueJsDevelopmentCertificates/CreateAngularVueJsDevelopmentCertificates.csproj" />
+  <Project Path="CreateChainedCertsConsoleDemo/CreateChainedCertsConsoleDemo.csproj" />
+  <Project Path="CreateIdentityServer4Certificates/CreateIdentityServerCertificates.csproj" />
+  <Project Path="CreateSelfSignedCertsConsoleDemo/CreateSelfSignedCertsConsoleDemo.csproj" />
+  <Project Path="IoTHubCreateChainedCerts/IoTHubCreateChainedCerts.csproj" />
+  <Project Path="IoTHubCreateDeviceCertificate/IoTHubCreateDeviceCertificate.csproj" />
+  <Project Path="IoTHubVerifyCertificate/IoTHubVerifyCertificate.csproj" />
+</Solution>
