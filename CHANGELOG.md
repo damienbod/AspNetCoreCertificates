@@ -1,5 +1,8 @@
 # Certificate Manager change log
 
+## 2026-10-26 version 1.0.11
+Updated packages and dependencies
+
 ## 2026-05-02 version 1.0.10
 Updated packages and dependencies
 
